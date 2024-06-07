@@ -1,0 +1,69 @@
+[
+    {
+        "cafe": "The Orangery",
+        "offer": "10% off coffee and food",
+        "location": "Winchester",
+        "county": "Hampshire",
+        "website": "https://www.thewinchesterorangery.com/",
+        "persons": "4"
+    },
+
+    {
+        "cafe": "Caracoli",
+        "offer": "20% off coffee",
+        "location": "New Alresford",
+        "county": "Hampshire",
+        "website": "https://www.caracoli.co.uk/",
+        "persons": "2"
+    },
+
+    {
+        "cafe": "Josie's",
+        "offer": "15% off coffee and food",
+        "location": "Winchester",
+        "county": "Hampshire",
+        "website": "https://www.josieswinecoffee.com/",
+        "persons": "2"
+    },
+    {
+        "cafe": "Hoxton Bakehouse",
+        "offer": "20% off coffee",
+        "location": "Winchester",
+        "county": "Hampshire",
+        "website": "https://www.hoxtonbakehouse.com/",
+        "persons": "2"
+    },
+    {
+        "cafe": "The Yard",
+        "offer": "10% off coffee and food",
+        "location": "Alresford",
+        "county": "Hampshire",
+        "website": "https://www.theyardhampshire.co.uk/",
+        "persons": "4"
+    },
+    {
+        "cafe": "The Yard",
+        "offer": "10% off coffee and food",
+        "location": "Alresford",
+        "county": "Hampshire",
+        "website": "https://www.theyardhampshire.co.uk/",
+        "persons": "4"
+    },
+    {
+        "cafe": "The Monde",
+        "offer": "15% off coffee and food",
+        "location": "Winchester",
+        "county": "Hampshire",
+        "persons": "4"
+    },
+    {
+        "cafe": "Kavi Coffee",
+        "offer": "20% off coffee",
+        "location": "Winchester",
+        "county": "Hampshire",
+        "persons": "2"
+    }
+
+
+
+]
