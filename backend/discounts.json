@@ -1,67 +1,61 @@
 [
     {
         "cafe": "The Orangery",
-        "offer": "10% off coffee and food",
         "location": "Winchester",
         "county": "Hampshire",
         "website": "https://www.thewinchesterorangery.com/",
-        "persons": "4"
+        "description": "The Orangery is a family run business, offering a range of delicious food and drink. They have a beautiful garden and a play area for children. They also have a range of vegan and gluten free options."
     },
 
     {
         "cafe": "Caracoli",
-        "offer": "20% off coffee",
         "location": "New Alresford",
         "county": "Hampshire",
         "website": "https://www.caracoli.co.uk/",
-        "persons": "2"
+        "description": "Caracoli is a family run business, offering a range of delicious food and drink. They have a beautiful garden and a play area for children. They also have a range of vegan and gluten free options."
     },
 
     {
         "cafe": "Josie's",
-        "offer": "15% off coffee and food",
         "location": "Winchester",
         "county": "Hampshire",
         "website": "https://www.josieswinecoffee.com/",
-        "persons": "2"
+        "description": "Josie's is a family run business, offering a range of delicious food and drink. They have a beautiful garden and a play area for children. They also have a range of vegan and gluten free options."
     },
     {
         "cafe": "Hoxton Bakehouse",
-        "offer": "20% off coffee",
         "location": "Winchester",
         "county": "Hampshire",
         "website": "https://www.hoxtonbakehouse.com/",
-        "persons": "2"
+        "description": "Hoxton Bakehouse is a family run business, offering a range of delicious food and drink. They have a beautiful garden and a play area for children. They also have a range of vegan and gluten free options."
     },
     {
         "cafe": "The Yard",
-        "offer": "10% off coffee and food",
         "location": "Alresford",
         "county": "Hampshire",
         "website": "https://www.theyardhampshire.co.uk/",
-        "persons": "4"
+        "description": "The Yard is a family run business, offering a range of delicious food and drink. They have a beautiful garden and a play area for children. They also have a range of vegan and gluten free options."
     },
     {
         "cafe": "The Yard",
-        "offer": "10% off coffee and food",
         "location": "Alresford",
         "county": "Hampshire",
         "website": "https://www.theyardhampshire.co.uk/",
-        "persons": "4"
+        "description": "The Yard is a family run business, offering a range of delicious food and drink. They have a beautiful garden and a play area for children. They also have a range of vegan and gluten free options."
+
     },
     {
         "cafe": "The Monde",
-        "offer": "15% off coffee and food",
         "location": "Winchester",
         "county": "Hampshire",
-        "persons": "4"
+        "description": "The Monde is a family run business, offering a range of delicious food and drink. They have a beautiful garden and a play area for children. They also have a range of vegan and gluten free options."
     },
     {
         "cafe": "Kavi Coffee",
         "offer": "20% off coffee",
         "location": "Winchester",
         "county": "Hampshire",
-        "persons": "2"
+        "description": "Kavi Coffee is a family run business, offering a range of delicious food and drink. They have a beautiful garden and a play area for children. They also have a range of vegan and gluten free options."
     }
 
 
