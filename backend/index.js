@@ -1,6 +1,12 @@
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
+import { connectDb } from "./src/db/db.connection.js";
+import authenticate from "./src/middleware/authenticate.js";
+
+import { registerUserRouter } from "./src/routes/userRoutes/registerUser.route.js";
+import { loginUserRouter } from "./src/routes/userRoutes/loginUser.route.js";
+import { updatePasswordRouter } from "./src/routes/userRoutes/updatePassword.route.js";
 
 const app = express();
 
@@ -10,6 +16,12 @@ dotenv.config({
 
 app.use(cors());
 app.use(express.json());
+
+connectDb();
+
+app.use("/user", registerUserRouter);
+app.use("/user", loginUserRouter);
+app.use("/user", authenticate, updatePasswordRouter);
 
 const { PORT, HOST } = process.env;
 

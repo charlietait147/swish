@@ -34,6 +34,7 @@ export const loginUserService = async (email, password) => {
 
 export const updatePasswordService = async (newPassword, _id) => {
     try {
+        console.log(_id);
         const user = await User.findById(_id);
         if (!user) {
             throw new Error('User not found');

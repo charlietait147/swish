@@ -10,11 +10,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    discounts: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Discount'
-    }]
-
     });
 
     const User = mongoose.model('User', userSchema);
