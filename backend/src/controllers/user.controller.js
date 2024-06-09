@@ -9,7 +9,8 @@ export const registerUserController = async (req, res) => {
     try {
         const { email, password } = req.body;
         const user = await registerUserService(email, password);
-        res.status(201).json(user);
+        const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '24h' });
+        res.status(201).json({ message: "User registered successfully", user, token});
     } catch (error) {
         res.status(400).send("Registration failed");
         console.error("Registration failed", error);
@@ -20,7 +21,8 @@ export const loginUserController = async (req, res) => {
     try {
         const { email, password } = req.body;
         const user = await loginUserService(email, password);
-        res.status(200).json(user);
+        const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '24h' });
+        res.status(201).json({ message: "User logged in successfully", user, token});
     } catch (error) {
         res.status(400).send("Login failed");
         console.error("Login failed", error);
