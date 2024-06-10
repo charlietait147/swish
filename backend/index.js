@@ -8,6 +8,10 @@ import { registerUserRouter } from "./src/routes/userRoutes/registerUser.route.j
 import { loginUserRouter } from "./src/routes/userRoutes/loginUser.route.js";
 import { updatePasswordRouter } from "./src/routes/userRoutes/updatePassword.route.js";
 
+import { addReviewRouter } from "./src/routes/reviewRoutes/addReview.route.js";
+import { editReviewRouter } from "./src/routes/reviewRoutes/editReview.route.js";
+import { deleteReviewRouter } from "./src/routes/reviewRoutes/deleteReview.route.js";
+
 const app = express();
 
 dotenv.config({
@@ -22,6 +26,12 @@ connectDb();
 app.use("/user", registerUserRouter);
 app.use("/user", loginUserRouter);
 app.use("/user", authenticate, updatePasswordRouter);
+
+app.use("/review", authenticate, addReviewRouter);
+app.use("/review", authenticate, editReviewRouter);
+app.use("/review", authenticate, deleteReviewRouter);
+
+
 
 const { PORT, HOST } = process.env;
 
