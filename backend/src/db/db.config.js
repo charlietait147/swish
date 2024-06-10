@@ -4,11 +4,9 @@ dotenv.config({
     path: `.env${process.env.NODE_ENV ? `.${process.env.NODE_ENV}` : ``}`,
 });
 
-const { DBURI } = process.env;
-
 const config = { 
     db: {
-        uri: DBURI
+        uri: process.env.DBURI
     },
 };
 

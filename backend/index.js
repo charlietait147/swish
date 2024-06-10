@@ -4,6 +4,7 @@ import express from "express";
 import { connectDb } from "./src/db/db.connection.js";
 import authenticate from "./src/middleware/authenticate.js";
 
+
 import { registerUserRouter } from "./src/routes/userRoutes/registerUser.route.js";
 import { loginUserRouter } from "./src/routes/userRoutes/loginUser.route.js";
 import { updatePasswordRouter } from "./src/routes/userRoutes/updatePassword.route.js";
