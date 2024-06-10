@@ -1,7 +1,8 @@
 import jwt from 'jsonwebtoken';
+import User from '../models/user.model.js';
 const { JWT_KEY } = process.env;
 
-const authenticate = (req, res, next) => {
+const authenticate = async (req, res, next) => {
     const authHeader = req.headers.authorization;
     if (!authHeader) {
         return res.status(401).json({
@@ -19,7 +20,16 @@ const authenticate = (req, res, next) => {
     }
     try {
         const decoded = jwt.verify(authToken, JWT_KEY);
-        req.user = decoded;
+        const user = await User.findOne({ email: decoded.email })
+        if (!user ) {
+            return res.status(401).json({
+                status: 'error',
+                error: 'Authentication failed'
+            });
+        }
+        req.user = user;
+        console.log(user);
+        // req.user = decoded;
         next();
     } catch (error) {
         return res.status(401).json({
