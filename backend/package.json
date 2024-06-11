@@ -7,8 +7,9 @@
   "scripts": {
     "start": "NODE_ENV=production nodemon index.js",
     "dev": "NODE_ENV=development nodemon index.js",
-    "seed": "NODE_ENV=development node seeds/cafes.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "seed:prod": "NODE_ENV=production node seeds/cafes.js",
+    "seed:dev": "NODE_ENV=development node seeds/cafes.js",
+    "test": "NODE_ENV=development mocha --timeout 10000 exit"
   },
   "keywords": [],
   "author": "",
@@ -23,6 +24,10 @@
   },
   "devDependencies": {
     "bcrypt": "^5.1.1",
+    "c8": "^10.0.0",
+    "chai": "^5.1.1",
+    "chai-http": "^5.0.0",
+    "mocha": "^10.4.0",
     "nodemon": "^3.1.3"
   }
 }
