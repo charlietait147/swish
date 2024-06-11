@@ -3,14 +3,10 @@ import Cafe from '../src/models/cafe.model.js';
 import mongoose from 'mongoose';
 import { connectDb } from '../src/db/db.connection.js';
 import dotenv from 'dotenv';
-import config from '../src/db/db.config.js';
 
 dotenv.config({
     path: `.env${process.env.NODE_ENV ? `.${process.env.NODE_ENV}` : ``}`,
 });
-
-// const { uri } = config.db;
-// console.log(uri);
 
 const seedDatabase = async () => {
     try {

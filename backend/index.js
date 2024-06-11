@@ -13,6 +13,9 @@ import { addReviewRouter } from "./src/routes/reviewRoutes/addReview.route.js";
 import { editReviewRouter } from "./src/routes/reviewRoutes/editReview.route.js";
 import { deleteReviewRouter } from "./src/routes/reviewRoutes/deleteReview.route.js";
 
+import { getAllCafesRouter } from "./src/routes/cafeRoutes/getAllCafes.route.js";
+import { getSingleCafeRouter } from "./src/routes/cafeRoutes/getSingleCafe.route.js";
+
 const app = express();
 
 dotenv.config({
@@ -31,6 +34,9 @@ app.use("/user", authenticate, updatePasswordRouter);
 app.use("/review", authenticate, addReviewRouter);
 app.use("/review", authenticate, editReviewRouter);
 app.use("/review", authenticate, deleteReviewRouter);
+
+app.use("/cafes", getAllCafesRouter);
+app.use("/cafes", getSingleCafeRouter);
 
 
 
