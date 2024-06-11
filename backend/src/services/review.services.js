@@ -1,12 +1,13 @@
 import Review from '../models/review.model.js';
 import User from '../models/user.model.js';
+import Cafe from '../models/cafe.model.js';
 
 export const addReviewService = async (cafeId, userId, reviewData) => {
     try {
-        // const cafe = await Cafe.findById(cafeId);
-        // if (!cafe) {
-        //     throw new Error('Cafe not found');
-        // }
+        const cafe = await Cafe.findById(cafeId);
+        if (!cafe) {
+            throw new Error('Cafe not found');
+        }
 
         const user = await User.findById(userId);
         if (!user) {
@@ -24,8 +25,8 @@ export const addReviewService = async (cafeId, userId, reviewData) => {
         user.reviews.push(newReview._id);
         await user.save();
 
-        // cafe.reviews.push(newReview._id);
-        // await cafe.save();
+        cafe.reviews.push(newReview._id);
+        await cafe.save();
 
         return newReview;
 
