@@ -9,7 +9,8 @@
     "dev": "NODE_ENV=development nodemon index.js",
     "seed:prod": "NODE_ENV=production node seeds/cafes.js",
     "seed:dev": "NODE_ENV=development node seeds/cafes.js",
-    "test": "NODE_ENV=development mocha --timeout 10000 exit"
+    "test": "NODE_ENV=development mocha --timeout 10000 --exit",
+    "coverage": "NODE_ENV=development c8 -t html npm test"
   },
   "keywords": [],
   "author": "",
@@ -26,7 +27,7 @@
     "bcrypt": "^5.1.1",
     "c8": "^10.0.0",
     "chai": "^5.1.1",
-    "chai-http": "^5.0.0",
+    "chai-http": "^4.4.0",
     "mocha": "^10.4.0",
     "nodemon": "^3.1.3"
   }
