@@ -21,7 +21,16 @@ export const loginUserService = async (email, password) => {
         if (!user) {
             throw new Error('User not found');
         }
-        const isPasswordValid = await bcrypt.compare(password, user.password);
+
+        let isPasswordValid = false;
+
+        if (process.env.NODE_ENV === 'development') {
+            // If in a test environment, use compareSync without hashing
+            isPasswordValid = bcrypt.compareSync(password, user.password);
+          } else {
+            // In production, use bcrypt.compare
+            isPasswordValid = await bcrypt.compare(password, user.password);
+          }
         if (!isPasswordValid) {
             throw new Error('Invalid password');
         }
@@ -32,10 +41,9 @@ export const loginUserService = async (email, password) => {
     }
 }
 
-export const updatePasswordService = async (newPassword, _id) => {
+export const updatePasswordService = async (newPassword, userId) => {
     try {
-        console.log(_id);
-        const user = await User.findById(_id);
+        const user = await User.findById(userId);
         if (!user) {
             throw new Error('User not found');
         }
