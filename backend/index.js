@@ -42,8 +42,16 @@ app.use("/cafes", getSingleCafeRouter);
 
 const { PORT, HOST } = process.env;
 
-const server = app.listen(PORT,() => {
-    console.log(`Server is listening at http://${HOST}:${PORT}`);
-});
+// const server = app.listen(PORT,() => {
+//     console.log(`Server is listening at http://${HOST}:${PORT}`);
+// });
 
-export default server;
+// export default server;
+
+if (process.env.NODE_ENV !== 'development') {
+     app.listen(PORT, () => {
+        console.log(`Server is listening at http://${HOST}:${PORT}`);
+    });
+}
+
+export default app;

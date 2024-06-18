@@ -1,44 +1,21 @@
-import * as chai from "chai";
 import { expect } from "chai";
-import chaiHttp from "chai-http";
 
-import server from "../index.js";
 import userData from "./data/testUser.js";
-import User from "../src/models/user.model.js";
-import jwt from "jsonwebtoken";
+import { setupDatabase, initialiseSetup } from "./testSetup.js";
 
-const { request } = chai.use(chaiHttp);
 
 const { userDataToImport, wellFormedUser, userNoEmail, userWrongTypeEmail, userShortPassword } = userData;
 
-const generateToken = (user) => {
-    const payload = { _id: user._id, email: user.email };
-    return jwt.sign(payload, process.env.JWT_KEY, { expiresIn: '24h' });
-};
 
 describe("Testing Requests on User Collection", () => {
 
     let token;
     let userId;
 
-    const testServer = request(server).keepOpen();
+    const testServer = initialiseSetup();
 
-    beforeEach(async () => {
-        try {
-            await User.deleteMany({});
-            console.log('User collection cleared');
-        } catch (error) {
-            console.error('Error clearing User collection: ', error.message);
-        };
-        try {
-            const users = await User.insertMany(userDataToImport); 
-            userId = users[0]._id;
-
-            token = generateToken(users[0]);
-            console.log('User collection populated with users');
-        } catch (error) {
-            console.error('Error populating User collection: ', error.message);
-        }
+    before(async () => {
+        ({ userId, token } = await setupDatabase(userDataToImport, []));
     });
 
     describe(`POST request to /user/register`, () => {
@@ -102,7 +79,6 @@ describe("Testing Requests on User Collection", () => {
                 .send({ email, password: "testPassword123" });
 
             //Assert
-            console.log(res.body);
             expect(res).to.have.status(201);
             expect(res.body).to.have.property('message').that.equals('User logged in successfully');
             expect(res.body).to.be.an('object');
@@ -149,7 +125,6 @@ describe("Testing Requests on User Collection", () => {
                 .send({ newPassword: "newPassword123"});
 
             //Assert
-            console.log(res.body);
             expect(res).to.have.status(200);
             expect(res.body).to.have.property('email').that.equals(email);
             expect(res.body).to.have.property('password');
@@ -162,7 +137,6 @@ describe("Testing Requests on User Collection", () => {
                 .send({ newPassword: "newPassword123" });
 
             //Assert
-            console.log(res.body);
             expect(res).to.have.status(401);
             expect(res.body.error).to.equal('Authentication failed: No token provided');
            
@@ -176,7 +150,6 @@ describe("Testing Requests on User Collection", () => {
                 .send({ newPassword: "newPass" });
 
             //Assert
-            console.log(res.body);
             expect(res).to.have.status(400);
             expect(res.text).to.equal('["New password must be between 8 to 16 characters long and must contain at least one letter and one number"]');
         });
