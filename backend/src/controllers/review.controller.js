@@ -3,10 +3,10 @@ import { addReviewService, editReviewService, deleteReviewService } from "../ser
 export const addReviewController = async (req, res) => {
     try {
         const { cafeId } = req.params;
-        const { description, name } = req.body;
+        const { name, description } = req.body;
         const userId = req.user._id;
 
-        const newReview = await addReviewService(cafeId, userId, { description, name });
+        const newReview = await addReviewService(cafeId, userId, { name, description });
         res.status(201).json({message: "Review added successfully", review: newReview});
     } catch (error) {
         res.status(400).send("Review failed");
@@ -17,10 +17,10 @@ export const addReviewController = async (req, res) => {
 export const editReviewController = async (req, res) => {
     try {
         const { reviewId } = req.params;
-        const { description, name } = req.body;
+        const { name, description } = req.body;
         const userId = req.user._id;
 
-        const updatedReview = await editReviewService(reviewId, userId, { description, name });
+        const updatedReview = await editReviewService(reviewId, userId, { name, description });
         res.status(200).json({message: "Review updated successfully", review: updatedReview});
     } catch (error) {
         res.status(400).send("Review update failed");

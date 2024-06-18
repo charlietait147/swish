@@ -39,8 +39,8 @@ const cafeData = [
 const reviewData = 
     {
         _id: '60f1b6b5f3f9e4f4b8f3b3b6',
-        user: '60f1b6b5f3f9e4f4b8f3b3b1',
-        cafe: '60f1b6b5f3f9e4f4b8f3b3b4',
+        user: userData[0]._id,
+        cafe: cafeData[0]._id,
         name: 'Test Review',
         description: 'Test Description',
         likes: 0

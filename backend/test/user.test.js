@@ -15,7 +15,7 @@ describe("Testing Requests on User Collection", () => {
     const testServer = initialiseSetup();
 
     before(async () => {
-        ({ userId, token } = await setupDatabase(userDataToImport, []));
+        ({ userId, token } = await setupDatabase(userDataToImport, [], []));
     });
 
     describe(`POST request to /user/register`, () => {

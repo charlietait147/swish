@@ -4,6 +4,8 @@ import chaiHttp from "chai-http";
 
 import User from '../src/models/user.model.js';
 import Cafe from '../src/models/cafe.model.js';
+import Review from '../src/models/review.model.js';
+
 import jwt from 'jsonwebtoken';
 
 import app from '../index.js';
@@ -17,18 +19,21 @@ export const generateToken = (user) => {
     return jwt.sign(payload, process.env.JWT_KEY, { expiresIn: '24h' });
 };
 
-export const setupDatabase = async (userData, cafeData) => {
+export const setupDatabase = async (userData, cafeData, reviewData) => {
 
     try {
         await User.deleteMany({});
         await Cafe.deleteMany({});
-        console.log('User and Cafe collections cleared');
+        await Review.deleteMany({});
+        console.log('User, Cafe and Review collections cleared');
     } catch (error) {
         console.error('Error clearing User and Cafe collections: ', error.message);
     }
 
     try {
         await Cafe.insertMany(cafeData);
+
+        await Review.insertMany(reviewData);
 
         const users = await User.insertMany(userData);
         const userId = users[0]._id;

@@ -43,12 +43,12 @@ export const editReviewService = async (reviewId, userId, reviewData) => {
             throw new Error('Review not found');
         }
 
-        if (review.user.toString() !== userId) {
+        if (review.user.toString() !== userId.toString()) { 
             throw new Error('You are not authorized to edit this review');
-        }
+        } 
 
         if (reviewData.name) review.name = reviewData.name;
-        if (reviewData.comment) review.comment = reviewData.comment;
+        if (reviewData.description) review.description = reviewData.description;
 
         const updatedReview = await review.save();
 

@@ -28,8 +28,6 @@ const authenticate = async (req, res, next) => {
             });
         }
         req.user = user;
-        console.log(user);
-        // req.user = decoded;
         next();
     } catch (error) {
         return res.status(401).json({
