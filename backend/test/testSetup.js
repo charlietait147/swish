@@ -40,7 +40,7 @@ export const setupDatabase = async (userData, cafeData, reviewData) => {
 
         const token = generateToken(users[0]);
 
-        console.log('User and Cafe collections populated');
+        console.log('User, Cafe and Review collections populated');
         return { userId, token };
 
     } catch (error) {
