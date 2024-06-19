@@ -6,7 +6,7 @@ import { setupDatabase, initialiseSetup } from "./testSetup.js";
 
 
 
-const { wellFormedReviewData, reviewNoName } = testReviewData;
+const { wellFormedReviewData, reviewNoName, reviewNoDescription } = testReviewData;
 
 describe("Testing Requests on Review Collection", () => {
     let token;
@@ -48,6 +48,19 @@ describe("Testing Requests on Review Collection", () => {
             expect(res.text).to.equal('Review failed');
         });
 
+        it(`should return a 400 status code when a review with no description is sent`, async () => {
+            //Act
+            const res = await testServer
+                .post(`/review/${cafeData[1]._id}/add-review`)
+                .set('Authorization', `Bearer ${token}`)
+                .send(reviewNoDescription);
+            
+            //Assert
+            expect(res).to.have.status(400);
+            expect(res.text).to.equal('Review failed');
+
+        });
+
         it('should return a 401 status code when no token is sent', async () => {
             //Act
             const res = await testServer
@@ -69,8 +82,6 @@ describe("Testing Requests on Review Collection", () => {
                 .send({ name: 'Updated Review', description: 'Updated Description'});
 
             //Assert
-            // console.log(token);
-            console.log(res.body);
             expect(res).to.have.status(200);
             expect(res.body).to.have.property('message').that.equals('Review updated successfully');
             expect(res.body).to.have.property('review');
@@ -83,6 +94,29 @@ describe("Testing Requests on Review Collection", () => {
             const res = await testServer
                 .put(`/review/edit-review/${reviewData._id}`)
                 .send({ name: 'Updated Review', description: 'Updated Description'});
+
+            //Assert
+            expect(res).to.have.status(401);
+            expect(res.body.error).to.equal('Authentication failed: No token provided');
+        });
+    });
+
+    describe(`DELETE request to /review/delete-review/:reviewId/`, () => {
+        it('should return a 200 status code and a message when a review is deleted', async () => {
+            //Act
+            const res = await testServer
+                .delete(`/review/delete-review/${reviewData._id}`)
+                .set('Authorization', `Bearer ${token}`);
+
+            //Assert
+            expect(res).to.have.status(200);
+            expect(res.body).to.have.property('message').that.equals('Review deleted successfully');
+        });
+
+        it('should return a 401 status code when no token is sent', async () => {
+            //Act
+            const res = await testServer
+                .delete(`/review/delete-review/${reviewData._id}`);
 
             //Assert
             expect(res).to.have.status(401);

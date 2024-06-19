@@ -53,6 +53,9 @@ const testReviewData = {
     },
     reviewNoName: {
         description: 'Test Description'
+    },
+    reviewNoDescription: {
+        name: 'Test Review'
     }
 }
 

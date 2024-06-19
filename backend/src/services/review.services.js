@@ -65,11 +65,11 @@ export const deleteReviewService = async (reviewId, userId) => {
             throw new Error('Review not found');
         }
 
-        if (review.user.toString() !== userId) {
+        if (review.user.toString() !== userId.toString()) {
             throw new Error('You are not authorized to delete this review');
         }
 
-        await review.remove();
+        await review.deleteOne();
         return { message: 'Review deleted successfully' };
     } catch (error) {
         throw new Error(error.message);
