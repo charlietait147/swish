@@ -8,6 +8,7 @@ import authenticate from "./src/middleware/authenticate.js";
 import { registerUserRouter } from "./src/routes/userRoutes/registerUser.route.js";
 import { loginUserRouter } from "./src/routes/userRoutes/loginUser.route.js";
 import { updatePasswordRouter } from "./src/routes/userRoutes/updatePassword.route.js";
+import { addCafeRouter } from "./src/routes/userRoutes/addCafe.route.js";
 
 import { addReviewRouter } from "./src/routes/reviewRoutes/addReview.route.js";
 import { editReviewRouter } from "./src/routes/reviewRoutes/editReview.route.js";
@@ -15,6 +16,7 @@ import { deleteReviewRouter } from "./src/routes/reviewRoutes/deleteReview.route
 
 import { getAllCafesRouter } from "./src/routes/cafeRoutes/getAllCafes.route.js";
 import { getSingleCafeRouter } from "./src/routes/cafeRoutes/getSingleCafe.route.js";
+
 
 const app = express();
 
@@ -30,6 +32,7 @@ connectDb();
 app.use("/user", registerUserRouter);
 app.use("/user", loginUserRouter);
 app.use("/user", authenticate, updatePasswordRouter);
+app.use("/user", authenticate, addCafeRouter);
 
 app.use("/review", authenticate, addReviewRouter);
 app.use("/review", authenticate, editReviewRouter);

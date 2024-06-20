@@ -57,3 +57,26 @@ export const updatePasswordService = async (newPassword, userId) => {
         throw new Error(error.message);
     }
 }
+
+export const addCafeService = async (userId, cafeId) => {
+    try {
+        const user = await User.findById(userId)
+        if (!user) {
+            throw new Error('User not found');
+        }
+
+        if (user.cafes.includes(cafeId)) {
+            throw new Error('Cafe already added');
+        }
+
+        user.cafes.push(cafeId);
+        await user.save();
+
+        return user;
+
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
+
+
