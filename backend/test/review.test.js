@@ -99,6 +99,18 @@ describe("Testing Requests on Review Collection", () => {
             expect(res).to.have.status(401);
             expect(res.body.error).to.equal('Authentication failed: No token provided');
         });
+
+        it(`should return a 400 status code when a review that doesn't exist is edited`, async () => {
+            //Act
+            const res = await testServer
+                .put(`/review/edit-review/60f1b6b5f3f9e4f4b8f3b3b7`)
+                .set('Authorization', `Bearer ${token}`)
+                .send({ name: 'Updated Review', description: 'Updated Description'});
+
+            //Assert
+            expect(res).to.have.status(400);
+            expect(res.body).to.have.property('error').that.equals('Review not found');
+        });
     });
 
     describe(`DELETE request to /review/delete-review/:reviewId/`, () => {
@@ -121,6 +133,17 @@ describe("Testing Requests on Review Collection", () => {
             //Assert
             expect(res).to.have.status(401);
             expect(res.body.error).to.equal('Authentication failed: No token provided');
+        });
+
+        it(`should return a 400 status code when a review that doesn't exist is deleted`, async () => {
+            //Act
+            const res = await testServer
+                .delete(`/review/delete-review/60f1b6b5f3f9e4f4b8f3b3b7`)
+                .set('Authorization', `Bearer ${token}`);
+
+            //Assert
+            expect(res).to.have.status(400);
+            expect(res.body).to.have.property('error').that.equals('Review not found');
         });
     });
 });

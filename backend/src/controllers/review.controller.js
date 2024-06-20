@@ -23,7 +23,8 @@ export const editReviewController = async (req, res) => {
         const updatedReview = await editReviewService(reviewId, userId, { name, description });
         res.status(200).json({message: "Review updated successfully", review: updatedReview});
     } catch (error) {
-        res.status(400).send("Review update failed");
+        // res.status(400).send("Review update failed");
+        res.status(400).json({error: error.message});
         console.error("Review update failed", error);
     }
 }
@@ -36,7 +37,8 @@ export const deleteReviewController = async (req, res) => {
         await deleteReviewService(reviewId, userId);
         res.status(200).json({message: "Review deleted successfully"});
     } catch (error) {
-        res.status(400).send("Review delete failed");
+        // res.status(400).send("Review delete failed");
+        res.status(400).json({error: error.message});
         console.error("Review delete failed", error);
     }
 }
