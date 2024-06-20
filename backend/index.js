@@ -9,6 +9,7 @@ import { registerUserRouter } from "./src/routes/userRoutes/registerUser.route.j
 import { loginUserRouter } from "./src/routes/userRoutes/loginUser.route.js";
 import { updatePasswordRouter } from "./src/routes/userRoutes/updatePassword.route.js";
 import { addCafeRouter } from "./src/routes/userRoutes/addCafe.route.js";
+import { getCafesRouter } from "./src/routes/userRoutes/getCafes.route.js";
 
 import { addReviewRouter } from "./src/routes/reviewRoutes/addReview.route.js";
 import { editReviewRouter } from "./src/routes/reviewRoutes/editReview.route.js";
@@ -33,6 +34,7 @@ app.use("/user", registerUserRouter);
 app.use("/user", loginUserRouter);
 app.use("/user", authenticate, updatePasswordRouter);
 app.use("/user", authenticate, addCafeRouter);
+app.use("/user", authenticate, getCafesRouter);
 
 app.use("/review", authenticate, addReviewRouter);
 app.use("/review", authenticate, editReviewRouter);

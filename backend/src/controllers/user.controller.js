@@ -1,4 +1,4 @@
-import { registerUserService, loginUserService, updatePasswordService, addCafeService } from "../services/user.services.js";
+import { registerUserService, loginUserService, updatePasswordService, addCafeService, getCafesService } from "../services/user.services.js";
 import { validationResult } from "express-validator";
 import jwt from "jsonwebtoken";
 
@@ -59,4 +59,17 @@ export const addCafeController = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 }
+
+export const getCafesController = async (req, res) => {
+    try {
+        const userId = req.user._id;
+        const cafes = await getCafesService(userId);
+
+        res.status(200).json(cafes);
+
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+}
+        
 

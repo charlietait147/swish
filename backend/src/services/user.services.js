@@ -79,4 +79,18 @@ export const addCafeService = async (userId, cafeId) => {
     }
 };
 
+export const getCafesService = async (userId) => {
+    try {
+        const user = await User.findById(userId);
+        if (!user) {
+            throw new Error('User not found');
+        }
+        const cafes = await User.findById(userId).populate('cafes');
+        return cafes;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
+
+
 
