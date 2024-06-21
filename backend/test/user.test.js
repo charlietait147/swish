@@ -158,7 +158,7 @@ describe("Testing Requests on User Collection", () => {
     });
 
     describe(`POST request to /user/add-cafe/:cafeId`, () => {
-        it('should return a 200 status code and the user when a well formed user is sent', async () => {
+        it('should return a 200 status code and a message when the user adds a cafe', async () => {
             //Act
             const res = await testServer
                 .post(`/user/add-cafe/${cafeData[0]._id}`)
@@ -189,6 +189,32 @@ describe("Testing Requests on User Collection", () => {
             //Assert
             expect(res).to.have.status(400);
             expect(res.body.error).to.equal('Cafe already added');
+        });
+    });
+
+    describe(`GET request to /user/cafes`, () => {
+        it('should return a 200 status code and the cafes when the user fetches the cafes', async () => {
+            //Act
+            const res = await testServer
+                .get('/user/cafes')
+                .set('Authorization', `Bearer ${token}`);
+
+            //Assert
+            expect(res).to.have.status(200);
+            expect(res.body.cafes).to.be.an('array').that.has.lengthOf(1);
+            expect(res.body.cafes[0]).to.have.property('name').that.equals(cafeData[0].name);
+            expect(res.body.cafes[0]).to.have.property('location').that.equals(cafeData[0].location);
+            expect(res.body.cafes[0]).to.have.property('description').that.equals(cafeData[0].description);
+        });
+
+        it('should return a 401 status code when a user with no token tries to get cafes', async () => {
+            //Act
+            const res = await testServer
+                .get('/user/cafes');
+
+            //Assert
+            expect(res).to.have.status(401);
+            expect(res.body.error).to.equal('Authentication failed: No token provided');
         });
     });
 
