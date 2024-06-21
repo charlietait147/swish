@@ -1,10 +1,12 @@
 import { expect } from "chai";
 
 import userData from "./data/testUser.js";
+import { cafeData } from "./data/testData.js";
 import { setupDatabase, initialiseSetup } from "./testSetup.js";
 
 
 const { userDataToImport, wellFormedUser, userNoEmail, userWrongTypeEmail, userShortPassword } = userData;
+
 
 
 describe("Testing Requests on User Collection", () => {
@@ -15,7 +17,7 @@ describe("Testing Requests on User Collection", () => {
     const testServer = initialiseSetup();
 
     before(async () => {
-        ({ userId, token } = await setupDatabase(userDataToImport, [], []));
+        ({ userId, token } = await setupDatabase(userDataToImport, cafeData, []));
     });
 
     describe(`POST request to /user/register`, () => {
@@ -152,6 +154,41 @@ describe("Testing Requests on User Collection", () => {
             //Assert
             expect(res).to.have.status(400);
             expect(res.text).to.equal('["New password must be between 8 to 16 characters long and must contain at least one letter and one number"]');
+        });
+    });
+
+    describe(`POST request to /user/add-cafe/:cafeId`, () => {
+        it('should return a 200 status code and the user when a well formed user is sent', async () => {
+            //Act
+            const res = await testServer
+                .post(`/user/add-cafe/${cafeData[0]._id}`)
+                .set('Authorization', `Bearer ${token}`);
+
+            //Assert
+            expect(res).to.have.status(200);
+            expect(res.body).to.have.property('message').that.equals('Cafe added to user successfully');
+            expect(res.body.user).to.have.property('cafes').that.is.an('array').that.has.lengthOf(1);
+        });
+
+        it('should return a 401 status code when a user with no token adds a cafe', async () => {
+            //Act
+            const res = await testServer
+                .post(`/user/add-cafe/${cafeData[0]._id}`);
+
+            //Assert
+            expect(res).to.have.status(401);
+            expect(res.body.error).to.equal('Authentication failed: No token provided');
+        });
+
+        it('should return a 400 status code when a user tries to add a cafe that is already added', async () => {
+            //Act
+            const res = await testServer
+                .post(`/user/add-cafe/${cafeData[0]._id}`)
+                .set('Authorization', `Bearer ${token}`);
+
+            //Assert
+            expect(res).to.have.status(400);
+            expect(res.body.error).to.equal('Cafe already added');
         });
     });
 
