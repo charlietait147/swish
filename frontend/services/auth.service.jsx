@@ -52,7 +52,7 @@ export const updatePassword = async (newPassword) => {
     try {
         const token = localStorage.getItem("token");
     
-        const res = await axios.patch(
+        const res = await axios.put(
         `${API_URL}/user/update-password`,
         { newPassword },
         {
