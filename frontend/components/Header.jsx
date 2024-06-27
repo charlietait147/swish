@@ -10,7 +10,7 @@ function Header() {
       </header>
       <div className="h-20 w-40 bg-white absolute top-6 flex flex-row items-center shadow-lg ml-7">
         <Image src={Logo} alt="Swish Logo" width={75} height={75} />
-        <h1 className="text-2xl font-medium absolute right-4 tracking-wide">
+        <h1 className="text-2xl font-bold absolute right-4 tracking-wide">
           Swish .
         </h1>
       </div>
