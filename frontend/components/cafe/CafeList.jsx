@@ -1,6 +1,6 @@
 import CafeCard from "./CafeCard";
 
-function CafeList() {
+function CafeList({cafes}) {
     return ( 
         <CafeCard />
      );
