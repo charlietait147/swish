@@ -12,6 +12,22 @@ function CafeFilters({ onFilterChange }) {
     setFilters(updatedFilters); // Update the filters state
     onFilterChange(updatedFilters); // Call the onFilterChange prop with the updated filters
   };
+
+  const handleApplyFilters = () => {
+    onFilterChange(filters);
+  }
+
+  const handleResetFilters = () => {
+    setFilters({ // Reset the filters state
+      name: "",
+      location: "",
+    });
+    onFilterChange({ // Call the onFilterChange prop with an empty object
+      name: "",
+      location: "",
+    });
+  }
+
   return (
     <div className="bg-white pt-20 pb-6 px-6 ">
       <div className="bg-gray-200 rounded-lg shadow-lg flex flex-col py-3 px-4">
@@ -63,8 +79,8 @@ function CafeFilters({ onFilterChange }) {
           />
         </div>
         <div className="flex flex-row">
-        <button className="bg-orange-500 w-32 text-white font-semibold rounded-lg mt-4 py-2 hover:bg-orange-400"> Apply Filters</button>
-        <button className = "bg-gray-300 w-32 text-gray-700 font-semibold rounded-lg mt-4 py-2 hover:bg-gray-400 ml-4"> Clear Filters</button>
+        <button className="bg-orange-500 w-32 text-white font-semibold rounded-lg mt-4 py-2 hover:bg-orange-400" onClick={handleApplyFilters}> Apply Filters</button>
+        <button className = "bg-gray-300 w-32 text-gray-700 font-semibold rounded-lg mt-4 py-2 hover:bg-gray-400 ml-4" onClick = {handleResetFilters}> Clear Filters</button>
         </div>
       </div>
     </div>
