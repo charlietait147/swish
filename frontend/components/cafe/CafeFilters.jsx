@@ -28,7 +28,7 @@ function CafeFilters({ onFilterChange }) {
   }
 
   return (
-    <div className="bg-white pt-20 pb-6 px-6 ">
+    <div className="bg-white py-6 px-6 ">
       <div className="bg-gray-200 rounded-lg shadow-lg flex flex-col py-3 px-4">
         <div className="flex flex-row">
           <h1 className="text-xl font-semibold">Filters</h1>

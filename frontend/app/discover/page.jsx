@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import CafeFilters from "@/components/cafe/CafeFilters";
 import CafeList from "@/components/cafe/CafeList";
+import DiscoverCafeHero from "@/components/cafe/DiscoverCafeHero";
 import { fetchCafes } from "@/services/cafe.service";
 import { useState, useEffect } from "react";
 
@@ -40,6 +41,7 @@ export default function DiscoverPage() {
   return (
     <>
       <Header />
+      <DiscoverCafeHero />
       <CafeFilters onFilterChange={handleFilters} />
       <CafeList cafes={filteredCafes} />
       <Footer />
