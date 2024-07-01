@@ -10,7 +10,6 @@ function CafeFilters({ onFilterChange }) {
     const updatedFilters = { ...filters, [name]: value }; // Update the filters state
 
     setFilters(updatedFilters); // Update the filters state
-    onFilterChange(updatedFilters); // Call the onFilterChange prop with the updated filters
   };
 
   const handleApplyFilters = () => {
