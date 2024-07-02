@@ -8,6 +8,7 @@ function DiscoverCafeHero() {
         src={CafeInterior}
         alt="Cafe Interior"
         className="w-full h-full object-cover"
+        priority={true}
       />
       <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white text-center p-4">
         <h1 className="text-2xl font-semibold">Discover</h1>
