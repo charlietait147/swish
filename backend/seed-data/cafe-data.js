@@ -4,7 +4,7 @@ const cafes = [
         location: 'Winchester',
         description: 'The Orangery is a beautiful cafe in the heart of Winchester. It is the perfect place to relax and enjoy a coffee or a light lunch. The cafe is open seven days a week and serves a range of delicious food and drinks. The Orangery is also available for private hire and is the perfect venue for a special occasion.',
         website: 'https://www.thewinchesterorangery.com',
-        image: '/',
+        image: 'the-orangery-cafe.jpeg',
         reviews: []
     },
     {
@@ -53,7 +53,7 @@ const cafes = [
         location: 'Winchester',
         description: 'The South Downs Social is a family-run cafe in the heart of Winchester. The cafe is open seven days a week and serves a range of delicious food and drinks. The South Downs Social is the perfect place to relax and enjoy a coffee or a light lunch. The cafe is also available for private hire and is the perfect venue for a special occasion.',
         website: 'https://www.southdownssocial.com',
-        image: '/',
+        image: 'south-downs-social-cafe.jpeg',
         reviews: []
     },
     {
@@ -61,7 +61,7 @@ const cafes = [
         location: 'Winchester',
         description:'The Refectory is a family-run cafe in the heart of Winchester. The cafe is open seven days a week and serves a range of delicious food and drinks. The Refectory is the perfect place to relax and enjoy a coffee or a light lunch. The cafe is also available for private hire and is the perfect venue for a special occasion.',
         website: 'https://www.winchester-cathedral.org.uk/welcome/cafe/',
-        image: '/',
+        image: 'the-refectory-cafe.jpeg',
         reviews: []
     },
     {
@@ -69,7 +69,7 @@ const cafes = [
         location:'Haslemere',
         description: 'Heidi is a family-run cafe in the heart of Haslemere. The cafe is open seven days a week and serves a range of delicious food and drinks. Heidi is the perfect place to relax and enjoy a coffee or a light lunch. The cafe is also available for private hire and is the perfect venue for a special occasion.',
         website:'https://www.heidibakery.co.uk/locations/heidi-haslemere/',
-        image: '/',
+        image: 'heidi-cafe.jpeg',
         reviews: []
     },
     {
@@ -77,7 +77,7 @@ const cafes = [
         location: 'Winchester',
         description: 'Naafi is a family-run cafe in the heart of Winchester. The cafe is open seven days a week and serves a range of delicious food and drinks. Naafi is the perfect place to relax and enjoy a coffee or a light lunch. The cafe is also available for private hire and is the perfect venue for a special occasion.',
         website: 'https://naafi.co.uk/winchester/',
-        image: '/',
+        image: 'naafi-cafe.jpeg',
         reviews: []
     },
     {
@@ -85,7 +85,7 @@ const cafes = [
         location: 'Winchester',
         description: 'The Handlebar Cafe is a family-run cafe in the heart of Winchester. The cafe is open seven days a week and serves a range of delicious food and drinks. The Handlebar Cafe is the perfect place to relax and enjoy a coffee or a light lunch. The cafe is also available for private hire and is the perfect venue for a special occasion.',
         website: 'https://www.handlebar.cafe',
-        image: '/',
+        image: 'handle-bar-cafe.jpeg',
         reviews: []
     }
 ]
