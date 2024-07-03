@@ -3,10 +3,19 @@ function CafeCard({ cafe }) {
     <div>
       <div
         className="relative bg-cover bg-center w-full shadow-lg overflow-hidden h-48 border-2 border-orange-400 rounded-lg cursor-pointer transition duration-300 ease-in-out transform hover:scale-105"
-        style={{ backgroundImage: `url(${cafe.image})` }}
+        style={{
+          backgroundImage: `url(${process.env.NEXT_API_URL}/public/images/${cafe.image})`,
+        }}
       >
-        <div className="absolute inset-0 bg-gray-100 bg-opacity-50 flex flex-col justify-center items-center p-4">
+        {/* <div className="absolute inset-0 bg-gray-100 bg-opacity-50 flex flex-col justify-center items-center p-4">
           <h2 className="pr-2 uppercase font-semibold">{cafe.name}</h2>
+        </div> */}
+        <div className="absolute inset-0 bg-black bg-opacity-50"></div>{" "}
+        {/* Overlay */}
+        <div className="relative z-10 flex flex-col justify-center items-center h-full p-4">
+          <h2 className="text-white text-lg uppercase font-semibold px-4 text-center">
+            {cafe.name}
+          </h2>
         </div>
         <div className="absolute left-0 bottom-0 bg-orange-500 text-white p-2 rounded-tr-lg flex flex-row">
           <svg
