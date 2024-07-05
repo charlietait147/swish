@@ -6,6 +6,8 @@ import { fetchCafe } from "@/services/cafe.service";
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import CafeDetailsSection from "@/components/cafe/CafeDetailsSection";
+import Logo from '../../../public/logo/swish-logo.png';
+import Image from 'next/image';
 
 export default function CafePage() {
   const [cafe, setCafe] = useState(null);
@@ -30,10 +32,22 @@ export default function CafePage() {
     getCafe();
   }, []);
 
+  if (loading) {
+    return (
+      <>
+        <Header />
+        <div className="flex justify-center items-center h-screen">
+          <Image src={Logo} alt="Swish Logo" width = {125} height = {125} className="spinner"/>
+        </div>
+        <Footer />
+      </>
+    );
+  }
+
   return (
     <>
       <Header />
-      <CafeDetailsSection cafe = {cafe} />
+      <CafeDetailsSection cafe={cafe} />
       <Footer />
     </>
   );
