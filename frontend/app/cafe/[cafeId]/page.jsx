@@ -8,6 +8,7 @@ import { useParams } from "next/navigation";
 import CafeDetailsSection from "@/components/cafe/CafeDetailsSection";
 import Logo from '../../../public/logo/swish-logo.png';
 import Image from 'next/image';
+import CafeReviewList from "@/components/cafe/CafeReviewList";
 
 export default function CafePage() {
   const [cafe, setCafe] = useState(null);
@@ -48,6 +49,7 @@ export default function CafePage() {
     <>
       <Header />
       <CafeDetailsSection cafe={cafe} />
+      <CafeReviewList cafe = {cafe} />
       <Footer />
     </>
   );
