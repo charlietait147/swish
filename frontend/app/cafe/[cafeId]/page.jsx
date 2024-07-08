@@ -38,7 +38,7 @@ export default function CafePage() {
       <>
         <Header />
         <div className="flex justify-center items-center h-screen">
-          <Image src={Logo} alt="Swish Logo" width = {125} height = {125} className="spinner"/>
+          <Image src={Logo} alt="Swish Logo" width = {125} height = {125} className="spinner" priority={true}/>
         </div>
         <Footer />
       </>
