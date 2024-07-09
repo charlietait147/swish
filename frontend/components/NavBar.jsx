@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import Cookies from "js-cookie";
 
 function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,14 +11,16 @@ function NavBar() {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    // const token = localStorage.getItem("token");
+    const token = Cookies.get("token");
     if (token) {
       setIsLoggedIn(true);
     }
   }, []);
 
   const handleSignOut = () => {
-    localStorage.remove("token");
+    // localStorage.remove("token");
+    Cookies.remove("token");
     setIsLoggedIn(false);
   };
 
