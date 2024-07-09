@@ -1,10 +1,12 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const API_URL = process.env.NEXT_API_URL;
 
 export const addReview = async (cafeId, name, description) => {
     try {
-        const token = localStorage.getItem("token");
+        // const token = localStorage.getItem("token");
+        const token = Cookies.get("token");
     
         if (!token) {
         throw new Error("No token found. Please log in.");
@@ -27,7 +29,8 @@ export const addReview = async (cafeId, name, description) => {
 
     export const editReview = async (reviewId, name, description) => {
         try {
-            const token = localStorage.getItem("token");
+            // const token = localStorage.getItem("token");
+            const token = Cookies.get("token");
         
             if (!token) {
             throw new Error("No token found. Please log in.");
@@ -50,7 +53,8 @@ export const addReview = async (cafeId, name, description) => {
 
     export const deleteReview = async (reviewId) => {
         try {
-            const token = localStorage.getItem("token");
+            // const token = localStorage.getItem("token");
+            const token = Cookies.get("token");
         
             if (!token) {
             throw new Error("No token found. Please log in.");
