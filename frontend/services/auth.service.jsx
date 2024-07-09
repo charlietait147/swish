@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const API_URL = process.env.NEXT_API_URL;
 
@@ -12,7 +13,8 @@ export const register = async (email, password) => {
     const data = await res.data;
 
     if (res.status === 201) {
-      localStorage.setItem("token", data.token);
+      // localStorage.setItem("token", data.token);
+      Cookies.set("token", data.token, { expires: 1 }, { sameSite: "Strict" })
       console.log("User registered successfully", data);
     } else {
       console.error("Registration failed", data);
@@ -32,7 +34,8 @@ export const login = async (email, password) => {
     const data = await res.data;
 
     if (res.status === 201) {
-      localStorage.setItem("token", data.token);
+      // localStorage.setItem("token", data.token);
+      Cookies.set("token", data.token, { expires: 1 }, { sameSite: "Strict" });
       console.log("User logged in successfully", data);
     } else {
       console.error("Login failed", data);
@@ -50,7 +53,8 @@ export const login = async (email, password) => {
 
 export const updatePassword = async (newPassword) => {
     try {
-        const token = localStorage.getItem("token");
+        // const token = localStorage.getItem("token");
+        const token = Cookies.get("token");
     
         const res = await axios.put(
         `${API_URL}/user/update-password`,
