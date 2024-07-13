@@ -43,15 +43,13 @@ export const login = async (email, password) => {
       Cookies.set("token", data.token, { expires: 1 }, { sameSite: "Strict" });
       console.log("User logged in successfully", data);
     } else {
-      console.error("Login failed", data);
+      throw new Error(data.message || "Login failed");
     }
   } catch (error) {
     if (error.response && error.response.status === 400) {
-      return error.message ? error : new Error("This user couldn't be found"); // Throw the specific error message
+      throw new Error(error.response.data)// Throw the specific error message
     } else {
-      return error.message
-        ? error
-        : new Error("An error occurred during login"); // Throw a generic error message
+      throw new Error(error.message || "An error occurred during registration");
     }
   }
 };
