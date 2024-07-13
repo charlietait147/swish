@@ -22,6 +22,7 @@ function NavBar() {
     // localStorage.remove("token");
     Cookies.remove("token");
     setIsLoggedIn(false);
+    window.location.reload();
   };
 
   return (
