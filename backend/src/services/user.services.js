@@ -5,13 +5,13 @@ export const registerUserService = async (email, password) => {
     try {
         const user = await User.findOne({ email });
         if (user) {
-            throw new Error('User already exists');
+            throw new Error('A user with this email already exists');
         }
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = new User({ email, password: hashedPassword });
         return await newUser.save();
     } catch (error) {
-        throw new Error(error);
+        throw new Error(error.message);
     }
 }
 
@@ -19,7 +19,7 @@ export const loginUserService = async (email, password) => {
     try {
         const user = await User.findOne({ email });
         if (!user) {
-            throw new Error('User not found');
+            throw new Error('A user with this email does not exist');
         }
 
         let isPasswordValid = false;
