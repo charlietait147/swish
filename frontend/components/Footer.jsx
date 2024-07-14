@@ -1,5 +1,27 @@
+"use client";
+import { useState, useEffect   } from "react";
+import Cookies from "js-cookie";
 
 function Footer() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // const token = localStorage.getItem("token");
+    const token = Cookies.get("token");
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  const handleSignOut = () => {
+    // localStorage.remove("token");
+    Cookies.remove("token");
+    setIsLoggedIn(false);
+    window.location.reload();
+  };
+
+
+
   return (
     <footer className="px-6 pt-8 pb-4 bg-orange-500">
       <div className="border border-t-white mb-8"></div>
@@ -9,7 +31,14 @@ function Footer() {
       <ul className="flex flex-col text-center mb-4 ">
         <li className="text-white py-2">Discover</li>
         <li className="text-white py-2">Contact Us</li>
-        <li className="text-white py-2">Sign In</li>
+        {!isLoggedIn ? (
+          <li className="text-white py-2">Sign In</li>
+        ) : (
+          <>
+            <li className="text-white py-2">My Account</li>
+            <li className="text-white py-2" onClick={handleSignOut}>Sign Out</li>
+          </>
+        )}
       </ul>
       <div className="border border-t-white mb-4"></div>
       <small className="text-gray-200">
