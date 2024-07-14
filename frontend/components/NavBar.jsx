@@ -26,7 +26,6 @@ function NavBar() {
     Cookies.remove("token");
     setIsLoggedIn(false);
     router.push("/login");
-    // window.location.reload();
   };
 
   return (

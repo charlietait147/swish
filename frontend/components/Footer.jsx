@@ -20,8 +20,6 @@ function Footer() {
     Cookies.remove("token");
     setIsLoggedIn(false);
     router.push("/login");
-    // window.location.reload();
-
   };
 
 
