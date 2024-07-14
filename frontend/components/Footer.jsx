@@ -1,9 +1,11 @@
 "use client";
 import { useState, useEffect   } from "react";
 import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 function Footer() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     // const token = localStorage.getItem("token");
@@ -17,7 +19,9 @@ function Footer() {
     // localStorage.remove("token");
     Cookies.remove("token");
     setIsLoggedIn(false);
-    window.location.reload();
+    router.push("/login");
+    // window.location.reload();
+
   };
 
 
