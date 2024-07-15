@@ -13,8 +13,8 @@ const cafes = [
         location: 'New Alresford',
         description: 'Caracoli is a family-run cafe in the heart of New Alresford. The cafe is open seven days a week and serves a range of delicious food and drinks. Caracoli is the perfect place to relax and enjoy a coffee or a light lunch. The cafe is also available for private hire and is the perfect venue for a special occasion.',
         website: 'https://www.caracoli.co.uk',
-        image: '/',
-        borderImage: '/',
+        image: 'caracoli-cafe-no-border.jpeg',
+        borderImage: 'caracoli-cafe.jpeg',
         reviews: []
     },
     {
@@ -22,8 +22,8 @@ const cafes = [
         location: 'Winchester',
         description: 'Josie\'s is a family-run cafe in the heart of Winchester. The cafe is open seven days a week and serves a range of delicious food and drinks. Josie\'s is the perfect place to relax and enjoy a coffee or a light lunch. The cafe is also available for private hire and is the perfect venue for a special occasion.',
         website: 'https://www.josieswinecoffee.com',
-        image: '/',
-        borderImage: '/',
+        image: 'josies-cafe-no-border.jpeg',
+        borderImage: 'josies-cafe.jpeg',
         reviews: []
     },
     {
@@ -31,8 +31,8 @@ const cafes = [
         location: 'Winchester',
         description: 'Hoxton Bakehouse is a family-run cafe in the heart of Winchester. The cafe is open seven days a week and serves a range of delicious food and drinks. Hoxton Bakehouse is the perfect place to relax and enjoy a coffee or a light lunch. The cafe is also available for private hire and is the perfect venue for a special occasion.',
         website: 'https://www.hoxtonbakehouse.com',
-        image: '/',
-        borderImage: '/',
+        image: 'hoxton-bakehouse-no-border.jpeg',
+        borderImage: 'hoxton-bakehouse.jpeg',
         reviews: []
     },
     {
@@ -40,8 +40,8 @@ const cafes = [
         location: 'Alresford',
         description: 'The Yard is a family-run cafe in the heart of Alresford. The cafe is open seven days a week and serves a range of delicious food and drinks. The Yard is the perfect place to relax and enjoy a coffee or a light lunch. The cafe is also available for private hire and is the perfect venue for a special occasion.',
         website: 'https://www.theyardhampshire.co.uk',
-        image: '/',
-        borderImage: '/',
+        image: 'the-yard-cafe-no-border.jpeg',
+        borderImage: 'the-yard-cafe.jpeg',
         reviews: []
     },
     {
@@ -49,8 +49,8 @@ const cafes = [
         location: 'Winchester',
         description: 'Kavi Coffee is a family-run cafe in the heart of Winchester. The cafe is open seven days a week and serves a range of delicious food and drinks. Kavi Coffee is the perfect place to relax and enjoy a coffee or a light lunch. The cafe is also available for private hire and is the perfect venue for a special occasion.',
         website: "https://www.kavicoffee.com",
-        image: '/',
-        borderImage: '/',
+        image: 'kavi-no-border.jpeg',
+        borderImage: 'kavi.jpeg',
         reviews: []
 
     },
@@ -77,8 +77,8 @@ const cafes = [
         location:'Haslemere',
         description: 'Heidi is a family-run cafe in the heart of Haslemere. The cafe is open seven days a week and serves a range of delicious food and drinks. Heidi is the perfect place to relax and enjoy a coffee or a light lunch. The cafe is also available for private hire and is the perfect venue for a special occasion.',
         website:'https://www.heidibakery.co.uk/locations/heidi-haslemere/',
-        image: 'heidi-cafe-no-border.jpeg',
-        borderImage: 'heidi-cafe.jpeg',
+        image: '/',
+        borderImage: '/',
         reviews: []
     },
     {
