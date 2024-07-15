@@ -14,6 +14,7 @@ export default function CafePage() {
   const [cafe, setCafe] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [reviewsUpdated, setReviewsUpdated] = useState(false);
   const { cafeId } = useParams();
 
   const getCafe = async () => {
@@ -31,7 +32,7 @@ export default function CafePage() {
 
   useEffect(() => {
     getCafe();
-  }, []);
+  }, [reviewsUpdated]);
 
   if (loading) {
     return (
@@ -49,7 +50,7 @@ export default function CafePage() {
     <>
       <Header />
       <CafeDetailsSection cafe={cafe} />
-      <CafeReviewList cafe = {cafe} />
+      <CafeReviewList cafe = {cafe} setReviewsUpdated = {setReviewsUpdated} />
       <Footer />
     </>
   );

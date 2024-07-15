@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import Cookies from "js-cookie";
 
-function CafeReviewList({ cafe }) {
+function CafeReviewList({ cafe, setReviewsUpdated }) {
   const [openReviewForm, setOpenReviewForm] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const reviewCount = cafe.reviews.length;
@@ -72,6 +72,7 @@ function CafeReviewList({ cafe }) {
           onClose={() => {
             setOpenReviewForm(false);
           }}
+          setReviewsUpdated={setReviewsUpdated}
         />
       )}
     </div>
