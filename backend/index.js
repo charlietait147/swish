@@ -11,6 +11,7 @@ import { loginUserRouter } from "./src/routes/userRoutes/loginUser.route.js";
 import { updatePasswordRouter } from "./src/routes/userRoutes/updatePassword.route.js";
 import { addCafeRouter } from "./src/routes/userRoutes/addCafe.route.js";
 import { getCafesRouter } from "./src/routes/userRoutes/getCafes.route.js";
+import { isCafeSavedRouter } from "./src/routes/userRoutes/isCafeSaved.route.js";
 
 import { addReviewRouter } from "./src/routes/reviewRoutes/addReview.route.js";
 import { editReviewRouter } from "./src/routes/reviewRoutes/editReview.route.js";
@@ -18,6 +19,7 @@ import { deleteReviewRouter } from "./src/routes/reviewRoutes/deleteReview.route
 
 import { getAllCafesRouter } from "./src/routes/cafeRoutes/getAllCafes.route.js";
 import { getSingleCafeRouter } from "./src/routes/cafeRoutes/getSingleCafe.route.js";
+
 
 
 const app = express();
@@ -42,6 +44,7 @@ app.use("/user", loginUserRouter);
 app.use("/user", authenticate, updatePasswordRouter);
 app.use("/user", authenticate, addCafeRouter);
 app.use("/user", authenticate, getCafesRouter);
+app.use("/user", authenticate, isCafeSavedRouter);
 
 app.use("/review", authenticate, addReviewRouter);
 app.use("/review", authenticate, editReviewRouter);

@@ -92,5 +92,17 @@ export const getCafesService = async (userId) => {
     }
 }
 
+export const isCafeSavedService = async (userId, cafeId) => {
+    try {
+        const user = await User.findById(userId);
+        if (!user) {
+            throw new Error('User not found');
+        }
+        return user.cafes.includes(cafeId);
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
+
 
 
