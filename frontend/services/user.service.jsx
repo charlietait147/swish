@@ -46,3 +46,23 @@ export const getCafes = async () => {
     console.error("Cafes fetch failed", error);
   }
 };
+
+export const isCafeSaved = async (cafeId) => {
+  try {
+    const token = Cookies.get("token");
+
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+
+    const res = await axios.get(`${API_URL}/user/isCafeSaved/${cafeId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log("Cafe saved status fetched successfully", res.data);
+    return res.data.isSaved;
+  } catch (error) {
+    console.error("Cafe saved status fetch failed", error);
+  }
+}
