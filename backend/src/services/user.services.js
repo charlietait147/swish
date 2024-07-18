@@ -104,5 +104,19 @@ export const isCafeSavedService = async (userId, cafeId) => {
     }
 }
 
+export const getUserDataService = async (userId) => {
+    try {
+        const user = await User.findById(userId)
+        .populate('cafes')
+        .populate('reviews')
+        if (!user) {
+            throw new Error('User not found');
+        }
+        return user;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
+
 
 
