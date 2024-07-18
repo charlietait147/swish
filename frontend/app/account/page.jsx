@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { fetchUserData } from "@/services/user.service.jsx";
 import Image from "next/image";
 import Logo from "../../public/logo/swish-logo.png";
+import AccountReviewList from "@/components/account/AccountReviewList";
 
 export default function AccountPage() {
   const [userData, setUserData] = useState(null);
@@ -65,6 +66,8 @@ export default function AccountPage() {
         cafesLength={userData.cafes.length}
         reviewsLength={userData.reviews.length}
       />
+      <div className="bg-gray-200 py-2.5"></div>
+      <AccountReviewList reviews={userData.reviews} />
       <Footer />
     </>
   );
