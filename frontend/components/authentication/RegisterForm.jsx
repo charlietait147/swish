@@ -20,6 +20,7 @@ function RegisterForm() {
     }
   }, []);
 
+
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
