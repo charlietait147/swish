@@ -21,13 +21,12 @@ export default function AccountPage() {
     if (!user) {
       router.push("/");
     }
-  });
+  }, [router]);
 
   useEffect(() => {
     const getUserData = async () => {
       try {
         const response = await fetchUserData();
-        console.log("Response from API:", response);
         setUserData(response);
       } catch (error) {
         console.error("Error fetching user data", error);
@@ -56,6 +55,10 @@ export default function AccountPage() {
         <Footer />
       </>
     );
+  }
+
+  if (!userData) {
+    return null;
   }
 
   return (
