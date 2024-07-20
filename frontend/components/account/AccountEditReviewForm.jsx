@@ -24,7 +24,6 @@ function AccountEditReviewForm({
 
     try {
       const response = await editReview(reviewId, name, description);
-      console.log(response);
       setReviewsUpdated(true);
       setUpdated(true);
       setError(null);

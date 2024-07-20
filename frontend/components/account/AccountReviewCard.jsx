@@ -1,9 +1,12 @@
 import formatDistanceToNowStrict from "date-fns/formatDistanceToNowStrict";
 import { useState } from "react";
-import AccountEditReviewForm from "./AccountEditReviewForm";
 
-function AccountReviewCard({ review, setReviewsUpdated}) {
+import AccountEditReviewForm from "./AccountEditReviewForm";
+import AccountDeleteReviewModal from "./AccountDeleteReviewModal";
+
+function AccountReviewCard({ review, setReviewsUpdated }) {
   const [openReviewForm, setOpenReviewForm] = useState(false);
+  const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
 
   const handleEditClick = () => {
     setOpenReviewForm(true);
@@ -12,7 +15,15 @@ function AccountReviewCard({ review, setReviewsUpdated}) {
   const handleClose = () => {
     setOpenReviewForm(false);
     setReviewsUpdated((prev) => !prev);
-  }
+  };
+
+  const handleDeleteClick = () => {
+    setOpenConfirmDelete(true);
+  };
+
+  const handleModalClose = () => {
+    setOpenConfirmDelete(false);
+  };
 
   return (
     <div className="bg-white border border-gray-300 py-4 px-4 flex flex-col rounded-lg shadow-md">
@@ -34,9 +45,19 @@ function AccountReviewCard({ review, setReviewsUpdated}) {
         >
           Edit
         </button>
-        <button className="text-xs font-semibold bg-red-500 text-white p-2 ml-2">
+        <button
+          onClick={handleDeleteClick}
+          className="text-xs font-semibold bg-red-500 text-white p-2 ml-2"
+        >
           Delete
         </button>
+        {openConfirmDelete && (
+          <AccountDeleteReviewModal
+            onClose={handleModalClose}
+            reviewId={review._id}
+            setReviewsUpdated={setReviewsUpdated}
+          />
+        )}
       </div>
       {openReviewForm && (
         <AccountEditReviewForm
