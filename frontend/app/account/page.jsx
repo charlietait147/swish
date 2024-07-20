@@ -9,6 +9,7 @@ import { fetchUserData } from "@/services/user.service.jsx";
 import Image from "next/image";
 import Logo from "../../public/logo/swish-logo.png";
 import AccountReviewList from "@/components/account/AccountReviewList";
+import AccountSavedCafeList from "@/components/account/AccountSavedCafeList";
 
 export default function AccountPage() {
   const [userData, setUserData] = useState(null);
@@ -27,7 +28,6 @@ export default function AccountPage() {
   const getUserData = async () => {
     try {
       const response = await fetchUserData();
-      console.log(response);
       setUserData(response);
     } catch (error) {
       console.error("Error fetching user data", error);
@@ -71,6 +71,8 @@ export default function AccountPage() {
         cafesLength={userData.cafes.length}
         reviewsLength={userData.reviews.length}
       />
+      <div className="bg-gray-200 py-2.5"></div>
+      <AccountSavedCafeList cafes={userData.cafes} />
       <div className="bg-gray-200 py-2.5"></div>
       <AccountReviewList
         reviews={userData.reviews}
