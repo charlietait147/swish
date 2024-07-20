@@ -2,7 +2,7 @@ import AccountReviewCard from "./AccountReviewCard";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-function AccountReviewList({ reviews }) {
+function AccountReviewList({ reviews, setReviewsUpdated }) {
   const [showDiscoverLink, setShowDiscoverLink] = useState(false);
 
   useEffect(() => {
@@ -30,12 +30,12 @@ function AccountReviewList({ reviews }) {
           </div>
         ) : (
           <div>
-            <h3 className="font-semibold text-lg text-gray-800 pb-4 pt-2">
+            <h3 className="font-semibold text-lg text-gray-800 pb-4 pt-3">
               My Reviews
             </h3>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 pb-4">
               {reviews.map((review) => (
-                <AccountReviewCard key={review._id} review={review} />
+                <AccountReviewCard key={review._id} review={review} setReviewsUpdated={setReviewsUpdated} />
               ))}
             </div>
           </div>

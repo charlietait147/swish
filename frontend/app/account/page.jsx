@@ -13,6 +13,7 @@ import AccountReviewList from "@/components/account/AccountReviewList";
 export default function AccountPage() {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [reviewsUpdated, setReviewsUpdated] = useState(false);
 
   const router = useRouter();
 
@@ -23,21 +24,21 @@ export default function AccountPage() {
     }
   }, [router]);
 
-  useEffect(() => {
-    const getUserData = async () => {
-      try {
-        const response = await fetchUserData();
-        console.log(response);
-        setUserData(response);
-      } catch (error) {
-        console.error("Error fetching user data", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const getUserData = async () => {
+    try {
+      const response = await fetchUserData();
+      console.log(response);
+      setUserData(response);
+    } catch (error) {
+      console.error("Error fetching user data", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     getUserData();
-  }, []);
+  }, [reviewsUpdated]);
 
   if (loading) {
     return (
@@ -71,7 +72,10 @@ export default function AccountPage() {
         reviewsLength={userData.reviews.length}
       />
       <div className="bg-gray-200 py-2.5"></div>
-      <AccountReviewList reviews={userData.reviews} />
+      <AccountReviewList
+        reviews={userData.reviews}
+        setReviewsUpdated={setReviewsUpdated}
+      />
       <Footer />
     </>
   );

@@ -37,7 +37,7 @@ export const addReview = async (cafeId, name, description) => {
             }
         
             const res = await axios.put(
-            `${API_URL}/review/edit-review${reviewId}`,
+            `${API_URL}/review/edit-review/${reviewId}`,
             { name, description },
             {
                 headers: {
