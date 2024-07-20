@@ -1,4 +1,4 @@
-import { registerUserService, loginUserService, updatePasswordService, addCafeService, getCafesService, isCafeSavedService, getUserDataService } from "../services/user.services.js";
+import { registerUserService, loginUserService, updatePasswordService, addCafeService, getCafesService, isCafeSavedService, getUserDataService, deleteSavedCafeService } from "../services/user.services.js";
 import { validationResult } from "express-validator";
 import jwt from "jsonwebtoken";
 
@@ -91,6 +91,17 @@ export const getUserDataController = async (req, res) => {
         res.status(200).json(user);
     } catch (error) {
         res.status(400).json({ error: error.message });
+    }
+}
+
+export const deleteSavedCafeController = async (req, res) => {
+    try {
+        const userId = req.user._id;
+        const { cafeId } = req.params;
+        await deleteSavedCafeService(userId, cafeId);
+        res.status(200).json({message: "Cafe deleted successfully"});
+    } catch (error) {
+        res.status(400).json({error: error.message});
     }
 }
         

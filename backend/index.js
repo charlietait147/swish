@@ -13,6 +13,7 @@ import { addCafeRouter } from "./src/routes/userRoutes/addCafe.route.js";
 import { getCafesRouter } from "./src/routes/userRoutes/getCafes.route.js";
 import { isCafeSavedRouter } from "./src/routes/userRoutes/isCafeSaved.route.js";
 import { getUserDataRouter } from "./src/routes/userRoutes/getUserData.route.js";
+import { deleteSavedCafeRouter } from "./src/routes/userRoutes/deleteSavedCafe.route.js";
 
 import { addReviewRouter } from "./src/routes/reviewRoutes/addReview.route.js";
 import { editReviewRouter } from "./src/routes/reviewRoutes/editReview.route.js";
@@ -47,6 +48,7 @@ app.use("/user", authenticate, addCafeRouter);
 app.use("/user", authenticate, getCafesRouter);
 app.use("/user", authenticate, isCafeSavedRouter);
 app.use("/user", authenticate, getUserDataRouter);
+app.use("/user", authenticate, deleteSavedCafeRouter )
 
 app.use("/review", authenticate, addReviewRouter);
 app.use("/review", authenticate, editReviewRouter);
