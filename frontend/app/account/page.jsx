@@ -15,6 +15,7 @@ export default function AccountPage() {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [reviewsUpdated, setReviewsUpdated] = useState(false);
+  const [cafesUpdated, setCafesUpdated] = useState(false);
 
   const router = useRouter();
 
@@ -38,7 +39,7 @@ export default function AccountPage() {
 
   useEffect(() => {
     getUserData();
-  }, [reviewsUpdated]);
+  }, [reviewsUpdated, cafesUpdated]);
 
   if (loading) {
     return (
@@ -72,7 +73,10 @@ export default function AccountPage() {
         reviewsLength={userData.reviews.length}
       />
       <div className="bg-gray-200 py-2.5"></div>
-      <AccountSavedCafeList cafes={userData.cafes} />
+      <AccountSavedCafeList
+        cafes={userData.cafes}
+        setCafesUpdated={setCafesUpdated}
+      />
       <div className="bg-gray-200 py-2.5"></div>
       <AccountReviewList
         reviews={userData.reviews}

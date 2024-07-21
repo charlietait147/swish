@@ -1,6 +1,6 @@
 import AccountSavedCafeCard from "./AccountSavedCafeCard";
 
-function AccountSavedCafeList({cafes}) {
+function AccountSavedCafeList({cafes, setCafesUpdated}) {
    
   return (
     <div className="bg-white md:bg-gray-200 md:px-8">
@@ -10,7 +10,7 @@ function AccountSavedCafeList({cafes}) {
         </h3>
         <div className="flex flex-col gap-4">
             {cafes.map((cafe) => (
-                <AccountSavedCafeCard key={cafe._id} cafe={cafe} />
+                <AccountSavedCafeCard key={cafe._id} cafe={cafe} setCafesUpdated={setCafesUpdated} />
             ))}   
         </div>
       </div>

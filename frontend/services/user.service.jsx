@@ -86,3 +86,22 @@ export const fetchUserData = async () => {
     console.error("User data fetch failed", error);
   }
 }
+
+export const deleteSavedCafe = async (cafeId) => {
+  try {
+    const token = Cookies.get("token");
+
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+
+    const res = await axios.delete(`${API_URL}/user/${cafeId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log("Cafe deleted successfully", res.data);
+  } catch (error) {
+    console.error("Cafe deletion failed", error);
+  }
+}

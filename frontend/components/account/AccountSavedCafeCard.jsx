@@ -1,22 +1,61 @@
 import Link from "next/link";
-function AccountSavedCafeCard({ cafe }) {
+import { deleteSavedCafe } from "@/services/user.service";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+function AccountSavedCafeCard({ cafe, setCafesUpdated }) {
+  const [deleteClicked, setDeleteClicked] = useState(false);
+
+  const router = useRouter();
+
+  const handleDelete = async (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+
+    console.log("Delete button clicked");
+
+    try {
+      await deleteSavedCafe(cafe._id);
+      setCafesUpdated((prev) => !prev);
+    } catch (error) {
+      console.error("Error deleting saved cafe", error);
+    }
+  };
+
+  const handleCardClick = (event) => {
+    if (!deleteClicked) {
+      console.log("Navigating to cafe page");
+      router.push(`/cafe/${cafe._id}`);
+    } else {
+      console.log("Navigation prevented due to delete action");
+      setDeleteClicked(false);
+    }
+  };
+
+  const handleDeleteClick = (event) => {
+    console.log("Delete icon clicked, setting deleteClicked to true");
+    handleDelete(event);
+    setDeleteClicked(true);
+  };
+
   return (
-    <Link href={`/cafe/${cafe._id}`}>
-      <div>
-        <div
-          className="relative bg-cover bg-center w-full shadow-lg overflow-hidden h-48 border-2 border-orange-400 rounded-lg cursor-pointer transition duration-300 ease-in-out transform hover:scale-105"
-          style={{
-            backgroundImage: `url(${process.env.NEXT_API_URL}/public/images/${cafe.image})`,
-          }}
-        >
-          <div className="absolute inset-0 bg-black bg-opacity-50"></div>{" "}
-          {/* Overlay */}
-          <div className="relative z-10 flex flex-col justify-center items-center h-full p-4">
-            <h2 className="text-white text-lg uppercase font-semibold px-4 text-center">
-              {cafe.name}
-            </h2>
-          </div>
-          <div className="absolute top-0 right-0">
+    <div onClick={handleCardClick}>
+      {/* <Link href={`/cafe/${cafe._id}`}> */}
+      {/* <div> */}
+      <div
+        className="relative bg-cover bg-center w-full shadow-lg overflow-hidden h-48 border-2 border-orange-400 rounded-lg cursor-pointer transition duration-300 ease-in-out transform hover:scale-105"
+        style={{
+          backgroundImage: `url(${process.env.NEXT_API_URL}/public/images/${cafe.image})`,
+        }}
+      >
+        <div className="absolute inset-0 bg-black bg-opacity-50"></div>{" "}
+        {/* Overlay */}
+        <div className="relative flex flex-col justify-center items-center h-full p-4">
+          <h2 className="text-white text-lg uppercase font-semibold px-4 text-center">
+            {cafe.name}
+          </h2>
+        </div>
+        <div onClick={handleDeleteClick} className="absolute z-10 top-0 right-0">
+          <div className="cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -29,44 +68,35 @@ function AccountSavedCafeCard({ cafe }) {
                 clipRule="evenodd"
               />
             </svg>
-            {/* <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="size-6 text-white mr-2 mt-1 "
-            >
-              <path
-                fillRule="evenodd"
-                d="M6.32 2.577a49.255 49.255 0 0 1 11.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 0 1-1.085.67L12 18.089l-7.165 3.583A.75.75 0 0 1 3.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93Z"
-                clipRule="evenodd"
-              />
-            </svg> */}
-          </div>
-          <div className="absolute left-0 bottom-0 bg-orange-500 text-white p-2 rounded-tr-lg flex flex-row">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="w-5 h-5"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
-              />
-            </svg>
-            <p className="text-sm pl-0.5">{cafe.location}</p>
           </div>
         </div>
+        <div className="absolute left-0 bottom-0 bg-orange-500 text-white p-2 rounded-tr-lg flex flex-row">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            className="w-5 h-5"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+            />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+            />
+          </svg>
+          <p className="text-sm pl-0.5">{cafe.location}</p>
+        </div>
       </div>
-    </Link>
+      {/* </div> */}
+
+      {/* </Link> */}
+    </div>
   );
 }
 
