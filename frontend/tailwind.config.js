@@ -8,6 +8,7 @@ module.exports = {
     extend: {
       fontFamily: {
         body: ['Raleway, sans-serif'],
+        header: ['Dancing Script, sans-serif'],
       },
     },
   },
