@@ -20,7 +20,7 @@ function CallToAction() {
   }, []);
   return (
     <div>
-      <div className="bg-gray-300 py-5 md:flex md:my-10">
+      <div className="bg-gray-300 my-6 py-5 md:flex md:my-10">
         <div className="flex flex-col gap-5 items-center md:justify-center px-4 md:w-1/2 md:items-start md:px-6">
           <h1 className="text-3xl font-semibold mt-4 text-center md:text-left">
             Find Your Favourite Cafe
@@ -45,7 +45,7 @@ function CallToAction() {
         </div>
       </div>
       {!isLoggedIn ? (
-        <div className="bg-orange-200 py-5 mt-6 md:flex ">
+        <div className="bg-orange-200 py-5 my-10 md:flex ">
           <Image
             src={coffeeLaptopSignIn}
             alt="Coffee in front of Laptop"
@@ -65,7 +65,7 @@ function CallToAction() {
           </div>
         </div>
       ) : (
-        <div className="bg-orange-200 py-5 mt-6 md:flex ">
+        <div className="bg-orange-200 py-5 my-6 md:flex ">
           <Image
             src={accountView}
             alt="Woman sitting with laptop"
