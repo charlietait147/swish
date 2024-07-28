@@ -7,6 +7,11 @@ function CafeReviewForm({ onClose, cafeId, cafeName, setReviewsUpdated }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [submitted, setSubmitted] = useState(false);
+  const [image, setImage] = useState(null);
+
+  const handleImageChange = (e) => {
+    setImage(e.target.files[0]);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,7 +39,7 @@ function CafeReviewForm({ onClose, cafeId, cafeName, setReviewsUpdated }) {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
-      <div className="modal bg-white w-5/6 rounded-lg shadow-lg p-6 relative">
+      <div className="modal bg-white w-11/12 md:w-5/6 rounded-lg shadow-lg p-6 relative">
         {submitted ? (
           <div>
             <div className="flex flex-col items-center">
@@ -93,6 +98,35 @@ function CafeReviewForm({ onClose, cafeId, cafeName, setReviewsUpdated }) {
                     onChange={(e) => setDescription(e.target.value)}
                   ></textarea>
                 </div>
+                <div>
+                  <label className="text-sm font-semibold">
+                    Upload a Photo
+                  </label>
+                  <div className="flex items-center border border-gray-300 rounded">
+                    <input
+                      type="text"
+                      value={image ? image.name : "No file chosen"}
+                      className="flex-grow p-2 text-gray-700 text-sm bg-white rounded-l focus:outline-none"
+                      readOnly
+                    />
+                    <input
+                      type="file"
+                      id="file"
+                      accept="image/*"
+                      onChange={handleImageChange}
+                      className="hidden"
+                      required
+                    />
+                    <label
+                      htmlFor="file"
+                      className="bg-blue-500 text-sm text-white py-2 px-4 rounded-r cursor-pointer"
+                    >
+                      Browse
+                    </label>
+                  </div>
+                </div> 
+        
+
                 <div>
                   <button
                     type="submit"
