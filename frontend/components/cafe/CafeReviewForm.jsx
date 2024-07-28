@@ -13,6 +13,10 @@ function CafeReviewForm({ onClose, cafeId, cafeName, setReviewsUpdated }) {
     setImage(e.target.files[0]);
   };
 
+  const handleRemoveImage = () => {
+    setImage(null);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -39,7 +43,7 @@ function CafeReviewForm({ onClose, cafeId, cafeName, setReviewsUpdated }) {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
-      <div className="modal bg-white w-11/12 md:w-5/6 rounded-lg shadow-lg p-6 relative">
+      <div className="modal bg-white w-11/12 md:w-5/6 rounded-lg shadow-lg p-6 relative z-20">
         {submitted ? (
           <div>
             <div className="flex flex-col items-center">
@@ -106,9 +110,28 @@ function CafeReviewForm({ onClose, cafeId, cafeName, setReviewsUpdated }) {
                     <input
                       type="text"
                       value={image ? image.name : "No file chosen"}
-                      className="flex-grow p-2 text-gray-700 text-sm bg-white rounded-l focus:outline-none"
+                      className="relative flex-grow p-2 text-gray-700 text-sm bg-white rounded-l focus:outline-none"
                       readOnly
                     />
+                    {image && (
+                      <svg
+                      onClick={handleRemoveImage}
+                      className="w-2 h-2 mt-0.5 absolute left-44 text-gray-500 hover:text-gray-700"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 14 14"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M1 1l6 6m0 0l6 6M7 7l6-6M7 7L1 13"
+                      />
+                    </svg>
+                
+                    )}
                     <input
                       type="file"
                       id="file"
@@ -124,8 +147,7 @@ function CafeReviewForm({ onClose, cafeId, cafeName, setReviewsUpdated }) {
                       Browse
                     </label>
                   </div>
-                </div> 
-        
+                </div>
 
                 <div>
                   <button
