@@ -21,7 +21,7 @@ function ContactForm() {
               type="text"
               id="first-name"
               name="first-name"
-              className="w-full border border-gray-300  p-2 mt-1"
+              className="w-full border border-gray-300  p-2 mt-1 bg-gray-50 text-sm"
               required
             />
           </div>
@@ -36,7 +36,7 @@ function ContactForm() {
               type="text"
               id="last-name"
               name="last-name"
-              className="w-full border border-gray-300  p-2 mt-1"
+              className="w-full border border-gray-300  p-2 mt-1  bg-gray-50 text-sm"
               required
             />
           </div>
@@ -49,7 +49,7 @@ function ContactForm() {
             type="email"
             id="email"
             name="email"
-            className="w-full border border-gray-300  p-2 mt-2"
+            className="w-full border border-gray-300  p-2 mt-2  bg-gray-50 text-sm"
             required
           />
         </div>
@@ -60,9 +60,12 @@ function ContactForm() {
           <textarea
             id="message"
             name="message"
-            className="w-full border border-gray-300 p-2 mt-1"
+            className="w-full border border-gray-300 p-2 mt-1  bg-gray-50 text-sm"
             required
           />
+        </div>
+        <div className="flex justify-center mt-4">
+          <button type="submit" className="bg-gray-700 px-6 py-3 text-white hover:bg-gray-600">Send</button>
         </div>
       </form>
     </div>
