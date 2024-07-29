@@ -5,6 +5,8 @@ import { connectDb } from "./src/db/db.connection.js";
 import authenticate from "./src/middleware/authenticate.js";
 import path from "path";
 import { fileURLToPath } from 'url';
+import fs from 'fs';
+import upload from './src/middleware/file.storage.js';
 
 import { registerUserRouter } from "./src/routes/userRoutes/registerUser.route.js";
 import { loginUserRouter } from "./src/routes/userRoutes/loginUser.route.js";
@@ -33,8 +35,17 @@ dotenv.config({
 const __filename = fileURLToPath(import.meta.url); 
 const __dirname = path.dirname(__filename); 
 
+const uploadsDir = path.join(__dirname, 'uploads');
+
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
+
+app.use('/uploads', express.static(uploadsDir));
+
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
 // app.use('/public', express.static('./images'));
@@ -50,7 +61,7 @@ app.use("/user", authenticate, isCafeSavedRouter);
 app.use("/user", authenticate, getUserDataRouter);
 app.use("/user", authenticate, deleteSavedCafeRouter )
 
-app.use("/review", authenticate, addReviewRouter);
+app.use("/review", authenticate, upload.single('image'), addReviewRouter);
 app.use("/review", authenticate, editReviewRouter);
 app.use("/review", authenticate, deleteReviewRouter);
 
