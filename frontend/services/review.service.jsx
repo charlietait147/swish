@@ -3,7 +3,8 @@ import Cookies from "js-cookie";
 
 const API_URL = process.env.NEXT_API_URL;
 
-export const addReview = async (cafeId, name, description) => {
+
+export const addReview = async (cafeId, formData) => {
     try {
         // const token = localStorage.getItem("token");
         const token = Cookies.get("token");
@@ -11,14 +12,15 @@ export const addReview = async (cafeId, name, description) => {
         if (!token) {
         throw new Error("No token found. Please log in.");
         }
-    
+
         const res = await axios.post(
         `${API_URL}/review/${cafeId}/add-review`,
-        { name, description },
+         formData,
         {
             headers: {
             Authorization: `Bearer ${token}`,
-            },
+            "Content-Type": "multipart/form-data",
+            }
         }
         );
         console.log("Review added successfully", res.data);

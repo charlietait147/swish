@@ -22,8 +22,15 @@ function CafeReviewForm({ onClose, cafeId, cafeName, setReviewsUpdated }) {
 
     setLoading(true);
 
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("description", description);
+    if (image) {
+      formData.append("image", image);
+    }
+
     try {
-      const response = await addReview(cafeId, name, description);
+      const response = await addReview(cafeId, formData);
       setName("");
       setDescription("");
       setReviewsUpdated(true);
@@ -115,22 +122,21 @@ function CafeReviewForm({ onClose, cafeId, cafeName, setReviewsUpdated }) {
                     />
                     {image && (
                       <svg
-                      onClick={handleRemoveImage}
-                      className="w-2 h-2 mt-0.5 absolute left-44 text-gray-500 hover:text-gray-700"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 14 14"
-                    >
-                      <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M1 1l6 6m0 0l6 6M7 7l6-6M7 7L1 13"
-                      />
-                    </svg>
-                
+                        onClick={handleRemoveImage}
+                        className="w-2 h-2 mt-0.5 absolute left-44 text-gray-500 hover:text-gray-700"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 14 14"
+                      >
+                        <path
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M1 1l6 6m0 0l6 6M7 7l6-6M7 7L1 13"
+                        />
+                      </svg>
                     )}
                     <input
                       type="file"
@@ -138,11 +144,10 @@ function CafeReviewForm({ onClose, cafeId, cafeName, setReviewsUpdated }) {
                       accept="image/*"
                       onChange={handleImageChange}
                       className="hidden"
-                      required
                     />
                     <label
                       htmlFor="file"
-                      className="bg-blue-500 text-sm text-white py-2 px-4 rounded-r cursor-pointer"
+                      className="bg-blue-500 text-sm text-white py-2 px-4 rounded-r cursor-pointer hover:bg-blue-600"
                     >
                       Browse
                     </label>
