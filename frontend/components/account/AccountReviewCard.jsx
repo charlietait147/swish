@@ -1,5 +1,6 @@
 import formatDistanceToNowStrict from "date-fns/formatDistanceToNowStrict";
 import { useState } from "react";
+import Image from "next/image";
 
 import AccountEditReviewForm from "./AccountEditReviewForm";
 import AccountDeleteReviewModal from "./AccountDeleteReviewModal";
@@ -38,27 +39,41 @@ function AccountReviewCard({ review, setReviewsUpdated }) {
         </p>
       </div>
       <p className="text-gray-800 text-xs font-light">{review.description}</p>
-      <div className="flex flex-row justify-end pt-3">
-        <button
-          onClick={handleEditClick}
-          className="text-xs font-semibold bg-blue-500 text-white p-2"
-        >
-          Edit
-        </button>
-        <button
-          onClick={handleDeleteClick}
-          className="text-xs font-semibold bg-red-500 text-white p-2 ml-2"
-        >
-          Delete
-        </button>
-        {openConfirmDelete && (
-          <AccountDeleteReviewModal
-            onClose={handleModalClose}
-            reviewId={review._id}
-            setReviewsUpdated={setReviewsUpdated}
-          />
-        )}
+      <div className="flex flex-row gap-5">
+        {review.image ? (
+          <div className="flex flex-row items-center">
+            <Image
+              src={`${process.env.NEXT_API_URL}/uploads/${review.image}`}
+              height={150}
+              width={150}
+              alt="review photo"
+              className=" mt-3 border-2 border-gray-300"
+            />
+          </div>
+        ) : null}
+        <div className="flex flex-row items-end justify-end">
+          <button
+            onClick={handleEditClick}
+            className="text-xs font-semibold bg-blue-500 text-white p-2"
+          >
+            Edit
+          </button>
+          <button
+            onClick={handleDeleteClick}
+            className="text-xs font-semibold bg-red-500 text-white p-2 ml-2"
+          >
+            Delete
+          </button>
+        </div>
       </div>
+      {openConfirmDelete && (
+        <AccountDeleteReviewModal
+          onClose={handleModalClose}
+          reviewId={review._id}
+          setReviewsUpdated={setReviewsUpdated}
+        />
+      )}
+      {/* </div> */}
       {openReviewForm && (
         <AccountEditReviewForm
           cafeName={review.cafe.name}

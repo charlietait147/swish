@@ -33,7 +33,7 @@ function CafeReviewCard({ review }) {
             src={`${process.env.NEXT_API_URL}/uploads/${review.image}`}
             width={150}
             height={150}
-            alt="review"
+            alt="review photo"
             className=" mt-3 border-2 border-gray-300"
           />
         </div>
