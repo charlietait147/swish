@@ -9,6 +9,7 @@
     "dev": "NODE_ENV=development nodemon index.js",
     "seed:prod": "NODE_ENV=production node seeds/cafes.js",
     "seed:dev": "NODE_ENV=development node seeds/cafes.js",
+    "update:prod": "NODE_ENV=production node upsert-script.js",
     "test": "NODE_ENV=development mocha --timeout 10000 --exit --require ./test/testSetup.js './test/**/*.test.js'",
     "coverage": "NODE_ENV=development c8 -t html npm test"
   },
