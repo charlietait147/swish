@@ -17,8 +17,8 @@ const cafes = [
         website: 'https://www.caracoli.co.uk',
         image: 'caracoli-cafe-no-border.jpeg',
         borderImage: 'caracoli-cafe.jpeg',
-        lat: 51.0629061,
-        lng: -1.3184552,
+        lat: 51.09106,
+        lng: -1.16183,
         reviews: []
     },
     {
@@ -28,8 +28,8 @@ const cafes = [
         website: 'https://www.josieswinecoffee.com',
         image: 'josies-cafe-no-border.jpeg',
         borderImage: 'josies-cafe.jpeg',
-        lat: 51.0652274,
-        lng: -1.3182397,
+        lat: 51.065576,
+        lng: -1.315485,
         reviews: []
     },
     {
@@ -39,8 +39,8 @@ const cafes = [
         website: 'https://www.hoxtonbakehouse.com',
         image: 'hoxton-bakehouse-no-border.jpeg',
         borderImage: 'hoxton-bakehouse.jpeg',
-        lat: 51.0646113,
-        lng: -1.3218967,
+        lat: 51.06404,
+        lng: -1.31587,
         reviews: []
     },
     {
@@ -50,8 +50,8 @@ const cafes = [
         website: 'https://www.theyardhampshire.co.uk',
         image: 'the-yard-cafe-no-border.jpeg',
         borderImage: 'the-yard-cafe.jpeg',
-        lat: 51.1590548,
-        lng: -1.1577642,
+        lat: 51.15907,
+        lng: -1.15516,
         reviews: []
     },
     {
@@ -61,8 +61,8 @@ const cafes = [
         website: "https://www.kavicoffee.com",
         image: 'kavi-no-border.jpeg',
         borderImage: 'kavi.jpeg',
-        lat: 51.0640911,
-        lng: -1.3187711,
+        lat: 51.064408,
+        lng: -1.31612,
         reviews: []
 
     },
@@ -73,8 +73,8 @@ const cafes = [
         website: 'https://www.southdownssocial.com',
         image: 'south-downs-social-cafe-no-border.jpeg',
         borderImage: 'south-downs-social-cafe.jpeg',
-        lat: 51.0625245,
-        lng: -1.314337,
+        lat: 51.06253,
+        lng: -1.31176,
         reviews: []
     },
     {
@@ -84,8 +84,8 @@ const cafes = [
         website: 'https://www.winchester-cathedral.org.uk/welcome/cafe/',
         image: 'the-refectory-cafe-no-border.jpeg',
         borderImage: 'the-refectory-cafe.jpeg',
-        lat: 51.0609588,
-        lng: -1.3178572,
+        lat: 51.06097,
+        lng: -1.31527,
         reviews: []
     },
     {
@@ -95,8 +95,8 @@ const cafes = [
         website:'https://www.heidibakery.co.uk/locations/heidi-haslemere/',
         image: '/',
         borderImage: '/',
-        lat: 51.0883346,
-        lng: -0.7141268,
+        lat: 51.08834,
+        lng: -0.70925,
         reviews: []
     },
     {
@@ -106,8 +106,8 @@ const cafes = [
         website: 'https://naafi.co.uk/winchester/',
         image: 'naafi-cafe-no-border.jpeg',
         borderImage: 'naafi-cafe.jpeg',
-        lat: 51.0630357,
-        lng: -1.3165779,
+        lat: 51.06304,
+        lng: -1.31400,
         reviews: []
     },
     {
@@ -117,8 +117,8 @@ const cafes = [
         website: 'https://www.handlebar.cafe',
         image: 'handle-bar-cafe-no-border.jpeg',
         borderImage: 'handle-bar-cafe.jpeg',
-        lat: 51.0493875,
-        lng: -1.3137897,
+        lat: 51.04940,
+        lng: -1.31124,
         reviews: []
     }
 ]
