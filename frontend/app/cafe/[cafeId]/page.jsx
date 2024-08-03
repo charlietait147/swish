@@ -9,6 +9,7 @@ import CafeDetailsSection from "@/components/cafe/CafeDetailsSection";
 import Logo from '../../../public/logo/swish-logo.png';
 import Image from 'next/image';
 import CafeReviewList from "@/components/cafe/CafeReviewList";
+import CafeMapContainer from "@/components/cafe/CafeMapContainer";
 
 export default function CafePage() {
   const [cafe, setCafe] = useState(null);
@@ -50,6 +51,7 @@ export default function CafePage() {
     <>
       <Header />
       <CafeDetailsSection cafe={cafe} />
+      <CafeMapContainer />
       <CafeReviewList cafe = {cafe} setReviewsUpdated = {setReviewsUpdated} />
       <Footer />
     </>
