@@ -82,7 +82,7 @@ function CafeDetailsSection({ cafe }) {
         </div>
       )}
       {cafe && (
-        <div className="flex flex-col md:flex-row gap-4">
+        <div className="flex flex-col gap-4">
           <div className="relative w-full md:w-1/2">
             <img
               src={`${process.env.NEXT_API_URL}/public/images/${cafe.image}`}

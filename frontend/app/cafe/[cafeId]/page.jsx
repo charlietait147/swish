@@ -51,7 +51,7 @@ export default function CafePage() {
     <>
       <Header />
       <CafeDetailsSection cafe={cafe} />
-      <CafeMapContainer />
+      <CafeMapContainer cafe = {cafe} />
       <CafeReviewList cafe = {cafe} setReviewsUpdated = {setReviewsUpdated} />
       <Footer />
     </>
