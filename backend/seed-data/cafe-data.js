@@ -8,6 +8,16 @@ const cafes = [
         borderImage: 'the-orangery-cafe.jpeg',
         lat: 51.0622118,
         lng: -1.3178322,
+        icons: [
+            {
+                type: 'Accessible by Public Transport',
+                url: ''
+            },
+            {
+                type: 'Hot Food Available',
+                url: '',
+            },
+        ],
         reviews: []
     },
     {
@@ -19,6 +29,20 @@ const cafes = [
         borderImage: 'caracoli-cafe.jpeg',
         lat: 51.09106,
         lng: -1.16183,
+        icons: [
+            {
+                type: 'Accessible by Public Transport',
+                url: ''
+            },
+            {
+                type: 'Dog Friendly',
+                url: '',
+            },
+            {
+                type: 'Onsite Parking',
+                url: '',
+            },
+        ],
         reviews: []
     },
     {
@@ -30,6 +54,20 @@ const cafes = [
         borderImage: 'josies-cafe.jpeg',
         lat: 51.065576,
         lng: -1.315485,
+        icons: [
+            {
+                type: 'Accessible by Public Transport',
+                url: ''
+            },
+            {
+                type: 'Dog Friendly',
+                url: '',
+            },
+            {
+                type: 'Hot Food Available',
+                url: '',
+            }
+        ],
         reviews: []
     },
     {
@@ -41,6 +79,16 @@ const cafes = [
         borderImage: 'hoxton-bakehouse.jpeg',
         lat: 51.06404,
         lng: -1.31587,
+        icons: [
+            {
+                type: 'Accessible by Public Transport',
+                url: ''
+            },
+            {
+                type: 'Dog Friendly',
+                url: '',
+            }
+        ],
         reviews: []
     },
     {
@@ -52,6 +100,16 @@ const cafes = [
         borderImage: 'the-yard-cafe.jpeg',
         lat: 51.15907,
         lng: -1.15516,
+        icons: [
+            {
+                type: 'Dog Friendly',
+                url: ''
+            },
+            {
+                type: 'Onsite Parking',
+                url: '',
+            }
+        ],
         reviews: []
     },
     {
@@ -63,8 +121,17 @@ const cafes = [
         borderImage: 'kavi.jpeg',
         lat: 51.064408,
         lng: -1.31612,
+        icons: [
+            {
+                type: 'Accessible by Public Transport',
+                url: ''
+            },
+            {
+                type: 'Hot Food Available',
+                url: '',
+            }
+        ],
         reviews: []
-
     },
     {
         name: 'The South Downs Social',
@@ -75,6 +142,16 @@ const cafes = [
         borderImage: 'south-downs-social-cafe.jpeg',
         lat: 51.06253,
         lng: -1.31176,
+        icons: [
+            {
+                type: 'Accessible by Public Transport',
+                url: ''
+            },
+            {
+                type: 'Dog Friendly',
+                url: '',
+            }
+        ],
         reviews: []
     },
     {
@@ -86,6 +163,20 @@ const cafes = [
         borderImage: 'the-refectory-cafe.jpeg',
         lat: 51.06097,
         lng: -1.31527,
+        icons: [
+            {
+                type: 'Accessible by Public Transport',
+                url: ''
+            },
+            {
+                type: 'Dog Friendly',
+                url: '',
+            },
+            {
+                type: 'Hot Food Available',
+                url: '',
+            }
+        ],
         reviews: []
     },
     {
@@ -97,19 +188,33 @@ const cafes = [
         borderImage: '/',
         lat: 51.08834,
         lng: -0.70925,
+        icons: [
+            {
+                type: 'Accessible by Public Transport',
+                url: ''
+            },
+            {
+                type: 'Dog Friendly',
+                url: '',
+            },
+            {
+                type: 'Onsite Parking',
+                url: '',
+            }
+        ],
         reviews: []
     },
-    {
-        name: 'Naafi',
-        location: 'Winchester',
-        description: 'Naafi is a family-run cafe in the heart of Winchester. The cafe is open seven days a week and serves a range of delicious food and drinks. Naafi is the perfect place to relax and enjoy a coffee or a light lunch. The cafe is also available for private hire and is the perfect venue for a special occasion.',
-        website: 'https://naafi.co.uk/winchester/',
-        image: 'naafi-cafe-no-border.jpeg',
-        borderImage: 'naafi-cafe.jpeg',
-        lat: 51.06304,
-        lng: -1.31400,
-        reviews: []
-    },
+    // {
+    //     name: 'Naafi',
+    //     location: 'Winchester',
+    //     description: 'Naafi is a family-run cafe in the heart of Winchester. The cafe is open seven days a week and serves a range of delicious food and drinks. Naafi is the perfect place to relax and enjoy a coffee or a light lunch. The cafe is also available for private hire and is the perfect venue for a special occasion.',
+    //     website: 'https://naafi.co.uk/winchester/',
+    //     image: 'naafi-cafe-no-border.jpeg',
+    //     borderImage: 'naafi-cafe.jpeg',
+    //     lat: 51.06304,
+    //     lng: -1.31400,
+    //     reviews: []
+    // },
     {
         name: 'The Handlebar Cafe',
         location: 'Winchester',
@@ -119,6 +224,16 @@ const cafes = [
         borderImage: 'handle-bar-cafe.jpeg',
         lat: 51.04940,
         lng: -1.31124,
+        icons: [
+            {
+                type: 'Dog Friendly',
+                url: '',
+            },
+            {
+                type: 'Onsite Parking',
+                url: '',
+            }
+        ],
         reviews: []
     }
 ]

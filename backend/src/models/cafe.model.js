@@ -29,6 +29,28 @@ const cafeSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    icons: [
+        {
+            type: String,
+            url: String
+        },
+        {
+            type: String,
+            url: String
+        },
+        {
+            type: String,
+            url: String,
+        },
+        {
+            type: String,
+            url: String,
+        },
+        {
+            type: String,
+            url: String,
+        }
+    ],
     reviews: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Review',
