@@ -11,11 +11,11 @@ const cafes = [
         icons: [
             {
                 type: 'Accessible by Public Transport',
-                url: ''
+                url: 'accessible-by-public-transport.jpeg'
             },
             {
                 type: 'Hot Food Available',
-                url: '',
+                url: 'hot-food.jpeg',
             },
         ],
         reviews: []
@@ -32,15 +32,15 @@ const cafes = [
         icons: [
             {
                 type: 'Accessible by Public Transport',
-                url: ''
+                url: 'accessible-by-public-transport.jpeg'
             },
             {
                 type: 'Dog Friendly',
-                url: '',
+                url: 'dog-friendly.jpeg',
             },
             {
                 type: 'Onsite Parking',
-                url: '',
+                url: 'onsite-parking.jpeg',
             },
         ],
         reviews: []
@@ -57,15 +57,15 @@ const cafes = [
         icons: [
             {
                 type: 'Accessible by Public Transport',
-                url: ''
+                url: 'accessible-by-public-transport.jpeg'
             },
             {
                 type: 'Dog Friendly',
-                url: '',
+                url: 'dog-friendly.jpeg',
             },
             {
                 type: 'Hot Food Available',
-                url: '',
+                url: 'hot-food.jpeg',
             }
         ],
         reviews: []
@@ -82,11 +82,11 @@ const cafes = [
         icons: [
             {
                 type: 'Accessible by Public Transport',
-                url: ''
+                url: 'accessible-by-public-transport.jpeg'
             },
             {
                 type: 'Dog Friendly',
-                url: '',
+                url: 'dog-friendly.jpeg',
             }
         ],
         reviews: []
@@ -103,11 +103,11 @@ const cafes = [
         icons: [
             {
                 type: 'Dog Friendly',
-                url: ''
+                url: 'dog-friendly.jpeg',
             },
             {
                 type: 'Onsite Parking',
-                url: '',
+                url: 'onsite-parking.jpeg',
             }
         ],
         reviews: []
@@ -124,11 +124,11 @@ const cafes = [
         icons: [
             {
                 type: 'Accessible by Public Transport',
-                url: ''
+                url: 'accessible-by-public-transport.jpeg'
             },
             {
                 type: 'Hot Food Available',
-                url: '',
+                url: 'hot-food.jpeg',
             }
         ],
         reviews: []
@@ -145,11 +145,11 @@ const cafes = [
         icons: [
             {
                 type: 'Accessible by Public Transport',
-                url: ''
+                url: 'accessible-by-public-transport.jpeg'
             },
             {
                 type: 'Dog Friendly',
-                url: '',
+                url: 'dog-friendly.jpeg',
             }
         ],
         reviews: []
@@ -166,15 +166,15 @@ const cafes = [
         icons: [
             {
                 type: 'Accessible by Public Transport',
-                url: ''
+                url: 'accessible-by-public-transport.jpeg'
             },
             {
                 type: 'Dog Friendly',
-                url: '',
+                url: 'dog-friendly.jpeg',
             },
             {
                 type: 'Hot Food Available',
-                url: '',
+                url: 'hot-food.jpeg',
             }
         ],
         reviews: []
@@ -191,30 +191,19 @@ const cafes = [
         icons: [
             {
                 type: 'Accessible by Public Transport',
-                url: ''
+                url: 'accessible-by-public-transport.jpeg'
             },
             {
                 type: 'Dog Friendly',
-                url: '',
+                url: 'dog-friendly.jpeg',
             },
             {
                 type: 'Onsite Parking',
-                url: '',
+                url: 'onsite-parking.jpeg',
             }
         ],
         reviews: []
     },
-    // {
-    //     name: 'Naafi',
-    //     location: 'Winchester',
-    //     description: 'Naafi is a family-run cafe in the heart of Winchester. The cafe is open seven days a week and serves a range of delicious food and drinks. Naafi is the perfect place to relax and enjoy a coffee or a light lunch. The cafe is also available for private hire and is the perfect venue for a special occasion.',
-    //     website: 'https://naafi.co.uk/winchester/',
-    //     image: 'naafi-cafe-no-border.jpeg',
-    //     borderImage: 'naafi-cafe.jpeg',
-    //     lat: 51.06304,
-    //     lng: -1.31400,
-    //     reviews: []
-    // },
     {
         name: 'The Handlebar Cafe',
         location: 'Winchester',
@@ -227,11 +216,11 @@ const cafes = [
         icons: [
             {
                 type: 'Dog Friendly',
-                url: '',
+                url: 'dog-friendly.jpeg',
             },
             {
                 type: 'Onsite Parking',
-                url: '',
+                url: 'onsite-parking.jpeg',
             }
         ],
         reviews: []

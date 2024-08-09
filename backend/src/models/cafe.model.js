@@ -31,25 +31,13 @@ const cafeSchema = new mongoose.Schema({
     },
     icons: [
         {
-            type: String,
-            url: String
-        },
-        {
-            type: String,
-            url: String
-        },
-        {
-            type: String,
-            url: String,
-        },
-        {
-            type: String,
-            url: String,
-        },
-        {
-            type: String,
-            url: String,
-        }
+            type: {
+              type: String, // Type of icon (e.g., 'Dog Friendly')
+            },
+            url: {
+              type: String, // URL of the icon
+            }
+          }
     ],
     reviews: [{
         type: mongoose.Schema.Types.ObjectId,
