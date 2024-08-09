@@ -11,7 +11,7 @@ const cafes = [
         icons: [
             {
                 type: 'Accessible by Public Transport',
-                url: 'accessible-by-public-transport.jpeg'
+                url: 'accessible-by-transport.jpeg'
             },
             {
                 type: 'Hot Food Available',
@@ -32,7 +32,7 @@ const cafes = [
         icons: [
             {
                 type: 'Accessible by Public Transport',
-                url: 'accessible-by-public-transport.jpeg'
+                url: 'accessible-by-transport.jpeg'
             },
             {
                 type: 'Dog Friendly',
@@ -57,7 +57,7 @@ const cafes = [
         icons: [
             {
                 type: 'Accessible by Public Transport',
-                url: 'accessible-by-public-transport.jpeg'
+                url: 'accessible-by-transport.jpeg'
             },
             {
                 type: 'Dog Friendly',
@@ -82,7 +82,7 @@ const cafes = [
         icons: [
             {
                 type: 'Accessible by Public Transport',
-                url: 'accessible-by-public-transport.jpeg'
+                url: 'accessible-by-transport.jpeg'
             },
             {
                 type: 'Dog Friendly',
@@ -124,7 +124,7 @@ const cafes = [
         icons: [
             {
                 type: 'Accessible by Public Transport',
-                url: 'accessible-by-public-transport.jpeg'
+                url: 'accessible-by-transport.jpeg'
             },
             {
                 type: 'Hot Food Available',
@@ -145,7 +145,7 @@ const cafes = [
         icons: [
             {
                 type: 'Accessible by Public Transport',
-                url: 'accessible-by-public-transport.jpeg'
+                url: 'accessible-by-transport.jpeg'
             },
             {
                 type: 'Dog Friendly',
@@ -166,7 +166,7 @@ const cafes = [
         icons: [
             {
                 type: 'Accessible by Public Transport',
-                url: 'accessible-by-public-transport.jpeg'
+                url: 'accessible-by-transport.jpeg'
             },
             {
                 type: 'Dog Friendly',
@@ -191,7 +191,7 @@ const cafes = [
         icons: [
             {
                 type: 'Accessible by Public Transport',
-                url: 'accessible-by-public-transport.jpeg'
+                url: 'accessible-by-transport.jpeg'
             },
             {
                 type: 'Dog Friendly',
