@@ -2,11 +2,14 @@ import { useEffect, useState, useRef } from "react";
 import Cookies from "js-cookie";
 import { addCafe, isCafeSaved } from "../../services/user.service";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 function CafeDetailsSection({ cafe }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
   const [showModal, setShowModal] = useState(false);
   // const isSavedRef = useRef(isSaved);
+
+  console.log(cafe);
 
   const router = useRouter();
 
@@ -45,8 +48,7 @@ function CafeDetailsSection({ cafe }) {
     // }
     if (isSaved) {
       router.push("/");
-    }
-    else {
+    } else {
       try {
         await addCafe(cafe._id);
         setIsSaved(true);
@@ -93,7 +95,9 @@ function CafeDetailsSection({ cafe }) {
               <button
                 onClick={handleSaveCafe}
                 className={`absolute top-2 right-2  p-2 rounded-2xl border font-semibold flex flex-row gap-1 items-center text-sm ${
-                  isSaved ? "bg-black text-white border-black hover:text-white hover:bg-black underline" : "bg-white text-black hover:bg-black hover:underline hover:text-white" 
+                  isSaved
+                    ? "bg-black text-white border-black hover:text-white hover:bg-black underline"
+                    : "bg-white text-black hover:bg-black hover:underline hover:text-white"
                 }`}
               >
                 <svg
@@ -181,6 +185,25 @@ function CafeDetailsSection({ cafe }) {
                 {` ${cafe.description.split(" ").slice(1).join(" ")}`}
               </p>
             )}
+          </div>
+          <div className="flex justify-center pt-2">
+            <div className="border border-gray-300 w-11/12"></div>
+          </div>
+          {cafe.icons &&
+            cafe.icons.map((icon, index) => (
+              <div key={index} className="flex flex-row gap-2 items-center">
+                <img
+                  src={`${process.env.NEXT_API_URL}/public/icons/${icon.url}`}
+                  alt={icon.type}
+                  className="w-12 h-12"
+                />
+                <p key={index} className="text-sm font-semibold text-gray-600">
+                  {icon.type}
+                </p>
+              </div>
+            ))}
+          <div className="flex justify-center pt-2">
+            <div className="border border-gray-300 w-11/12"></div>
           </div>
         </div>
       )}
