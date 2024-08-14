@@ -17,6 +17,10 @@ const cafes = [
                 type: 'Hot Food Available',
                 url: 'hot-food.jpeg',
             },
+            {
+                type: 'Takes Bookings',
+                url: 'bookings.jpeg',
+            }
         ],
         reviews: []
     },
@@ -108,6 +112,10 @@ const cafes = [
             {
                 type: 'Onsite Parking',
                 url: 'onsite-parking.jpeg',
+            },
+            {
+                type: 'Takes Bookings (6+)',
+                url: 'bookings.jpeg',
             }
         ],
         reviews: []
