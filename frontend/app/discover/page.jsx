@@ -11,6 +11,7 @@ import { useState, useEffect } from "react";
 export default function DiscoverPage() {
   const [cafes, setCafes] = useState([]);
   const [filteredCafes, setFilteredCafes] = useState([]);
+  const [selectedAmenities, setSelectedAmenities] = useState([]);
 
   const getCafes = async () => {
     const response = await fetchCafes();
@@ -35,6 +36,21 @@ export default function DiscoverPage() {
             cafe.location.toLowerCase().includes(filters.location.toLowerCase())
         );
     }
+    // if (selectedAmenities.length > 0) {
+    //   filteredCafes = filteredCafes.filter((cafe) =>
+    //     selectedAmenities.every((amenity) =>
+    //       cafe.icons.some((icon) => icon.type === amenity)
+    //     )
+    //   );
+    // }
+    if (filters.amenities && filters.amenities.length > 0) {
+      filteredCafes = filteredCafes.filter((cafe) =>
+        filters.amenities.every((amenity) =>
+          cafe.icons.some((icon) => icon.type === amenity)
+        )
+      );
+    }
+
     setFilteredCafes(filteredCafes);
   };
 
@@ -42,7 +58,7 @@ export default function DiscoverPage() {
     <>
       <Header />
       <DiscoverCafeHero />
-      <CafeFilters onFilterChange={handleFilters} />
+      <CafeFilters onFilterChange={handleFilters} setSelectedAmenities={setSelectedAmenities} selectedAmenities={selectedAmenities} />
       <CafeList cafes={filteredCafes} />
       <Footer />
     </>
