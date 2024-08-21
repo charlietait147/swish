@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -30,7 +31,7 @@ function NavBar() {
 
   return (
     <>
-      <div className="burger-menu mr-3" onClick={toggleMenu}>
+      <div className="burger-menu mr-3 md:hidden" onClick={toggleMenu}>
         <div className="h-5 w-5 flex flex-col justify-between cursor-pointer">
           <div className="h-1 w-full bg-white"></div>
           <div className="h-1 w-full bg-white"></div>
@@ -119,9 +120,9 @@ function NavBar() {
                 </>
               ) : (
                 <>
-                  <li className="text-white py-2 bg-gray-800  hover:bg-gray-600  shadow-lg">
+                  <l className="text-white py-2 bg-gray-800  hover:bg-gray-600  shadow-lg">
                     My Account
-                  </li>
+                  </l>
                   <li
                     className="text-white py-2 bg-gray-800  hover:bg-gray-600  shadow-lg"
                     onClick={handleSignOut}
@@ -134,6 +135,26 @@ function NavBar() {
           </div>
         </div>
       )}
+        <ul className="hidden md:flex flex-row space-x-8 items-center">
+          <Link href="/discover" className="text-white  text-sm lg:text-base hover:underline hover:underline-offset-8">Discover</Link>
+          <Link href="/#contact-form" className="text-white  text-sm lg:text-base hover:underline hover:underline-offset-8  ">Contact Us</Link>
+          <span className="h-0.5 bg-gray-200 w-5 transform rotate-90"></span>
+          {!isLoggedIn ? (
+            <>
+             <Link href="/login" className="bg-black text-sm lg:text-base text-white py-2 px-4 rounded-2xl hover:bg-gray-800">Sign In</Link>
+            </>
+          ) : (
+            <>
+              <Link href="/account" className="text-white text-sm lg:text-base hover:underline hover:underline-offset-8 ">My Account</Link>
+              <li
+                className="bg-black text-sm lg:text-base text-white py-2 px-4 rounded-2xl hover:bg-gray-800"
+                onClick={handleSignOut}
+              >
+                Sign Out
+              </li>
+            </>
+          )}
+        </ul>
     </>
   );
 }

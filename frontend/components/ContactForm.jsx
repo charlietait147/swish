@@ -1,13 +1,13 @@
 function ContactForm() {
   return (
-    <div className="bg-white px-4">
+    <div className="bg-white px-4" id="contact-form">
       <h1 className="text-3xl font-semibold text-center tracking-wide text-gray-700 pt-4">
         Contact<em className="font-light pl-2.5">Us.</em>
       </h1>
       <p className="text-center text-gray-600 py-4">
         We'd love to hear from you!
       </p>
-      <form className="pb-4 max-w-md mx-auto">
+      <form className="pb-4 max-w-md mx-auto md:pb-12">
         <span className="text-gray-600 font-semibold my-3">Name*</span>
         <div className="flex flex-row gap-6 pt-3">
           <div className="flex flex-col w-1/2">
