@@ -1,15 +1,13 @@
+import Link from "next/link";
 function CafeCard({ cafe }) {
   return (
-    <div>
+    <Link href= {`cafe/${cafe._id}`}>
       <div
         className="relative bg-cover bg-center w-full shadow-lg overflow-hidden h-48 border-2 border-orange-400 rounded-lg cursor-pointer transition duration-300 ease-in-out transform hover:scale-105"
         style={{
           backgroundImage: `url(${process.env.NEXT_API_URL}/public/images/${cafe.image})`,
         }}
       >
-        {/* <div className="absolute inset-0 bg-gray-100 bg-opacity-50 flex flex-col justify-center items-center p-4">
-          <h2 className="pr-2 uppercase font-semibold">{cafe.name}</h2>
-        </div> */}
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>{" "}
         {/* Overlay */}
         <div className="relative z-10 flex flex-col justify-center items-center h-full p-4">
@@ -40,7 +38,7 @@ function CafeCard({ cafe }) {
           <p className="text-sm pl-0.5">{cafe.location}</p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
