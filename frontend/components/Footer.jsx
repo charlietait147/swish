@@ -27,7 +27,7 @@ function Footer() {
     <footer className="px-6 pt-8 pb-4 bg-orange-500">
       <div className="max-width mx-auto">
       <div className="border border-t-white mb-8"></div>
-      <div className="md:flex flex-row pb-4 md:justify-center md:gap-16 md:py-12">
+      <div className="md:flex flex-row pb-4 md:justify-center md:gap-16 md:py-8">
         <h1 className="text-white text-2xl font-bold mb-6 text-center">
           Swish .
         </h1>

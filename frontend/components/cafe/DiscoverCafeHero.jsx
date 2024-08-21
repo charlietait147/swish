@@ -3,7 +3,8 @@ import CafeInterior from "../../public/images/cafe-interior-discover.jpg";
 function DiscoverCafeHero() {
   return (
     <>
-    <div className="relative mt-16 w-full h-60 ">
+    <div className="relative mt-16 w-full h-1/2 max-width mx-auto sm:h-80 md:h-96 md:mt-0">
+    <div className="w-full h-full overflow-hidden">
       <Image
         src={CafeInterior}
         alt="Cafe Interior"
@@ -12,6 +13,7 @@ function DiscoverCafeHero() {
       />
       <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white text-center p-4">
         <h1 className="text-2xl font-semibold">Discover</h1>
+      </div>
       </div>
     </div>
     {/* <div className=" bg-orange-500 text-white p-2  flex flex-row px-2 mt-4 text-center">

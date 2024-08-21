@@ -74,16 +74,16 @@ function NavBar() {
             <h1 className="text-2xl font-bold pt-4">Swish .</h1>
             <div className="border border-t-gray-300 mt-4"></div>
             <ul className="mt-6 space-y-5 text-center">
-              <li className="text-white py-2 bg-orange-500 hover:bg-orange-400 shadow-lg">
+              <Link href="/discover" className="text-white py-2 bg-orange-500 hover:bg-orange-400 shadow-lg flex items-center justify-center">
                 Discover
-              </li>
-              <li className="text-white py-2 bg-orange-500 hover:bg-orange-400 shadow-lg">
+              </Link>
+              <Link href="/#contact-form" className="text-white py-2 bg-orange-500 hover:bg-orange-400 shadow-lg flex items-center justify-center">
                 Contact Us
-              </li>
+              </Link>
               <div className="border border-t-gray-300 mt-6"></div>
               {!isLoggedIn ? (
                 <>
-                  <li className="text-white py-2 bg-gray-800  hover:bg-gray-600  shadow-lg flex items-center justify-center">
+                  <Link href = "/login" className="text-white py-2 bg-gray-800  hover:bg-gray-600  shadow-lg flex items-center justify-center">
                     Sign In
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -99,8 +99,8 @@ function NavBar() {
                         d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
                       />
                     </svg>
-                  </li>
-                  <li className="text-white py-2 flex items-center justify-center bg-gray-800 hover:bg-gray-600 shadow-lg">
+                  </Link>
+                  <Link href="/register" className="text-white py-2 flex items-center justify-center bg-gray-800 hover:bg-gray-600 shadow-lg">
                     Register
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -116,13 +116,13 @@ function NavBar() {
                         d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
                       />
                     </svg>
-                  </li>
+                  </Link>
                 </>
               ) : (
                 <>
-                  <l className="text-white py-2 bg-gray-800  hover:bg-gray-600  shadow-lg">
+                  <Link href="/account" className="text-white py-2 bg-gray-800  hover:bg-gray-600  shadow-lg">
                     My Account
-                  </l>
+                  </Link>
                   <li
                     className="text-white py-2 bg-gray-800  hover:bg-gray-600  shadow-lg"
                     onClick={handleSignOut}
@@ -135,10 +135,10 @@ function NavBar() {
           </div>
         </div>
       )}
-        <ul className="hidden md:flex flex-row space-x-8 items-center">
-          <Link href="/discover" className="text-white  text-sm lg:text-base hover:underline hover:underline-offset-8">Discover</Link>
-          <Link href="/#contact-form" className="text-white  text-sm lg:text-base hover:underline hover:underline-offset-8  ">Contact Us</Link>
-          <span className="h-0.5 bg-gray-200 w-5 transform rotate-90"></span>
+        <ul className="hidden md:flex flex-row  items-center">
+          <Link href="/discover" className="text-white mr-8 text-sm lg:text-base hover:underline hover:underline-offset-8">Discover</Link>
+          <Link href="/#contact-form" className="text-white mr-8 text-sm lg:text-base hover:underline hover:underline-offset-8  ">Contact Us</Link>
+          <span className="h-0.5 bg-gray-200 w-8 transform rotate-90 mr-1"></span>
           {!isLoggedIn ? (
             <>
              <Link href="/login" className="bg-black text-sm lg:text-base text-white py-2 px-4 rounded-2xl hover:bg-gray-800">Sign In</Link>

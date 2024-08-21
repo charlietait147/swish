@@ -32,9 +32,9 @@ export default function DiscoverPage() {
     }
 
     if (filters.location) {
-        filteredCafes = filteredCafes.filter((cafe) =>
-            cafe.location.toLowerCase().includes(filters.location.toLowerCase())
-        );
+      filteredCafes = filteredCafes.filter((cafe) =>
+        cafe.location.toLowerCase().includes(filters.location.toLowerCase())
+      );
     }
     // if (selectedAmenities.length > 0) {
     //   filteredCafes = filteredCafes.filter((cafe) =>
@@ -58,8 +58,16 @@ export default function DiscoverPage() {
     <>
       <Header />
       <DiscoverCafeHero />
-      <CafeFilters onFilterChange={handleFilters} setSelectedAmenities={setSelectedAmenities} selectedAmenities={selectedAmenities} />
-      <CafeList cafes={filteredCafes} />
+      <div className="flex flex-col lg:flex-row max-width mx-auto lg:my-12">
+      <div className="lg:sticky lg:top-0 lg:h-full lg:pt-4">
+        <CafeFilters
+          onFilterChange={handleFilters}
+          setSelectedAmenities={setSelectedAmenities}
+          selectedAmenities={selectedAmenities}
+        />
+        </div>
+        <CafeList cafes={filteredCafes} />
+      </div>
       <Footer />
     </>
   );
