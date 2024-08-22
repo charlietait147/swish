@@ -7,9 +7,6 @@ function CafeDetailsSection({ cafe }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  // const isSavedRef = useRef(isSaved);
-
-  console.log(cafe);
 
   const router = useRouter();
 
@@ -20,19 +17,12 @@ function CafeDetailsSection({ cafe }) {
     }
   }, []);
 
-  // useEffect(() => {
-  //   isSavedRef.current = isSaved;
-  // }, [isSaved]);
-
   useEffect(() => {
-    // console.log("isSaved.current: ", isSavedRef.current);
     const checkSavedStatus = async () => {
       if (isLoggedIn && cafe) {
         try {
           const savedStatus = await isCafeSaved(cafe._id);
           setIsSaved(savedStatus);
-          // isSavedRef.current = savedStatus;
-          // console.log("Cafe saved status fetched successfully:", savedStatus);
         } catch (error) {
           console.error("Error checking saved status", error);
         }
@@ -42,10 +32,6 @@ function CafeDetailsSection({ cafe }) {
   }, [isLoggedIn, cafe]);
 
   const handleSaveCafe = async () => {
-    // console.log("isSavedRef.current", isSavedRef.current);
-    // if (isSavedRef.current) {
-    //   router.push("/");
-    // }
     if (isSaved) {
       router.push("/");
     } else {
@@ -63,7 +49,7 @@ function CafeDetailsSection({ cafe }) {
   };
 
   return (
-    <div className="container mx-auto mt-16 mb-6 px-4">
+    <div className="max-w-screen-lg mx-auto xs:px-6 sm:px-10 xl:px-0 mt-16 mb-6 px-4">
       {showModal && (
         <div className="fixed top-3 right-2 bg-black border z-10 rounded-lg shadow-lg p-4 flex flex-row items-center gap-1">
           <span className="text-sm font-semibold text-white">
@@ -84,8 +70,8 @@ function CafeDetailsSection({ cafe }) {
         </div>
       )}
       {cafe && (
-        <div className="flex flex-col gap-4">
-          <div className="relative w-full md:w-1/2">
+        <div className="flex flex-col lg:flex-row gap-14">
+          <div className="relative w-full lg:w-1/2 flex-shrink-0">
             <img
               src={`${process.env.NEXT_API_URL}/public/images/${cafe.image}`}
               alt={cafe.name}
@@ -94,7 +80,7 @@ function CafeDetailsSection({ cafe }) {
             {isLoggedIn && (
               <button
                 onClick={handleSaveCafe}
-                className={`absolute top-2 right-2  p-2 rounded-2xl border font-semibold flex flex-row gap-1 items-center text-sm ${
+                className={`absolute top-2 right-2 p-2 rounded-2xl border font-semibold flex flex-row gap-1 items-center text-sm ${
                   isSaved
                     ? "bg-black text-white border-black hover:text-white hover:bg-black underline"
                     : "bg-white text-black hover:bg-black hover:underline hover:text-white"
@@ -115,7 +101,14 @@ function CafeDetailsSection({ cafe }) {
                 {isSaved ? "Saved" : "Save"}
               </button>
             )}
-            {/* <div className="absolute bottom-0 right-0 flex flex-row items-center  bg-orange-500 text-white p-2 rounded-tr-lg">
+          </div>
+
+          <div className="lg:w-1/2 flex flex-col gap-4 md:gap-5">
+            <div className="flex flex-row justify-between md:flex-col gap-2">
+              <h1 className="text-3xl font-semibold tracking-wide md:text-4xl">
+                {cafe.name}
+              </h1>
+              <div className="flex flex-row">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -135,78 +128,89 @@ function CafeDetailsSection({ cafe }) {
                     d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
                   />
                 </svg>
-                <p className="text-sm font-semibold text-white pl-0.5">{cafe.location}</p>
-              </div> */}
-          </div>
-
-          <div className="flex flex-row justify-between">
-            <h1 className="text-3xl font-semibold">{cafe.name}</h1>
-            <div className="flex flex-row">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="w-4 h-4 mb-0.5"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
-                />
-              </svg>
-              <p className="text-sm font-semibold text-gray-600 pl-0.5">
-                {cafe.location}
-              </p>
-            </div>
-          </div>
-          <div className="border border-gray-200 rounded-lg px-4 py-2">
-            <a
-              href={cafe.website}
-              target="_blank"
-              rel="noreferrer"
-              className="text-orange-500 text-sm break-words"
-            >
-              {cafe.website}
-            </a>
-          </div>
-          <div className="rounded-md bg-gray-200 shadow-md px-4 py-2">
-            {cafe.description && (
-              <p className="text-sm font-semibold text-gray-600">
-                <span className="font-extrabold">
-                  {cafe.description.split(" ")[0]}
-                </span>
-                {` ${cafe.description.split(" ").slice(1).join(" ")}`}
-              </p>
-            )}
-          </div>
-          <div className="flex justify-center pt-2">
-            <div className="border border-gray-300 w-11/12"></div>
-          </div>
-          {cafe.icons &&
-            cafe.icons.map((icon, index) => (
-              <div key={index} className="flex flex-row gap-2 items-center">
-                <img
-                  src={`${process.env.NEXT_API_URL}/public/icons/${icon.url}`}
-                  alt={icon.type}
-                  className="w-12 h-12"
-                />
-                <p key={index} className="text-sm font-semibold text-gray-600">
-                  {icon.type}
+                <p className="text-sm font-semibold text-gray-600 pl-0.5">
+                  {cafe.location}
                 </p>
               </div>
-            ))}
-          <div className="flex justify-center pt-2">
-            <div className="border border-gray-300 w-11/12"></div>
+            </div>
+            <div className="border border-gray-200 rounded-lg px-4 py-2 md:w-fit">
+              <a
+                href={cafe.website}
+                target="_blank"
+                rel="noreferrer"
+                className="text-orange-500 text-sm break-words md:text-base"
+              >
+                {cafe.website}
+              </a>
+            </div>
+            {/* Icons Below Image on md+ screens */}
+            <div className="hidden lg:flex flex-col gap-3">
+              {cafe.icons &&
+                cafe.icons.map((icon, index) => (
+                  <div key={index} className="flex flex-row gap-2 items-center">
+                    <img
+                      src={`${process.env.NEXT_API_URL}/public/icons/${icon.url}`}
+                      alt={icon.type}
+                      className="w-12 h-12"
+                    />
+                    <p
+                      key={index}
+                      className="text-sm font-semibold text-gray-600"
+                    >
+                      {icon.type}
+                    </p>
+                  </div>
+                ))}
+            </div>
+            <div className="rounded-md bg-gray-200 shadow-md px-4 py-2 lg:hidden">
+              {cafe.description && (
+                <p className="text-sm font-semibold text-gray-600 md:text-base">
+                  <span className="font-extrabold">
+                    {cafe.description.split(" ")[0]}
+                  </span>
+                  {` ${cafe.description.split(" ").slice(1).join(" ")}`}
+                </p>
+              )}
+            </div>
+            {/* Icons Here on Small Screens */}
+            <div className="flex flex-col gap-4 lg:hidden">
+              <div className="flex justify-center pt-2">
+                <div className="border border-gray-300 w-11/12"></div>
+              </div>
+              {cafe.icons &&
+                cafe.icons.map((icon, index) => (
+                  <div key={index} className="flex flex-row gap-2 items-center">
+                    <img
+                      src={`${process.env.NEXT_API_URL}/public/icons/${icon.url}`}
+                      alt={icon.type}
+                      className="w-12 h-12"
+                    />
+                    <p
+                      key={index}
+                      className="text-sm font-semibold text-gray-600"
+                    >
+                      {icon.type}
+                    </p>
+                  </div>
+                ))}
+              <div className="flex justify-center pt-2">
+                <div className="border border-gray-300 w-11/12"></div>
+              </div>
+            </div>
           </div>
         </div>
       )}
+      {/* Description on lg+ screens*/}
+        <div className="hidden lg:inline-block lg:rounded-md mt-6 bg-gray-200 shadow-md px-4 py-2 ">
+          {cafe.description && (
+            <p className="text-sm font-semibold text-gray-600 md:text-base md:leading-7">
+              <span className="font-extrabold">
+                {cafe.description.split(" ")[0]}
+              </span>
+              {` ${cafe.description.split(" ").slice(1).join(" ")}`}
+            </p>
+          )}
+        </div>
     </div>
   );
 }

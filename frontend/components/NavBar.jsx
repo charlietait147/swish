@@ -145,7 +145,7 @@ function NavBar() {
             </>
           ) : (
             <>
-              <Link href="/account" className="text-white text-sm lg:text-base hover:underline hover:underline-offset-8 ">My Account</Link>
+              <Link href="/account" className="text-white text-sm lg:text-base hover:underline hover:underline-offset-8 mr-4 ">My Account</Link>
               <li
                 className="bg-black text-sm lg:text-base text-white py-2 px-4 rounded-2xl hover:bg-gray-800"
                 onClick={handleSignOut}

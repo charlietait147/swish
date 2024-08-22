@@ -10,6 +10,11 @@ module.exports = {
         body: ['Raleway, sans-serif'],
         header: ['Dancing Script, sans-serif'],
       },
+      height: {
+        '108': '27rem', 
+        '120': '30rem', 
+        '132': '33rem', 
+      },
     },
     screens: {
       'xs': '480px', 
@@ -17,7 +22,7 @@ module.exports = {
       'md': '768px',  
       'lg': '1024px', 
       'xl': '1280px', 
-    }
+    },
   },
   plugins: [],
 }

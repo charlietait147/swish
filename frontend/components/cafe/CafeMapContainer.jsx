@@ -13,7 +13,7 @@ function CafeMapContainer({ cafe }) {
     []
   );
   return (
-    <div className="container mx-auto px-4 flex flex-col gap-3 pb-6">
+    <div className="max-w-screen-lg mx-auto xs:px-6 sm:px-10 lg:pt-6 xl:px-0 px-4 flex flex-col gap-3 pb-6">
       <h1 className="text-xl font-semibold">Location</h1>
       <div className="map">
         {!isLoaded ? (
@@ -22,7 +22,7 @@ function CafeMapContainer({ cafe }) {
           <GoogleMap
             zoom={14}
             center={center}
-            mapContainerClassName="w-full h-72"
+            mapContainerClassName="w-full h-80 sm:h-96 md:h-120 lg:h-132"
           >
             <Marker
               key="marker_1"
