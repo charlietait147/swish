@@ -7,9 +7,12 @@ import CafeList from "@/components/cafe/CafeList";
 import DiscoverCafeHero from "@/components/cafe/DiscoverCafeHero";
 import { fetchCafes } from "@/services/cafe.service";
 import { useState, useEffect } from "react";
+import Image from "next/image";
+import Logo from "../../public/logo/swish-logo.png"; // Image
 
 export default function DiscoverPage() {
   const [cafes, setCafes] = useState([]);
+  const [loading, setLoading] = useState(true); // Loading state
   const [filteredCafes, setFilteredCafes] = useState([]);
   const [selectedAmenities, setSelectedAmenities] = useState([]);
 
@@ -17,6 +20,7 @@ export default function DiscoverPage() {
     const response = await fetchCafes();
     setCafes(response);
     setFilteredCafes(response);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -36,13 +40,7 @@ export default function DiscoverPage() {
         cafe.location.toLowerCase().includes(filters.location.toLowerCase())
       );
     }
-    // if (selectedAmenities.length > 0) {
-    //   filteredCafes = filteredCafes.filter((cafe) =>
-    //     selectedAmenities.every((amenity) =>
-    //       cafe.icons.some((icon) => icon.type === amenity)
-    //     )
-    //   );
-    // }
+
     if (filters.amenities && filters.amenities.length > 0) {
       filteredCafes = filteredCafes.filter((cafe) =>
         filters.amenities.every((amenity) =>
@@ -59,14 +57,27 @@ export default function DiscoverPage() {
       <Header />
       <DiscoverCafeHero />
       <div className="flex flex-col lg:flex-row max-width mx-auto lg:my-12">
-      <div className="lg:sticky lg:top-0 lg:h-full lg:pt-4">
-        <CafeFilters
-          onFilterChange={handleFilters}
-          setSelectedAmenities={setSelectedAmenities}
-          selectedAmenities={selectedAmenities}
-        />
+        <div className="lg:sticky lg:top-0 lg:h-full lg:pt-4">
+          <CafeFilters
+            onFilterChange={handleFilters}
+            setSelectedAmenities={setSelectedAmenities}
+            selectedAmenities={selectedAmenities}
+          />
         </div>
-        <CafeList cafes={filteredCafes} />
+        {loading ? (
+          <div className="flex justify-center items-center py-6 lg:pl-72 lg:py-24">
+            <Image
+              src={Logo}
+              alt="Swish Logo"
+              width={125}
+              height={125}
+              className="spinner"
+              priority={true}
+            />
+          </div>
+        ) : (
+          <CafeList cafes={filteredCafes} />
+        )}
       </div>
       <Footer />
     </>
