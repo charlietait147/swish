@@ -23,6 +23,8 @@ const cafeData = [
         description:'Test Description',
         website: 'test.com',
         image: '/',
+        lat: 0,
+        lng: 0,
         reviews: []
     },
     {
@@ -31,6 +33,8 @@ const cafeData = [
         location: 'Test Location 2',
         description:'Test Description',
         website: 'test.com',
+        lat: 0,
+        lng: 0,
         image: '/',
         reviews: []
     }

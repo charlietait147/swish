@@ -66,7 +66,7 @@ describe("Testing Requests on User Collection", () => {
 
             //Assert
             expect(res).to.have.status(400);
-            expect(res.text).to.equal('["Password must be between 8 to 16 characters long and must contain at least one letter and one number"]');
+            expect(res.text).to.equal('["Password must be at least 6 characters long and must contain at least one letter and one number"]');
         });
     });
 
@@ -97,7 +97,8 @@ describe("Testing Requests on User Collection", () => {
 
             //Assert
             expect(res).to.have.status(400);
-            expect(res.text).to.equal('Login failed');
+            console.log(res);
+            expect(res.text).to.equal('A user with this email does not exist');
         });
 
         it('should return a 400 status code when a user with a wrong password is sent', async () => {
@@ -111,7 +112,7 @@ describe("Testing Requests on User Collection", () => {
 
             //Assert
             expect(res).to.have.status(400);
-            expect(res.text).to.equal('Login failed');
+            expect(res.text).to.equal('Invalid password');
         });
     });
 
