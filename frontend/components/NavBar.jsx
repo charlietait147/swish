@@ -47,7 +47,7 @@ function NavBar() {
           ></div>
 
           {/* Flyout Menu */}
-          <div className="fixed top-0 right-0 z-50 h-screen p-5 overflow-y-auto bg-white w-64 dark:bg-gray-800 transition-transform transform duration-300 ease-in-out shadow-2xl">
+          <div className="fixed top-0 right-0 z-50 h-screen p-5 overflow-y-auto bg-white w-64 dark:bg-gray-800 transition-transform transform duration-300 ease-in-out shadow-2xl xs:w-72">
             <button
               type="button"
               aria-controls="drawer-navigation"
@@ -73,17 +73,32 @@ function NavBar() {
             </button>
             <h1 className="text-2xl font-bold pt-4">Swish .</h1>
             <div className="border border-t-gray-300 mt-4"></div>
-            <ul className="mt-6 space-y-5 text-center">
-              <Link href="/discover" className="text-white py-2 bg-orange-500 hover:bg-orange-400 shadow-lg flex items-center justify-center">
+            <ul className="mt-6 space-y-7 text-center">
+              <Link
+                href="/"
+                className="text-white py-2 bg-orange-500 hover:bg-orange-400 shadow-lg flex items-center justify-center"
+              >
+                Home
+              </Link>
+              <Link
+                href="/discover"
+                className="text-white py-2 bg-orange-500 hover:bg-orange-400 shadow-lg flex items-center justify-center"
+              >
                 Discover
               </Link>
-              <Link href="/#contact-form" className="text-white py-2 bg-orange-500 hover:bg-orange-400 shadow-lg flex items-center justify-center">
+              <Link
+                href="/#contact-form"
+                className="text-white py-2 bg-orange-500 hover:bg-orange-400 shadow-lg flex items-center justify-center"
+              >
                 Contact Us
               </Link>
               <div className="border border-t-gray-300 mt-6"></div>
               {!isLoggedIn ? (
                 <>
-                  <Link href = "/login" className="text-white py-2 bg-gray-800  hover:bg-gray-600  shadow-lg flex items-center justify-center">
+                  <Link
+                    href="/login"
+                    className="text-white py-2 bg-gray-800  hover:bg-gray-600  shadow-lg flex items-center justify-center"
+                  >
                     Sign In
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -100,7 +115,10 @@ function NavBar() {
                       />
                     </svg>
                   </Link>
-                  <Link href="/register" className="text-white py-2 flex items-center justify-center bg-gray-800 hover:bg-gray-600 shadow-lg">
+                  <Link
+                    href="/register"
+                    className="text-white py-2 flex items-center justify-center bg-gray-800 hover:bg-gray-600 shadow-lg"
+                  >
                     Register
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -120,7 +138,10 @@ function NavBar() {
                 </>
               ) : (
                 <>
-                  <Link href="/account" className="text-white py-2 bg-gray-800  hover:bg-gray-600  shadow-lg">
+                  <Link
+                    href="/account"
+                    className="text-white py-2 bg-gray-800  hover:bg-gray-600  shadow-lg flex items-center justify-center"
+                  >
                     My Account
                   </Link>
                   <li
@@ -135,26 +156,52 @@ function NavBar() {
           </div>
         </div>
       )}
-        <ul className="hidden md:flex flex-row  items-center">
-          <Link href="/discover" className="text-white mr-8 text-sm lg:text-base hover:underline hover:underline-offset-8">Discover</Link>
-          <Link href="/#contact-form" className="text-white mr-8 text-sm lg:text-base hover:underline hover:underline-offset-8  ">Contact Us</Link>
-          <span className="h-0.5 bg-gray-200 w-8 transform rotate-90 mr-1"></span>
-          {!isLoggedIn ? (
-            <>
-             <Link href="/login" className="bg-black text-sm lg:text-base text-white py-2 px-4 rounded-2xl hover:bg-gray-800">Sign In</Link>
-            </>
-          ) : (
-            <>
-              <Link href="/account" className="text-white text-sm lg:text-base hover:underline hover:underline-offset-8 mr-4 ">My Account</Link>
-              <li
-                className="bg-black text-sm lg:text-base text-white py-2 px-4 rounded-2xl hover:bg-gray-800"
-                onClick={handleSignOut}
-              >
-                Sign Out
-              </li>
-            </>
-          )}
-        </ul>
+      <ul className="hidden md:flex flex-row  items-center">
+        <Link
+          href="/"
+          className="text-white mr-8 text-sm lg:text-base hover:underline hover:underline-offset-8"
+        >
+          Home
+        </Link>
+        <Link
+          href="/discover"
+          className="text-white mr-8 text-sm lg:text-base hover:underline hover:underline-offset-8"
+        >
+          Discover
+        </Link>
+        <Link
+          href="/#contact-form"
+          className="text-white mr-8 text-sm lg:text-base hover:underline hover:underline-offset-8  "
+        >
+          Contact Us
+        </Link>
+        <span className="h-0.5 bg-gray-200 w-8 transform rotate-90 mr-1"></span>
+        {!isLoggedIn ? (
+          <>
+            <Link
+              href="/login"
+              className="bg-black text-sm lg:text-base text-white py-2 px-4 rounded-2xl hover:bg-gray-800"
+            >
+              Sign In
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link
+              href="/account"
+              className="text-white text-sm lg:text-base hover:underline hover:underline-offset-8 mr-4 "
+            >
+              My Account
+            </Link>
+            <li
+              className="bg-black text-sm lg:text-base text-white py-2 px-4 rounded-2xl hover:bg-gray-800"
+              onClick={handleSignOut}
+            >
+              Sign Out
+            </li>
+          </>
+        )}
+      </ul>
     </>
   );
 }

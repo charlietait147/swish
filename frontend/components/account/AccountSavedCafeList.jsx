@@ -29,7 +29,7 @@ function AccountSavedCafeList({ cafes, setCafesUpdated }) {
         </div>
       ) : (
         <div>
-          <h3 className="font-semibold text-lg text-gray-800 pb-4 pt-3">
+          <h3 className="font-semibold text-lg text-gray-800 pb-4 pt-3 md:text-xl md:pb-6">
             My Saved Cafes
           </h3>
           <div className="flex flex-col gap-4 xs:grid grid-cols-2 lg:grid-cols-3">
