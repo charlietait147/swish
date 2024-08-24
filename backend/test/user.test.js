@@ -97,7 +97,6 @@ describe("Testing Requests on User Collection", () => {
 
             //Assert
             expect(res).to.have.status(400);
-            console.log(res);
             expect(res.text).to.equal('A user with this email does not exist');
         });
 
@@ -216,6 +215,43 @@ describe("Testing Requests on User Collection", () => {
             //Assert
             expect(res).to.have.status(401);
             expect(res.body.error).to.equal('Authentication failed: No token provided');
+        });
+    });
+
+    describe(`DELETE request to /user/:cafeId`, () => {
+        it('should return a 200 status code and a message when the user deletes a cafe', async () => {
+            //Act
+            const res = await testServer
+                .delete(`/user/${cafeData[0]._id}`)
+                .set('Authorization', `Bearer ${token}`);
+
+            //Assert
+            expect(res).to.have.status(200);
+            expect(res.body).to.have.property('message').that.equals('Cafe deleted successfully');
+            // expect(res.body.user).to.have.property('cafes').that.is.an('array').that.has.lengthOf(0);
+            ;
+        });
+
+        it('should return a 401 status code when a user with no token deletes a cafe', async () => {
+            //Act
+            const res = await testServer
+                .delete(`/user/${cafeData[0]._id}`);
+
+            //Assert
+            expect(res).to.have.status(401);
+            expect(res.body.error).to.equal('Authentication failed: No token provided');
+        });
+
+        it('should return a 400 status code when a user tries to delete a cafe that is not added', async () => {
+            //Act
+            const res = await testServer
+                .delete(`/user/${cafeData[0]._id}`)
+                .set('Authorization', `Bearer ${token}`);
+
+            //Assert
+            expect(res).to.have.status(400);
+            console.log(res.body.error);
+            expect(res.body.error).to.equal('Cafe not found');
         });
     });
 
