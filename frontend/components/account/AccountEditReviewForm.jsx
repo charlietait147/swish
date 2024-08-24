@@ -39,7 +39,7 @@ function AccountEditReviewForm({
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
-      <div className="modal bg-white w-5/6 rounded-lg shadow-lg p-6 relative">
+      <div className="modal bg-white w-5/6 sm:w-1/2 lg:w-1/3 rounded-lg shadow-lg p-6 relative">
         {" "}
         {updated ? (
           <div>

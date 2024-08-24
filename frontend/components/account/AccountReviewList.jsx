@@ -32,7 +32,7 @@ function AccountReviewList({ reviews, setReviewsUpdated }) {
             <h3 className="font-semibold text-lg text-gray-800 pb-4 pt-3 md:text-xl md:pb-6">
               My Reviews
             </h3>
-            <div className="columns-1 md:columns-2 lg:columns-3 gap-4">
+            <div className="columns-1 sm:columns-2 lg:columns-3 gap-4">
               {reviews.map((review) => (
                 <AccountReviewCard key={review._id} review={review} setReviewsUpdated={setReviewsUpdated} />
               ))}

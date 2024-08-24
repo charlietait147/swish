@@ -39,7 +39,7 @@ function AccountReviewCard({ review, setReviewsUpdated }) {
         </p>
       </div>
       <p className="text-gray-800 text-xs font-light">{review.description}</p>
-      <div className={`flex ${review.image ? 'flex-row' : 'flex-col'} gap-5`}>
+      <div className={`flex ${review.image ? 'flex-row justify-between' : 'flex-col'} gap-5`}>
         {review.image && (
           <div className="flex items-center">
             <Image
