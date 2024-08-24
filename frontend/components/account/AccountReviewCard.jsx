@@ -27,9 +27,9 @@ function AccountReviewCard({ review, setReviewsUpdated }) {
   };
 
   return (
-    <div className="bg-white border border-gray-300 py-4 px-4 flex flex-col rounded-lg shadow-md">
+    <div className="bg-white border border-gray-300 py-4 px-4 flex flex-col rounded-lg shadow-md h-fit mb-4  break-inside-avoid">
       <div className="flex flex-row justify-between items-center pb-1.5">
-        <div className="flex flex-row ">
+        <div className="flex flex-row">
           <p className="text-gray-800 text-sm font-semibold">
             @ {review.cafe.name}
           </p>
@@ -39,19 +39,19 @@ function AccountReviewCard({ review, setReviewsUpdated }) {
         </p>
       </div>
       <p className="text-gray-800 text-xs font-light">{review.description}</p>
-      <div className="flex flex-row gap-5">
-        {review.image ? (
-          <div className="flex flex-row items-center">
+      <div className={`flex ${review.image ? 'flex-row' : 'flex-col'} gap-5`}>
+        {review.image && (
+          <div className="flex items-center">
             <Image
               src={`${process.env.NEXT_API_URL}/uploads/${review.image}`}
               height={150}
               width={150}
               alt="review photo"
-              className=" mt-3 border-2 border-gray-300"
+              className="mt-3 border-2 border-gray-300"
             />
           </div>
-        ) : null}
-        <div className="flex flex-row items-end justify-end">
+        )}
+        <div className="flex flex-row items-end justify-end mt-auto">
           <button
             onClick={handleEditClick}
             className="text-xs font-semibold bg-blue-500 text-white p-2"
@@ -73,7 +73,6 @@ function AccountReviewCard({ review, setReviewsUpdated }) {
           setReviewsUpdated={setReviewsUpdated}
         />
       )}
-      {/* </div> */}
       {openReviewForm && (
         <AccountEditReviewForm
           cafeName={review.cafe.name}
@@ -87,5 +86,6 @@ function AccountReviewCard({ review, setReviewsUpdated }) {
     </div>
   );
 }
+
 
 export default AccountReviewCard;

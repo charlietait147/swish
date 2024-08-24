@@ -42,7 +42,7 @@ function AccountSavedCafeCard({ cafe, setCafesUpdated }) {
       {/* <Link href={`/cafe/${cafe._id}`}> */}
       {/* <div> */}
       <div
-        className="relative bg-cover bg-center w-full shadow-lg overflow-hidden h-48 border-2 border-orange-400 rounded-lg cursor-pointer transition duration-300 ease-in-out transform hover:scale-105"
+        className="relative bg-cover bg-center w-full shadow-lg overflow-hidden h-48 border-2 border-orange-400 rounded-lg cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 md:h-48 lg:h-52"
         style={{
           backgroundImage: `url(${process.env.NEXT_API_URL}/public/images/${cafe.image})`,
         }}

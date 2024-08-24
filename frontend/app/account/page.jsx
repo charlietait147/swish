@@ -67,21 +67,23 @@ export default function AccountPage() {
   return (
     <>
       <Header />
-      <AccountOverview
-        email={userData.email}
-        cafesLength={userData.cafes.length}
-        reviewsLength={userData.reviews.length}
-      />
-      <div className="bg-gray-200 py-2.5"></div>
-      <AccountSavedCafeList
-        cafes={userData.cafes}
-        setCafesUpdated={setCafesUpdated}
-      />
-      <div className="bg-gray-200 py-2.5"></div>
-      <AccountReviewList
-        reviews={userData.reviews}
-        setReviewsUpdated={setReviewsUpdated}
-      />
+      <div className="bg-gray-200 pb md:px-24 lg:px-6 md:pb-6 lg:pb-12">
+        <AccountOverview
+          email={userData.email}
+          cafesLength={userData.cafes.length}
+          reviewsLength={userData.reviews.length}
+        />
+        <div className="bg-gray-200 py-2.5 md:py-4 lg:py-6"></div>
+        <AccountSavedCafeList
+          cafes={userData.cafes}
+          setCafesUpdated={setCafesUpdated}
+        />
+        <div className="bg-gray-200 py-2.5 md:py-4 lg:py-6"></div>
+        <AccountReviewList
+          reviews={userData.reviews}
+          setReviewsUpdated={setReviewsUpdated}
+        />
+      </div>
       <Footer />
     </>
   );

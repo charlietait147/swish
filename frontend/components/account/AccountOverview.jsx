@@ -5,14 +5,14 @@ function AccountOverview({ email, cafesLength, reviewsLength }) {
   return (
     <div>
       <div className="bg-gray-200 pt-16 pb-3">
-        <div className="container mx-auto px-4">
-          <h1 className="font-semibold text-2xl text-gray-800 text-center">
+        <div className="max-width mx-auto px-4">
+          <h1 className="font-semibold text-2xl text-gray-800 text-center md:text-3xl">
             My Account
           </h1>
         </div>
       </div>
-      <div className="bg-white md:bg-gray-200 md:px-8">
-        <div className="bg-white py-3 shadow-lg">
+      {/* <div className="bg-white md:bg-gray-200 md:px-8"> */}
+        <div className="bg-white py-3 shadow-lg max-w-screen-lg mx-auto md:pb-6 md:pt-4">
           <div className="flex flex-row items-center px-4">
             <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center overflow-hidden shadow-xl border border-gray-300">
               <Image src={Logo} alt="Account Avatar" className="w-14 h-14" />
@@ -40,7 +40,7 @@ function AccountOverview({ email, cafesLength, reviewsLength }) {
             </div>
           </div>
         </div>
-      </div>
+      {/* </div> */}
     </div>
   );
 }
