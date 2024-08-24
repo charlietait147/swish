@@ -280,4 +280,46 @@ describe("Testing Requests on User Collection", () => {
             expect(res.body.error).to.equal('Authentication failed: No token provided');
         });
     });
+
+    describe(`GET request to /user/isCafeSaved/:cafeId`, () => {
+        it('should return a 200 status code and a message that the cafe is saved when the user checks if a cafe is saved', async () => {
+
+            //Arrange
+            await testServer
+                .post(`/user/add-cafe/${cafeData[0]._id}`)
+                .set('Authorization', `Bearer ${token}`);
+                
+            //Act
+            const res = await testServer
+                .get(`/user/isCafeSaved/${cafeData[0]._id}`)
+                .set('Authorization', `Bearer ${token}`);
+
+            //Assert
+            expect(res).to.have.status(200);
+            const parsedResponse = JSON.parse(res.text);
+            expect(parsedResponse).to.deep.equal({ isSaved: true });
+        });
+
+        it('should return a 401 status code when a user with no token checks if a cafe is saved', async () => {
+            //Act
+            const res = await testServer
+                .get(`/user/isCafeSaved/${cafeData[0]._id}`);
+
+            //Assert
+            expect(res).to.have.status(401);
+            expect(res.body.error).to.equal('Authentication failed: No token provided');
+        });
+
+        it('should return a 200 status code and a message that the cafe is not saved when a user checks if a cafe is saved that is not added', async () => {
+            //Act
+            const res = await testServer
+                .get(`/user/isCafeSaved/${cafeData[1]._id}`)
+                .set('Authorization', `Bearer ${token}`);
+
+            //Assert
+            expect(res).to.have.status(200);
+            const parsedResponse = JSON.parse(res.text);
+            expect(parsedResponse).to.deep.equal({ isSaved: false });
+        });
+    });
 });
