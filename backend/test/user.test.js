@@ -255,4 +255,29 @@ describe("Testing Requests on User Collection", () => {
         });
     });
 
+    describe(`GET request to /user/`,() => {
+        it('should return a 200 status code and the user when the user fetches their profile', async () => {
+            //Act
+            const res = await testServer
+                .get('/user')
+                .set('Authorization', `Bearer ${token}`);
+
+            //Assert
+            expect(res).to.have.status(200);
+            expect(res.body).to.have.property('email').that.equals(userDataToImport[0].email);
+            expect(res.body).to.have.property('password');
+            expect(res.body).to.have.property('cafes').that.is.an('array').that.has.lengthOf(0);
+            expect(res.body).to.have.property('reviews').that.is.an('array').that.has.lengthOf(0);
+        });
+
+        it('should return a 401 status code when a user with no token tries to get their profile', async () => {
+            //Act
+            const res = await testServer
+                .get('/user');
+
+            //Assert
+            expect(res).to.have.status(401);
+            expect(res.body.error).to.equal('Authentication failed: No token provided');
+        });
+    });
 });

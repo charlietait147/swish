@@ -6,13 +6,15 @@ const userData = {
             _id: '60f1b6b5f3f9e4f4b8f3b3b1',
             email: 'testUser@gmail.com',
             password: bcrypt.hashSync('testPassword123', 10),
-            reviews: []
+            reviews: [],
+            cafes: []
         },
         {
             _id: '60f1b6b5f3f9e4f4b8f3b3b2',
             email: 'testUser2@gmail.com',
             password: bcrypt.hashSync('testPassword234', 10),
-            reviews: []
+            reviews: [],
+            cafes: []
         }
     ],
     wellFormedUser: {
