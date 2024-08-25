@@ -40,6 +40,31 @@ const cafeData = [
     }
 ]
 
+const cafeDataToBeDeleted = [
+    {
+        _id: '60f1b6b5f3f9e4f4b8f3b3b4',
+        name: 'Test Cafe',
+        location: 'Test Location',
+        description:'Test Description',
+        website: 'test.com',
+        lat: 0,
+        lng: 0,
+        image: '/',
+        reviews: []
+    },
+    {
+        _id: '60f1b6b5f3f9e4f4b8f3b3b5',
+        name: 'Test Cafe 2',
+        location: 'Test Location 2',
+        description:'Test Description',
+        website: 'test.com',
+        lat: 0,
+        lng: 0,
+        image: '/',
+        reviews: []
+    }
+]
+
 const reviewData = 
     {
         _id: '60f1b6b5f3f9e4f4b8f3b3b6',
@@ -64,5 +89,5 @@ const testReviewData = {
 }
 
 
-export { userData, cafeData, reviewData, testReviewData };
+export { userData, cafeData, reviewData, testReviewData, cafeDataToBeDeleted };
 

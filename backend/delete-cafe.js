@@ -11,8 +11,10 @@ const removeCafe = async (cafeName) => {
     const result = await Cafe.deleteOne({ name: cafeName });
     if (result.deletedCount > 0) {
         console.log(`Cafe '${cafeName}' removed from the database.`);
+        return true; // Indicates deletion was successful
     } else {
         console.log(`Cafe '${cafeName}' not found in the database.`);
+        return false; // Indicates deletion was unsuccessful
     }
 };
 
@@ -34,3 +36,5 @@ const deleteCafes = async () => {
 }
 
 deleteCafes().catch(console.error);
+
+export { removeCafe, deleteCafes };
