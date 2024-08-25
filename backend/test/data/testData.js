@@ -42,7 +42,7 @@ const cafeData = [
 
 const cafeDataToBeDeleted = [
     {
-        _id: '60f1b6b5f3f9e4f4b8f3b3b4',
+        _id: '60f1b6b5f3f9e4f4b8f3b3b6',
         name: 'Test Cafe',
         location: 'Test Location',
         description:'Test Description',
@@ -53,7 +53,7 @@ const cafeDataToBeDeleted = [
         reviews: []
     },
     {
-        _id: '60f1b6b5f3f9e4f4b8f3b3b5',
+        _id: '60f1b6b5f3f9e4f4b8f3b3b7',
         name: 'Test Cafe 2',
         location: 'Test Location 2',
         description:'Test Description',
