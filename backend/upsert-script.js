@@ -29,8 +29,6 @@ const updateCafes = async () => {
         await upsertCafes(cafeData);
         console.log('Cafe data upserted');
 
-        
-
         await mongoose.connection.close();
         console.log('Connection to the database closed');
     } catch (error) {
