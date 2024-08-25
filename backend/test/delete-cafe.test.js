@@ -15,7 +15,6 @@ describe('Cafe Deletion', () => {
         await setupDatabase(userData, cafeDataToBeDeleted, []);
     });
 
-    
 
     it('should delete a cafe from the database when it exists', async () => {
         const cafeName = cafeDataToBeDeleted[0].name;
