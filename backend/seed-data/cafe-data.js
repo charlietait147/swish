@@ -494,7 +494,7 @@ const cafes = [
             }
         ],
         reviews: []
-    }
+    },
 ]
 
 export default cafes;

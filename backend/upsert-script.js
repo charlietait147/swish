@@ -10,13 +10,16 @@ dotenv.config({
 
 const upsertCafes = async (cafeData) => {
     for (const cafe of cafeData) {
-            await Cafe.findOneAndUpdate(
-                { name: cafe.name },
-                { $set: cafe },
-                { upsert: true }
-            );
+            const { reviews, ...cafeDetails } = cafe; // Destructure to exclude reviews
+
+        await Cafe.findOneAndUpdate(
+            { name: cafe.name },
+            { $set: cafeDetails }, // Update all fields except reviews
+            { upsert: true }
+        );
         }
 };
+
 
 const updateCafes = async () => {
     try {
@@ -25,6 +28,8 @@ const updateCafes = async () => {
 
         await upsertCafes(cafeData);
         console.log('Cafe data upserted');
+
+        
 
         await mongoose.connection.close();
         console.log('Connection to the database closed');
