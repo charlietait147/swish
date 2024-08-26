@@ -1,7 +1,7 @@
 import { expect } from "chai";
 
 import userData from "./data/testUser.js";
-import { cafeData } from "./data/testData.js";
+import { testCafeData } from "./data/testData.js";
 import { setupDatabase, initialiseSetup } from "./testSetup.js";
 
 
@@ -17,7 +17,7 @@ describe("Testing Requests on User Collection", () => {
     const testServer = initialiseSetup();
 
     before(async () => {
-        ({ userId, token } = await setupDatabase(userDataToImport, cafeData, []));
+        ({ userId, token } = await setupDatabase(userDataToImport, testCafeData, []));
     });
 
     describe(`POST request to /user/register`, () => {
@@ -161,7 +161,7 @@ describe("Testing Requests on User Collection", () => {
         it('should return a 200 status code and a message when the user adds a cafe', async () => {
             //Act
             const res = await testServer
-                .post(`/user/add-cafe/${cafeData[0]._id}`)
+                .post(`/user/add-cafe/${testCafeData[0]._id}`)
                 .set('Authorization', `Bearer ${token}`);
 
             //Assert
@@ -173,7 +173,7 @@ describe("Testing Requests on User Collection", () => {
         it('should return a 401 status code when a user with no token adds a cafe', async () => {
             //Act
             const res = await testServer
-                .post(`/user/add-cafe/${cafeData[0]._id}`);
+                .post(`/user/add-cafe/${testCafeData[0]._id}`);
 
             //Assert
             expect(res).to.have.status(401);
@@ -183,7 +183,7 @@ describe("Testing Requests on User Collection", () => {
         it('should return a 400 status code when a user tries to add a cafe that is already added', async () => {
             //Act
             const res = await testServer
-                .post(`/user/add-cafe/${cafeData[0]._id}`)
+                .post(`/user/add-cafe/${testCafeData[0]._id}`)
                 .set('Authorization', `Bearer ${token}`);
 
             //Assert
@@ -202,9 +202,9 @@ describe("Testing Requests on User Collection", () => {
             //Assert
             expect(res).to.have.status(200);
             expect(res.body.cafes).to.be.an('array').that.has.lengthOf(1);
-            expect(res.body.cafes[0]).to.have.property('name').that.equals(cafeData[0].name);
-            expect(res.body.cafes[0]).to.have.property('location').that.equals(cafeData[0].location);
-            expect(res.body.cafes[0]).to.have.property('description').that.equals(cafeData[0].description);
+            expect(res.body.cafes[0]).to.have.property('name').that.equals(testCafeData[0].name);
+            expect(res.body.cafes[0]).to.have.property('location').that.equals(testCafeData[0].location);
+            expect(res.body.cafes[0]).to.have.property('description').that.equals(testCafeData[0].description);
         });
 
         it('should return a 401 status code when a user with no token tries to get cafes', async () => {
@@ -222,7 +222,7 @@ describe("Testing Requests on User Collection", () => {
         it('should return a 200 status code and a message when the user deletes a cafe', async () => {
             //Act
             const res = await testServer
-                .delete(`/user/${cafeData[0]._id}`)
+                .delete(`/user/${testCafeData[0]._id}`)
                 .set('Authorization', `Bearer ${token}`);
 
             //Assert
@@ -235,7 +235,7 @@ describe("Testing Requests on User Collection", () => {
         it('should return a 401 status code when a user with no token deletes a cafe', async () => {
             //Act
             const res = await testServer
-                .delete(`/user/${cafeData[0]._id}`);
+                .delete(`/user/${testCafeData[0]._id}`);
 
             //Assert
             expect(res).to.have.status(401);
@@ -245,7 +245,7 @@ describe("Testing Requests on User Collection", () => {
         it('should return a 400 status code when a user tries to delete a cafe that is not added', async () => {
             //Act
             const res = await testServer
-                .delete(`/user/${cafeData[0]._id}`)
+                .delete(`/user/${testCafeData[0]._id}`)
                 .set('Authorization', `Bearer ${token}`);
 
             //Assert
@@ -286,12 +286,12 @@ describe("Testing Requests on User Collection", () => {
 
             //Arrange
             await testServer
-                .post(`/user/add-cafe/${cafeData[0]._id}`)
+                .post(`/user/add-cafe/${testCafeData[0]._id}`)
                 .set('Authorization', `Bearer ${token}`);
                 
             //Act
             const res = await testServer
-                .get(`/user/isCafeSaved/${cafeData[0]._id}`)
+                .get(`/user/isCafeSaved/${testCafeData[0]._id}`)
                 .set('Authorization', `Bearer ${token}`);
 
             //Assert
@@ -303,7 +303,7 @@ describe("Testing Requests on User Collection", () => {
         it('should return a 401 status code when a user with no token checks if a cafe is saved', async () => {
             //Act
             const res = await testServer
-                .get(`/user/isCafeSaved/${cafeData[0]._id}`);
+                .get(`/user/isCafeSaved/${testCafeData[0]._id}`);
 
             //Assert
             expect(res).to.have.status(401);
@@ -313,7 +313,7 @@ describe("Testing Requests on User Collection", () => {
         it('should return a 200 status code and a message that the cafe is not saved when a user checks if a cafe is saved that is not added', async () => {
             //Act
             const res = await testServer
-                .get(`/user/isCafeSaved/${cafeData[1]._id}`)
+                .get(`/user/isCafeSaved/${testCafeData[1]._id}`)
                 .set('Authorization', `Bearer ${token}`);
 
             //Assert

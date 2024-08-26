@@ -5,17 +5,19 @@ const userData = [
         _id: '60f1b6b5f3f9e4f4b8f3b3b1',
         email: 'testUser@gmail.com',
         password: bcrypt.hashSync('testPassword123', 10),
-        reviews: []
+        reviews: [],
+        cafes: []
     },
     {
         _id: '60f1b6b5f3f9e4f4b8f3b3b2',
         email: 'testUser2@gmail.com',
         password: bcrypt.hashSync('testPassword234', 10),
-        reviews: []
+        reviews: [],
+        cafes: []
     }
 ]
 
-const cafeData = [
+const testCafeData = [
     {
         _id: '60f1b6b5f3f9e4f4b8f3b3b4',
         name: 'Test Cafe',
@@ -69,7 +71,7 @@ const reviewData =
     {
         _id: '60f1b6b5f3f9e4f4b8f3b3b6',
         user: userData[0]._id,
-        cafe: cafeData[0]._id,
+        cafe: testCafeData[0]._id,
         name: 'Test Review',
         description: 'Test Description',
         likes: 0
@@ -89,5 +91,5 @@ const testReviewData = {
 }
 
 
-export { userData, cafeData, reviewData, testReviewData, cafeDataToBeDeleted };
+export { userData, testCafeData, reviewData, testReviewData, cafeDataToBeDeleted };
 

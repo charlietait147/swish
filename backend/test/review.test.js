@@ -1,6 +1,6 @@
 import { expect } from "chai";
 
-import { userData, cafeData, reviewData, testReviewData } from "./data/testData.js";
+import { userData, testCafeData, reviewData, testReviewData } from "./data/testData.js";
 import { setupDatabase, initialiseSetup } from "./testSetup.js";
 
 
@@ -15,7 +15,7 @@ describe("Testing Requests on Review Collection", () => {
     const testServer = initialiseSetup();
 
     before(async () => {
-        ({ userId, token } = await setupDatabase(userData, cafeData, reviewData));
+        ({ userId, token } = await setupDatabase(userData, testCafeData, reviewData));
     });
 
   
@@ -23,7 +23,7 @@ describe("Testing Requests on Review Collection", () => {
         it('should return a 201 status code and the review when a well formed review is sent', async () => {
             //Act
             const res = await testServer
-                .post(`/review/${cafeData[0]._id}/add-review`)
+                .post(`/review/${testCafeData[0]._id}/add-review`)
                 .set('Authorization', `Bearer ${token}`)
                 .send(wellFormedReviewData);
 
@@ -39,7 +39,7 @@ describe("Testing Requests on Review Collection", () => {
         it(`should return a 400 status code when a review with no name is sent`, async () => {
             //Act
             const res = await testServer
-                .post(`/review/${cafeData[1]._id}/add-review`)
+                .post(`/review/${testCafeData[1]._id}/add-review`)
                 .set('Authorization', `Bearer ${token}`)
                 .send(reviewNoName);
 
@@ -51,7 +51,7 @@ describe("Testing Requests on Review Collection", () => {
         it(`should return a 400 status code when a review with no description is sent`, async () => {
             //Act
             const res = await testServer
-                .post(`/review/${cafeData[1]._id}/add-review`)
+                .post(`/review/${testCafeData[1]._id}/add-review`)
                 .set('Authorization', `Bearer ${token}`)
                 .send(reviewNoDescription);
             
@@ -64,7 +64,7 @@ describe("Testing Requests on Review Collection", () => {
         it('should return a 401 status code when no token is sent', async () => {
             //Act
             const res = await testServer
-                .post(`/review/${cafeData[0]._id}/add-review`)
+                .post(`/review/${testCafeData[0]._id}/add-review`)
                 .send(wellFormedReviewData);
 
             //Assert

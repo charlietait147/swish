@@ -1,6 +1,6 @@
 import { expect } from "chai";
 
-import { userData, cafeData } from "./data/testData.js";
+import { userData, testCafeData } from "./data/testData.js";
 
 import { setupDatabase, initialiseSetup } from "./testSetup.js";
 
@@ -12,7 +12,7 @@ describe("Testing Requests on Cafe Collection", () => {
     let userId;
 
     before(async () => {
-        ({ userId, token} = await setupDatabase(userData, cafeData, []));
+        ({ userId, token} = await setupDatabase(userData, testCafeData, []));
     });
 
     describe(`GET request to /cafe`, () => {
@@ -24,7 +24,7 @@ describe("Testing Requests on Cafe Collection", () => {
             //Assert
             expect(res).to.have.status(200);
             expect(res.body).to.be.an('array');
-            expect(res.body).to.have.lengthOf(cafeData.length);
+            expect(res.body).to.have.lengthOf(testCafeData.length);
             res.body.forEach(cafe => {
                 expect(cafe).to.have.property('_id');
                 expect(cafe).to.have.property('name');
@@ -38,15 +38,15 @@ describe("Testing Requests on Cafe Collection", () => {
         it('should return a 200 status code and the requested cafe when a request is made', async () => {
             //Act
             const res = await testServer
-                .get(`/cafes/${cafeData[0]._id}`);
+                .get(`/cafes/${testCafeData[0]._id}`);
 
             //Assert
             expect(res).to.have.status(200);
             expect(res.body).to.be.an('object');
-            expect(res.body).to.have.property('_id').that.equals(cafeData[0]._id);
-            expect(res.body).to.have.property('name').that.equals(cafeData[0].name);
-            expect(res.body).to.have.property('location').that.equals(cafeData[0].location);
-            expect(res.body).to.have.property('description').that.equals(cafeData[0].description);
+            expect(res.body).to.have.property('_id').that.equals(testCafeData[0]._id);
+            expect(res.body).to.have.property('name').that.equals(testCafeData[0].name);
+            expect(res.body).to.have.property('location').that.equals(testCafeData[0].location);
+            expect(res.body).to.have.property('description').that.equals(testCafeData[0].description);
         });
 
         it('should return a 404 status code when a request is made with an invalid id', async () => {
