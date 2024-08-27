@@ -12,6 +12,9 @@ export const fetchCafes = async () => {
     }
 
 export const fetchCafe = async (cafeId) => {
+    if (!cafeId) {
+        throw new Error("No cafeId provided");
+    }
     try {
         const res = await axios.get(`${API_URL}/cafes/${cafeId}`);
         return res.data;

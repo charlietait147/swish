@@ -2,13 +2,20 @@ import CafeReviewCard from "./CafeReviewCard";
 import CafeReviewForm from "./CafeReviewForm";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { notFound } from 'next/navigation'; // Import the notFound function
+
 
 import Cookies from "js-cookie";
 
 function CafeReviewList({ cafe, setReviewsUpdated }) {
   const [openReviewForm, setOpenReviewForm] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  if (cafe.reviews === undefined)  {
+    notFound();
+  }
   const reviewCount = cafe.reviews.length;
+  
 
   useEffect(() => {
     // const token = localStorage.getItem("token");

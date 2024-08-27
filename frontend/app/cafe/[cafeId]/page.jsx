@@ -11,6 +11,7 @@ import Image from 'next/image';
 import CafeReviewList from "@/components/cafe/CafeReviewList";
 import CafeMapContainer from "@/components/cafe/CafeMapContainer";
 
+
 export default function CafePage() {
   const [cafe, setCafe] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -31,10 +32,12 @@ export default function CafePage() {
     }
   };
 
+
   useEffect(() => {
     getCafe();
   }, [reviewsUpdated]);
 
+ 
   if (loading) {
     return (
       <>

@@ -6,6 +6,9 @@ module.exports = {
    ],
   theme: {
     extend: {
+      backgroundImage: {
+        'not-found': "url('/images/spilt-coffee-beans.jpg')",
+      },
       fontFamily: {
         body: ['Raleway, sans-serif'],
         header: ['Dancing Script, sans-serif'],
