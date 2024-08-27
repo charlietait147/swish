@@ -73,7 +73,7 @@ function NavBar() {
             </button>
             <h1 className="text-2xl font-bold pt-4">Swish .</h1>
             <div className="border border-t-gray-300 mt-4"></div>
-            <ul className="mt-6 space-y-7 text-center">
+            <ul className="mt-6 space-y-5 text-center">
               <Link
                 href="/"
                 className="text-white py-2 bg-orange-500 hover:bg-orange-400 shadow-lg flex items-center justify-center"
@@ -180,7 +180,7 @@ function NavBar() {
           <>
             <Link
               href="/login"
-              className="bg-black text-sm lg:text-base text-white py-2 px-4 rounded-2xl hover:bg-gray-800"
+              className="bg-white text-sm lg:text-base text-black py-2 px-4 rounded-3xl hover:bg-black hover:text-white cursor-pointer"
             >
               Sign In
             </Link>
@@ -189,12 +189,12 @@ function NavBar() {
           <>
             <Link
               href="/account"
-              className="text-white text-sm lg:text-base hover:underline hover:underline-offset-8 mr-4 "
+              className="text-white text-sm lg:text-base hover:underline hover:underline-offset-8 mr-5 "
             >
               My Account
             </Link>
             <li
-              className="bg-black text-sm lg:text-base text-white py-2 px-4 rounded-2xl hover:bg-gray-800"
+              className="bg-white text-sm lg:text-base text-black py-2 px-4 rounded-3xl hover:bg-black hover:text-white cursor-pointer"
               onClick={handleSignOut}
             >
               Sign Out

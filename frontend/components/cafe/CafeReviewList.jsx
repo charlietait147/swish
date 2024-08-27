@@ -85,7 +85,8 @@ function CafeReviewList({ cafe, setReviewsUpdated }) {
         </div>
       )}
       {/* </div> */}
-      <div className="flex flex-col gap-4 md:grid grid-cols-2 md:gap-16">
+      {/* <div className="flex flex-col gap-4 md:grid grid-cols-2 md:gap-16"> */}
+      <div className="columns-1 sm:columns-2 lg:columns-3 gap-4">
         {cafe.reviews.map((review) => (
           <CafeReviewCard key={review._id} review={review} />
         ))}

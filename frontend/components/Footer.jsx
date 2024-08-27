@@ -45,7 +45,7 @@ function Footer() {
             <>
               <ul className="flex flex-col text-center">
               <Link href="/account" className="text-white py-2">My Account</Link>
-              <li className="text-white py-2" onClick={handleSignOut}>
+              <li className="text-white py-2 cursor-pointer" onClick={handleSignOut}>
                 Sign Out
               </li>
               </ul>

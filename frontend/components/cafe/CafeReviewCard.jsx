@@ -4,7 +4,7 @@ import Image from "next/image";
 function CafeReviewCard({ review }) {
   return (
     <div>
-      <div className="bg-white border border-gray-300 py-4 px-4 flex flex-col rounded-lg shadow-md">
+      <div className="bg-white border border-gray-300 py-4 px-4 flex flex-col rounded-lg shadow-md h-fit mb-4  break-inside-avoid">
         <div className="flex flex-row justify-between items-center pb-1.5">
           <div className="flex flex-row ">
             <svg
@@ -27,17 +27,23 @@ function CafeReviewCard({ review }) {
         </div>
         {/* <p className="text-gray-500 text-sm">{review.date}</p>   */}
         <p className="text-gray-800 text-xs font-light">{review.description}</p>
-        {review.image ? (
-        <div className="flex flex-row items-center">
-          <Image
-            src={`${process.env.NEXT_API_URL}/uploads/${review.image}`}
-            width={150}
-            height={150}
-            alt="review photo"
-            className=" mt-3 border-2 border-gray-300"
-          />
+        <div
+          className={`flex ${
+            review.image ? "flex-row justify-between" : "flex-col"
+          } gap-5`}
+        >
+          {review.image && (
+            <div className="flex items-center">
+              <Image
+                src={`${process.env.NEXT_API_URL}/uploads/${review.image}`}
+                height={150}
+                width={150}
+                alt="review photo"
+                className="mt-3 border-2 border-gray-300"
+              />
+            </div>
+          )}
         </div>
-        ) : null}
       </div>
     </div>
   );
