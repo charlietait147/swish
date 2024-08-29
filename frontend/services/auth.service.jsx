@@ -1,7 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const API_URL = process.env.NEXT_API_URL;
+const API_URL = process.env.NEXT_API_URL || "http://localhost:4000";
 
 export const register = async (email, password) => {
   try {
