@@ -39,9 +39,9 @@ export const login = async (email, password) => {
     const data = await res.data;
 
     if (res.status === 201) {
-      // localStorage.setItem("token", data.token);
       Cookies.set("token", data.token, { expires: 1 }, { sameSite: "Strict" });
       console.log("User logged in successfully", data);
+      return data;
     } else {
       throw new Error(data.message || "Login failed");
     }
@@ -49,7 +49,7 @@ export const login = async (email, password) => {
     if (error.response && error.response.status === 400) {
       throw new Error(error.response.data)// Throw the specific error message
     } else {
-      throw new Error(error.message || "An error occurred during registration");
+      throw new Error(error.message || "An error occurred during login");
     }
   }
 };
