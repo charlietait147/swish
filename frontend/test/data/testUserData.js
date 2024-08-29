@@ -12,3 +12,5 @@ export const userWithInvalidEmail = {
     email: "testUser3",
     password: "12345678"
 };
+
+export const newPassword = "1234567";

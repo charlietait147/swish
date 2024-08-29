@@ -1,6 +1,6 @@
 import axios from "axios";
 import { register, login, updatePassword } from "../../services/auth.service.jsx";
-import { user, shortUserPassword, userWithInvalidEmail } from "../data/testUserData.js";
+import { user, shortUserPassword, userWithInvalidEmail, newPassword } from "../data/testUserData.js";
 
 jest.mock("axios");
 
@@ -151,5 +151,60 @@ describe("AuthServiceTests", () => {
                 // Act & Assert
                 await expect(login(user.email, user.password)).rejects.toThrow(expectedErrorMessage);
             });
+    });
+
+    describe("updatePassword service tests", () => {
+
+        it('12 - should actually make the PUT request to the /update-password endpoint with the right data', async () => {
+            // Arrange
+            axios.put.mockResolvedValueOnce({ data: { token: 'fakeToken' }, status: 200 });
+            
+            // Act
+            const response = await updatePassword(newPassword);
+            
+            // Assert
+            expect(axios.put).toHaveBeenCalledWith(`http://localhost:4000/user/update-password`, {
+              newPassword: newPassword, // Ensure you're using `newPassword` as expected in your function
+            }, {
+              headers: {
+                Authorization: expect.stringContaining('Bearer'), // Ensure the Authorization header is passed
+              },
+            });
+            expect(response).toEqual({ token: 'fakeToken' }); // Make sure the function returns the expected data
+          });
+    
+        it('13 - should throw an error if the request fails', async () => {
+            // Arrange
+            axios.put.mockRejectedValueOnce({ response: { data: 'fakeError', status: 400 } });
+            
+            // Act
+            const response = updatePassword(user.password);
+            
+            // Assert
+            await expect(response).rejects.toThrow('fakeError');
+        });
+    
+        it("14 - should have an unsuccessful request to the /update-password endpoint when there is no token provided", async () => {
+            // Arrange
+            const expectedMessage = "An error occurred during password update";
+            axios.put.mockRejectedValueOnce(new Error(expectedMessage));
+    
+            // Assert
+            await expect(updatePassword(user.password)).rejects.toThrow(expectedMessage);
+        });
+    
+        it("15 - should return an error when updating password with a short password", async () => {
+            // Arrange
+            const expectedErrorMessage = "Password must be at least 6 characters long and must contain at least one letter and one number"; 
+            axios.put.mockRejectedValueOnce({
+                response: {
+                    status: 400,
+                    data: expectedErrorMessage, // Simulate the error message returned by the server
+                },
+            });
+        
+            // Act & Assert
+            await expect(updatePassword(shortUserPassword.password)).rejects.toThrow(expectedErrorMessage);
+        });
     });
 });

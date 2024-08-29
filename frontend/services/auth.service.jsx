@@ -73,10 +73,13 @@ export const updatePassword = async (newPassword) => {
 
     if (res.status === 200) {
       console.log("Password updated successfully", data);
+      return data;
     } else {
       console.error("Password update failed", data);
+      throw new Error(data.message || "Password update failed");
     }
   } catch (error) {
     console.error("Password update failed", error);
+    throw new Error(error.response?.data || "An error occurred during password update");
   }
 };
