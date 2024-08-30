@@ -164,7 +164,7 @@ describe("AuthServiceTests", () => {
             
             // Assert
             expect(axios.put).toHaveBeenCalledWith(`http://localhost:4000/user/update-password`, {
-              newPassword: newPassword, // Ensure you're using `newPassword` as expected in your function
+              newPassword: newPassword, 
             }, {
               headers: {
                 Authorization: expect.stringContaining('Bearer'), // Ensure the Authorization header is passed

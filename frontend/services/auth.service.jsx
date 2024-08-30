@@ -56,7 +56,6 @@ export const login = async (email, password) => {
 
 export const updatePassword = async (newPassword) => {
   try {
-    // const token = localStorage.getItem("token");
     const token = Cookies.get("token");
 
     const res = await axios.put(
@@ -75,11 +74,9 @@ export const updatePassword = async (newPassword) => {
       console.log("Password updated successfully", data);
       return data;
     } else {
-      console.error("Password update failed", data);
       throw new Error(data.message || "Password update failed");
     }
   } catch (error) {
-    console.error("Password update failed", error);
     throw new Error(error.response?.data || "An error occurred during password update");
   }
 };
