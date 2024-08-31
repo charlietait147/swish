@@ -1,7 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const API_URL = process.env.NEXT_API_URL;
+const API_URL = process.env.NEXT_API_URL || "http://localhost:4000";
 
 
 export const addReview = async (cafeId, formData) => {
@@ -24,8 +24,14 @@ export const addReview = async (cafeId, formData) => {
         }
         );
         console.log("Review added successfully", res.data);
+        return res.data;
     } catch (error) {
-        console.error("Review addition failed", error);
+        if (error.response && error.response.status === 400) {
+            throw new Error(error.response?.data)// Throw the specific error message
+           }
+           else {
+             throw new Error(error.message || "An error occurred adding a review");
+           }
     }
     }
 
@@ -48,14 +54,23 @@ export const addReview = async (cafeId, formData) => {
             }
             );
             console.log("Review edited successfully", res.data);
+            return res.data;
         } catch (error) {
-            console.error("Review edit failed", error);
+            if (error.response && error.response.status === 400) {
+                throw new Error(error.response?.data)// Throw the specific error message
+               }
+               else {
+                 throw new Error(error.message || "An error occurred adding a review");
+               }
         }
         }
 
     export const deleteReview = async (reviewId) => {
         try {
-            // const token = localStorage.getItem("token");
+            if (!reviewId) {
+                throw new Error("No review ID provided.");
+            }
+            
             const token = Cookies.get("token");
         
             if (!token) {
@@ -71,7 +86,13 @@ export const addReview = async (cafeId, formData) => {
             }
             );
             console.log("Review deleted successfully", res.data);
+            return res.data;
         } catch (error) {
-            console.error("Review deletion failed", error);
+            if (error.response && error.response.status === 400) {
+                throw new Error(error.response?.data)// Throw the specific error message
+               }
+               else {
+                 throw new Error(error.message || "An error occurred adding a review");
+               }
         }
         }
