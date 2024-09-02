@@ -1,11 +1,10 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const API_URL = process.env.NEXT_API_URL;
+const API_URL = process.env.NEXT_API_URL || "http://localhost:4000";
 
 export const addCafe = async (cafeId) => {
   try {
-    // const token = localStorage.getItem("token");
     const token = Cookies.get("token");
 
     if (!token) {
@@ -22,14 +21,19 @@ export const addCafe = async (cafeId) => {
       }
     );
     console.log("Cafe added successfully", res.data);
+    return res.data;
   } catch (error) {
-    console.error("Cafe addition failed", error);
+    if (error.response && error.response.status === 400) {
+      throw new Error(error.response?.data)// Throw the specific error message
+     }
+     else {
+       throw new Error(error.message || "An error occurred adding a cafe");
+     }
   }
 };
 
 export const getCafes = async () => {
   try {
-    // const token = localStorage.getItem("token");
     const token = Cookies.get("token");
 
     if (!token) {
@@ -42,13 +46,20 @@ export const getCafes = async () => {
       },
     });
     console.log("Cafes fetched successfully", res.data);
+    return res.data;
   } catch (error) {
-    console.error("Cafes fetch failed", error);
+    if (error.response && error.response.status === 400) {
+      throw new Error(error.response?.data)// Throw the specific error message
+     }
+     else {
+       throw new Error(error.message || "An error occurred adding a cafe");
+     }
   }
 };
 
 export const isCafeSaved = async (cafeId) => {
   try {
+
     const token = Cookies.get("token");
 
     if (!token) {
@@ -63,7 +74,12 @@ export const isCafeSaved = async (cafeId) => {
     console.log("Cafe saved status fetched successfully", res.data);
     return res.data.isSaved;
   } catch (error) {
-    console.error("Cafe saved status fetch failed", error);
+    if (error.response && error.response.status === 400) {
+      throw new Error(error.response?.data)// Throw the specific error message
+     }
+     else {
+       throw new Error(error.message || "An error occurred adding a cafe");
+     }
   }
 }
 
@@ -83,7 +99,12 @@ export const fetchUserData = async () => {
     console.log("User data fetched successfully", res.data);
     return res.data;
   } catch (error) {
-    console.error("User data fetch failed", error);
+    if (error.response && error.response.status === 400) {
+      throw new Error(error.response?.data)// Throw the specific error message
+     }
+     else {
+       throw new Error(error.message || "An error occurred adding a cafe");
+     }
   }
 }
 
@@ -101,7 +122,13 @@ export const deleteSavedCafe = async (cafeId) => {
       },
     });
     console.log("Cafe deleted successfully", res.data);
+    return res.data;
   } catch (error) {
-    console.error("Cafe deletion failed", error);
+    if (error.response && error.response.status === 400) {
+      throw new Error(error.response?.data)// Throw the specific error message
+     }
+     else {
+       throw new Error(error.message || "An error occurred adding a cafe");
+     }
   }
 }

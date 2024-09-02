@@ -14,3 +14,10 @@ export const userWithInvalidEmail = {
 };
 
 export const newPassword = "1234567";
+
+export const testUserData = {
+    email: "testUser@gmail.com",
+    password: "12345678",
+    cafes: [],
+    reviews: []
+}

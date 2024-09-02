@@ -8,20 +8,20 @@ describe("AuthServiceTests", () => {
 
     describe("register service tests", () => {
        
-        it('1 - should actually make the POST request to the /register endpoint with the right data', async () => {
-            // Arrange
-            axios.post.mockResolvedValueOnce({ data: { token: 'fakeToken' }, status: 201 });
-            
-            // Act
-            const response = await register(user.email, user.password);
-            
-            // Assert
-            expect(axios.post).toHaveBeenCalledWith(`http://localhost:4000/user/register`, {
-              email: user.email,
-              password: user.password,
+            it('1 - should actually make the POST request to the /register endpoint with the right data', async () => {
+                // Arrange
+                axios.post.mockResolvedValueOnce({ data: { token: 'fakeToken' }, status: 201 });
+                
+                // Act
+                const response = await register(user.email, user.password);
+                
+                // Assert
+                expect(axios.post).toHaveBeenCalledWith(`http://localhost:4000/user/register`, {
+                email: user.email,
+                password: user.password,
+                });
+                expect(response).toEqual({ token: 'fakeToken' });
             });
-            expect(response).toEqual({ token: 'fakeToken' });
-          });
 
             it('2 - should throw an error if the request fails', async () => {
                 // Arrange
