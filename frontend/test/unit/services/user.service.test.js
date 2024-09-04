@@ -1,7 +1,7 @@
 import axios from "axios";
-import { addCafe, getCafes, isCafeSaved, fetchUserData, deleteSavedCafe } from "../../services/user.service.jsx";
-import { testCafeData } from "../data/testCafeData.js";
-import { testUserData } from "../data/testUserData.js";
+import { addCafe, getCafes, isCafeSaved, fetchUserData, deleteSavedCafe } from "../../../services/user.service.jsx";
+import { testCafeData } from "../../data/testCafeData.js";
+import { testUserData } from "../../data/testUserData.js";
 
 import Cookies from "js-cookie";    
 
@@ -22,7 +22,7 @@ describe("UserServiceTests", () => {
 
           // Assert
           expect(axios.post).toHaveBeenCalledWith(
-                `http://localhost:4000/user/add-cafe/${testCafeData[0]._id}`,
+                `http://localhost:3000/user/add-cafe/${testCafeData[0]._id}`,
                 {},
                 {
                     headers: {
@@ -66,7 +66,7 @@ describe("UserServiceTests", () => {
             const response = await getCafes();
 
             // Assert
-            expect(axios.get).toHaveBeenCalledWith(`http://localhost:4000/user/cafes`, {
+            expect(axios.get).toHaveBeenCalledWith(`http://localhost:3000/user/cafes`, {
                 headers: {
                     Authorization: `Bearer ${fakeToken}`,
                 },
@@ -97,7 +97,7 @@ describe("UserServiceTests", () => {
             const response = await isCafeSaved(testCafeData[0]._id);
     
             // Assert
-            expect(axios.get).toHaveBeenCalledWith(`http://localhost:4000/user/isCafeSaved/${testCafeData[0]._id}`, {
+            expect(axios.get).toHaveBeenCalledWith(`http://localhost:3000/user/isCafeSaved/${testCafeData[0]._id}`, {
                 headers: {
                     Authorization: `Bearer ${fakeToken}`,
                 },
@@ -137,7 +137,7 @@ describe("UserServiceTests", () => {
             const response = await isCafeSaved(testCafeData[0]._id);
 
             // Assert
-            expect(axios.get).toHaveBeenCalledWith(`http://localhost:4000/user/isCafeSaved/${testCafeData[0]._id}`, {
+            expect(axios.get).toHaveBeenCalledWith(`http://localhost:3000/user/isCafeSaved/${testCafeData[0]._id}`, {
             headers: {
                 Authorization: `Bearer ${fakeToken}`,
                 },
@@ -158,7 +158,7 @@ describe("UserServiceTests", () => {
             const response = await fetchUserData();
 
             // Assert
-            expect(axios.get).toHaveBeenCalledWith(`http://localhost:4000/user`, {
+            expect(axios.get).toHaveBeenCalledWith(`http://localhost:3000/user`, {
             headers: {
                 Authorization: `Bearer ${fakeToken}`,
                 },
@@ -191,7 +191,7 @@ describe("UserServiceTests", () => {
 
             // Assert
             expect(axios.delete).toHaveBeenCalledWith(
-                `http://localhost:4000/user/${testCafeData[0]._id}`,
+                `http://localhost:3000/user/${testCafeData[0]._id}`,
                 {
                 headers: {
                     Authorization: `Bearer ${fakeToken}`,

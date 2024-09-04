@@ -1,7 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const API_URL = process.env.NEXT_API_URL || "http://localhost:4000";
+const API_URL = process.env.NEXT_API_URL || "http://localhost:3000";
 
 export const register = async (email, password) => {
   try {
@@ -14,7 +14,7 @@ export const register = async (email, password) => {
 
     if (res.status === 201) {
       Cookies.set("token", data.token, { expires: 1 }, { sameSite: "Strict" });
-      console.log("User registered successfully", data);
+      console.log("User registered successfully");
       return data;
     } else {
       throw new Error(data.message || ("Registration failed"));
@@ -40,7 +40,7 @@ export const login = async (email, password) => {
 
     if (res.status === 201) {
       Cookies.set("token", data.token, { expires: 1 }, { sameSite: "Strict" });
-      console.log("User logged in successfully", data);
+      console.log("User logged in successfully");
       return data;
     } else {
       throw new Error(data.message || "Login failed");

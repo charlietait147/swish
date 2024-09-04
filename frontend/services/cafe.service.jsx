@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = process.env.NEXT_API_URL || "http://localhost:4000";;
+const API_URL = process.env.NEXT_API_URL || "http://localhost:3000";;
 
 export const fetchCafes = async () => {
     try {

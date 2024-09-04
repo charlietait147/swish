@@ -1,6 +1,6 @@
 import axios from "axios";
-import { register, login, updatePassword } from "../../services/auth.service.jsx";
-import { user, shortUserPassword, userWithInvalidEmail, newPassword } from "../data/testUserData.js";
+import { register, login, updatePassword } from "../../../services/auth.service.jsx";
+import { user, shortUserPassword, userWithInvalidEmail, newPassword } from "../../data/testUserData.js";
 
 jest.mock("axios");
 
@@ -16,7 +16,7 @@ describe("AuthServiceTests", () => {
                 const response = await register(user.email, user.password);
                 
                 // Assert
-                expect(axios.post).toHaveBeenCalledWith(`http://localhost:4000/user/register`, {
+                expect(axios.post).toHaveBeenCalledWith(`http://localhost:3000/user/register`, {
                 email: user.email,
                 password: user.password,
                 });
@@ -96,7 +96,7 @@ describe("AuthServiceTests", () => {
             const response = await login(user.email, user.password);
             
             // Assert
-            expect(axios.post).toHaveBeenCalledWith(`http://localhost:4000/user/login`, {
+            expect(axios.post).toHaveBeenCalledWith(`http://localhost:3000/user/login`, {
               email: user.email,
               password: user.password,
             });
@@ -163,7 +163,7 @@ describe("AuthServiceTests", () => {
             const response = await updatePassword(newPassword);
             
             // Assert
-            expect(axios.put).toHaveBeenCalledWith(`http://localhost:4000/user/update-password`, {
+            expect(axios.put).toHaveBeenCalledWith(`http://localhost:3000/user/update-password`, {
               newPassword: newPassword, 
             }, {
               headers: {

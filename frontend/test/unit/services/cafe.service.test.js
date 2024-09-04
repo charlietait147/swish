@@ -1,7 +1,7 @@
 import axios from "axios";
-import { fetchCafes, fetchCafe } from "../../services/cafe.service.jsx";
+import { fetchCafes, fetchCafe } from "../../../services/cafe.service.jsx";
 
-import { testCafeData } from "../data/testCafeData.js";
+import { testCafeData } from "../../data/testCafeData.js";
 
 jest.mock("axios");
 
@@ -18,7 +18,7 @@ describe("CafeServiceTests", () => {
             const response = await fetchCafes();
 
             //Asset
-            expect(axios.get).toHaveBeenCalledWith(`http://localhost:4000/cafes`);
+            expect(axios.get).toHaveBeenCalledWith(`http://localhost:3000/cafes`);
             expect(response).toEqual(testCafeData);
         });
 
@@ -45,7 +45,7 @@ describe("CafeServiceTests", () => {
                 const response = await fetchCafe(cafeId);
     
                 // Assert
-                expect(axios.get).toHaveBeenCalledWith(`http://localhost:4000/cafes/${cafeId}`);
+                expect(axios.get).toHaveBeenCalledWith(`http://localhost:3000/cafes/${cafeId}`);
                 expect(response).toEqual(testCafeData[0]);
             });
     

@@ -1,7 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const API_URL = process.env.NEXT_API_URL || "http://localhost:4000";
+const API_URL = process.env.NEXT_API_URL || "http://localhost:3000";
 
 
 export const addReview = async (cafeId, formData) => {
@@ -70,7 +70,7 @@ export const addReview = async (cafeId, formData) => {
             if (!reviewId) {
                 throw new Error("No review ID provided.");
             }
-            
+
             const token = Cookies.get("token");
         
             if (!token) {

@@ -1,6 +1,6 @@
 import axios from "axios";
-import { addReview, deleteReview, editReview } from "../../services/review.service.jsx";
-import { testReviewData, filteredReviewData } from "../data/testReviewData.js";
+import { addReview, deleteReview, editReview } from "../../../services/review.service.jsx";
+import { testReviewData, filteredReviewData } from "../../data/testReviewData.js";
 
 import Cookies from "js-cookie";
 
@@ -20,7 +20,7 @@ describe("ReviewServiceTests", () => {
       
           // Assert
           expect(axios.post).toHaveBeenCalledWith(
-            `http://localhost:4000/review/${testReviewData.cafe}/add-review`, 
+            `http://localhost:3000/review/${testReviewData.cafe}/add-review`, 
             filteredReviewData,
             {
               headers: {
@@ -65,7 +65,7 @@ describe("ReviewServiceTests", () => {
         
             // Assert
             expect(axios.put).toHaveBeenCalledWith(
-                `http://localhost:4000/review/edit-review/${testReviewData.id}`, 
+                `http://localhost:3000/review/edit-review/${testReviewData.id}`, 
                 { name: filteredReviewData.name, description: filteredReviewData.description },
                 {
                 headers: {
@@ -100,7 +100,7 @@ describe("ReviewServiceTests", () => {
 
             // Assert
             expect(axios.delete).toHaveBeenCalledWith(
-                `http://localhost:4000/review/delete-review/${testReviewData.id}`,
+                `http://localhost:3000/review/delete-review/${testReviewData.id}`,
                 {
                 headers: {
                     Authorization: `Bearer ${fakeToken}`,
