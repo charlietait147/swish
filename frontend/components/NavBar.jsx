@@ -4,7 +4,6 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-
 function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -16,7 +15,6 @@ function NavBar() {
   };
 
   useEffect(() => {
-    // const token = localStorage.getItem("token");
     const token = Cookies.get("token");
     if (token) {
       setIsLoggedIn(true);
@@ -24,7 +22,6 @@ function NavBar() {
   }, []);
 
   const handleSignOut = () => {
-    // localStorage.remove("token");
     Cookies.remove("token");
     setIsLoggedIn(false);
     router.push("/login");
@@ -32,7 +29,7 @@ function NavBar() {
 
   return (
     <>
-      <div className="burger-menu mr-3 md:hidden" onClick={toggleMenu}>
+      <div className="burger-menu mr-3 md:hidden" role="button" aria-label="burger menu" onClick={toggleMenu}>
         <div className="h-5 w-5 flex flex-col justify-between cursor-pointer">
           <div className="h-1 w-full bg-white"></div>
           <div className="h-1 w-full bg-white"></div>
@@ -52,6 +49,7 @@ function NavBar() {
             <button
               type="button"
               aria-controls="drawer-navigation"
+              aria-label="close menu"
               className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-5 right-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white"
               onClick={toggleMenu}
             >
@@ -74,7 +72,7 @@ function NavBar() {
             </button>
             <h1 className="text-2xl font-bold pt-4">Swish .</h1>
             <div className="border border-t-gray-300 mt-4"></div>
-            <ul className="mt-6 space-y-5 text-center">
+            <ul className="mt-6 space-y-5 text-center" role="menu" >
               <Link
                 href="/"
                 className="text-white py-2 bg-orange-500 hover:bg-orange-400 shadow-lg flex items-center justify-center"
