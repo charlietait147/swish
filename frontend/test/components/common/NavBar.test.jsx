@@ -54,6 +54,16 @@ describe("NavBar Component", () => {
     expect(signOutButton).toBeInTheDocument();
   });
 
+  it("should render a My Account link when the user is logged in", () => {
+    Cookies.get.mockReturnValue("839429f778gfd8gf8387gd");
+
+    render(<NavBar />);
+
+    const myAccountLink = screen.getByText(/My Account/i);
+
+    expect(myAccountLink).toBeInTheDocument();
+  });
+
   it("should toggle the menu when the burger icon is clicked", async () => {
     // Render the NavBar component
     render(<NavBar />);

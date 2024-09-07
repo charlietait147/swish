@@ -9,7 +9,6 @@ function Footer() {
   const router = useRouter();
 
   useEffect(() => {
-    // const token = localStorage.getItem("token");
     const token = Cookies.get("token");
     if (token) {
       setIsLoggedIn(true);
@@ -17,7 +16,6 @@ function Footer() {
   }, []);
 
   const handleSignOut = () => {
-    // localStorage.remove("token");
     Cookies.remove("token");
     setIsLoggedIn(false);
     router.push("/login");
