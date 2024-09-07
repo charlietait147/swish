@@ -9,3 +9,11 @@ import '@testing-library/jest-dom';
 afterEach(() => {
   cleanup();
 });
+
+// Mock the next/image component to render an img element with a fixed width and height globally
+jest.mock('next/image', () => ({
+  __esModule: true,
+  default: (props) => {
+    return <img {...props} alt={props.alt || 'test-image'} width={500} height={500} />;
+  },
+}));
