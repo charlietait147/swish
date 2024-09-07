@@ -2,7 +2,7 @@
 import Cookies from "js-cookie";
 
 import { useState, useEffect } from "react";
-import { register } from "@/services/auth.service";
+import { register } from "../../services/auth.service";
 import { useRouter } from "next/navigation";
 
 function RegisterForm() {
@@ -37,10 +37,13 @@ function RegisterForm() {
       const response = await register(email, password);
       console.log(response);
       setSuccess(true);
+
       setTimeout(() => {
         router.push("/"); // Redirect to the homepage after a delay
       }, 2000); // 2 seconds delay
+    
     } catch (error) {
+      console.log("Caught error:", error);
       setError(error.message);
       setSuccess(false);
     }

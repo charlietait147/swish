@@ -30,6 +30,7 @@ describe("NavBar Component", () => {
           // Otherwise, log the error
           console.error(message);
         });
+        jest.clearAllMocks();
       });
 
       afterEach(() => {

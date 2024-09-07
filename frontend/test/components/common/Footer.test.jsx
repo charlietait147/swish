@@ -30,6 +30,7 @@ jest.mock("js-cookie", () => ({
           // Otherwise, log the error
           console.error(message);
         });
+        jest.clearAllMocks()
       });
 
       afterEach(() => {
