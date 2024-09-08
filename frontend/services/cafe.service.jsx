@@ -5,6 +5,7 @@ const API_URL = process.env.NEXT_API_URL || "http://localhost:3000";;
 export const fetchCafes = async () => {
     try {
         const res = await axios.get(`${API_URL}/cafes`);
+        console.log("Cafes fetched successfully", res.data);
         return res.data;
     } catch (error) {
         if (error.response && error.response.status === 400) {

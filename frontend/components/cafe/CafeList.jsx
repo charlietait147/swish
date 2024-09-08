@@ -15,8 +15,8 @@ function CafeList({ cafes }) {
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-5 px-4 pb-4 xs:grid-cols-2 md:px-24 lg:px-4 flex-grow">
-          {sortedCafes.map((cafe) => (
-            <CafeCard key={cafe._id} cafe={cafe} />
+          {sortedCafes.map((cafe, index) => (
+            <CafeCard key={cafe._id || index} cafe={cafe} />
           ))}
         </div>
       )}

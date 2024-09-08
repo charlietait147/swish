@@ -114,8 +114,8 @@ function CafeFilters({
           </div>
           <div className="flex flex-col mt-3">
             <div className="flex flex-row items-center gap-2">
-              <label className="text-sm font-semibold">Amenities</label>
-              <div onClick={toggleDropdown} className="cursor-pointer lg:hidden">
+              <label className="text-sm font-semibold" htmlFor="amenities">Amenities</label>
+              <div onClick={toggleDropdown} className="cursor-pointer lg:hidden" data-testid= "amenities-dropdown">
                 <svg
                   className={`w-4 h-4 transform ${
                     isOpen ? "rotate-180" : "rotate-0"

@@ -1,11 +1,11 @@
 "use client";
 
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
-import CafeFilters from "@/components/cafe/CafeFilters";
-import CafeList from "@/components/cafe/CafeList";
-import DiscoverCafeHero from "@/components/cafe/DiscoverCafeHero";
-import { fetchCafes } from "@/services/cafe.service";
+import Footer from "../../components/Footer.jsx";
+import Header from "../../components/Header.jsx";
+import CafeFilters from "../../components/cafe/CafeFilters.jsx";
+import CafeList from "../../components/cafe/CafeList.jsx";
+import DiscoverCafeHero from "../../components/cafe/DiscoverCafeHero.jsx";
+import { fetchCafes } from "../../services/cafe.service.jsx";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Logo from "../../public/logo/swish-logo.png"; // Image
@@ -68,7 +68,7 @@ export default function DiscoverPage() {
           <div className="flex justify-center items-center py-6 lg:pl-72 lg:py-24">
             <Image
               src={Logo}
-              alt="Swish Logo"
+              alt="Swish Logo Spinning"
               width={125}
               height={125}
               className="spinner"

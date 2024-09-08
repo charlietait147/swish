@@ -14,6 +14,6 @@ afterEach(() => {
 jest.mock('next/image', () => ({
   __esModule: true,
   default: (props) => {
-    return <img {...props} alt={props.alt || 'test-image'} width={500} height={500} />;
+    return <img {...props} alt={props.alt || 'test-image'} width={500} height={500} priority="true"/>;
   },
 }));
