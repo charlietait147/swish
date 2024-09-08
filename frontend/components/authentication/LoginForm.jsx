@@ -2,7 +2,7 @@
 import Cookies from "js-cookie";
 
 import { useState, useEffect } from "react";
-import { login } from "@/services/auth.service";
+import { login } from "../../services/auth.service.jsx";
 import { useRouter } from "next/navigation";
 
 function LoginForm() {

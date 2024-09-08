@@ -43,7 +43,6 @@ function RegisterForm() {
       }, 2000); // 2 seconds delay
     
     } catch (error) {
-      console.log("Caught error:", error);
       setError(error.message);
       setSuccess(false);
     }
