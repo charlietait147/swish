@@ -23,7 +23,7 @@ export const testCafeData = [
 
 export const mockCafeData = [
     {
-        id: 1,
+        _id: "1",
         name: "Cafe 1",
         location: "Location 1",
         description: "Description 1",
@@ -34,7 +34,7 @@ export const mockCafeData = [
         reviews: [],
     },
     {
-        id: 2,
+        _id: "2",
         name: "Cafe 2",
         location: "Location 2",
         description: "Description 2",

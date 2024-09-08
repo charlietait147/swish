@@ -9,6 +9,7 @@ describe("CafeList Component", () => {
 
         expect(screen.getByText(/Cafe 1/i)).toBeInTheDocument();
         expect(screen.getByText(/Cafe 2/i)).toBeInTheDocument();
+        expect()
     });
 
     it("should render the cafes in alphabetical order", () => {

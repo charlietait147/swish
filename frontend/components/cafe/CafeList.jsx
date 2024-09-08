@@ -1,6 +1,8 @@
 import CafeCard from "./CafeCard";
+import PropTypes from "prop-types";
 
 function CafeList({ cafes }) {
+
   const sortedCafes = cafes.sort((a, b) => a.name.localeCompare(b.name));
   return (
     <>
@@ -15,8 +17,8 @@ function CafeList({ cafes }) {
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-5 px-4 pb-4 xs:grid-cols-2 md:px-24 lg:px-4 flex-grow">
-          {sortedCafes.map((cafe, index) => (
-            <CafeCard key={cafe._id || index} cafe={cafe} />
+          {sortedCafes.map((cafe) => (
+            <CafeCard key={cafe._id} cafeId={cafe._id} image={cafe.image} name={cafe.name} location={cafe.location} />
           ))}
         </div>
       )}
@@ -24,4 +26,17 @@ function CafeList({ cafes }) {
   );
 }
 
+CafeList.propTypes = {
+  cafes: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      location: PropTypes.string.isRequired,
+      image: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+}
+
 export default CafeList;
+
+

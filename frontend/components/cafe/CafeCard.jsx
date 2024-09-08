@@ -1,18 +1,21 @@
 import Link from "next/link";
-function CafeCard({ cafe }) {
+import PropTypes from "prop-types";
+
+function CafeCard({ cafeId, name, location, image }) {
   return (
-    <Link href= {`cafe/${cafe._id}`}>
+    <Link href= {`cafe/${cafeId}`} data-testid="cafe-link">
       <div
         className="relative bg-cover bg-center w-full shadow-lg overflow-hidden h-48 border-2 border-orange-400 rounded-lg cursor-pointer transition duration-300 ease-in-out transform hover:scale-105"
+        data-testid="cafe-card"
         style={{
-          backgroundImage: `url(${process.env.NEXT_API_URL}/public/images/${cafe.image})`,
+          backgroundImage: `url(${process.env.NEXT_API_URL}/public/images/${image})`,
         }}
       >
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>{" "}
         {/* Overlay */}
         <div className="relative z-10 flex flex-col justify-center items-center h-full p-4">
           <h2 className="text-white text-lg uppercase font-semibold px-4 text-center">
-            {cafe.name}
+            {name}
           </h2>
         </div>
         <div className="absolute left-0 bottom-0 bg-orange-500 text-white p-2 rounded-tr-lg flex flex-row">
@@ -35,11 +38,18 @@ function CafeCard({ cafe }) {
               d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
             />
           </svg>
-          <p className="text-sm pl-0.5">{cafe.location}</p>
+          <p className="text-sm pl-0.5">{location}</p>
         </div>
       </div>
     </Link>
   );
 }
+
+CafeCard.propTypes = {
+  cafeId: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  location: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+};
 
 export default CafeCard;
