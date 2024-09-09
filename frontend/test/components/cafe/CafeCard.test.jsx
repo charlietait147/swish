@@ -2,25 +2,27 @@ import { render, screen } from "@testing-library/react";
 import CafeCard from "../../../components/cafe/CafeCard.jsx";
 
 describe("CafeCard Component", () => {
-  it("renders the correct href with cafeId", () => {
-    const mockCafeId = "12345";
+  const mockCafeData = {
+    cafeId: "12345",
+    name: "Cafe 1",
+    location: "Cafe Location",
+    image: "cafe1.jpg",
+  };
 
-    render(<CafeCard cafeId={mockCafeId} />);
+  it("renders the correct href with cafeId", () => {
+    render(<CafeCard {...mockCafeData} />);
 
     const cafeLink = screen.getByTestId("cafe-link");
 
     // Assert that the anchor tag's href contains the correct cafeId
-    expect(cafeLink).toHaveAttribute("href", `cafe/${mockCafeId}`);
+    expect(cafeLink).toHaveAttribute("href", `cafe/${mockCafeData.cafeId}`);
   });
 
   it("renders the correct name and location", () => {
-    const mockName = "Cafe 1";
-    const mockLocation = "Cafe Location";
+    render(<CafeCard {...mockCafeData} />);
 
-    render(<CafeCard name={mockName} location={mockLocation} />);
-
-    const name = screen.getByText(mockName);
-    const location = screen.getByText(mockLocation);
+    const name = screen.getByText(mockCafeData.name);
+    const location = screen.getByText(mockCafeData.location);
 
     // Assert that the name and location are rendered
     expect(name).toBeInTheDocument();
@@ -28,17 +30,15 @@ describe("CafeCard Component", () => {
   });
 
   it("renders the correct background image", () => {
-    const mockImage = "cafe1.jpg";
-
     process.env.NEXT_API_URL = "https://example.com";
 
-    render(<CafeCard image={mockImage} />);
+    render(<CafeCard {...mockCafeData} />);
 
     const cafeCard = screen.getByTestId("cafe-card");
 
     // Assert that the background image is set correctly
     expect(cafeCard).toHaveStyle(
-      `background-image: url(https://example.com/public/images/${mockImage})`
+      `background-image: url(https://example.com/public/images/${mockCafeData.image})`
     );
   });
 });

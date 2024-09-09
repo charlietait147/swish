@@ -1,7 +1,9 @@
 import Link from "next/link";
 import PropTypes from "prop-types";
 
+
 function CafeCard({ cafeId, name, location, image }) {
+  
   return (
     <Link href= {`cafe/${cafeId}`} data-testid="cafe-link">
       <div
