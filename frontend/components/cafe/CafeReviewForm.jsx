@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { addReview } from "../../services/review.service.jsx";
+import PropTypes from "prop-types";
 
 function CafeReviewForm({ onClose, cafeId, cafeName, setReviewsUpdated }) {
   const [name, setName] = useState("");
@@ -186,5 +187,12 @@ function CafeReviewForm({ onClose, cafeId, cafeName, setReviewsUpdated }) {
     </div>
   );
 }
+
+CafeReviewForm.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  cafeId: PropTypes.string.isRequired,
+  cafeName: PropTypes.string.isRequired,
+  setReviewsUpdated: PropTypes.func.isRequired,
+};
 
 export default CafeReviewForm;

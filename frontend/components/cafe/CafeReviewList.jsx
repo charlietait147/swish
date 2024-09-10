@@ -2,8 +2,7 @@ import CafeReviewCard from "./CafeReviewCard";
 import CafeReviewForm from "./CafeReviewForm";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { notFound } from 'next/navigation'; // Import the notFound function
-
+import { notFound } from "next/navigation"; // Import the notFound function
 
 import Cookies from "js-cookie";
 
@@ -11,11 +10,11 @@ function CafeReviewList({ cafe, setReviewsUpdated }) {
   const [openReviewForm, setOpenReviewForm] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  if (cafe.reviews === undefined)  {
-    notFound();
+  if (!cafe || cafe.reviews === undefined) {
+    return null;
   }
+
   const reviewCount = cafe.reviews.length;
-  
 
   useEffect(() => {
     // const token = localStorage.getItem("token");
@@ -87,9 +86,10 @@ function CafeReviewList({ cafe, setReviewsUpdated }) {
       {/* </div> */}
       {/* <div className="flex flex-col gap-4 md:grid grid-cols-2 md:gap-16"> */}
       <div className="columns-1 sm:columns-2 lg:columns-3 gap-4">
-        {cafe.reviews.map((review) => (
-          <CafeReviewCard key={review._id} review={review} />
-        ))}
+        {cafe && cafe.reviews &&
+          cafe.reviews.map((review) => (
+            <CafeReviewCard key={review._id} review={review} />
+          ))}
       </div>
       {openReviewForm && (
         <CafeReviewForm

@@ -109,12 +109,16 @@ describe("DiscoverPage Component", () => {
             expect(fetchCafes).toHaveBeenCalledTimes(1);
         });
     
-        const toggleDropdown = screen.getByTestId("amenities-dropdown");
+        // const toggleDropdown = screen.getByTestId("amenities-dropdown");
+        const toggleDropdown = screen.getByRole("button", { name: /amenities-dropdown/i });
         await userEvent.click(toggleDropdown);
 
-        const amenityButton1 = screen.getByRole("button", { name: /Onsite Parking/i });
-        const amenityButton2 = screen.getByRole("button", { name: /Hot Food Available/i });
-        await userEvent.click(amenityButton1);
+        const amenityButton1 = screen.getAllByRole("button", { name: /Onsite Parking/i });
+        const firstAmenityButton1 = amenityButton1[0];
+        const amenityButton2 = screen.getAllByRole("button", { name: /Hot Food Available/i });
+        const firstAmenityButton2 = amenityButton2[0];
+
+        await userEvent.click(firstAmenityButton1);
 
         const applyButton = screen.getByRole("button", { name: /Apply Filters/i });
         await userEvent.click(applyButton);
@@ -140,12 +144,16 @@ describe("DiscoverPage Component", () => {
         const locationInput = screen.getByLabelText(/Location/i);
         await userEvent.type(locationInput, "Location 2");
 
-        const toggleDropdown = screen.getByTestId("amenities-dropdown");
+        // const toggleDropdown = screen.getByTestId("amenities-dropdown");
+        const toggleDropdown = screen.getByRole("button", { name: /amenities-dropdown/i });
         await userEvent.click(toggleDropdown);
 
-        const amenityButton1 = screen.getByRole("button", { name: /Onsite Parking/i });
-        const amenityButton2 = screen.getByRole("button", { name: /Hot Food Available/i });
-        await userEvent.click(amenityButton1);
+        const amenityButton1 = screen.getAllByRole("button", { name: /Onsite Parking/i });
+        const firstAmenityButton1 = amenityButton1[0];
+        const amenityButton2 = screen.getAllByRole("button", { name: /Hot Food Available/i });
+        const firstAmenityButton2 = amenityButton2[0];
+
+        await userEvent.click(firstAmenityButton1);
 
         const resetButton = screen.getByRole("button", { name: /Clear Filters/i });
         await userEvent.click(resetButton);
@@ -171,12 +179,16 @@ describe("DiscoverPage Component", () => {
         const locationInput = screen.getByLabelText(/Location/i);
         await userEvent.type(locationInput, "Location 1");
 
-        const toggleDropdown = screen.getByTestId("amenities-dropdown");
+        // const toggleDropdown = screen.getByTestId("amenities-dropdown");
+        const toggleDropdown = screen.getByRole("button", { name: /amenities-dropdown/i });
         await userEvent.click(toggleDropdown);
 
-        const amenityButton1 = screen.getByRole("button", { name: /Onsite Parking/i });
-        const amenityButton2 = screen.getByRole("button", { name: /Hot Food Available/i });
-        await userEvent.click(amenityButton1);
+        const amenityButton1 = screen.getAllByRole("button", { name: /Onsite Parking/i });
+        const firstAmenityButton1 = amenityButton1[0];
+        const amenityButton2 = screen.getAllByRole("button", { name: /Hot Food Available/i });
+        const firstAmenityButton2 = amenityButton2[0];
+
+        await userEvent.click(firstAmenityButton1);
 
         const applyButton = screen.getByRole("button", { name: /Apply Filters/i });
         await userEvent.click(applyButton);

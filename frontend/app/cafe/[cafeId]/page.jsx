@@ -1,16 +1,16 @@
 "use client";
 
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
-import { fetchCafe } from "@/services/cafe.service";
+import Footer from "../../../components/Footer.jsx";
+import Header from "../../../components/Header.jsx";
+import { fetchCafe } from "../../../services/cafe.service.jsx";
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
-import CafeDetailsSection from "@/components/cafe/CafeDetailsSection";
-import Logo from '../../../public/logo/swish-logo.png';
-import Image from 'next/image';
-import CafeReviewList from "@/components/cafe/CafeReviewList";
-import CafeMapContainer from "@/components/cafe/CafeMapContainer";
-
+import CafeDetailsSection from "../../../components/cafe/CafeDetailsSection.jsx";
+import Logo from "../../../public/logo/swish-logo.png";
+import Image from "next/image";
+import CafeReviewList from "../../../components/cafe/CafeReviewList.jsx";
+import CafeMapContainer from "../../../components/cafe/CafeMapContainer.jsx";
+import { notFound } from "next/navigation";
 
 export default function CafePage() {
   const [cafe, setCafe] = useState(null);
@@ -32,31 +32,40 @@ export default function CafePage() {
     }
   };
 
-
   useEffect(() => {
     getCafe();
   }, [reviewsUpdated]);
 
- 
-  if (loading) {
-    return (
-      <>
-        <Header />
-        <div className="flex justify-center items-center h-screen">
-          <Image src={Logo} alt="Swish Logo" width = {125} height = {125} className="spinner" priority={true}/>
-        </div>
-        <Footer />
-      </>
-    );
+  if (error) {
+    notFound(); // This will send the user to the 404 page
   }
 
   return (
     <>
-      <Header />
-      <CafeDetailsSection cafe={cafe} />
-      <CafeMapContainer cafe = {cafe} />
-      <CafeReviewList cafe = {cafe} setReviewsUpdated = {setReviewsUpdated} />
-      <Footer />
+      {loading ? (
+        <>
+          <Header />
+          <div className="flex justify-center items-center h-screen">
+            <Image
+              src={Logo}
+              alt="Swish Logo Spinning"
+              width={125}
+              height={125}
+              className="spinner"
+              priority={true}
+            />
+          </div>
+          <Footer />
+        </>
+      ) : (
+        <>
+          <Header />
+          <CafeDetailsSection cafe={cafe} />
+          <CafeMapContainer cafe={cafe} />
+          <CafeReviewList cafe={cafe} setReviewsUpdated={setReviewsUpdated} />
+          <Footer />
+        </>
+      )}
     </>
   );
 }

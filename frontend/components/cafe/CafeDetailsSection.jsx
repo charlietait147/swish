@@ -2,7 +2,8 @@ import { useEffect, useState, useRef } from "react";
 import Cookies from "js-cookie";
 import { addCafe, isCafeSaved } from "../../services/user.service";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
+import PropTypes from "prop-types";
+
 function CafeDetailsSection({ cafe }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
@@ -70,7 +71,7 @@ function CafeDetailsSection({ cafe }) {
         </div>
       )}
       {cafe && (
-        <div className="flex flex-col lg:flex-row gap-14">
+        <div className="flex flex-col lg:flex-row gap-5 md:gap-8 lg:gap-14">
           <div className="relative w-full lg:w-1/2 flex-shrink-0">
             <img
               src={`${process.env.NEXT_API_URL}/public/images/${cafe.image}`}
@@ -163,7 +164,7 @@ function CafeDetailsSection({ cafe }) {
                 ))}
             </div>
             <div className="rounded-md bg-gray-200 shadow-md px-4 py-2 lg:hidden">
-              {cafe.description && (
+              {cafe && cafe.description && (
                 <p className="text-sm font-semibold text-gray-600 md:text-base">
                   <span className="font-extrabold">
                     {cafe.description.split(" ")[0]}
@@ -202,7 +203,7 @@ function CafeDetailsSection({ cafe }) {
       )}
       {/* Description on lg+ screens*/}
         <div className="hidden lg:inline-block lg:rounded-md mt-6 bg-gray-200 shadow-md px-4 py-2 ">
-          {cafe.description && (
+          {cafe && cafe.description && (
             <p className="text-sm font-semibold text-gray-600 md:text-base md:leading-7">
               <span className="font-extrabold">
                 {cafe.description.split(" ")[0]}
@@ -214,5 +215,9 @@ function CafeDetailsSection({ cafe }) {
     </div>
   );
 }
+
+CafeDetailsSection.propTypes = {
+  cafe: PropTypes.object,
+};
 
 export default CafeDetailsSection;

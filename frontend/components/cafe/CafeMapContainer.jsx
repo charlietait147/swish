@@ -2,13 +2,14 @@ import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import { useMemo } from "react";
 
 function CafeMapContainer({ cafe }) {
+ 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
   });
   const center = useMemo(
     () => ({
-      lat: cafe.lat,
-      lng: cafe.lng,
+      lat: cafe && cafe.lat,
+      lng: cafe && cafe.lng,
     }),
     []
   );
@@ -27,8 +28,8 @@ function CafeMapContainer({ cafe }) {
             <Marker
               key="marker_1"
               position={{
-                lat: cafe.lat,
-                lng: cafe.lng,
+                lat: cafe && cafe.lat,
+                lng: cafe && cafe.lng,
               }}
             />
           </GoogleMap>
