@@ -15,6 +15,7 @@ function AccountSavedCafeCard({ cafe, setCafesUpdated }) {
 
     try {
       await deleteSavedCafe(cafe._id);
+      localStorage.removeItem(`savedCafe_${cafe._id}`);
       setCafesUpdated((prev) => !prev);
     } catch (error) {
       console.error("Error deleting saved cafe", error);

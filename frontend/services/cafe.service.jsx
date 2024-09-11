@@ -22,7 +22,6 @@ export const fetchCafe = async (cafeId) => {
     }
     try {
         const res = await axios.get(`${API_URL}/cafes/${cafeId}`);
-        console.log(res.data);
         return res.data;
     } catch (error) {
         if (error.response && error.response.status === 400) {

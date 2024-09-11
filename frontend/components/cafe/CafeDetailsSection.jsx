@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { addCafe, isCafeSaved } from "../../services/user.service";
 import { useRouter } from "next/navigation";
@@ -19,26 +19,38 @@ function CafeDetailsSection({ cafe }) {
   }, []);
 
   useEffect(() => {
-    const checkSavedStatus = async () => {
-      if (isLoggedIn && cafe) {
-        try {
-          const savedStatus = await isCafeSaved(cafe._id);
-          setIsSaved(savedStatus);
-        } catch (error) {
-          console.error("Error checking saved status", error);
-        }
+    if (cafe && cafe._id) {
+      const cachedStatus = localStorage.getItem(`savedCafe_${cafe._id}`);
+      if (cachedStatus) {
+        setIsSaved(JSON.parse(cachedStatus));
+      } else {
+        const checkSavedStatus = async () => {
+          if (isLoggedIn && cafe) {
+            try {
+              const savedStatus = await isCafeSaved(cafe._id);
+              setIsSaved(savedStatus);
+              localStorage.setItem(
+                `savedCafe_${cafe._id}`,
+                JSON.stringify(savedStatus)
+              );
+            } catch (error) {
+              console.error("Error checking saved status", error);
+            }
+          }
+        };
+        checkSavedStatus();
       }
-    };
-    checkSavedStatus();
+    }
   }, [isLoggedIn, cafe]);
 
   const handleSaveCafe = async () => {
     if (isSaved) {
-      router.push("/");
+      router.push("/account");
     } else {
       try {
         await addCafe(cafe._id);
         setIsSaved(true);
+        localStorage.setItem(`savedCafe_${cafe._id}`, JSON.stringify(true)); // Update localStorage
         setShowModal(true);
         setTimeout(() => {
           setShowModal(false);
@@ -202,16 +214,16 @@ function CafeDetailsSection({ cafe }) {
         </div>
       )}
       {/* Description on lg+ screens*/}
-        <div className="hidden lg:inline-block lg:rounded-md mt-6 bg-gray-200 shadow-md px-4 py-2 ">
-          {cafe && cafe.description && (
-            <p className="text-sm font-semibold text-gray-600 md:text-base md:leading-7">
-              <span className="font-extrabold">
-                {cafe.description.split(" ")[0]}
-              </span>
-              {` ${cafe.description.split(" ").slice(1).join(" ")}`}
-            </p>
-          )}
-        </div>
+      <div className="hidden lg:inline-block lg:rounded-md mt-6 bg-gray-200 shadow-md px-4 py-2 ">
+        {cafe && cafe.description && (
+          <p className="text-sm font-semibold text-gray-600 md:text-base md:leading-7">
+            <span className="font-extrabold">
+              {cafe.description.split(" ")[0]}
+            </span>
+            {` ${cafe.description.split(" ").slice(1).join(" ")}`}
+          </p>
+        )}
+      </div>
     </div>
   );
 }
