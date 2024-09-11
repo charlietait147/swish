@@ -2,7 +2,6 @@ import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import { useMemo } from "react";
 
 function CafeMapContainer({ cafe }) {
- 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
   });
