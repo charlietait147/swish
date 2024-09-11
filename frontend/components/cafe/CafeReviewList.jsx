@@ -2,7 +2,6 @@ import CafeReviewCard from "./CafeReviewCard";
 import CafeReviewForm from "./CafeReviewForm";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { notFound } from "next/navigation"; // Import the notFound function
 
 import Cookies from "js-cookie";
 
@@ -10,14 +9,9 @@ function CafeReviewList({ cafe, setReviewsUpdated }) {
   const [openReviewForm, setOpenReviewForm] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  if (!cafe || cafe.reviews === undefined) {
-    return null;
-  }
-
-  const reviewCount = cafe.reviews.length;
+  const reviewCount = cafe?.reviews?.length || 0;
 
   useEffect(() => {
-    // const token = localStorage.getItem("token");
     const token = Cookies.get("token");
     if (token) {
       setIsLoggedIn(true);
@@ -33,7 +27,9 @@ function CafeReviewList({ cafe, setReviewsUpdated }) {
       <h3 className="text-xl font-semibold">Reviews</h3>
       {/* <div className="flex flex-row justify-between pb-3 sm:flex-col"> */}
       <p className="text-sm font-semibold text-gray-400 pb-3">
-        {reviewCount} {reviewCount === 1 ? "Review" : "Reviews"}
+        {reviewCount === 0
+          ? "No reviews yet"
+          : `${reviewCount} ${reviewCount === 1 ? "Review" : "Reviews"}`}
       </p>
       {!isLoggedIn ? (
         <>
@@ -86,7 +82,8 @@ function CafeReviewList({ cafe, setReviewsUpdated }) {
       {/* </div> */}
       {/* <div className="flex flex-col gap-4 md:grid grid-cols-2 md:gap-16"> */}
       <div className="columns-1 sm:columns-2 lg:columns-3 gap-4">
-        {cafe && cafe.reviews &&
+        {cafe &&
+          cafe.reviews &&
           cafe.reviews.map((review) => (
             <CafeReviewCard key={review._id} review={review} />
           ))}

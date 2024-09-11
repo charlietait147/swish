@@ -51,7 +51,7 @@ function CafeReviewForm({ onClose, cafeId, cafeName, setReviewsUpdated }) {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
-      <div className="modal bg-white w-11/12 sm:w-5/6 md:w-1/2 rounded-lg shadow-lg p-6 relative z-20">
+      <div className="modal bg-white w-11/12 sm:w-5/6 md:w-1/2 rounded-lg shadow-lg p-6 relative z-20" role="dialog">
         {submitted ? (
           <div>
             <div className="flex flex-col items-center">

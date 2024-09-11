@@ -1,4 +1,4 @@
-import formatDistanceToNowStrict from "date-fns/formatDistanceToNowStrict";
+import {formatDistanceToNowStrict } from "date-fns";
 import Image from "next/image";
 
 function CafeReviewCard({ review }) {
