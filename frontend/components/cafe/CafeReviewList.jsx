@@ -84,8 +84,14 @@ function CafeReviewList({ cafe, setReviewsUpdated }) {
       <div className="columns-1 sm:columns-2 lg:columns-3 gap-4">
         {cafe &&
           cafe.reviews &&
-          cafe.reviews.map((review) => (
-            <CafeReviewCard key={review._id} review={review} />
+          cafe.reviews.map((review, index) => (
+            <CafeReviewCard
+              key={review._id || index}
+              timestamp={review.timestamp}
+              description={review.description}
+              name={review.name}
+              image={review.image}
+            />
           ))}
       </div>
       {openReviewForm && (

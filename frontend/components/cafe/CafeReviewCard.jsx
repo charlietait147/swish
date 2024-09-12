@@ -1,7 +1,11 @@
-import {formatDistanceToNowStrict } from "date-fns";
+import { formatDistanceToNowStrict } from "date-fns";
 import Image from "next/image";
+import PropTypes from "prop-types";
 
-function CafeReviewCard({ review }) {
+function CafeReviewCard({ timestamp, description, name, image }) {
+
+  // const formattedTimestamp = typeof timestamp === 'string' ? new Date(timestamp) : timestamp;
+
   return (
     <div>
       <div className="bg-white border border-gray-300 py-4 px-4 flex flex-col rounded-lg shadow-md h-fit mb-4  break-inside-avoid">
@@ -19,23 +23,23 @@ function CafeReviewCard({ review }) {
                 clipRule="evenodd"
               />
             </svg>
-            <p className="text-gray-800 text-sm font-bold">{review.name}</p>
+            <p className="text-gray-800 text-sm font-bold">{name}</p>
           </div>
           <p className="text-gray-400 text-xs">
-            {formatDistanceToNowStrict(review.timestamp)} ago
+            {formatDistanceToNowStrict(timestamp)} ago
           </p>
         </div>
-        {/* <p className="text-gray-500 text-sm">{review.date}</p>   */}
-        <p className="text-gray-800 text-xs font-light">{review.description}</p>
+        {/* <p className="text-gray-500 text-sm">{date}</p>   */}
+        <p className="text-gray-800 text-xs font-light">{description}</p>
         <div
           className={`flex ${
-            review.image ? "flex-row justify-between" : "flex-col"
+            image ? "flex-row justify-between" : "flex-col"
           } gap-5`}
         >
-          {review.image && (
+          {image && (
             <div className="flex items-center">
               <Image
-                src={`${process.env.NEXT_API_URL}/uploads/${review.image}`}
+                src={`${process.env.NEXT_API_URL}/uploads/${image}`}
                 height={150}
                 width={150}
                 alt="review photo"
@@ -48,5 +52,14 @@ function CafeReviewCard({ review }) {
     </div>
   );
 }
+
+CafeReviewCard.propTypes = {
+  timestamp: PropTypes.instanceOf(Date).isRequired,
+  description: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  image: PropTypes.string,
+};
+
+
 
 export default CafeReviewCard;

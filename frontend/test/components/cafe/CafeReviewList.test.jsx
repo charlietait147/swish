@@ -76,9 +76,11 @@ describe("CafeReviewList Component", () => {
     it("should display the AddReviewForm when the Add Review button is clicked", async () => {
       Cookies.get.mockReturnValue("839429f778gfd8gf8387gd");
 
-      const cafe = { _id: 1, name: "Test Cafe", reviews: [] };
+      const cafe = { _id: "1", name: "Test Cafe", reviews: [] };
 
-      render(<CafeReviewList cafe={cafe}  />);
+      const setReviewsUpdated = jest.fn();
+
+      render(<CafeReviewList cafe={cafe}  setReviewsUpdated={setReviewsUpdated}   />);
 
       const addReviewButton = screen.getByText(/Add a review/i);
       userEvent.click(addReviewButton);
