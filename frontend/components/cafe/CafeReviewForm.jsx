@@ -11,7 +11,9 @@ function CafeReviewForm({ onClose, cafeId, cafeName, setReviewsUpdated }) {
   const [image, setImage] = useState(null);
 
   const handleImageChange = (e) => {
-    setImage(e.target.files[0]);
+    if (e.target.files[0]) {
+      setImage(e.target.files[0]);
+    }
   };
 
   const handleRemoveImage = () => {
@@ -51,10 +53,13 @@ function CafeReviewForm({ onClose, cafeId, cafeName, setReviewsUpdated }) {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
-      <div className="modal bg-white w-11/12 sm:w-5/6 md:w-1/2 rounded-lg shadow-lg p-6 relative z-20" role="dialog">
+      <div
+        className="modal bg-white w-11/12 sm:w-5/6 md:w-1/2 rounded-lg shadow-lg p-6 relative z-20"
+        role="dialog"
+      >
         {submitted ? (
           <div>
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center" role="alertdialog">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -111,7 +116,7 @@ function CafeReviewForm({ onClose, cafeId, cafeName, setReviewsUpdated }) {
                   ></textarea>
                 </div>
                 <div>
-                  <label className="text-sm font-semibold">
+                  <label htmlFor="file" className="text-sm font-semibold">
                     Upload a Photo
                   </label>
                   <div className="flex items-center border border-gray-300 rounded">
@@ -122,22 +127,45 @@ function CafeReviewForm({ onClose, cafeId, cafeName, setReviewsUpdated }) {
                       readOnly
                     />
                     {image && (
-                      <svg
+                      // <svg
+                      //   role="button"
+                      //   aria-label="remove-image"
+                      //   onClick={handleRemoveImage}
+                      //   className="w-2 h-2 mt-0.5 absolute left-44 text-gray-500 hover:text-gray-700"
+                      //   aria-hidden="true"
+                      //   xmlns="http://www.w3.org/2000/svg"
+                      //   fill="none"
+                      //   viewBox="0 0 14 14"
+                      // >
+                      //   <path
+                      //     stroke="currentColor"
+                      //     strokeLinecap="round"
+                      //     strokeLinejoin="round"
+                      //     strokeWidth="2"
+                      //     d="M1 1l6 6m0 0l6 6M7 7l6-6M7 7L1 13"
+                      //   />
+                      // </svg>
+                      <button
+                        type="button"
+                        aria-label="remove-image"
                         onClick={handleRemoveImage}
-                        className="w-2 h-2 mt-0.5 absolute left-44 text-gray-500 hover:text-gray-700"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 14 14"
+                        className="absolute left-44 text-gray-500 hover:text-gray-700"
                       >
-                        <path
-                          stroke="currentColor"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M1 1l6 6m0 0l6 6M7 7l6-6M7 7L1 13"
-                        />
-                      </svg>
+                        <svg
+                          className="w-2 h-2 mt-0.5"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 14 14"
+                        >
+                          <path
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M1 1l6 6m0 0l6 6M7 7l6-6M7 7L1 13"
+                          />
+                        </svg>
+                      </button>
                     )}
                     <input
                       type="file"

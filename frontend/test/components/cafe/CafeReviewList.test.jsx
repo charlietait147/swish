@@ -80,7 +80,9 @@ describe("CafeReviewList Component", () => {
 
       const setReviewsUpdated = jest.fn();
 
-      render(<CafeReviewList cafe={cafe}  setReviewsUpdated={setReviewsUpdated}   />);
+      render(
+        <CafeReviewList cafe={cafe} setReviewsUpdated={setReviewsUpdated} />
+      );
 
       const addReviewButton = screen.getByText(/Add a review/i);
       userEvent.click(addReviewButton);

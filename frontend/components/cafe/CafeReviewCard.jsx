@@ -4,8 +4,6 @@ import PropTypes from "prop-types";
 
 function CafeReviewCard({ timestamp, description, name, image }) {
 
-  // const formattedTimestamp = typeof timestamp === 'string' ? new Date(timestamp) : timestamp;
-
   return (
     <div>
       <div className="bg-white border border-gray-300 py-4 px-4 flex flex-col rounded-lg shadow-md h-fit mb-4  break-inside-avoid">
