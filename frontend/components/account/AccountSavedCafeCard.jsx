@@ -2,7 +2,13 @@ import Link from "next/link";
 import { deleteSavedCafe } from "../../services/user.service";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-function AccountSavedCafeCard({ cafe, setCafesUpdated }) {
+function AccountSavedCafeCard({
+  cafeId,
+  cafeName,
+  cafeImage,
+  cafeLocation,
+  setCafesUpdated,
+}) {
   const [deleteClicked, setDeleteClicked] = useState(false);
 
   const router = useRouter();
@@ -11,21 +17,19 @@ function AccountSavedCafeCard({ cafe, setCafesUpdated }) {
     event.stopPropagation();
     event.preventDefault();
 
-    console.log("Delete button clicked");
-
     try {
-      await deleteSavedCafe(cafe._id);
-      localStorage.removeItem(`savedCafe_${cafe._id}`);
+      await deleteSavedCafe(cafeId);
+      localStorage.removeItem(`savedCafe_${cafeId}`);
       setCafesUpdated((prev) => !prev);
     } catch (error) {
       console.error("Error deleting saved cafe", error);
     }
   };
 
-  const handleCardClick = (event) => {
+  const handleCardClick = () => {
     if (!deleteClicked) {
       console.log("Navigating to cafe page");
-      router.push(`/cafe/${cafe._id}`);
+      router.push(`/cafe/${cafeId}`);
     } else {
       console.log("Navigation prevented due to delete action");
       setDeleteClicked(false);
@@ -40,22 +44,23 @@ function AccountSavedCafeCard({ cafe, setCafesUpdated }) {
 
   return (
     <div onClick={handleCardClick}>
-      {/* <Link href={`/cafe/${cafe._id}`}> */}
-      {/* <div> */}
       <div
         className="relative bg-cover bg-center w-full shadow-lg overflow-hidden h-48 border-2 border-orange-400 rounded-lg cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 md:h-48 lg:h-52"
         style={{
-          backgroundImage: `url(${process.env.NEXT_API_URL}/public/images/${cafe.image})`,
+          backgroundImage: `url(${process.env.NEXT_API_URL}/public/images/${cafeImage})`,
         }}
       >
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>{" "}
         {/* Overlay */}
         <div className="relative flex flex-col justify-center items-center h-full p-4">
           <h2 className="text-white text-lg uppercase font-semibold px-4 text-center">
-            {cafe.name}
+            {cafeName}
           </h2>
         </div>
-        <div onClick={handleDeleteClick} className="absolute z-10 top-0 right-0">
+        <div
+          onClick={handleDeleteClick}
+          className="absolute z-10 top-0 right-0"
+        >
           <div className="cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -91,12 +96,9 @@ function AccountSavedCafeCard({ cafe, setCafesUpdated }) {
               d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
             />
           </svg>
-          <p className="text-sm pl-0.5">{cafe.location}</p>
+          <p className="text-sm pl-0.5">{cafeLocation}</p>
         </div>
       </div>
-      {/* </div> */}
-
-      {/* </Link> */}
     </div>
   );
 }

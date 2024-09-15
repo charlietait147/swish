@@ -22,7 +22,7 @@ function AccountSavedCafeList({ cafes, setCafesUpdated }) {
           <p className="font-semibold text-gray-500 text-sm text-center pb-4">
           Explore cafes and save your favorites for easy access anytime
             {" "}
-            <Link href="/discover" className="underline font-bold">
+            <Link href="/discover" role="link" className="underline font-bold">
               here
             </Link>
           </p>
@@ -36,7 +36,10 @@ function AccountSavedCafeList({ cafes, setCafesUpdated }) {
             {cafes.map((cafe, index) => (
               <AccountSavedCafeCard
                 key={cafe._id || index}
-                cafe={cafe}
+                cafeId={cafe._id}
+                cafeName={cafe.name}
+                cafeImage={cafe.image}
+                cafeLocation={cafe.location}
                 setCafesUpdated={setCafesUpdated}
               />
             ))}
