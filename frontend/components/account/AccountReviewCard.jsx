@@ -1,11 +1,12 @@
-import formatDistanceToNowStrict from "date-fns/formatDistanceToNowStrict";
+import { formatDistanceToNowStrict } from "date-fns";
 import { useState } from "react";
 import Image from "next/image";
+import PropTypes from "prop-types";
 
 import AccountEditReviewForm from "./AccountEditReviewForm";
 import AccountDeleteReviewModal from "./AccountDeleteReviewModal";
 
-function AccountReviewCard({ review, setReviewsUpdated }) {
+function AccountReviewCard({ cafeName, reviewDescription, reviewTimestamp, reviewImage, reviewId, setReviewsUpdated }) {
   const [openReviewForm, setOpenReviewForm] = useState(false);
   const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
 
@@ -27,23 +28,24 @@ function AccountReviewCard({ review, setReviewsUpdated }) {
   };
 
   return (
+   
     <div className="bg-white border border-gray-300 py-4 px-4 flex flex-col rounded-lg shadow-md h-fit mb-4  break-inside-avoid">
       <div className="flex flex-row justify-between items-center pb-1.5">
         <div className="flex flex-row">
           <p className="text-gray-800 text-sm font-semibold">
-            @ {review.cafe.name}
+            @ {cafeName}
           </p>
         </div>
         <p className="text-gray-400 text-xs">
-          {formatDistanceToNowStrict(review.timestamp)} ago
+          {formatDistanceToNowStrict(reviewTimestamp)} ago
         </p>
       </div>
-      <p className="text-gray-800 text-xs font-light">{review.description}</p>
-      <div className={`flex ${review.image ? 'flex-row justify-between' : 'flex-col'} gap-5`}>
-        {review.image && (
+      <p className="text-gray-800 text-xs font-light">{reviewDescription}</p>
+      <div className={`flex ${reviewImage ? 'flex-row justify-between' : 'flex-col'} gap-5`}>
+        {reviewImage && (
           <div className="flex items-center">
             <Image
-              src={`${process.env.NEXT_API_URL}/uploads/${review.image}`}
+              src={`${process.env.NEXT_API_URL}/uploads/${reviewImage}`}
               height={150}
               width={150}
               alt="review photo"
@@ -69,23 +71,33 @@ function AccountReviewCard({ review, setReviewsUpdated }) {
       {openConfirmDelete && (
         <AccountDeleteReviewModal
           onClose={handleModalClose}
-          reviewId={review._id}
+          reviewId={reviewId}
           setReviewsUpdated={setReviewsUpdated}
         />
       )}
       {openReviewForm && (
         <AccountEditReviewForm
-          cafeName={review.cafe.name}
-          reviewId={review._id}
-          reviewName={review.name}
-          reviewDescription={review.description}
+          cafeName={cafeName}
+          reviewId={reviewId}
+          reviewName={reviewName}
+          reviewDescription={reviewDescription}
           onClose={handleClose}
           setReviewsUpdated={setReviewsUpdated}
         />
       )}
+      
     </div>
   );
 }
+
+AccountReviewCard.propTypes = {
+  cafeName: PropTypes.string.isRequired,
+  reviewDescription: PropTypes.string.isRequired,
+  reviewTimestamp: PropTypes.instanceOf(Date).isRequired,
+  reviewImage: PropTypes.string,
+  reviewId: PropTypes.string.isRequired,
+  setReviewsUpdated: PropTypes.func.isRequired,
+};
 
 
 export default AccountReviewCard;

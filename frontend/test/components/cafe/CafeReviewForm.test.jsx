@@ -163,8 +163,6 @@ describe("CafeReviewForm Component", () => {
 
       fireEvent.change(fileInput, { target: { files: [testFile] } });
 
-      screen.debug();
-
       await waitFor(() => {
         expect(fileInput.files[0]).toBe(testFile);
         expect(fileInput.files[0].name).toBe("test-image.png");

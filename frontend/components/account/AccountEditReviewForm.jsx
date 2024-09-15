@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { editReview } from "@/services/review.service";
+import { editReview } from "../../services/review.service.jsx";
 
 function AccountEditReviewForm({
   onClose,

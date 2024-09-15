@@ -33,9 +33,9 @@ function AccountSavedCafeList({ cafes, setCafesUpdated }) {
             My Saved Cafes
           </h3>
           <div className="flex flex-col gap-4 xs:grid grid-cols-2 lg:grid-cols-3">
-            {cafes.map((cafe) => (
+            {cafes.map((cafe, index) => (
               <AccountSavedCafeCard
-                key={cafe._id}
+                key={cafe._id || index}
                 cafe={cafe}
                 setCafesUpdated={setCafesUpdated}
               />

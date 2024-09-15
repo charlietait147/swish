@@ -1,4 +1,4 @@
-import { deleteReview } from "@/services/review.service";
+import { deleteReview } from "../../services/review.service.jsx";
 function AccountDeleteReviewModal({onClose, reviewId, setReviewsUpdated}) {
     
     const handleDelete = async () => {

@@ -11,7 +11,6 @@ function AccountOverview({ email, cafesLength, reviewsLength }) {
           </h1>
         </div>
       </div>
-      {/* <div className="bg-white md:bg-gray-200 md:px-8"> */}
         <div className="bg-white py-3 shadow-lg max-w-screen-lg mx-auto md:pb-6 md:pt-4">
           <div className="flex flex-row items-center px-4">
             <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center overflow-hidden shadow-xl border border-gray-300">
@@ -40,7 +39,6 @@ function AccountOverview({ email, cafesLength, reviewsLength }) {
             </div>
           </div>
         </div>
-      {/* </div> */}
     </div>
   );
 }

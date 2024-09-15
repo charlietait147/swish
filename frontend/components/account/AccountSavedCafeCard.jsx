@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { deleteSavedCafe } from "@/services/user.service";
+import { deleteSavedCafe } from "../../services/user.service";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 function AccountSavedCafeCard({ cafe, setCafesUpdated }) {
