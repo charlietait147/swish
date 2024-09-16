@@ -62,8 +62,8 @@ describe("AccountPage Component", () => {
       const mockUserData = {
         email: "test@gmail.com",
         cafes: [
-          { id: "1", name: "Cafe 1" },
-          { id: "2", name: "Cafe 2" },
+          { _id: "1", name: "Cafe 1", image: "cafe1.jpg", location: "London" },
+          { _id: "2", name: "Cafe 2", image: "cafe2.jpg", location: "Paris"}
         ],
         reviews: [
           {
@@ -100,13 +100,13 @@ describe("AccountPage Component", () => {
       const mockUserData = {
         email: "test@gmail.com",
         cafes: [
-          { id: "1", name: "Cafe 1" },
-          { id: "2", name: "Cafe 2" },
+          { _id: "1", name: "Cafe 1", image: "cafe1.jpg", location: "London" },
+          { _id: "2", name: "Cafe 2", image: "cafe2.jpg", location: "Paris" },
         ],
         reviews: [
           {
             _id: "1",
-            cafes: [{ _id: "1", name: "Cafe 1" }],
+            cafes: [{ _id: "1", name: "Cafe 1", image: "cafe1.jpg", location: "London" }],
             name: "User",
             description: "Great cafe!",
             timestamp: new Date(),
@@ -131,7 +131,7 @@ describe("AccountPage Component", () => {
       await act(async () => {
         fetchUserData.mockResolvedValueOnce({
           ...mockUserData,
-          cafes: [{ id: "1", name: "Updated Cafe 1" }],
+          cafes: [{ id: "1", name: "Updated Cafe 1", image: "cafe1.jpg", location: "London"}],
         });
 
         //Simulate a review or cafe change update

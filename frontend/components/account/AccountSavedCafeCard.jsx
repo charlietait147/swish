@@ -2,6 +2,8 @@ import Link from "next/link";
 import { deleteSavedCafe } from "../../services/user.service";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import PropTypes from "prop-types";
+
 function AccountSavedCafeCard({
   cafeId,
   cafeName,
@@ -28,7 +30,6 @@ function AccountSavedCafeCard({
 
   const handleCardClick = () => {
     if (!deleteClicked) {
-      console.log("Navigating to cafe page");
       router.push(`/cafe/${cafeId}`);
     } else {
       console.log("Navigation prevented due to delete action");
@@ -43,12 +44,14 @@ function AccountSavedCafeCard({
   };
 
   return (
-    <div onClick={handleCardClick}>
+    <div onClick={handleCardClick} role="button" aria-label="cafe-click-handler">
       <div
         className="relative bg-cover bg-center w-full shadow-lg overflow-hidden h-48 border-2 border-orange-400 rounded-lg cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 md:h-48 lg:h-52"
         style={{
-          backgroundImage: `url(${process.env.NEXT_API_URL}/public/images/${cafeImage})`,
+          backgroundImage: `url(${process.env.NEXT_API_URL}/public/images/${cafeImage})`
         }}
+        role="img"
+        aria-label={cafeName}
       >
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>{" "}
         {/* Overlay */}
@@ -60,6 +63,8 @@ function AccountSavedCafeCard({
         <div
           onClick={handleDeleteClick}
           className="absolute z-10 top-0 right-0"
+          role="button"
+          aria-label="delete-cafe"
         >
           <div className="cursor-pointer">
             <svg
@@ -102,5 +107,13 @@ function AccountSavedCafeCard({
     </div>
   );
 }
+
+AccountSavedCafeCard.propTypes = {
+  cafeId: PropTypes.string.isRequired,
+  cafeName: PropTypes.string.isRequired,
+  cafeImage: PropTypes.string.isRequired,
+  cafeLocation: PropTypes.string.isRequired,
+  setCafesUpdated: PropTypes.func.isRequired,
+};
 
 export default AccountSavedCafeCard;

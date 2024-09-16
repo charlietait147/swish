@@ -6,11 +6,8 @@ function AccountSavedCafeList({ cafes, setCafesUpdated }) {
   const [showDiscoverLink, setShowDiscoverLink] = useState(false);
 
   useEffect(() => {
-    if (cafes.length === 0) {
-      setShowDiscoverLink(true);
-    }
-  }),
-    [];
+    setShowDiscoverLink(cafes.length === 0);
+  }, [cafes]);
 
   return (
     <div className="bg-white py-3 shadow-lg px-4 max-w-screen-lg mx-auto md:pb-6 md:pt-4 md:px-6">
@@ -36,10 +33,10 @@ function AccountSavedCafeList({ cafes, setCafesUpdated }) {
             {cafes.map((cafe, index) => (
               <AccountSavedCafeCard
                 key={cafe._id || index}
-                cafeId={cafe._id}
+                cafeId={cafe._id || ""}
                 cafeName={cafe.name}
-                cafeImage={cafe.image}
-                cafeLocation={cafe.location}
+                cafeImage={cafe.image || ""}
+                cafeLocation={cafe.location || ""}
                 setCafesUpdated={setCafesUpdated}
               />
             ))}
