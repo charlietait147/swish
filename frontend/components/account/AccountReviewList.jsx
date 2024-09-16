@@ -21,7 +21,7 @@ function AccountReviewList({ reviews, setReviewsUpdated }) {
           </h3>
           <p className="font-semibold text-gray-500 text-sm text-center pb-4 ">
             Discover a cafe you love and share your thoughts with the community{" "}
-            <Link href="/discover" className="underline font-bold">
+            <Link href="/discover" className="underline font-bold" role="link">
               here
             </Link>
           </p>
