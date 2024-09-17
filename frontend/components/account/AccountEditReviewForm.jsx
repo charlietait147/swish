@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { editReview } from "../../services/review.service.jsx";
+import PropTypes from "prop-types";
 
 function AccountEditReviewForm({
   onClose,
@@ -39,7 +40,7 @@ function AccountEditReviewForm({
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
-      <div className="modal bg-white w-5/6 sm:w-1/2 lg:w-1/3 rounded-lg shadow-lg p-6 relative" role="dialog" aria-label="edit-review">
+      <div className="modal bg-white w-5/6 sm:w-1/2 lg:w-1/3 rounded-lg shadow-lg p-6 relative" role="dialog" aria-label="edit-form">
         {" "}
         {updated ? (
           <div>
@@ -99,6 +100,8 @@ function AccountEditReviewForm({
                 <div>
                   <button
                     type="submit"
+                    role="button"
+                    aria-label="submit"
                     className={`bg-orange-500 text-white text-sm px-4 py-2 rounded-lg ${
                       isButtonDisabled
                         ? "opacity-50 cursor-not-allowed"
@@ -110,6 +113,8 @@ function AccountEditReviewForm({
                   </button>
                   <button
                     onClick={onClose}
+                    role="button"
+                    aria-label="cancel"
                     className="text-orange-500 text-sm px-4 py-2 rounded-lg"
                   >
                     Cancel
@@ -128,5 +133,14 @@ function AccountEditReviewForm({
     </div>
   );
 }
+
+AccountEditReviewForm.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  reviewId: PropTypes.string.isRequired,
+  cafeName: PropTypes.string.isRequired,
+  reviewName: PropTypes.string.isRequired,
+  reviewDescription: PropTypes.string.isRequired,
+  setReviewsUpdated: PropTypes.func.isRequired,
+};
 
 export default AccountEditReviewForm;

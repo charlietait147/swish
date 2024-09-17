@@ -65,8 +65,55 @@ describe("AccountReviewCard Component", () => {
       // Assert that the edit form is rendered
       await waitFor(() => {
         expect(
-          screen.getByRole("dialog", { name: /edit-review/i })
+          screen.getByRole("dialog", { name: /edit-form/i })
         ).toBeInTheDocument();
+      });
+    });
+    it("should close the edit form when the close button is clicked", async () => {
+      const cafeName = "Cafe 1";
+      const reviewDescription = "Great cafe";
+      const reviewTimestamp = new Date();
+      const reviewImage = "review.jpg";
+      const reviewId = "1";
+      const setReviewsUpdated = jest.fn();
+      const reviewName = "Test";
+
+      render(
+        <AccountReviewCard
+          cafeName={cafeName}
+          reviewDescription={reviewDescription}
+          reviewTimestamp={reviewTimestamp}
+          reviewImage={reviewImage}
+          reviewId={reviewId}
+          setReviewsUpdated={setReviewsUpdated}
+          reviewName={reviewName}
+        />
+      );
+
+      const editButton = screen.getByRole("button", { name: /edit-review/i });
+      expect(editButton).toBeInTheDocument();
+
+      // Click the edit button
+      await userEvent.click(editButton);
+
+      // Assert that the edit form is rendered
+      await waitFor(() => {
+        expect(
+          screen.getByRole("dialog", { name: /edit-form/i })
+        ).toBeInTheDocument();
+      });
+
+      const cancelButton = screen.getByRole("button", { name: /cancel/i });
+      expect(cancelButton).toBeInTheDocument();
+
+      // Click the close button
+      await userEvent.click(cancelButton);
+
+      // Assert that the edit form is closed
+      await waitFor(() => {
+        expect(
+          screen.queryByRole("dialog", { name: /edit-form/i })
+        ).not.toBeInTheDocument();
       });
     });
     it("should open the delete alert box when the delete button is clicked", async () => {
