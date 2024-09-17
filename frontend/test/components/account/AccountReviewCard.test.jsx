@@ -69,7 +69,7 @@ describe("AccountReviewCard Component", () => {
         ).toBeInTheDocument();
       });
     });
-    it("should close the edit form when the close button is clicked", async () => {
+    it("should close the edit form when the cancel button is clicked", async () => {
       const cafeName = "Cafe 1";
       const reviewDescription = "Great cafe";
       const reviewTimestamp = new Date();
@@ -150,6 +150,52 @@ describe("AccountReviewCard Component", () => {
         expect(
           screen.getByRole("alertdialog", { name: /delete-review/i })
         ).toBeInTheDocument();
+      });
+    });
+
+    it("should close the delete modal when the cancel button is clicked", async () => {
+      const cafeName = "Cafe 1";
+      const reviewDescription = "Great cafe";
+      const reviewTimestamp = new Date();
+      const reviewImage = "review.jpg";
+      const reviewId = "1";
+      const setReviewsUpdated = jest.fn();
+      const reviewName = "Test";
+
+      render(
+        <AccountReviewCard
+          cafeName={cafeName}
+          reviewDescription={reviewDescription}
+          reviewTimestamp={reviewTimestamp}
+          reviewImage={reviewImage}
+          reviewId={reviewId}
+          setReviewsUpdated={setReviewsUpdated}
+          reviewName={reviewName}
+        />
+      );
+
+      const deleteButton = screen.getByRole("button", {
+        name: /delete-review/i,
+      });
+      expect(deleteButton).toBeInTheDocument();
+
+      await userEvent.click(deleteButton);
+
+      await waitFor(() => {
+        expect(
+          screen.getByRole("alertdialog", { name: /delete-review/i })
+        ).toBeInTheDocument();
+      });
+
+      const cancelButton = screen.getByRole("button", { name: /cancel/i });
+      expect(cancelButton).toBeInTheDocument();
+
+      await userEvent.click(cancelButton);
+
+      await waitFor(() => {
+        expect(
+          screen.queryByRole("alertdialog", { name: /delete-review/i })
+        ).not.toBeInTheDocument();
       });
     });
   });
