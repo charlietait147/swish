@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import AccountReviewList from "../../../components/account/AccountReviewList.jsx";
 
 describe("AccountReviewList Component", () => {
@@ -39,7 +39,9 @@ describe("AccountReviewList Component", () => {
       },
     ];
 
-    render(<AccountReviewList reviews={reviews} />);
+    const setReviewsUpdated = jest.fn();
+
+    render(<AccountReviewList reviews={reviews} setReviewsUpdated={setReviewsUpdated} />);
 
     expect(screen.getByText(/Cafe 1/i)).toBeInTheDocument();
     expect(screen.getByText(/Cafe 2/i)).toBeInTheDocument();

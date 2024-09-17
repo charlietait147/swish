@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import AccountEditReviewForm from "./AccountEditReviewForm";
 import AccountDeleteReviewModal from "./AccountDeleteReviewModal";
 
-function AccountReviewCard({ cafeName, reviewDescription, reviewTimestamp, reviewImage, reviewId, setReviewsUpdated }) {
+function AccountReviewCard({ cafeName, reviewDescription, reviewTimestamp, reviewImage, reviewId, setReviewsUpdated, reviewName }) {
   const [openReviewForm, setOpenReviewForm] = useState(false);
   const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
 
@@ -57,12 +57,16 @@ function AccountReviewCard({ cafeName, reviewDescription, reviewTimestamp, revie
           <button
             onClick={handleEditClick}
             className="text-xs font-semibold bg-blue-500 text-white p-2"
+            role="button"
+            aria-label="edit-review"
           >
             Edit
           </button>
           <button
             onClick={handleDeleteClick}
             className="text-xs font-semibold bg-red-500 text-white p-2 ml-2"
+            role="button"
+            aria-label="delete-review"
           >
             Delete
           </button>
@@ -96,6 +100,7 @@ AccountReviewCard.propTypes = {
   reviewTimestamp: PropTypes.instanceOf(Date).isRequired,
   reviewImage: PropTypes.string,
   reviewId: PropTypes.string.isRequired,
+  reviewName: PropTypes.string.isRequired,
   setReviewsUpdated: PropTypes.func.isRequired,
 };
 

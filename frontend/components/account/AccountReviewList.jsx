@@ -5,6 +5,8 @@ import Link from "next/link";
 function AccountReviewList({ reviews, setReviewsUpdated }) {
   const [showDiscoverLink, setShowDiscoverLink] = useState(false);
 
+  console.log(reviews);
+
   useEffect(() => {
     if (reviews.length === 0) {
       setShowDiscoverLink(true);
@@ -39,6 +41,7 @@ function AccountReviewList({ reviews, setReviewsUpdated }) {
                 cafeName={review.cafe?.name || "Cafe not found"}
                 reviewDescription={review.description}
                 reviewTimestamp={review.timestamp}
+                reviewName={review.name}
                 reviewImage={review.image}
                 reviewId={review._id}
                 setReviewsUpdated={setReviewsUpdated}
