@@ -53,7 +53,7 @@ function AccountReviewCard({ cafeName, reviewDescription, reviewTimestamp, revie
             />
           </div>
         )}
-        <div className="flex flex-row items-end justify-end mt-auto">
+        <div className="flex flex-row items-end justify-end mt-1">
           <button
             onClick={handleEditClick}
             className="text-xs font-semibold bg-blue-500 text-white p-2"

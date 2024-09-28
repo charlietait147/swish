@@ -6,8 +6,14 @@ import Link from "next/link";
 function Header() {
   return (
     <>
-      <header className=" bg-orange-500 lg:py-1">
+      <header className=" bg-orange-500 md:py-3">
         <div className="max-width mx-auto flex justify-end items-center px-4 h-14">
+          {/* <Link href="/" className="flex flex-row gap-1 items-center">
+            <Image src={Logo} className="h-12 w-12 md:h-14 md:w-14" alt="Swish Logo"></Image>
+            <h1 className="text-white text-xl font-bold tracking-wide lg:text-xl">
+              Swish .
+            </h1>
+          </Link> */}
           <NavBar />
         </div>
       </header>

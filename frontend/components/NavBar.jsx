@@ -3,10 +3,12 @@ import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import AccountMenu from "./AccountMenu";
 
 function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setisLoading] = useState(true);
 
   const router = useRouter();
 
@@ -19,6 +21,7 @@ function NavBar() {
     if (token) {
       setIsLoggedIn(true);
     }
+    setisLoading(false)
   }, []);
 
   const handleSignOut = () => {
@@ -27,15 +30,25 @@ function NavBar() {
     router.push("/login");
   };
 
+  if (isLoading) {
+    return null; // Don't render anything while loading
+  }
+
   return (
     <>
-      <div className="burger-menu mr-3 md:hidden" role="button" aria-label="burger menu" onClick={toggleMenu}>
+      <div
+        className="burger-menu mr-3 md:hidden"
+        role="button"
+        aria-label="burger menu"
+        onClick={toggleMenu}
+      >
         <div className="h-5 w-5 flex flex-col justify-between cursor-pointer">
           <div className="h-1 w-full bg-white"></div>
           <div className="h-1 w-full bg-white"></div>
           <div className="h-1 w-full bg-white"></div>
         </div>
       </div>
+
       {isMenuOpen && (
         <div className="fixed inset-0 z-40">
           {/* Overlay */}
@@ -72,7 +85,7 @@ function NavBar() {
             </button>
             <h1 className="text-2xl font-bold pt-4">Swish .</h1>
             <div className="border border-t-gray-300 mt-4"></div>
-            <ul className="mt-6 space-y-5 text-center" role="menu" >
+            <ul className="mt-6 space-y-5 text-center" role="menu">
               <Link
                 href="/"
                 className="text-white py-2 bg-orange-500 hover:bg-orange-400 shadow-lg flex items-center justify-center"
@@ -155,49 +168,62 @@ function NavBar() {
           </div>
         </div>
       )}
-      <ul className="hidden md:flex flex-row  items-center">
+      <ul className="hidden md:flex flex-row items-center md:gap-1">
         <Link
           href="/"
-          className="text-white mr-8 text-sm lg:text-base hover:underline hover:underline-offset-8"
+          className="text-sm  text-white py-2 px-4 rounded-3xl hover:bg-orange-400 cursor-pointer"
         >
           Home
         </Link>
         <Link
           href="/discover"
-          className="text-white mr-8 text-sm lg:text-base hover:underline hover:underline-offset-8"
+          className="text-sm  text-white py-2 px-4 rounded-3xl hover:bg-orange-400 cursor-pointer"
         >
           Discover
         </Link>
         <Link
           href="/#contact-form"
-          className="text-white mr-8 text-sm lg:text-base hover:underline hover:underline-offset-8  "
+          className="text-sm  text-white py-2 px-4 rounded-3xl hover:bg-orange-400 cursor-pointer  "
         >
           Contact Us
         </Link>
-        <span className="h-0.5 bg-gray-200 w-8 transform rotate-90 mr-1"></span>
+        <span className="h-0.5 bg-gray-200 w-6 transform rotate-90 mr-1"></span>
         {!isLoggedIn ? (
           <>
             <Link
               href="/login"
-              className="bg-white text-sm lg:text-base text-black py-2 px-4 rounded-3xl hover:bg-black hover:text-white cursor-pointer"
+              className="text-sm  text-white py-2 px-4 rounded-3xl bg-orange-400 hover:bg-orange-500 cursor-pointer r"
             >
-              Sign In
+              Sign in
             </Link>
+            {/* <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              class="size-6 text-white cursor-pointer"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+                clip-rule="evenodd"
+              />
+            </svg> */}
           </>
         ) : (
           <>
-            <Link
+            {/* <Link
               href="/account"
-              className="text-white text-sm lg:text-base hover:underline hover:underline-offset-8 mr-5 "
+              className="text-white text-sm  hover:underline hover:underline-offset-8 mr-5 "
             >
               My Account
             </Link>
             <li
-              className="bg-white text-sm lg:text-base text-black py-2 px-4 rounded-3xl hover:bg-black hover:text-white cursor-pointer"
+              className="bg-white text-sm  text-black py-2 px-4 rounded-3xl hover:bg-black hover:text-white cursor-pointer"
               onClick={handleSignOut}
             >
               Sign Out
-            </li>
+            </li> */}
+            <AccountMenu handleSignOut={handleSignOut} />
           </>
         )}
       </ul>

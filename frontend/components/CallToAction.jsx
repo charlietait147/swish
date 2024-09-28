@@ -52,7 +52,7 @@ function CallToAction() {
             className="px-4 md:w-1/2"
           />
 
-          <div className="flex flex-col px-4 md:justify-center items-center md:w-1/2">
+          <div className="flex flex-col px-4 md:justify-center items-center md:w-1/2 gap-1">
             <h2 className="text-3xl font-semibold mt-5">Register an account</h2>
             <p className="text-sm font-light mt-1 text-gray-600">
               To add reviews and save your favourite cafes
@@ -71,7 +71,7 @@ function CallToAction() {
             alt="Woman sitting with laptop"
             className="px-4 md:w-1/2"
           />
-          <div className="flex flex-col px-4 md:justify-center items-center md:w-1/2">
+          <div className="flex flex-col px-4 md:justify-center items-center md:w-1/2 gap-1">
             <h2 className="text-3xl font-semibold mt-5">Manage your account</h2>
             <p className="text-sm font-light mt-2 text-gray-600 md:text-center">
               To edit your profile, view and delete saved cafes and manage your

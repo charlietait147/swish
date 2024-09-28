@@ -1,34 +1,62 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100%{
-        transform: rotate(360deg);
-    }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-.spinner{
-    @apply animate-spin;
-    animation: spin 2s linear infinite;
+@layer utilities {
+  @keyframes slideUp {
+    0% {
+      transform: translateY(100%);
+    }
+    100% {
+      transform: translateY(0%);
+    }
+  }
+
+  @keyframes slideDown {
+    0% {
+      transform: translateY(0%);
+    }
+    100% {
+      transform: translateY(100%);
+    }
+  }
+}
+
+.spinner {
+  @apply animate-spin;
+  animation: spin 2s linear infinite;
+}
+
+.slider {
+  animation: slideUp 0.4s ease-in-out;
+}
+
+.slider-out{
+    animation: slideDown 0.6s ease-in-out;
 }
 
 .off-screen-left {
-    transform: translateX(-20px);
-  }
+  transform: translateX(-20px);
+}
 
 .off-screen-right {
-    transform: translateX(20px);
-  }
+  transform: translateX(20px);
+}
 .white-shadow {
-    box-shadow: 1 0 10px 10px white;
-  }
+  box-shadow: 1 0 10px 10px white;
+}
 
 .max-width {
   max-width: 1184px;

@@ -3,7 +3,7 @@ import CafeInterior from "../../public/images/cafe-interior-discover.jpg";
 function DiscoverCafeHero() {
   return (
     <>
-    <div className="relative mt-16 w-full h-1/2 max-width mx-auto sm:h-80 md:h-96 md:mt-0">
+    <div className="relative w-full h-1/2 max-width mx-auto sm:h-80 md:h-96 md:mt-0">
     <div className="w-full h-full overflow-hidden">
       <Image
         src={CafeInterior}

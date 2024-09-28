@@ -57,11 +57,12 @@ export default function DiscoverPage() {
       <Header />
       <DiscoverCafeHero />
       <div className="flex flex-col lg:flex-row max-width mx-auto lg:my-12">
-        <div className="lg:sticky lg:top-0 lg:h-full lg:pt-4">
+        <div className="px-4 sticky z-10 bg-white top-0 lg:h-full lg:pt-4 md:px-24 lg:px-4 shadow-lg lg:shadow-none">
           <CafeFilters
             onFilterChange={handleFilters}
             setSelectedAmenities={setSelectedAmenities}
             selectedAmenities={selectedAmenities}
+            setLoading={setLoading}
           />
         </div>
         {loading ? (

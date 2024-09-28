@@ -7,7 +7,7 @@ function CafeCard({ cafeId, name, location, image }) {
   return (
     <Link href= {`cafe/${cafeId}`} data-testid="cafe-link">
       <div
-        className="relative bg-cover bg-center w-full shadow-lg overflow-hidden h-48 border-2 border-orange-400 rounded-lg cursor-pointer transition duration-300 ease-in-out transform hover:scale-105"
+        className="relative bg-cover bg-center w-full shadow-lg overflow-hidden h-56 rounded-lg cursor-pointer transition duration-300 ease-in-out transform hover:scale-105"
         data-testid="cafe-card"
         style={{
           backgroundImage: `url(${process.env.NEXT_API_URL}/public/images/${image})`,
@@ -40,7 +40,7 @@ function CafeCard({ cafeId, name, location, image }) {
               d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
             />
           </svg>
-          <p className="text-sm pl-0.5">{location}</p>
+          <p className="text-sm pl-0.5 tracking-wide">{location}</p>
         </div>
       </div>
     </Link>
