@@ -8,6 +8,7 @@ function CafeDetailsSection({ cafe }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showFullText, setShowFullText] = useState(false);
 
   const router = useRouter();
 
@@ -60,6 +61,17 @@ function CafeDetailsSection({ cafe }) {
       }
     }
   };
+
+  const toggleText = () => {
+    setShowFullText(!showFullText);
+  };
+
+  const maxWords = 40;
+  const fullDescription = cafe?.description || "";
+  const truncatedDescription = fullDescription
+    .split(" ")
+    .slice(0, maxWords)
+    .join(" ");
 
   return (
     <div className="max-w-screen-lg mx-auto xs:px-6 sm:px-10 xl:px-0 mt-16 mb-6 px-4">
@@ -175,13 +187,75 @@ function CafeDetailsSection({ cafe }) {
                   </div>
                 ))}
             </div>
-            <div className="rounded-md bg-gray-200 shadow-md px-4 py-2 lg:hidden">
+            {/* <div className="rounded-md bg-gray-200 shadow-md px-4 py-2 lg:hidden">
               {cafe && cafe.description && (
                 <p className="text-sm font-semibold text-gray-600 md:text-base">
                   <span className="font-extrabold">
                     {cafe.description.split(" ")[0]}
                   </span>
                   {` ${cafe.description.split(" ").slice(1).join(" ")}`}
+                </p>
+              )}
+            </div> */}
+            <div className="rounded-md bg-gray-200 shadow-md px-4 py-2 lg:hidden">
+              {cafe && cafe.description && (
+                <p className="text-sm font-semibold text-gray-600 md:text-base">
+                  {showFullText ? (
+                    // Show full description with "Read less" link
+                    <>
+                      <span className="font-extrabold">
+                        {cafe.description.split(" ")[0]}
+                      </span>
+                      {` ${cafe.description.split(" ").slice(1).join(" ")}`}
+                      <button
+                        onClick={toggleText}
+                        className="flex items-center gap-1 cursor-pointer"
+                      >
+                        <p className=" text-orange-500 underline">Read less</p>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                          className="w-4 h-4"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M11.47 7.72a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 0 1-1.06-1.06l7.5-7.5Z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </button>
+                    </>
+                  ) : (
+                    // Show truncated description with "Read more" link
+                    <>
+                      <span className="font-extrabold">
+                        {truncatedDescription.split(" ")[0]}
+                      </span>
+                      {` ${truncatedDescription
+                        .split(" ")
+                        .slice(1)
+                        .join(" ")}...`}
+                      <button
+                        onClick={toggleText}
+                        className="flex items-center gap-1 cursor-pointer"
+                      >
+                        <p className=" text-orange-500 underline">Read more</p>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                          className="w-4 h-4"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </button>
+                    </>
+                  )}
                 </p>
               )}
             </div>
