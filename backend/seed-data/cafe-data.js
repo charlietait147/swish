@@ -6,6 +6,7 @@ const cafes = [
         website: 'https://www.thewinchesterorangery.com',
         image: 'the-orangery-cafe-no-border.jpeg',
         borderImage: 'the-orangery-cafe.jpeg',
+        address: '11 The Square, Winchester, SO23 9ES',
         lat: 51.0622118,
         lng: -1.3178322,
         icons: [
@@ -31,6 +32,7 @@ const cafes = [
         website: 'https://www.caracoli.co.uk',
         image: 'caracoli-cafe-no-border.jpeg',
         borderImage: 'caracoli-cafe.jpeg',
+        address: '15 Broad St, Alresford SO24 9AR',
         lat: 51.09106,
         lng: -1.16183,
         icons: [
@@ -56,6 +58,7 @@ const cafes = [
         website: 'https://www.josieswinecoffee.com',
         image: 'josies-cafe-no-border.jpeg',
         borderImage: 'josies-cafe.jpeg',
+        address: '28 Jewry St, Winchester SO23 8SA',
         lat: 51.065576,
         lng: -1.315485,
         icons: [
@@ -81,6 +84,7 @@ const cafes = [
         website: 'https://www.hoxtonbakehouse.com',
         image: 'hoxton-bakehouse-no-border.jpeg',
         borderImage: 'hoxton-bakehouse.jpeg',
+        address: '40 Jewry St, Winchester SO23 8RY',
         lat: 51.06404,
         lng: -1.31587,
         icons: [
@@ -102,6 +106,7 @@ const cafes = [
         website: 'https://www.theyardhampshire.co.uk',
         image: 'the-yard-cafe-no-border.jpeg',
         borderImage: 'the-yard-cafe.jpeg',
+        address: 'Chilton Manor Farm, Chilton Candover, Alresford, SO24 9TX',
         lat: 51.15907,
         lng: -1.15516,
         icons: [
@@ -127,6 +132,7 @@ const cafes = [
         website: "https://www.kavicoffee.com",
         image: 'kavi-no-border.jpeg',
         borderImage: 'kavi.jpeg',
+        address: '12 Jewry St, Winchester SO23 8RZ',
         lat: 51.064408,
         lng: -1.31612,
         icons: [
@@ -148,6 +154,7 @@ const cafes = [
         website: 'https://www.southdownssocial.com',
         image: 'south-downs-social-cafe-no-border.jpeg',
         borderImage: 'south-downs-social-cafe.jpeg',
+        address: '3-4, Kings Walk, Middle Brook St, Winchester SO23 8AF',
         lat: 51.06253,
         lng: -1.31176,
         icons: [
@@ -169,6 +176,7 @@ const cafes = [
         website: 'https://www.winchester-cathedral.org.uk/welcome/cafe/',
         image: 'the-refectory-cafe-no-border.jpeg',
         borderImage: 'the-refectory-cafe.jpeg',
+        address: 'Great Minster St, Winchester SO23 9HE',
         lat: 51.06097,
         lng: -1.31527,
         icons: [
@@ -194,6 +202,7 @@ const cafes = [
         website: 'https://www.heidibakery.co.uk/locations/heidi-haslemere/',
         image: '/',
         borderImage: '/',
+        address: '27 High St, Haslemere GU27 2HG',
         lat: 51.08834,
         lng: -0.70925,
         icons: [
@@ -219,6 +228,7 @@ const cafes = [
         website: 'https://www.handlebar.cafe',
         image: 'handle-bar-cafe-no-border.jpeg',
         borderImage: 'handle-bar-cafe.jpeg',
+        address: 'Garnier Road Car Park, Winchester SO23 9PA',
         lat: 51.04940,
         lng: -1.31124,
         icons: [
@@ -240,6 +250,7 @@ const cafes = [
         website: 'https://edisons.life/',
         image: 'edisons-no-border.jpeg',
         borderImage: 'edisons.jpeg',
+        address: '126 High St, Southampton SO14 2AA',
         lat: 50.89943,
         lng: -1.40396,
         icons: [
@@ -265,6 +276,7 @@ const cafes = [
         website: 'https://coffeediemfarnham.co.uk/',
         image: 'coffee-diem-no-border.jpeg',
         borderImage: 'coffee-diem.jpeg',
+        address: 'Unit 9, 24 Lion and Lamb Yard, Farnham GU9 7LL',
         lat: 51.21482,
         lng: -0.80134,
         icons: [
@@ -294,6 +306,7 @@ const cafes = [
         description: 'Located in the heart of Haslemere, Hemingways is a quirky coffee shop perfect for those looking for a breakfast or brunch treat. An extensive menu is available offering breakfast, lunch, snacks and afternoon tea. The venue is a very short and scenic drive for those visiting the Devil\'s Punchbowl; why not start the morning here?',
         image: 'hemingways-no-border.jpeg',
         borderImage: 'hemingways.jpeg',
+        address: '48 High St, Haslemere GU27 2LA',
         lat: 51.08875,
         lng: -0.70867,
         icons: [
@@ -323,6 +336,7 @@ const cafes = [
         description: 'Positioned on the corner of Farnham\'s charming Lion & Lamb Yard, this Harris & Hoole establishment is a spacious, two-storey café serving high quality, well-presented coffee and snacks. The venue boasts four choices for seating; downstairs, outside, upstairs, and on the terrace balcony. We\'d particularly recommend this café as a good spot for a date, or somewhere to recharge after a stroll around the nearby Frensham Great Pond.',
         image: 'harris-hoole-no-border.jpeg',
         borderImage: 'harris-hoole.jpeg',
+        address: '113B West St, Lion and Lamb Yard, Farnham GU9 7HH',
         lat: 51.21444,
         lng: -0.80080,
         icons: [
@@ -348,6 +362,7 @@ const cafes = [
         description: 'Wild & Green Kitchen is an independent, artisan café serving high quality coffee and natural food. The venue is positioned with a wonderful view of Cranleigh High Street and is well worth a visit for those visiting the quaint Surrey village. During the summer season, we\'d recommend a takeaway from this venue and walking a few minutes to the Common, where cricket can sometimes be watched in peaceful surroundings.',
         image: 'wild-green-kitchen-no-border.jpeg',
         borderImage: 'wild-green-kitchen.jpeg',
+        address: '180 High St, The Common, Cranleigh GU6 8RG',
         lat: 51.14200,
         lng: -0.49286,
         icons: [
@@ -373,6 +388,7 @@ const cafes = [
         description: 'Lilly\'s is a charming café located in the heart of Wickham on the corner of The Square. Its mismatched furniture, unusual ornaments and traditional crockery give the venue a homely feel akin to being at Granny’s. The popular venue offers a variety of savoury snacks and sandwiches as well as a modest selection of hot lunches, making it the perfect excuse to venture out to the very attractive village of Wickham.',
         image: 'lillys-no-border.jpeg',
         borderImage: 'lillys.jpeg',
+        address: 'The Square, Wickham, Fareham PO17 5JT',
         lat: 50.90026,
         lng: -1.18712,
         icons: [
@@ -402,6 +418,7 @@ const cafes = [
         description: 'The Bumblebee Café is a traditional village cafe, nestled right next to the village green of Rowlands Castle. In the heart of the picturesque village, its décor is bright and perfect for enjoying a quintessentially English lunch or afternoon tea. Although the village is somewhat remote, the café is located very close to its railway station; a small stop on the London to Portsmouth main line. Why not break up the journey and pay a visit to this hidden gem?',
         image: 'bumblebee-cafe-no-border.jpeg',
         borderImage: 'bumblebee-cafe.jpeg',
+        address: '2 The Green, Rowland\s Castle PO9 6BN',
         lat: 50.89115,
         lng: -0.95829,
         icons: [
@@ -431,6 +448,7 @@ const cafes = [
         description: 'Hidden within 1800 acres of ancient woodland on the Hampshire and West Sussex border, Stansted Park, with its stunning stately home and forest, is a wonderful setting for family and friends to gather. In the heart of The Walled Garden is a beautifully restored Victorian glass house, which now houses The Pavilion Tearoom. General bookings are not accepted but to enjoy the venue\'s esteemed afternoon tea (after 3:30pm), customers are required to book slots.',
         image: 'pavilion-tea-room-no-border.jpeg',
         borderImage: 'pavilion-tea-room.jpeg',
+        address: 'Stansted House, Rowlands Castle, Rowland\s Castle PO9 6DU',
         lat: 50.88737,
         lng: -0.91899,
         icons: [
@@ -452,6 +470,7 @@ const cafes = [
         description: 'This intriguing coffee and wine bar is a family run, lively shop offering a continental feel, serving light breakfast, lunch and evening snacks. A wide selection of drinks are available including local artisan coffee, speciality teas and a good selection of wines and beers. The venue marks a perfect spot for those visiting or passing through the quiet Hampshire town.',
         image: 'no-60-no-border.jpeg',
         borderImage: 'no-60.jpeg',
+        address: '60 High St, Bishop/s Waltham, Southampton SO32 1AB',
         lat: 50.95482,
         lng: -1.21220,
         icons: [
@@ -473,6 +492,7 @@ const cafes = [
         description: 'The Natural Food Deli is a health food café and restaurant to be found in the heart of the South Downs in the old town of Petersfield. It offers a range of healthy food options and caters particularly well for vegetarian and vegan customers. It is conveniently based between the town centre and Petersfield Lake – easily walkable to both – making it suitable for those visiting the market town as well as those heading out for waterside strolling or bathing. If dining in, customers can enjoy an interesting interior floorplan decorated with a vintage, rustic style.',
         image: 'natural-food-deli-no-border.jpeg',
         borderImage: 'natural-food-deli.jpeg',
+        address: '2 Dragon St, Petersfield GU31 4JD',
         lat: 51.00354,
         lng: -0.93440,
         icons: [

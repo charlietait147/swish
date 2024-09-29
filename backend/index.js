@@ -84,4 +84,10 @@ if (process.env.NODE_ENV !== 'development') {
     });
 }
 
+if (process.env.NODE_ENV === 'development') {
+    app.listen(PORT, HOST, () => {
+        console.log(`Server is listening at http://${HOST}:${PORT}`);
+    });
+}
+
 export default app;

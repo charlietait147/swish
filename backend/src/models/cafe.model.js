@@ -21,6 +21,10 @@ const cafeSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    address: {
+        type: String,
+        required: true,
+    },
     lat: {
         type: Number,
         required: true,
