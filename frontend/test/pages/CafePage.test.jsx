@@ -35,6 +35,7 @@ describe("CafePage Component", () => {
       description: "A great cafe",
       website: "cafe1@gmail.com",
       image: "cafe1.jpg",
+      address: "Town 1",
       reviews: [],
     });
   });
@@ -71,6 +72,7 @@ describe("CafePage Component", () => {
         location: "Town 1",
         website: "cafe1@gmail.com",
         image: "cafe1.jpg",
+        address: 'Address 1',
         reviews: [],
       });
 
@@ -90,6 +92,7 @@ describe("CafePage Component", () => {
           expect(screen.getByText(/Town 1/i)).toBeInTheDocument();
           expect(screen.getByText(/cafe1@gmail.com/i)).toBeInTheDocument();
           expect(screen.getByAltText(/Cafe 1/i)).toBeInTheDocument();
+          expect(screen.getByText(/Address 1/i)).toBeInTheDocument();
           expect(
               screen.queryByAltText("Swish Logo Spinning")
           ).not.toBeInTheDocument();

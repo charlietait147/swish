@@ -39,13 +39,13 @@ function CafeMapContainer({ cafe }) {
           </svg>
           <Link
             href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-              cafe.address
+              cafe?.address
             )}`}
             className="text-gray-800 text-sm hover:underline"
             target="_blank"
             rel="noopener noreferrer"
           >
-            {cafe.address}
+            {cafe?.address}
           </Link>
         </div>
       </div>
