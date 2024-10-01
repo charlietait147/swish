@@ -200,7 +200,7 @@ const cafes = [
         location: 'Haslemere',
         description: 'Heidi is a family-run cafe in the heart of Haslemere. The cafe is open seven days a week and serves a range of delicious food and drinks. Heidi is the perfect place to relax and enjoy a coffee or a light lunch. The cafe is also available for private hire and is the perfect venue for a special occasion.',
         website: 'https://www.heidibakery.co.uk/locations/heidi-haslemere/',
-        image: '/',
+        image: 'heidi.jpg',
         borderImage: '/',
         address: '27 High St, Haslemere GU27 2HG',
         lat: 51.08834,
@@ -515,6 +515,140 @@ const cafes = [
         ],
         reviews: []
     },
+    {
+        name: 'Baffled Coffee',
+        location: 'Portsmouth',
+        website: 'https://baffledcoffee.com/',
+        description: 'Feeling baffled on the beachfront? This buzzing venue is the perfect hang-out for anyone seeking delicious homemade food and speciality coffee in the Portsmouth and Southsea area. Its relatively small interior give this well-reviewed place a cosy vibe, making it the perfect escape on a rainy day to socialise or cuddle up with a book. Nearby attractions include Portsmouth Historic Dockyard, the Spinnaker Tower and Gunwharf Quays outlet shopping centre. ',
+        image: 'baffled-coffee-no-border.jpg',
+        borderImage: 'baffled-coffee.jpg',
+        address: '77 Fawcett Rd, Southsea, Portsmouth, Southsea PO4 0DB',
+        lat: 50.79387,
+        lng: -1.07625,
+        icons: [
+            {
+                type: 'Accessible by Public Transport',
+                url: 'accessible-by-transport.jpeg'
+            },
+            {
+                type: 'Dog Friendly',
+                url: 'dog-friendly.jpeg',
+            },
+            {
+                type: 'Hot Food Available',
+                url: 'hot-food.jpeg',
+            },
+            {
+                type: 'Takes Bookings',
+                url: 'bookings.jpeg',
+            }
+        ],
+        reviews: []
+    },
+    {
+        name: 'Bisque Coffee',
+        location: 'Southampton',
+        website: 'http://bisquecoffee.co.uk/',
+        description: 'Bisque is an independent coffee shop nestled in Old Town Southampton, with a focus on creating a productive workspace. A variety of workspaces are organised within the venue including communal tables, individual desks and soft lounge-style seating areas for relaxed brainstorming sessions. Beyond coffee, a delightful selection of pastries, sandwiches and sweet treats are also available. For those visiting Southampton for work purposes, we highly recommend paying this venue a visit.',
+        image: 'bisque-coffee-no-border.jpg',
+        borderImage: 'bisque-coffee.jpg',
+        address: 'Unit 2, 117 High St, Southampton SO14 2AA',
+        lat: 50.89839,
+        lng: -1.40409,
+        icons: [
+            {
+                type: 'Accessible by Public Transport',
+                url: 'accessible-by-transport.jpeg'
+            },
+            {
+                type: 'Takes Bookings',
+                url: 'bookings.jpeg',
+            }
+        ],
+        reviews: [],  
+    },
+    {
+        name: 'Fego Restaurant Cobham',
+        location: 'Cobham',
+        website: 'https://hellofego.com/',
+        description: 'Fego is the ultimate neighbourhood café serving artisan coffee and cakes, plus imaginative breakfast and lunch offerings. From breakfast classics to fabulous lunch food, Fego balances the fresh and healthy approach with indulgence, making it the perfect feel-good setting for a social catch-up. For anyone living in or visiting Cobham, we’d highly recommend this venue.',
+        image: 'fego-restaurant-cobham-no-border.jpg',
+        borderImage: 'fego-restaurant-cobham.jpg',
+        address: '14 Anyards Rd, Cobham KT11 2JZ',
+        lat: 51.32963,
+        lng: -0.41062,
+        icons: [
+            {
+                type: 'Accessible by Public Transport',
+                url: 'accessible-by-transport.jpeg'
+            },
+            {
+                type: 'Dog Friendly',
+                url: 'dog-friendly.jpeg',
+            },
+            {
+                type: 'Hot Food Available',
+                url: 'hot-food.jpeg',
+            },
+        ],
+        reviews: []
+    },
+    {
+        name: 'Hummings',
+        location: 'Esher',
+        website: 'https://www.hummings.co.uk/',
+        description: 'Located in the heart of Esher, Hummings is a café by day and a bar by night. With its contemporary design, intimate open-air terrace and relaxed, upbeat atmosphere, the place has become a destination-venue, attracting both locals and visitors alike. Why not pay a visit to discover their stunning selection of healthy brunch and lunch choices, smoothies, coffees and cakes? While walk-ins are welcome, we recommend booking at weekends for brunch and lunch in order to secure a table, owing to the popularity of the place!',
+        image: 'hummings-no-border.jpg',
+        borderImage: 'hummings.jpg',
+        address: '51 High St, Esher KT10 9RQ',
+        lat: 51.36988,
+        lng: -0.36461,
+        icons: [
+            {
+                type: 'Accessible by Public Transport',
+                url: 'accessible-by-transport.jpeg'
+            },
+            {
+                type: 'Dog Friendly',
+                url: 'dog-friendly.jpeg',
+            },
+            {
+                type: 'Hot Food Available',
+                url: 'hot-food.jpeg',
+            },
+            {
+                type: 'Takes Bookings',
+                url: 'bookings.jpeg',
+            }
+        ],
+        reviews: []
+    },
+    {
+        name: 'Pinnock\'s Coffee House',
+        location: 'Ripley',
+        website: 'https://pinnocks.coffee/',
+        description: 'Located centrally in the pretty Surrey village of Ripley, Pinnock’s is a truly independent business. Its emphasis is on freshly made quality home cooked food and cakes, sourcing these only from county-local suppliers. With eight different beans to choose from, their coffee is also roasted locally using the drip-method, or for those less fanatical about coffee, a selection of 16 loose leaf teas are available, hand blended by local tea artisans Bergamia in Dorking. Whether looking for a light lunch or a place to relax and socialise over a brew, you’re sure to be delighted by this venue!',
+        image: 'pinnocks-coffee-house-no-border.jpg',
+        borderImage: 'pinnocks-coffee-house.jpg',
+        address: 'Pinnocks, High St, Ripley, Woking GU23 6AF',
+        lat: 51.29992,
+        lng: -0.49319,
+        icons: [
+            {
+                type: 'Dog Friendly',
+                url: 'dog-friendly.jpeg',
+            },
+            {
+                type: 'Hot Food Available',
+                url: 'hot-food.jpeg',
+            },
+            {
+                type: 'Takes Bookings',
+                url: 'bookings.jpeg',
+            }
+        ],
+        reviews: []
+    }
 ]
 
 export default cafes;
