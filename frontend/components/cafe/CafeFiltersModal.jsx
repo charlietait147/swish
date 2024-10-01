@@ -48,7 +48,7 @@ function CafeFiltersModal({
   };
 
   return (
-    <div className="w-full fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="w-full fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50" role="dialog">
       <div
         className={`bg-white w-full max-w-lg rounded-lg shadow-lg ${
           slideOut ? "slider-out" : "slider"
@@ -58,7 +58,7 @@ function CafeFiltersModal({
         <div className="bg-white w-full max-w-lg rounded-lg shadow-lg">
           <div className="flex justify-between items-center px-6 pt-4 pb-4 border-b-2 border-b-gray-200 mb-4">
             <h2 className="text-lg font-semibold">Filters</h2>
-            <button onClick={toggleClose}>
+            <button onClick={toggleClose} role="button" aria-label="close">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -101,7 +101,7 @@ function CafeFiltersModal({
             <div>
               <label className="text-sm font-semibold">Amenities</label>
               <ul className="flex flex-wrap gap-2 mt-2">
-                {amenities.map((amenity, index) => (
+              {(amenities || []).map((amenity, index) => (
                   <li key={index}>
                     <button
                       onClick={() => handleAmenityClick(amenity)}
@@ -121,12 +121,16 @@ function CafeFiltersModal({
               <button
                 onClick={handleResetFilters}
                 className="px-4 py-2 text-gray-700 rounded-lg hover:bg-gray-100"
+                role="button"
+                aria-label="clear modal filters"
               >
                 Clear
               </button>
               <button
                 onClick={handleApplyAndClose}
                 className="px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg"
+                role="button"
+                aria-label="apply modal filters"
               >
                 Apply
               </button>

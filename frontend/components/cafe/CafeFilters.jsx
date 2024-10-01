@@ -90,6 +90,8 @@ function CafeFilters({
             stroke="currentColor"
             className="w-6 h-6 ml-1 cursor-pointer"
             onClick={handleMobileSearch}
+            role="button"
+            aria-label="search"
           >
             <path
               strokeLinecap="round"
@@ -111,6 +113,8 @@ function CafeFilters({
         <button
           onClick={toggleModal}
           className="border border-gray-300 bg-white text-black text-sm gap-1.5 items-center flex flex-row font-semibold py-3 px-4 rounded-full"
+          role="button"
+          aria-label="filters modal"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
