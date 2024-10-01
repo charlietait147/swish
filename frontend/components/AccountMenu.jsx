@@ -11,12 +11,6 @@ function AccountMenu({ handleSignOut }) {
     setDropdownVisible(!dropdownVisible);
   };
 
-//   const handleClickOutside = () => {
-//     if (dropdownVisible) {
-//       setDropdownVisible(false);
-//     }
-//   };
-
   useEffect(() => {
     const handleClickOutside = (event) => {
       // Check if the click is outside the dropdown
@@ -40,6 +34,8 @@ function AccountMenu({ handleSignOut }) {
       <div
         className="w-14 h-14 rounded-full bg-white flex items-center justify-center overflow-hidden shadow-xl border border-gray-300 cursor-pointer"
         onClick={handleToggleDropdown}
+        role="button"
+        aria-label="avatar"
       >
         <Image src={Logo} alt="Account Avatar" className="w-14 h-14" />
       </div>
@@ -49,6 +45,7 @@ function AccountMenu({ handleSignOut }) {
         <div
           className="absolute right-0 top-14 py-2 mt-2 w-48 bg-white rounded-lg shadow-lg z-10"
           onClick={(e) => e.stopPropagation()}
+          role="menu"
         >
           <ul className="text-sm text-black flex flex-col gap-1">
             <li className="px-4 py-2 hover:bg-gray-100">

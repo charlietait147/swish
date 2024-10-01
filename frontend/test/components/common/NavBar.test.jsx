@@ -20,22 +20,22 @@ jest.mock("js-cookie", () => ({
 }));
 
 describe("NavBar Component", () => {
-    beforeEach(() => {
-        jest.spyOn(console, 'error').mockImplementation((message) => {
-            const msg = String(message);
-          if (msg.includes('Not implemented: navigation')) {
-            // Suppress this specific error
-            return;
-          }
-          // Otherwise, log the error
-          console.error(message);
-        });
-        jest.clearAllMocks();
-      });
+  beforeEach(() => {
+    jest.spyOn(console, "error").mockImplementation((message) => {
+      const msg = String(message);
+      if (msg.includes("Not implemented: navigation")) {
+        // Suppress this specific error
+        return;
+      }
+      // Otherwise, log the error
+      console.error(message);
+    });
+    jest.clearAllMocks();
+  });
 
-      afterEach(() => {
-        console.error.mockRestore();
-      });
+  afterEach(() => {
+    console.error.mockRestore();
+  });
 
   it("should render a Sign in link when the user is not logged in", () => {
     render(<NavBar />);
@@ -45,24 +45,14 @@ describe("NavBar Component", () => {
     expect(loginLink).toBeInTheDocument();
   });
 
-  it("should render a Sign Out link when the user is logged in", () => {
+  it("should render an avatar button  when the user is logged in", () => {
     Cookies.get.mockReturnValue("839429f778gfd8gf8387gd");
 
     render(<NavBar />);
 
-    const signOutButton = screen.getByText(/Sign Out/i);
+    const avatar = screen.getByRole("button", { name: /avatar/i });
 
-    expect(signOutButton).toBeInTheDocument();
-  });
-
-  it("should render a My Account link when the user is logged in", () => {
-    Cookies.get.mockReturnValue("839429f778gfd8gf8387gd");
-
-    render(<NavBar />);
-
-    const myAccountLink = screen.getByText(/My Account/i);
-
-    expect(myAccountLink).toBeInTheDocument();
+    expect(avatar).toBeInTheDocument();
   });
 
   it("should toggle the menu when the burger icon is clicked", async () => {
@@ -79,9 +69,9 @@ describe("NavBar Component", () => {
 
     // Assert that the menu is visible
     await waitFor(() => {
-        const visibleMenuList = screen.getByRole("menu");
-        expect(visibleMenuList).toBeVisible();
-      });
+      const visibleMenuList = screen.getByRole("menu");
+      expect(visibleMenuList).toBeVisible();
+    });
 
     // Click the burger icon again to close the menu
     const closeButton = screen.getByRole("button", { name: /close menu/i });
@@ -89,9 +79,9 @@ describe("NavBar Component", () => {
 
     // Assert that the menu is closed
     await waitFor(() => {
-        const closedMenuList = screen.queryByRole("menu");
-        expect(closedMenuList).not.toBeInTheDocument(); 
-      });
+      const closedMenuList = screen.queryByRole("menu");
+      expect(closedMenuList).not.toBeInTheDocument();
+    });
   });
 
   it("should remove the token in cookies and navigate to the login page when the Sign Out button is clicked", async () => {
@@ -99,20 +89,23 @@ describe("NavBar Component", () => {
     Cookies.get.mockReturnValue("839429f778gfd8gf8387gd");
 
     // 2. Render the NavBar component
-    render(
-    <NavBar />);
+    render(<NavBar />);
 
     // 3. Log the token from Cookies.get to confirm the mock is applied
     console.log("Token from Cookies.get mock:", Cookies.get("token"));
 
-    // 4. Find and click the Sign Out button
-    const signOutButton = screen.getByText(/Sign Out/i);
-    expect(signOutButton).toBeInTheDocument();
+    // 4. Find and click the Avatar button
+    const avatar = screen.getByRole("button", { name: /avatar/i });
+    userEvent.click(avatar);
 
-    // fireEvent.click(signOutButton);
-    userEvent.click(signOutButton);
+    // 5. Find and click the Sign Out button
+    await waitFor(() => {
+      const signOutButton = screen.getByText(/Sign Out/i);
+      expect(signOutButton).toBeInTheDocument();
+      userEvent.click(signOutButton);
+    });
 
-    // Assert 
+    // Assert
     await waitFor(() => {
       expect(Cookies.remove).toHaveBeenCalledWith("token");
       expect(mockRouterPush).toHaveBeenCalledWith("/login");
