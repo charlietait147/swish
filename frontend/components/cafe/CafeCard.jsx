@@ -1,11 +1,10 @@
 import Link from "next/link";
 import PropTypes from "prop-types";
 
-
 function CafeCard({ cafeId, name, location, image }) {
-  
+  console.log(process.env.NEXT_API_URL);
   return (
-    <Link href= {`cafe/${cafeId}`} data-testid="cafe-link">
+    <Link href={`cafe/${cafeId}`} data-testid="cafe-link">
       <div
         className="relative bg-cover bg-center w-full shadow-lg overflow-hidden h-56 rounded-lg cursor-pointer transition duration-300 ease-in-out transform hover:scale-105"
         data-testid="cafe-card"

@@ -4,11 +4,14 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import AccountMenu from "./AccountMenu";
+import { fetchUserData } from "../services/user.service.jsx";
 
 function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isLoading, setisLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
+  // const [avatarUrl, setAvatarUrl] = useState(null); // Store the avatar URL
+  const [userData, setUserData] = useState(null);
 
   const router = useRouter();
 
@@ -16,13 +19,54 @@ function NavBar() {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  // useEffect(() => {
+  //   const token = Cookies.get("token");
+  //   if (token) {
+  //     setIsLoggedIn(true);
+
+  //     fetchUserData()
+  //     .then((userData) => {
+  //       setAvatarUrl(userData.avatar); // Assuming the avatar URL is part of the user data
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching user data:", error);
+  //     });
+  //   }
+  //   setisLoading(false)
+  // }, []);
+
   useEffect(() => {
     const token = Cookies.get("token");
     if (token) {
       setIsLoggedIn(true);
     }
-    setisLoading(false)
   }, []);
+
+   //   fetchUserData()
+    //   .then((userData) => {
+    //     setAvatarUrl(userData.avatar); // Assuming the avatar URL is part of the user data
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error fetching user data:", error);
+    //   });
+    // }
+    // setisLoading(false)
+
+    const getUserData = async () => {
+      try {
+        const response = await fetchUserData();
+        setUserData(response);
+        console.log(userData);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    useEffect(() => {
+      getUserData();
+    }, []);
 
   const handleSignOut = () => {
     Cookies.remove("token");
@@ -30,7 +74,7 @@ function NavBar() {
     router.push("/login");
   };
 
-  if (isLoading) {
+  if (loading) {
     return null; // Don't render anything while loading
   }
 
@@ -223,7 +267,7 @@ function NavBar() {
             >
               Sign Out
             </li> */}
-            <AccountMenu handleSignOut={handleSignOut} />
+            <AccountMenu handleSignOut={handleSignOut} avatarUrl={userData.avatar} />
           </>
         )}
       </ul>

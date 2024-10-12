@@ -2,7 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import Logo from "../public/logo/swish-logo.png";
 import Image from "next/image";
 
-function AccountMenu({ handleSignOut }) {
+function AccountMenu({ handleSignOut, avatarUrl }) {
+  
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -37,7 +38,8 @@ function AccountMenu({ handleSignOut }) {
         role="button"
         aria-label="avatar"
       >
-        <Image src={Logo} alt="Account Avatar" className="w-14 h-14" />
+        <Image src={`${process.env.NEXT_API_URL}/public/images/${avatarUrl}`} width={56} 
+  height={56}  alt="Account Avatar" className="w-14 h-14" />
       </div>
 
       {/* Dropdown Menu */}
