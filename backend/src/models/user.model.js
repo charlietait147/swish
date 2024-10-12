@@ -10,6 +10,9 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    avatar: {
+        type: String,
+    },
     reviews: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Review'
@@ -17,7 +20,6 @@ const userSchema = new mongoose.Schema({
     cafes: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Cafe'
-    
     }]
 });
 

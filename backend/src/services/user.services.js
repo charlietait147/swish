@@ -8,7 +8,10 @@ export const registerUserService = async (email, password) => {
             throw new Error('A user with this email already exists');
         }
         const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = new User({ email, password: hashedPassword });
+        const avatarUrl = "swish-logo.png";
+    
+        const newUser = new User({ email, password: hashedPassword, avatar: avatarUrl });
+        console.log()
         return await newUser.save();
     } catch (error) {
         throw new Error(error.message);
