@@ -74,7 +74,7 @@ function CafeDetailsSection({ cafe }) {
     .join(" ");
 
   return (
-    <div className="max-w-screen-lg mx-auto xs:px-6 sm:px-10 xl:px-0 mt-16 mb-6 px-4">
+    <div className="max-w-screen-lg mx-auto xs:px-6 sm:px-10 xl:px-0 mt-8 lg:mt-12 mb-6 px-4">
       {showModal && (
         <div className="fixed top-3 right-2 bg-black border z-10 rounded-lg shadow-lg p-4 flex flex-row items-center gap-1">
           <span className="text-sm font-semibold text-white">

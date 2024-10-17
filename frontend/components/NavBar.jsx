@@ -12,6 +12,7 @@ function NavBar() {
   const [loading, setLoading] = useState(true);
   // const [avatarUrl, setAvatarUrl] = useState(null); // Store the avatar URL
   const [userData, setUserData] = useState(null);
+  const [error, setError] = useState(null);
 
   const router = useRouter();
 
