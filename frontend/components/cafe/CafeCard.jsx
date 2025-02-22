@@ -2,7 +2,7 @@ import Link from "next/link";
 import PropTypes from "prop-types";
 
 function CafeCard({ cafeId, name, location, image }) {
-  console.log(process.env.NEXT_API_URL);
+
   return (
     <Link href={`cafe/${cafeId}`} data-testid="cafe-link">
       <div
