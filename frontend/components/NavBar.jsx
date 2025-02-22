@@ -43,35 +43,40 @@ function NavBar() {
     }
   }, []);
 
-   //   fetchUserData()
-    //   .then((userData) => {
-    //     setAvatarUrl(userData.avatar); // Assuming the avatar URL is part of the user data
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error fetching user data:", error);
-    //   });
-    // }
-    // setisLoading(false)
+  //   fetchUserData()
+  //   .then((userData) => {
+  //     setAvatarUrl(userData.avatar); // Assuming the avatar URL is part of the user data
+  //   })
+  //   .catch((error) => {
+  //     console.error("Error fetching user data:", error);
+  //   });
+  // }
+  // setisLoading(false)
 
-    const getUserData = async () => {
-      try {
-        const response = await fetchUserData();
-        setUserData(response);
-        console.log(userData);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const getUserData = async () => {
+    try {
+      const response = await fetchUserData();
+      setUserData(response);
+      console.log(userData);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    useEffect(() => {
-      getUserData();
-    }, []);
+  useEffect(() => {
+    getUserData();
+  }, []);
 
   const handleSignOut = () => {
     Cookies.remove("token");
     setIsLoggedIn(false);
+    Object.keys(localStorage).forEach((key) => {
+      if (key.startsWith("savedCafe_")) {
+        localStorage.removeItem(key);
+      }
+    });
     router.push("/login");
   };
 
@@ -268,7 +273,10 @@ function NavBar() {
             >
               Sign Out
             </li> */}
-            <AccountMenu handleSignOut={handleSignOut} avatarUrl={userData.avatar} />
+            <AccountMenu
+              handleSignOut={handleSignOut}
+              avatarUrl={userData.avatar}
+            />
           </>
         )}
       </ul>
