@@ -296,7 +296,7 @@ const cafes = [
                 type: 'Takes Bookings',
                 url: 'bookings.jpeg',
             }
-        ], 
+        ],
         reviews: []
     },
     {
@@ -565,7 +565,7 @@ const cafes = [
                 url: 'bookings.jpeg',
             }
         ],
-        reviews: [],  
+        reviews: [],
     },
     {
         name: 'Fego Restaurant Cobham',
@@ -645,6 +645,66 @@ const cafes = [
             {
                 type: 'Takes Bookings',
                 url: 'bookings.jpeg',
+            }
+        ],
+        reviews: []
+    },
+    {
+        name: 'Natter Cafe',
+        location: 'Farncombe',
+        website: "https://nattercafe.co.uk/",
+        description: "Natter Cafe, in the heart of Farncombe, is dedicated to providing a lovely environment for local people and business, to come and enjoy top quality coffee, food and service.   Customers gather around tables everyday for a good natter - which sometimes we feel in this day in age is a thing of the past.  Their lovely secluded garden room is open daily all year round (with infra-red heaters, throws and hot water bottles) for you to enjoy.  Why not pay a visit and have a natter?",
+        image: "natter-cafe-no-border.jpg",
+        borderImage: "natter-cafe.jpg",
+        address: "67 St John's St, Farncombe, Godalming GU7 3EH",
+        lat: 51.19589,
+        lng: -0.60428,
+        icons: [
+            {
+                type: "Accessible by Public Transport",
+                url: "accessible-by-transport.jpeg"
+            },
+            {
+                type: "Dog Friendly",
+                url: "dog-friendly.jpeg",
+            },
+            {
+                type: "Hot Food Available",
+                url: "hot-food.jpeg",
+            },
+            {
+                type: "Takes Bookings",
+                url: "bookings.jpeg",
+            }
+        ],
+        reviews: []
+    },
+    {
+        name: "The Courtyard Cafe",
+        location: "Hartley Wintney",
+        website: "https://www.cafecourtyard.com/",
+        description: "Located on the edge of both the picturesque Cricket Green and Hartley Wintney High Street, The Courtyard is an independent family-friendly restaurant serving the local community and businesses.  They serve fresh, delicious, quality food, with everything made daily in the kitchens and only using the finest locally sourced ingredients.",
+        image: "the-courtyard-cafe-no-border.jpg",
+        borderImage: "the-courtyard-cafe.jpg",
+        address: "63 High St, Hartley Wintney, Hook RG27 8NY",
+        lat: 51.30612,
+        lng: -0.89987,
+        icons: [
+            {
+                type: "Dog Friendly",
+                url: "dog-friendly.jpeg",
+            },
+            {
+                type: "Hot Food Available",
+                url: "hot-food.jpeg",
+            },
+            {
+                type: "Onsite Parking",
+                url: "onsite-parking.jpeg",
+            },
+            {
+                type: "Takes Bookings",
+                url: "bookings.jpeg",
             }
         ],
         reviews: []
