@@ -9,6 +9,7 @@ const cafes = [
         address: '11 The Square, Winchester, SO23 9ES',
         lat: 51.0622118,
         lng: -1.3178322,
+        menu: "https://www.thewinchesterorangery.com/classes-om",
         icons: [
             {
                 type: 'Accessible by Public Transport',
@@ -35,6 +36,7 @@ const cafes = [
         address: '15 Broad St, Alresford SO24 9AR',
         lat: 51.09106,
         lng: -1.16183,
+        menu: null,
         icons: [
             {
                 type: 'Accessible by Public Transport',
@@ -61,6 +63,7 @@ const cafes = [
         address: '28 Jewry St, Winchester SO23 8SA',
         lat: 51.065576,
         lng: -1.315485,
+        menu: "https://static1.squarespace.com/static/602bde07aee616468ad8cdba/t/64bf9545ed0f3d7b89aaace3/1690277190195/Josies+Menu+2023+SS.pdf",
         icons: [
             {
                 type: 'Accessible by Public Transport',
@@ -87,6 +90,7 @@ const cafes = [
         address: '40 Jewry St, Winchester SO23 8RY',
         lat: 51.06404,
         lng: -1.31587,
+        menu: null,
         icons: [
             {
                 type: 'Accessible by Public Transport',
@@ -109,6 +113,7 @@ const cafes = [
         address: 'Chilton Manor Farm, Chilton Candover, Alresford, SO24 9TX',
         lat: 51.15907,
         lng: -1.15516,
+        menu: "https://static1.squarespace.com/static/5f7b21f0f1a242288e315e1d/t/66c88fd761b1a43f29e1b085/1724420056219/Yard+Menu+10.05.24.+non+alcohol++%281%29.pdf",
         icons: [
             {
                 type: 'Dog Friendly',
@@ -135,6 +140,7 @@ const cafes = [
         address: '12 Jewry St, Winchester SO23 8RZ',
         lat: 51.064408,
         lng: -1.31612,
+        menu: null,
         icons: [
             {
                 type: 'Accessible by Public Transport',
@@ -157,6 +163,7 @@ const cafes = [
         address: '3-4, Kings Walk, Middle Brook St, Winchester SO23 8AF',
         lat: 51.06253,
         lng: -1.31176,
+        menu: "https://www.southdownssocial.com/menu",
         icons: [
             {
                 type: 'Accessible by Public Transport',
@@ -179,6 +186,7 @@ const cafes = [
         address: 'Great Minster St, Winchester SO23 9HE',
         lat: 51.06097,
         lng: -1.31527,
+        menu: "https://winchestercathedral.events/wp-content/uploads/2024/01/Cafe-Menu-January-2024.pdf",
         icons: [
             {
                 type: 'Accessible by Public Transport',
@@ -205,6 +213,7 @@ const cafes = [
         address: '27 High St, Haslemere GU27 2HG',
         lat: 51.08834,
         lng: -0.70925,
+        menu: null,
         icons: [
             {
                 type: 'Accessible by Public Transport',
@@ -231,6 +240,7 @@ const cafes = [
         address: 'Garnier Road Car Park, Winchester SO23 9PA',
         lat: 51.04940,
         lng: -1.31124,
+        menu: null,
         icons: [
             {
                 type: 'Dog Friendly',
@@ -253,6 +263,7 @@ const cafes = [
         address: '126 High St, Southampton SO14 2AA',
         lat: 50.89943,
         lng: -1.40396,
+        menu: "https://edisons.life/wp-content/uploads/2024/10/Edisons-Food-2024.pdf",
         icons: [
             {
                 type: 'Accessible by Public Transport',
@@ -279,6 +290,7 @@ const cafes = [
         address: 'Unit 9, 24 Lion and Lamb Yard, Farnham GU9 7LL',
         lat: 51.21482,
         lng: -0.80134,
+        menu: "https://coffeediemfarnham.co.uk/menu/",
         icons: [
             {
                 type: 'Accessible by Public Transport',
@@ -309,6 +321,7 @@ const cafes = [
         address: '48 High St, Haslemere GU27 2LA',
         lat: 51.08875,
         lng: -0.70867,
+        menu: "https://hemingwaysofhaslemere.com/2-uncategorised/3-menu",
         icons: [
             {
                 type: 'Accessible by Public Transport',
@@ -339,6 +352,7 @@ const cafes = [
         address: '113B West St, Lion and Lamb Yard, Farnham GU9 7HH',
         lat: 51.21444,
         lng: -0.80080,
+        menu: "https://www.harrisandhoole.co.uk/menu/coffee",
         icons: [
             {
                 type: 'Accessible by Public Transport',
@@ -365,6 +379,7 @@ const cafes = [
         address: '180 High St, The Common, Cranleigh GU6 8RG',
         lat: 51.14200,
         lng: -0.49286,
+        menu: null,
         icons: [
             {
                 type: 'Accessible by Public Transport',
@@ -391,6 +406,7 @@ const cafes = [
         address: 'The Square, Wickham, Fareham PO17 5JT',
         lat: 50.90026,
         lng: -1.18712,
+        menu: null,
         icons: [
             {
                 type: 'Dog Friendly',
@@ -421,6 +437,7 @@ const cafes = [
         address: '2 The Green, Rowland\s Castle PO9 6BN',
         lat: 50.89115,
         lng: -0.95829,
+        menu: "https://www.thebumblebeecafe.co.uk/menu",
         icons: [
             {
                 type: 'Accessible by Public Transport',
@@ -451,6 +468,7 @@ const cafes = [
         address: 'Stansted House, Rowlands Castle, Rowland\s Castle PO9 6DU',
         lat: 50.88737,
         lng: -0.91899,
+        menu: "https://www.paviliontearoom.co.uk/menus/",
         icons: [
             {
                 type: 'Hot Food Available',
@@ -473,6 +491,7 @@ const cafes = [
         address: '60 High St, Bishop/s Waltham, Southampton SO32 1AB',
         lat: 50.95482,
         lng: -1.21220,
+        menu: null,
         icons: [
             {
                 type: 'Dog Friendly',
@@ -495,6 +514,7 @@ const cafes = [
         address: '2 Dragon St, Petersfield GU31 4JD',
         lat: 51.00354,
         lng: -0.93440,
+        menu: "https://www.thenaturalfooddeli.co.uk/menu",
         icons: [
             {
                 type: 'Accessible by Public Transport',
@@ -525,6 +545,7 @@ const cafes = [
         address: '77 Fawcett Rd, Southsea, Portsmouth, Southsea PO4 0DB',
         lat: 50.79387,
         lng: -1.07625,
+        menu: "https://baffledcoffee.com/files/Baffled%20Menu.pdf",
         icons: [
             {
                 type: 'Accessible by Public Transport',
@@ -555,6 +576,7 @@ const cafes = [
         address: 'Unit 2, 117 High St, Southampton SO14 2AA',
         lat: 50.89839,
         lng: -1.40409,
+        menu: null,
         icons: [
             {
                 type: 'Accessible by Public Transport',
@@ -577,6 +599,7 @@ const cafes = [
         address: '14 Anyards Rd, Cobham KT11 2JZ',
         lat: 51.32963,
         lng: -0.41062,
+        menu: "https://hellofego.com/fego-menu/",
         icons: [
             {
                 type: 'Accessible by Public Transport',
@@ -603,6 +626,7 @@ const cafes = [
         address: '51 High St, Esher KT10 9RQ',
         lat: 51.36988,
         lng: -0.36461,
+        menu: "https://www.hummings.co.uk/cafe/menus/",
         icons: [
             {
                 type: 'Accessible by Public Transport',
@@ -633,6 +657,7 @@ const cafes = [
         address: 'Pinnocks, High St, Ripley, Woking GU23 6AF',
         lat: 51.29992,
         lng: -0.49319,
+        menu: "https://pinnocks.coffee/food/",
         icons: [
             {
                 type: 'Dog Friendly',
@@ -659,6 +684,7 @@ const cafes = [
         address: "67 St John's St, Farncombe, Godalming GU7 3EH",
         lat: 51.19589,
         lng: -0.60428,
+        menu: "https://nattercafe.co.uk/wp-content/uploads/2023/09/NATTER-CAFE-MENUS.pdf",
         icons: [
             {
                 type: "Accessible by Public Transport",
@@ -689,6 +715,7 @@ const cafes = [
         address: "63 High St, Hartley Wintney, Hook RG27 8NY",
         lat: 51.30612,
         lng: -0.89987,
+        menu: "https://www.cafecourtyard.com/food-drink/",
         icons: [
             {
                 type: "Dog Friendly",

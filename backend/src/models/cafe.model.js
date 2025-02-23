@@ -33,6 +33,10 @@ const cafeSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    menu: {
+        type: String,
+        required: true,
+    },
     icons: [
         {
             type: {
