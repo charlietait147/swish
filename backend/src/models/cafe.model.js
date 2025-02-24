@@ -5,10 +5,10 @@ const cafeSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    location: {
+    location: [{
         type: String,
         required: true,
-    },
+    }],
     description: {
         type: String,
         required: true,
@@ -40,18 +40,18 @@ const cafeSchema = new mongoose.Schema({
     icons: [
         {
             type: {
-              type: String, // Type of icon (e.g., 'Dog Friendly')
+                type: String, // Type of icon (e.g., 'Dog Friendly')
             },
             url: {
-              type: String, // URL of the icon
+                type: String, // URL of the icon
             }
-          }
+        }
     ],
     reviews: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Review',
     }],
-}, { collection: "cafes"});
+}, { collection: "cafes" });
 
 const Cafe = mongoose.model('Cafe', cafeSchema);
 
