@@ -314,6 +314,8 @@ import { addCafe, isCafeSaved } from "../../services/user.service";
 import { useRouter } from "next/navigation";
 import PropTypes from "prop-types";
 import SignInModal from "../SignInModal";
+import menuIcon from "../../public/icons/menu.jpg";
+import Image from "next/image";
 
 function CafeDetailsSection({ cafe }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -390,13 +392,11 @@ function CafeDetailsSection({ cafe }) {
 
   const toggleModalClose = () => {
     setShowSignInModal(false);
-  }
+  };
 
   return (
     <div className="max-w-screen-lg mx-auto xs:px-6 sm:px-10 xl:px-0 mt-8 lg:mt-12 mb-6 px-4">
-      {showSignInModal && (
-          <SignInModal toggleModalClose={toggleModalClose} />
-      )}
+      {showSignInModal && <SignInModal toggleModalClose={toggleModalClose} />}
       {showModal && (
         <div className="fixed top-3 right-2 bg-black border z-10 rounded-lg shadow-lg p-4 flex flex-row items-center gap-1">
           <span className="text-sm font-semibold text-white">
@@ -488,6 +488,18 @@ function CafeDetailsSection({ cafe }) {
                 {cafe.website}
               </a>
             </div>
+            {/* {cafe.menu && (
+              <div className="border border-gray-200 rounded-lg px-4 pt-2 pb-0 md:w-fit inline-block">
+                <a
+                  href={cafe.menu}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-block"
+                >
+                  <Image src={menuIcon} alt="menu" width={48} height={48} />
+                </a>
+              </div>
+            )} */}
             {/* Icons Below Image on md+ screens */}
             <div className="hidden lg:flex flex-col gap-3">
               {cafe.icons &&
@@ -618,6 +630,27 @@ function CafeDetailsSection({ cafe }) {
           </p>
         )}
       </div>
+      {cafe.menu && (
+        <>
+          <h1 className="text-xl font-semibold pt-4 md:pt-6 lg:pt-8">Menu</h1>
+          <div className="flex items-center sm:pt-1 ">
+            <a
+              href={cafe.menu}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-2"
+            >
+              <Image src={menuIcon} alt="menu" className="h-16 w-16" />
+            </a>
+            <a
+              className="hidden xs:inline-block text-base font-semibold text-gray-600 ml-1 hover:underline hover:text-blue-400"
+              href={cafe.menu}
+            >
+              {cafe.menu}
+            </a>
+          </div>
+        </>
+      )}
     </div>
   );
 }
