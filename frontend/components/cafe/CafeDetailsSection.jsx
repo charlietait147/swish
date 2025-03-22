@@ -474,7 +474,7 @@ function CafeDetailsSection({ cafe }) {
                   />
                 </svg>
                 <p className="text-sm font-semibold text-gray-600 pl-0.5">
-                  {cafe.location}
+                  {cafe.locations[0]}
                 </p>
               </div>
             </div>
@@ -483,7 +483,7 @@ function CafeDetailsSection({ cafe }) {
                 href={cafe.website}
                 target="_blank"
                 rel="noreferrer"
-                className="text-orange-500 text-sm break-words md:text-base"
+                className="text-orange-500 text-sm break-words md:text-base hover:underline"
               >
                 {cafe.website}
               </a>

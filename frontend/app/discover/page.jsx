@@ -35,9 +35,17 @@ export default function DiscoverPage() {
       );
     }
 
+    // if (filters.location) {
+    //   filteredCafes = filteredCafes.filter((cafe) =>
+    //     cafe.location.toLowerCase().includes(filters.location.toLowerCase())
+    //   );
+    // }
+
     if (filters.location) {
       filteredCafes = filteredCafes.filter((cafe) =>
-        cafe.location.toLowerCase().includes(filters.location.toLowerCase())
+        cafe.locations.some((loc) =>
+          loc.toLowerCase().includes(filters.location.toLowerCase())
+        )
       );
     }
 
