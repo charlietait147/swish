@@ -6,7 +6,7 @@ function CafeReviewCard({ timestamp, description, name, image }) {
 
   return (
     <div>
-      <div className="bg-white border border-gray-300 py-4 px-4 flex flex-col rounded-lg shadow-md h-fit mb-4  break-inside-avoid">
+      <div className=" bg-white border border-gray-300 py-4 px-4 flex flex-col rounded-lg shadow-md h-fit mb-4  break-inside-avoid">
         <div className="flex flex-row justify-between items-center pb-1.5">
           <div className="flex flex-row ">
             <svg

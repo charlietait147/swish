@@ -206,7 +206,7 @@ function CafeReviewList({ cafe, setReviewsUpdated }) {
       </div>
       {/* )} */}
       {/* </div> */}
-      {/* <div className="flex flex-col gap-4 md:grid grid-cols-2 md:gap-16"> */}
+      {/* <div className="flex flex-col gap-4 md:grid grid-cols-2 md:gap-16">  */}
       <div className="columns-1 sm:columns-2 lg:columns-3 gap-4">
         {cafe &&
           cafe.reviews &&
@@ -220,6 +220,25 @@ function CafeReviewList({ cafe, setReviewsUpdated }) {
             />
           ))}
       </div>
+      {/* <div
+        id="default-carousel"
+        className="relative w-full"
+        data-carousel="static"
+      >
+        <div className="relative h-56 overflow-hidden rounded-lg md:h-96 ">
+          {cafe &&
+            cafe.reviews &&
+            cafe.reviews.map((review, index) => (
+              <CafeReviewCard
+                key={review._id || index}
+                timestamp={review.timestamp}
+                description={review.description}
+                name={review.name}
+                image={review.image}
+              />
+            ))}
+        </div>
+      </div> */}
       {openReviewForm && (
         <CafeReviewForm
           cafeId={cafe._id}
@@ -230,7 +249,7 @@ function CafeReviewList({ cafe, setReviewsUpdated }) {
           setReviewsUpdated={setReviewsUpdated}
         />
       )}
-    </div>
+      </div>
   );
 }
 
