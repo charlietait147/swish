@@ -735,7 +735,94 @@ const cafes = [
             }
         ],
         reviews: []
-    }
+    },
+    {
+        name: "Heartwork Coffee Bar",
+        locations: ["Holmbury Saint Mary",'Dorking'],
+        website: "https://www.heartworkcoffee.co.uk/",
+        description: "Based in the beautiful grounds of a Bed and Breakfast, the Heartwork Coffee Bar is a unique rustic coffee shop creating and selling its own high quality blend of coffee. The venue can be found tucked away in the heart of the Surrey Hills, centrally located between the three hills; Leith, Pitch and Holmbury, making this the perfect choice for those visiting these idyllic Surrey beauty spots. Why not start or finish a nice day out here?",
+        image: "heartwork-coffee-bar.jpg",
+        borderImage: "",
+        address: "Bulmer Farm, Holmbury St Mary, Dorking RH5 6LG",
+        lat: 51.18453,
+        lng: -0.40753,
+        menu: "https://www.heartworkcoffee.co.uk/pages/our-menu",
+        icons: [
+            {
+                type: "Dog Friendly",
+                url: "dog-friendly.jpeg",
+            },
+            {
+                type: "Hot Food Available",
+                url: "hot-food.jpeg",
+            },
+            {
+                type: "Onsite Parking",
+                url: "onsite-parking.jpeg",
+            },
+        ],
+        reviews: []
+    },
+    {
+        name: "Melleford",
+        locations: ["Milford on Sea", 'Lymington'],
+        website: "https://www.melleford.com/",
+        description: "Melleford is a beautiful restaurant with a lovely view of Milford on Sea village green. Serving a selection of breakfasts, starters, lunch and dessert dishes, all prepared on site, the venue is the obvious choice for those looking for a stylish yet inexpensive dining experience in the coastal village. We’d particularly recommend dining here for breakfast before taking a relaxing walk along the beach front, which is sandy at mid-low tide.",
+        image: "melleford.jpg",
+        borderImage: "",
+        address: "60 High St, Milford on Sea, Lymington SO41 0QD",
+        lat: 50.72542,
+        lng: -1.58908,
+        menu: "https://www.melleford.com/_files/ugd/c07335_f36eaac81e0e46e6b054ee560f11f399.pdf",
+        icons: [
+            {
+                type: "Dog Friendly",
+                url: "dog-friendly.jpeg",
+            },
+            {
+                type: "Hot Food Available",
+                url: "hot-food.jpeg",
+            },
+            {
+                type: "Takes Bookings",
+                url: "bookings.jpeg",
+            }
+           
+        ],
+        reviews: []
+    },
+    {
+        name: "The Larder",
+        locations: ['Lymington'],
+        website: "https://thelarder-lymington.co.uk/",
+        description: "Nestled in the heart of this very British coastal town, The Larder is a lively cafe under exciting new ownership and with large covered, heated, outside dining area; coffee, tea, breakfast and lunch are brilliantly served and the venue now hosts Tapas evenings on Thursdays and Fridays. For those not necessarily looking for a pub or restaurant meal, this venue offers the perfect in between with a laid-back, friendly vibe.",
+        image: "larder-cafe.jpg",
+        borderImage: "",
+        address: "12, Earley Court, Lymington SO41 9EP",
+        lat: 50.75918,
+        lng: -1.53969,
+        menu: "https://thelarder-lymington.co.uk/storage/pdf/aLAmZqsayNBm5ZyUgtAeVAoDUgU1ULsn0xxZRJMh.pdf",
+        icons: [
+            {
+                type: "Accessible by Public Transport",
+                url: "accessible-by-transport.jpeg"
+            },
+            {
+                type: "Dog Friendly",
+                url: "dog-friendly.jpeg",
+            },
+            {
+                type: "Hot Food Available",
+                url: "hot-food.jpeg",
+            },
+            {
+                type: "Takes Bookings",
+                url: "bookings.jpeg",
+            }
+           
+        ],
+        reviews: []
+    },
 ]
 
 export default cafes;
