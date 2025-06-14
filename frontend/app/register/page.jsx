@@ -20,7 +20,7 @@ export default function Register() {
         <p className="mt-10 text-center text-sm text-gray-500">
           Have an account?
           <a
-            href="#"
+            href="/login"
             className="font-semibold leading-6 text-orange-600 hover:text-orange-500"
           >
             {" "}
