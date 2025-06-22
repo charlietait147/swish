@@ -77,7 +77,7 @@ function LoginForm() {
             </label>
             <div className="text-sm">
               <a
-                href="#"
+                href="/password-reset"
                 className="font-semibold text-orange-500 hover:text-orange-600"
               >
                 Forgot password?
