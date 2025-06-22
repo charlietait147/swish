@@ -23,6 +23,7 @@ import { deleteReviewRouter } from "./src/routes/reviewRoutes/deleteReview.route
 
 import { getAllCafesRouter } from "./src/routes/cafeRoutes/getAllCafes.route.js";
 import { getSingleCafeRouter } from "./src/routes/cafeRoutes/getSingleCafe.route.js";
+import { forgotPasswordRouter } from "./src/routes/userRoutes/forgotPassword.route.js";
 
 
 
@@ -54,6 +55,7 @@ connectDb();
 
 app.use("/user", registerUserRouter);
 app.use("/user", loginUserRouter);
+app.use('/user', forgotPasswordRouter);
 app.use("/user", authenticate, updatePasswordRouter);
 app.use("/user", authenticate, addCafeRouter);
 app.use("/user", authenticate, getCafesRouter);

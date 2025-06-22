@@ -1,4 +1,4 @@
-import { registerUserService, loginUserService, updatePasswordService, addCafeService, getCafesService, isCafeSavedService, getUserDataService, deleteSavedCafeService } from "../services/user.services.js";
+import { registerUserService, loginUserService, forgotPasswordService, updatePasswordService, addCafeService, getCafesService, isCafeSavedService, getUserDataService, deleteSavedCafeService } from "../services/user.services.js";
 import { validationResult } from "express-validator";
 import jwt from "jsonwebtoken";
 
@@ -31,6 +31,19 @@ export const loginUserController = async (req, res) => {
     }
 }
 
+export const forgotPasswordController = async (req, res) => {
+    try {
+        const { email } = req.body;
+        const user = await forgotPasswordService(email)
+        res.status(200).json(user);
+
+    } catch (error) {
+        // res.status(400).send("Password reset failed");
+        res.status(400).json({ error: error.message });
+        console.error("Password reset failed", error);
+    }
+}
+
 export const updatePasswordController = async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -45,6 +58,8 @@ export const updatePasswordController = async (req, res) => {
         console.error("Password update failed", error);
     }
 }
+
+
 
 export const addCafeController = async (req, res) => {
     try {

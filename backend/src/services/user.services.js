@@ -1,5 +1,7 @@
 import User from '../models/user.model.js';
 import bcrypt from 'bcrypt';
+import crypto from 'crypto';
+import { sendResetEmail } from "../../utils/email.js";
 
 export const registerUserService = async (email, password) => {
     try {
@@ -11,8 +13,8 @@ export const registerUserService = async (email, password) => {
         const avatarUrl = "swish-logo.png";
     
         const newUser = new User({ email, password: hashedPassword, avatar: avatarUrl });
-        console.log()
         return await newUser.save();
+
     } catch (error) {
         throw new Error(error.message);
     }
@@ -40,6 +42,33 @@ export const loginUserService = async (email, password) => {
         return user;
     }
     catch (error) {
+        throw new Error(error.message);
+    }
+}
+
+export const forgotPasswordService = async (email) => {
+    try {
+        const user = await User.findOne({ email });
+        if (!user) {
+            throw new Error('A user with this email does not exist');
+        }
+
+        const rawToken = crypto.randomBytes(32).toString("hex");
+        const hashedToken = crypto.createHash("sha256").update(rawToken).digest("hex");
+
+        user.resetPasswordToken = hashedToken;
+
+        const expiryMinutes = parseInt(process.env.RESET_TOKEN_EXPIRY_MINUTES, 10) || 60;
+        user.resetPasswordExpires = Date.now() + expiryMinutes * 60 * 1000; 
+        await user.save();
+
+        const resetUrl = `https://localhost:3000/reset-password/${rawToken}`;
+
+        await sendResetEmail(user.email, resetUrl);
+
+        return user;
+
+    } catch (error) {
         throw new Error(error.message);
     }
 }

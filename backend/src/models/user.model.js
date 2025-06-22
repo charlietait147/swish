@@ -20,7 +20,13 @@ const userSchema = new mongoose.Schema({
     cafes: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Cafe'
-    }]
+    }],
+    resetPasswordToken: {
+        type: String
+    },
+    resetPasswordExpires: {
+        type: Date
+    }
 });
 
 const User = mongoose.model('User', userSchema);
