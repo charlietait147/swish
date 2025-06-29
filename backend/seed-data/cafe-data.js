@@ -823,6 +823,63 @@ const cafes = [
         ],
         reviews: []
     },
+    {
+        name: "Muse",
+        locations: ['Southampton'],
+        website: "https://www.musecoffeeco.co.uk/portswood/",
+        description: "Muse of Southampton is unapologetically vocal when it comes to promoting welcomeness, tolerance and gender equality in what is sometimes an unforgiving world.  If you’re looking for a coffee fix on the urban streets of Southampton, Muse could just be your cup of tea, with cafes available in the Portswood, Shirley and London Road areas.  Aside from the common pink theme, each is designed with a quirky, unique interior, and customers have a choice of window seats, high seats, sofa-style seats, church pews, or some limited outdoor seating for those who enjoy watching the urban hustle and bustle in Southampton. The stores can also be fairly quiet, peaceful places, particularly in the afternoons, for those looking to work or read.",
+        image: "muse.jpeg",
+        borderImage: "",
+        address: "14, The Broadway, Portswood Rd, Portswood, Southampton SO17 2WE",
+        lat: 50.92574,
+        lng: -1.39259,
+        menu: "https://www.musecoffeeco.co.uk/portswood/menu/collection.html",
+        icons: [
+            {
+                type: "Accessible by Public Transport",
+                url: "accessible-by-transport.jpeg"
+            },
+            {
+                type: "Dog Friendly",
+                url: "dog-friendly.jpeg",
+            },
+            {
+                type: "Hot Food Available",
+                url: "hot-food.jpeg",
+            },
+           
+        ],
+        reviews: []
+    },
+    {
+        name: "Roost",
+        locations: ['Godalming'],
+        website: "https://findyourroost.co.uk/",
+        description: "Roost is a fine, health-loving café based on the main street in the charming Surrey town of Godalming.  For those who enjoy fresh, wholesome food and good coffee, the café makes the perfect venue for a social catch-up in nice surroundings – where the environment is rustic and cosy, but enough space is provided between seating areas for social privacy.  Window seats, cosy corners and a small outside seating area at the rear can be found.  The venue is also situated right outside the town’s main bus stops, ideal for those arriving by public transport and hoping to have a drink or two afterwards, or those with mobility restrictions.",
+        image: "roost.jpeg",
+        borderImage: "",
+        address: "3 Wharf St, Godalming GU7 1NN",
+        lat: 51.18577,
+        lng: -0.61022,
+        menu: "https://goodeats.io/Roostgodalming",
+        icons: [
+            {
+                type: "Accessible by Public Transport",
+                url: "accessible-by-transport.jpeg"
+            },
+            {
+                type: "Dog Friendly",
+                url: "dog-friendly.jpeg",
+            },
+            {
+                type: "Takes Bookings",
+                url: "bookings.jpeg",
+            }
+           
+        ],
+        reviews: []
+    },
+
 ]
 
 export default cafes;
