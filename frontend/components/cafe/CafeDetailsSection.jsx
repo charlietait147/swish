@@ -3,6 +3,7 @@ import Cookies from "js-cookie";
 import { addCafe, isCafeSaved } from "../../services/user.service";
 import { useRouter } from "next/navigation";
 import { disableScroll, enableScroll } from "@/utils/scroll";
+import { useSwipeable } from "react-swipeable";
 import PropTypes from "prop-types";
 import SignInModal from "../SignInModal";
 import menuIcon from "../../public/icons/menu.jpg";
@@ -88,6 +89,13 @@ function CafeDetailsSection({ cafe }) {
     enableScroll();
   };
 
+  const handlers = useSwipeable({
+    onSwipedLeft: () => nextImage(),
+    onSwipedRight: () => prevImage(),
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true // lets swipe work with mouse too
+  });
+
   const nextImage = () => {
     setIndex((index + 1) % cafe.images.length);
   };
@@ -120,7 +128,10 @@ function CafeDetailsSection({ cafe }) {
       )}
       {cafe && (
         <div className="flex flex-col lg:flex-row gap-5 md:gap-8 lg:gap-14">
-          <div className="relative w-full lg:w-1/2 flex-shrink-0">
+          <div 
+          {...handlers}
+          className="relative w-full lg:w-1/2 flex-shrink-0"
+          >
             <img
               // src={`${process.env.NEXT_API_URL}/public/images/${cafe.image}`}
               src={`${process.env.NEXT_API_URL}/public/images/${cafe.images[index]}`}
