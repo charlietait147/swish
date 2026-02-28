@@ -96,12 +96,24 @@ function CafeDetailsSection({ cafe }) {
     trackMouse: true // lets swipe work with mouse too
   });
 
-  const nextImage = () => {
-    setIndex((index + 1) % cafe.images.length);
-  };
+  // const nextImage = () => {
+  //   setIndex((index + 1) % cafe.images.length);
+  // };
 
+  // const prevImage = () => {
+  //   setIndex((index - 1 + cafe.images.length) % cafe.images.length);
+  // };
+
+  const nextImage = () => {
+    if (index < cafe.images.length - 1) {
+      setIndex(index + 1);
+    }
+  };
+  
   const prevImage = () => {
-    setIndex((index - 1 + cafe.images.length) % cafe.images.length);
+    if (index > 0) {
+      setIndex(index - 1);
+    }
   };
 
   return (
@@ -130,7 +142,7 @@ function CafeDetailsSection({ cafe }) {
         <div className="flex flex-col lg:flex-row gap-5 md:gap-8 lg:gap-14">
           <div 
           {...handlers}
-          className="relative w-full lg:w-1/2 flex-shrink-0"
+          className="relative h-[max-content] w-full lg:w-1/2 flex-shrink-0"
           >
             <img
               // src={`${process.env.NEXT_API_URL}/public/images/${cafe.image}`}
@@ -160,20 +172,32 @@ function CafeDetailsSection({ cafe }) {
               </svg>
               {isSaved ? "Saved" : "Save"}
             </button>
-            <button
-        onClick={prevImage}
-        className="absolute bottom-4 left-4 bg-white/70 hover:bg-white rounded-full p-2 shadow"
-      >
-        ◀
-      </button>
+            {cafe.images.length > 1 && (
+              <>
+              {index > 0 && (
+              <button
+                onClick={prevImage}
+                className="absolute bottom-4 left-4 bg-orange-100 hover:bg-orange-200 rounded-full p-2 shadow"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5 ">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                </svg>
+              </button>
+            )}
 
-      {/* Right arrow */}
-      <button
-        onClick={nextImage}
-        className="absolute bottom-4 right-4 bg-white/70 hover:bg-white rounded-full p-2 shadow"
-      >
-        ▶
-      </button>
+          {/* Right arrow */}
+            {index < cafe.images.length - 1 && (
+            <button
+              onClick={nextImage}
+              className="absolute bottom-4 right-4 bg-orange-100 hover:bg-orange-200 rounded-full p-2 shadow"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5 ">
+                <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+             </svg>
+          </button>
+        )}
+      </>
+          )}
           </div>
 
           <div className="lg:w-1/2 flex flex-col gap-4 md:gap-5">
@@ -366,12 +390,12 @@ function CafeDetailsSection({ cafe }) {
               href={cafe.menu}
               target="_blank"
               rel="noreferrer"
-              className="mt-2"
+              className="mt-2 shrink-0"
             >
               <Image src={menuIcon} alt="menu" className="h-16 w-16" />
             </a>
             <a
-              className="hidden xs:inline-block text-base font-semibold text-gray-600 ml-1 hover:underline hover:text-blue-400"
+              className="hidden xs:inline-block text-base font-semibold text-gray-600 ml-1 hover:underline hover:text-blue-400 break-all"
               href={cafe.menu}
             >
               {cafe.menu}
