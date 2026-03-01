@@ -2,7 +2,9 @@ import nodemailer from "nodemailer";
 
 export const sendResetEmail = async (to, resetUrl) => {
     const transporter = nodemailer.createTransport({
-      service: "Gmail", // or your provider
+      host: "smtp.zoho.eu", // or your provider
+      port: 465,
+      secure: true, // true for 465
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
@@ -10,7 +12,7 @@ export const sendResetEmail = async (to, resetUrl) => {
     });
   
     const mailOptions = {
-      from: '"Swish Support" <no-reply@swish.com>',
+      from: `Swish Support <${process.env.EMAIL_USER}>`,
       to,
       subject: "Reset your Swish password",
       html: `
