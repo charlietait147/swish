@@ -66,8 +66,9 @@ export const resetPasswordController = async (req, res) => {
   }
 
   try {
-    const { token, newPassword } = req.body; // token from URL / frontend, new password from form
-
+    const { newPassword } = req.body; // token from URL / frontend, new password from form
+    const { token } = req.params;
+ 
     if (!token) {
       return res.status(400).json({ error: "Reset token is required" });
     }

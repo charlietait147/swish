@@ -4,7 +4,7 @@ import { resetPasswordValidation } from "../../middleware/user.validation.js";
 
 const router = express.Router();
 
-router.route("/reset-password")
+router.route("/reset-password/:token")
     .post(resetPasswordValidation, resetPasswordController);
 
 export { router as resetPasswordRouter };
