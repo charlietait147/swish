@@ -80,3 +80,38 @@ export const updatePassword = async (newPassword) => {
     throw new Error(error.response?.data || "An error occurred during password update");
   }
 };
+
+export const forgotPassword = async (email) => {
+
+  const res = await axios.put(`${API_URL}/user/forgot-password`, {
+    email
+  });
+
+  const data = await res.data;
+
+  if (res.status === 200) {
+    console.log("Password link sent", data);
+    return data;
+  } else {
+    throw new Error(data.message || "Password update failed");
+  }
+  
+}
+
+
+
+export const resetPassword = async (token, newPassword) => {
+
+  const res = await axios.post(`${API_URL}/user/reset-password/${token}`, {
+    newPassword,
+  });
+
+  const data = await res.data;
+
+  if (res.status === 200) {
+    console.log("Password changed successfully", data);
+    return data;
+  } else {
+    throw new Error(data.message || "Password reset failed");
+  }
+}
