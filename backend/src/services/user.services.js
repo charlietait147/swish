@@ -62,7 +62,7 @@ export const forgotPasswordService = async (email) => {
         user.resetPasswordExpires = Date.now() + expiryMinutes * 60 * 1000; 
         await user.save();
 
-        const resetUrl = `https://localhost:3000/reset-password/${rawToken}`;
+        const resetUrl = `${process.env.FRONTEND_URL}/reset-password/${rawToken}`;
 
         await sendResetEmail(user.email, resetUrl);
 
@@ -85,6 +85,34 @@ export const updatePasswordService = async (newPassword, userId) => {
         await user.save(); // save the user
 
         return user;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
+
+export const resetPasswordService = async(token, newPassword) => {
+    try {
+        const hashedToken = crypto.createHash('sha256').update(token).digest('hex');
+
+        const user = await User.findOne({
+            resetPasswordToken: hashedToken,
+            resetPasswordExpires: { $gt: Date.now() }, // token still valid
+          });
+
+          if (!user) {
+            throw new Error('Token is invalid or has expired');
+          }
+        
+          const hashedPassword = await bcrypt.hash(newPassword, 10);
+          user.password = hashedPassword;
+
+          user.resetPasswordToken = undefined;
+          user.resetPasswordExpires = undefined;
+
+          await user.save();
+
+          return user;
+
     } catch (error) {
         throw new Error(error.message);
     }

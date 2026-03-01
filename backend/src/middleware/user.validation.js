@@ -17,3 +17,15 @@ export const updatePasswordValidation = [
         .matches(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/)
         .withMessage('New password must be between 8 to 16 characters long and must contain at least one letter and one number')
 ];
+
+export const resetPasswordValidation = [
+    check('token')
+      .exists()
+      .notEmpty()
+      .withMessage('Reset token is required'),
+    
+    check('newPassword')
+      .exists()
+      .matches(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/)
+      .withMessage('New password must be between 8 to 16 characters long and must contain at least one letter and one number')
+  ];

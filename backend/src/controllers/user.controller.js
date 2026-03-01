@@ -1,4 +1,4 @@
-import { registerUserService, loginUserService, forgotPasswordService, updatePasswordService, addCafeService, getCafesService, isCafeSavedService, getUserDataService, deleteSavedCafeService } from "../services/user.services.js";
+import { registerUserService, loginUserService, forgotPasswordService, updatePasswordService, resetPasswordService, addCafeService, getCafesService, isCafeSavedService, getUserDataService, deleteSavedCafeService } from "../services/user.services.js";
 import { validationResult } from "express-validator";
 import jwt from "jsonwebtoken";
 
@@ -59,6 +59,27 @@ export const updatePasswordController = async (req, res) => {
     }
 }
 
+export const resetPasswordController = async (req, res) => {
+    const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array().map(e => e.msg) });
+  }
+
+  try {
+    const { token, newPassword } = req.body; // token from URL / frontend, new password from form
+
+    if (!token) {
+      return res.status(400).json({ error: "Reset token is required" });
+    }
+
+    const user = await resetPasswordService(token, newPassword);
+
+    res.status(200).json({ message: "Password has been reset successfully", userId: user._id });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+    console.error("Password reset failed", error);
+  }
+};
 
 
 export const addCafeController = async (req, res) => {
