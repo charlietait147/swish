@@ -83,7 +83,7 @@ export const updatePassword = async (newPassword) => {
 
 export const forgotPassword = async (email) => {
 
-  const res = await axios.put(`${API_URL}/user/forgot-password`, {
+  const res = await axios.post(`${API_URL}/user/forgot-password`, {
     email
   });
 
@@ -93,7 +93,11 @@ export const forgotPassword = async (email) => {
     console.log("Password link sent", data);
     return data;
   } else {
-    throw new Error(data.message || "Password update failed");
+    if (error.response && error.response.status === 400) {
+      throw new Error(error.response.data)// Throw the specific error message
+    } else {
+      throw new Error(error.message || "Password reset failed");
+    }
   }
   
 }
