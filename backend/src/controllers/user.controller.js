@@ -34,13 +34,17 @@ export const loginUserController = async (req, res) => {
 export const forgotPasswordController = async (req, res) => {
     try {
         const { email } = req.body;
-        const user = await forgotPasswordService(email)
-        res.status(200).json(user);
+        await forgotPasswordService(email)
+
+        return res.status(200).json({
+            message: "If your email is registered, you'll receive instructions to reset your password shortly."
+          });
+      
 
     } catch (error) {
-        // res.status(400).send("Password reset failed");
-        res.status(400).json({ error: error.message });
-        console.error("Password reset failed", error);
+        return res.status(200).json({
+            message: "If your email is registered, you'll receive instructions to reset your password shortly."
+          });
     }
 }
 
