@@ -4,14 +4,18 @@ import { useState } from "react";
 
 function PasswordResetForm({handleSubmit}) {
   const [email, setEmail] = useState("");
-  const [success, setSuccess] = useState(false);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    handleSubmit(email); // send email to parent
+  };
   
     return (
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={onSubmit}>
        <div className="space-y-2">
        <label
           htmlFor="email"

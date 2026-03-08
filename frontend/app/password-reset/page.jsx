@@ -10,10 +10,7 @@ import PasswordResetForm from "@/components/authentication/PasswordResetForm.jsx
 export default function PasswordReset() {
   const [success, setSuccess] = useState(false);
 
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-  
+  const handleSubmit = async (email) => {
     try { 
       const response = await forgotPassword(email);
       console.log(response);
