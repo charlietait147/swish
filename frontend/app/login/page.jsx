@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Logo from "../../public/logo/swish-logo.png";
+import Logo from "../../public/logo/swish-orange-logo.jpeg";
 import LoginForm from "@/components/authentication/LoginForm";
 export default function Login() {
   return (

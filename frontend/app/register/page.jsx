@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Logo from "../../public/logo/swish-logo.png";
+import Logo from "../../public/logo/swish-orange-logo.jpeg";
 import RegisterForm from "@/components/authentication/RegisterForm";
 export default function Register() {
   return (

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { forgotPassword } from "../../services/auth.service.jsx";
 
 import Image from "next/image";
-import Logo from "../../public/logo/swish-logo.png";
+import Logo from "../../public/logo/swish-orange-logo.jpeg";
 import PasswordResetForm from "@/components/authentication/PasswordResetForm.jsx"
 
 export default function PasswordReset() {
