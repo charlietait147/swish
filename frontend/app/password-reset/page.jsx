@@ -9,6 +9,7 @@ import PasswordResetForm from "@/components/authentication/PasswordResetForm.jsx
 
 export default function PasswordReset() {
   const [success, setSuccess] = useState(false);
+  const [email, setEmail] = useState("");
 
   const handleSubmit = async (email) => {
     try { 
@@ -46,7 +47,10 @@ export default function PasswordReset() {
         <>
        <p className="mt-5 sm:mx-auto sm:w-full sm:max-w-sm text-sm/6 text-gray-700 ">Enter your email and we'll send you a link to reset your password</p>
        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-sm">
-        <PasswordResetForm handleSubmit={handleSubmit} />
+        <PasswordResetForm 
+         handleSubmit={handleSubmit}
+         email={email}
+         setEmail={setEmail} />
         <div className="flex justify-center mt-10">
           <a className="inline-flex items-center space-x-2 mr-1 cursor-pointer" href="/login" >
            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5 text-orange-600 hover-orange-500 cursor-pointer">
@@ -62,7 +66,14 @@ export default function PasswordReset() {
           <p className="text-sm text-gray-500">
           If your email is registered, you'll receive instructions to reset your password shortly.
           </p>
+          <a className="inline-flex items-center space-x-2 mr-1 cursor-pointer mt-4" href="/login" >
+           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5 text-orange-600 hover-orange-500 cursor-pointer">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+           </svg>
+           <p className="text-center font-semibold text-sm text-orange-600 cursor-pointer hover-orange-500">Back to Login</p>
+         </a>
         </div>
+
        )}
     </div>
     

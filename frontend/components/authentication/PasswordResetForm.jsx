@@ -1,9 +1,6 @@
 "use client";
 
-import { useState } from "react";
-
-function PasswordResetForm({handleSubmit}) {
-  const [email, setEmail] = useState("");
+function PasswordResetForm({handleSubmit, email, setEmail}) {
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
