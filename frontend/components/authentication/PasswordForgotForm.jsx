@@ -1,6 +1,6 @@
 "use client";
 
-function PasswordResetForm({handleSubmit, email, setEmail}) {
+function PasswordForgotForm({handleSubmit, email, setEmail}) {
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -46,4 +46,4 @@ function PasswordResetForm({handleSubmit, email, setEmail}) {
     )
 }
 
-export default PasswordResetForm;
+export default PasswordForgotForm;

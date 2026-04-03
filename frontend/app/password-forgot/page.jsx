@@ -5,9 +5,9 @@ import { forgotPassword } from "../../services/auth.service.jsx";
 
 import Image from "next/image";
 import Logo from "../../public/logo/swish-orange-logo.jpeg";
-import PasswordResetForm from "@/components/authentication/PasswordResetForm.jsx"
+import PasswordForgotForm from "@/components/authentication/PasswordForgotForm.jsx"
 
-export default function PasswordReset() {
+export default function PasswordForgot() {
   const [success, setSuccess] = useState(false);
   const [email, setEmail] = useState("");
 
@@ -47,7 +47,7 @@ export default function PasswordReset() {
         <>
        <p className="mt-5 sm:mx-auto sm:w-full sm:max-w-sm text-sm/6 text-gray-700 ">Enter your email and we'll send you a link to reset your password</p>
        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-sm">
-        <PasswordResetForm 
+        <PasswordForgotForm
          handleSubmit={handleSubmit}
          email={email}
          setEmail={setEmail} />
