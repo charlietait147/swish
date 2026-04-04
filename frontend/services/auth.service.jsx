@@ -103,19 +103,39 @@ export const forgotPassword = async (email) => {
 }
 
 
+// export const resetPassword = async (token, newPassword) => {
+
+//   const res = await axios.post(`${API_URL}/user/reset-password/${token}`, {
+//     newPassword,
+//   });
+
+//   console.log("Password changed successfully", res.data);
+
+//   const data = await res.data;
+  
+//   if (res.status === 200) {
+//     console.log("Password changed successfully", data);
+//     return data;
+//   } else {
+//     throw new Error(data.message || "Password reset failed");
+//   }
+// }
 
 export const resetPassword = async (token, newPassword) => {
+  try {
+    const { data } = await axios.post(
+      `${API_URL}/user/reset-password/${token}`,
+      { newPassword }
+    );
 
-  const res = await axios.post(`${API_URL}/user/reset-password/${token}`, {
-    newPassword,
-  });
-
-  const data = await res.data;
-
-  if (res.status === 200) {
-    console.log("Password changed successfully", data);
     return data;
-  } else {
-    throw new Error(data.message || "Password reset failed");
+  } catch (err) {
+    const message =
+      err?.response?.data?.error ||
+      err?.response?.data?.errors?.[0] ||
+      err?.message ||
+      "Password reset failed";
+
+    throw new Error(message);
   }
-}
+};
