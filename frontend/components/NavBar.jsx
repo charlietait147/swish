@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import AccountMenu from "./AccountMenu";
 import { fetchUserData } from "../services/user.service.jsx";
+import Image from "next/image";
+import Logo from "../public/logo/swish-black-logo.jpeg";
 
 function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -133,7 +135,12 @@ function NavBar() {
               </svg>
               <span className="sr-only">Close menu</span>
             </button>
-            <h1 className="text-2xl font-bold pt-4">Swish .</h1>
+              <Image
+                src={Logo}
+                alt="Swish Logo"
+                priority={true}
+                className="mx-auto h-16 w-16"
+              />
             <div className="border border-t-gray-300 mt-4"></div>
             <ul className="mt-6 space-y-5 text-center" role="menu">
               <Link
