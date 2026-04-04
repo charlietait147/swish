@@ -30,9 +30,9 @@ function Footer() {
           Swish .
         </h1>
         <ul className="flex flex-col text-center mb-4 ">
-          <Link href="/" className="text-white py-2">Home</Link>
-          <Link href="/discover" className="text-white py-2">Discover</Link>
-          <Link href="/#contact-form" className="text-white py-2">Contact Us</Link>
+          <Link href="/" className="text-white py-2">Discover</Link>
+          <Link href="/about-us" className="text-white py-2">About Us</Link>
+          <Link href="/about-us#contact-form" className="text-white py-2">Contact Us</Link>
         </ul>
           {!isLoggedIn ? (
             <ul className="flex flex-col text-center">

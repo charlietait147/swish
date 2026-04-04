@@ -1,0 +1,17 @@
+import CallToAction from "@/components/CallToAction"
+import ContactForm from "@/components/ContactForm"
+import Footer from "@/components/Footer"
+import Header from "@/components/Header"
+import Hero from "@/components/Hero"
+
+export default function AboutUs() {
+  return (
+  <>
+  <Header />
+  <Hero />
+  <CallToAction />
+  <ContactForm  />
+  <Footer />
+  </>
+  )
+}

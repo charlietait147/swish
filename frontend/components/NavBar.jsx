@@ -147,16 +147,16 @@ function NavBar() {
                 href="/"
                 className="text-white py-2 bg-orange-500 hover:bg-orange-400 shadow-lg flex items-center justify-center"
               >
-                Home
-              </Link>
-              <Link
-                href="/discover"
-                className="text-white py-2 bg-orange-500 hover:bg-orange-400 shadow-lg flex items-center justify-center"
-              >
                 Discover
               </Link>
               <Link
-                href="/#contact-form"
+                href="/about-us"
+                className="text-white py-2 bg-orange-500 hover:bg-orange-400 shadow-lg flex items-center justify-center"
+              >
+                About Us
+              </Link>
+              <Link
+                href="/about-us#contact-form"
                 className="text-white py-2 bg-orange-500 hover:bg-orange-400 shadow-lg flex items-center justify-center"
               >
                 Contact Us
@@ -230,16 +230,16 @@ function NavBar() {
           href="/"
           className="text-sm  text-white py-2 px-4 rounded-3xl hover:bg-orange-400 cursor-pointer"
         >
-          Home
-        </Link>
-        <Link
-          href="/discover"
-          className="text-sm  text-white py-2 px-4 rounded-3xl hover:bg-orange-400 cursor-pointer"
-        >
           Discover
         </Link>
         <Link
-          href="/#contact-form"
+          href="/about-us"
+          className="text-sm  text-white py-2 px-4 rounded-3xl hover:bg-orange-400 cursor-pointer"
+        >
+          About Us
+        </Link>
+        <Link
+          href="/about-us#contact-form"
           className="text-sm  text-white py-2 px-4 rounded-3xl hover:bg-orange-400 cursor-pointer  "
         >
           Contact Us
