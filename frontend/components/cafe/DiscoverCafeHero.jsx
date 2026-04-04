@@ -1,9 +1,10 @@
 import Image from "next/image";
-import CafeInterior from "../../public/images/cafe-interior-discover.jpg";
+import CafeInterior from "../../public/images/cafe-interior-discover-cropped.jpg";
 function DiscoverCafeHero() {
   return (
     <>
-    <div className="relative w-full h-1/2 max-width mx-auto sm:h-80 md:h-96 md:mt-0">
+    {/* { <div className="relative w-full h-1/2 max-width mx-auto sm:h-80 md:h-96 md:mt-0"> */}
+    { <div className="relative w-full max-width mx-auto sm:h-40 md:mt-0">
     <div className="w-full h-full overflow-hidden">
       <Image
         src={CafeInterior}
@@ -12,10 +13,12 @@ function DiscoverCafeHero() {
         priority={true}
       />
       <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white text-center p-4">
-        <h1 className="text-2xl font-semibold">Discover</h1>
+        <h1 className="text-2xl font-semibold tracking-wide">Find your fix...</h1>
       </div>
       </div>
-    </div>
+    </div> }
+
+    {/* <h1 className="text-2xl font-semibold text-gray-800 mx-auto ">Find your fix...</h1> */}
     {/* <div className=" bg-orange-500 text-white p-2  flex flex-row px-2 mt-4 text-center">
     <p className="text-sm pl-0.5">
       {" "}
