@@ -25,12 +25,30 @@ export default function PasswordForgot() {
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+        {!success ? (
          <Image
           src={Logo}
           alt="Swish Logo"
           priority={true}
           className="mx-auto h-24 w-24"
         />
+        ) : (
+         
+          <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth="1.5"
+          stroke="currentColor"
+          className="w-16 h-16 text-orange-500 mx-auto"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
+          />
+        </svg>
+        )}
          {!success ? (
           <>
          <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
@@ -65,6 +83,9 @@ export default function PasswordForgot() {
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-sm text-center">
           <p className="text-sm text-gray-500">
           If your email is registered, you'll receive instructions to reset your password shortly.
+          </p>
+          <p className="text-sm text-gray-500 font-bold mt-6 mb-2">
+          Can't find the email in your inbox? Try checking your spam or junk folders.
           </p>
           <a className="inline-flex items-center space-x-2 mr-1 cursor-pointer mt-4" href="/login" >
            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5 text-orange-600 hover-orange-500 cursor-pointer">
