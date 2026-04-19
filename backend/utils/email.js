@@ -25,7 +25,7 @@ export const sendResetEmail = async (to, resetUrl) => {
                 <!-- Title -->
                 <tr>
                   <td align="center" style="font-size:20px; font-weight:bold; color:#111;">
-                    Reset your password
+                    Hi ${to}
                   </td>
                 </tr>
 
