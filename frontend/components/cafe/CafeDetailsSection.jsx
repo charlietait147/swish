@@ -398,7 +398,7 @@ function CafeDetailsSection({ cafe }) {
           </p>
         )}
       </div>
-      {cafe.menu && (
+      {cafe?.menu && (
         <>
           <h1 className="text-xl font-semibold pt-4 md:pt-6 lg:pt-8">Menu</h1>
           <div className="flex items-center sm:pt-1 ">

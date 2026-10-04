@@ -1,3 +1,7 @@
+/**
+ * @jest-environment node
+ */
+// Requires the backend running at NEXT_API_URL (default http://localhost:3000). Run with `npm run test:integration`.
 import { register, login, updatePassword } from "../../services/auth.service.jsx";
 
 
@@ -26,7 +30,7 @@ describe("Integration Tests: Auth Service", () => {
             await register(user.email, user.password);
         } catch (error) {
             // Assert
-            expect(error.message).toBe("Password must be at least 6 characters long and must contain at least one letter and one number");
+            expect(error.message).toBe("Password must be at least 8 characters long and must contain at least one letter and one number");
         }
     });
 

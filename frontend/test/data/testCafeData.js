@@ -25,7 +25,7 @@ export const mockCafeData = [
     {
         _id: "1",
         name: "Cafe 1",
-        location: "Location 1",
+        locations: ["Location 1"],
         description: "Description 1",
         website: "Website 1",
         image: "image1.jpg",
@@ -36,7 +36,7 @@ export const mockCafeData = [
     {
         _id: "2",
         name: "Cafe 2",
-        location: "Location 2",
+        locations: ["Location 2"],
         description: "Description 2",
         website: "Website 2",
         image: "image2.jpg",

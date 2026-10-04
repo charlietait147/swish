@@ -7,6 +7,13 @@ jest.mock("date-fns", () => ({
   formatDistanceToNowStrict: jest.fn(() => "1 day"),
 }));
 
+jest.mock("next/navigation", () => ({
+  __esModule: true,
+  useRouter: () => ({
+    push: jest.fn(),
+  }),
+}));
+
 jest.mock("js-cookie", () => ({
   get: jest.fn(),
   set: jest.fn(),
@@ -53,12 +60,14 @@ describe("CafeReviewList Component", () => {
     });
   });
   describe("user state tests", () => {
-    it("should render a Sign in link when the user is not logged in", () => {
+    it("should show the sign in modal when a logged out user clicks Add a review", async () => {
       render(<CafeReviewList />);
 
-      const loginLink = screen.getByText(/Sign in to add a review/i);
+      await userEvent.click(screen.getByText(/Add a review/i));
 
-      expect(loginLink).toBeInTheDocument();
+      expect(
+        screen.getByText(/Log in to add your saves/i)
+      ).toBeInTheDocument();
     });
 
     it("should render an Add Review button when the user is logged in", () => {

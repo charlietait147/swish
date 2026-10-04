@@ -23,6 +23,14 @@ jest.mock("../../../services/user.service", () => ({
   isCafeSaved: jest.fn(),
 }));
 
+const mockCafe = {
+  _id: 1,
+  name: "Cafe 1",
+  locations: ["Location 1"],
+  images: ["image1.jpg"],
+  icons: [],
+};
+
 describe("CafeDetailsSection Component", () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -33,7 +41,7 @@ describe("CafeDetailsSection Component", () => {
     isCafeSaved.mockResolvedValue(false);
     addCafe.mockResolvedValue(true);
 
-    render(<CafeDetailsSection cafe={{ _id: 1, name: "Cafe 1" }} />);
+    render(<CafeDetailsSection cafe={mockCafe} />);
 
     const saveButton = screen.getByRole("button", { name: /Save/i });
     await userEvent.click(saveButton);
@@ -49,7 +57,7 @@ describe("CafeDetailsSection Component", () => {
     Cookies.get.mockReturnValue("839429f778gfd8gf8387gd");
     isCafeSaved.mockResolvedValue(true);
 
-    render(<CafeDetailsSection cafe={{ _id: 1, name: "Cafe 1" }} />);
+    render(<CafeDetailsSection cafe={mockCafe} />);
     await waitFor(() => {
       const saveButton = screen.getByRole("button", { name: /Saved/i });
       userEvent.click(saveButton);

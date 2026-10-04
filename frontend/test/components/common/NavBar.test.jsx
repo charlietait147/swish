@@ -2,6 +2,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Cookies from "js-cookie";
 import NavBar from "../../../components/NavBar.jsx";
+import { fetchUserData } from "../../../services/user.service.jsx";
 
 const mockRouterPush = jest.fn();
 jest.mock("next/navigation", () => ({
@@ -23,6 +24,10 @@ jest.mock("js-cookie", () => ({
   remove: jest.fn(),
 }));
 
+jest.mock("../../../services/user.service.jsx", () => ({
+  fetchUserData: jest.fn(),
+}));
+
 describe("NavBar Component", () => {
   const originalConsoleError = console.error;
 
@@ -37,16 +42,17 @@ describe("NavBar Component", () => {
       originalConsoleError(message);
     });
     jest.clearAllMocks();
+    fetchUserData.mockResolvedValue({ avatar: null });
   });
 
   afterEach(() => {
     console.error.mockRestore();
   });
 
-  it("should render a Sign in link when the user is not logged in", () => {
+  it("should render a Sign in link when the user is not logged in", async () => {
     render(<NavBar />);
 
-    const loginLink = screen.getByText(/Sign in/i);
+    const loginLink = await screen.findByText(/Sign in/i);
 
     expect(loginLink).toBeInTheDocument();
   });
@@ -65,12 +71,14 @@ describe("NavBar Component", () => {
     // Render the NavBar component
     render(<NavBar />);
 
+    // Find the burger menu icon once the user data has loaded
+    const burgerIcon = await screen.findByRole("button", { name: /burger menu/i });
+
     // Initially, the menu should not be visible
     const menuList = screen.queryByRole("menu");
     expect(menuList).not.toBeInTheDocument(); // No menu initially
 
-    // Find and click the burger menu icon
-    const burgerIcon = await screen.findByRole("button", { name: /burger menu/i });
+    // Click the burger menu icon
     userEvent.click(burgerIcon);
 
     // Assert that the menu is visible

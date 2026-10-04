@@ -85,16 +85,17 @@ const { PORT, HOST } = process.env;
 
 // export default server;
 
-if (process.env.NODE_ENV !== 'development') {
-     app.listen(PORT, () => {
-        console.log(`Server is listening at http://${HOST}:${PORT}`);
-    });
-}
-
-if (process.env.NODE_ENV === 'development') {
-    app.listen(PORT, HOST, () => {
-        console.log(`Server is listening at http://${HOST}:${PORT}`);
-    });
+// Tests drive the app through chai-http, so they don't need a listening server
+if (!process.env.SKIP_LISTEN) {
+    if (process.env.NODE_ENV === 'development') {
+        app.listen(PORT, HOST, () => {
+            console.log(`Server is listening at http://${HOST}:${PORT}`);
+        });
+    } else {
+        app.listen(PORT, () => {
+            console.log(`Server is listening at http://${HOST}:${PORT}`);
+        });
+    }
 }
 
 export default app;

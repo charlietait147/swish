@@ -15,6 +15,10 @@ describe('Cafe Deletion', () => {
         await setupDatabase(userData, cafeDataToBeDeleted, []);
     });
 
+    afterEach(() => {
+        sinon.restore(); // restore console.log even if an assertion fails
+    });
+
 
     it('should delete a cafe from the database when it exists', async () => {
         const cafeName = cafeDataToBeDeleted[0].name;

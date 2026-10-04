@@ -14,6 +14,12 @@ jest.mock("js-cookie", () => ({
   remove: jest.fn(),
 }));
 
+// NavBar fetches user data too, which would consume the fetchUserData/Cookies mocks below
+jest.mock("../../components/Header.jsx", () => {
+  const MockHeader = () => <header />;
+  return MockHeader;
+});
+
 const mockRouterPush = jest.fn();
 jest.mock("next/navigation", () => ({
   useRouter: () => ({
