@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import Logo from "../public/logo/swish-logo.png";
 import Image from "next/image";
+import { getAvatarSrc } from "../utils/avatar";
 
 function AccountMenu({ handleSignOut, avatarUrl }) {
   
@@ -38,8 +38,8 @@ function AccountMenu({ handleSignOut, avatarUrl }) {
         role="button"
         aria-label="avatar"
       >
-        <Image src={`${process.env.NEXT_API_URL}/public/images/${avatarUrl}`} width={56} 
-  height={56}  alt="Account Avatar" className="w-14 h-14" />
+        <Image src={getAvatarSrc(avatarUrl)} width={56} 
+  height={56}  alt="Account Avatar" className="w-14 h-14 object-cover" />
       </div>
 
       {/* Dropdown Menu */}

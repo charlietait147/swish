@@ -132,3 +132,27 @@ export const deleteSavedCafe = async (cafeId) => {
      }
   }
 }
+
+export const uploadAvatar = async (file) => {
+  try {
+    const token = Cookies.get("token");
+
+    if (!token) {
+      throw new Error("No token found. Please log in.");
+    }
+
+    const formData = new FormData();
+    formData.append("avatar", file);
+
+    const res = await axios.put(`${API_URL}/user/avatar`, formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    console.log("Avatar updated successfully", res.data);
+    return res.data;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || error.message || "An error occurred uploading your avatar");
+  }
+}

@@ -1,6 +1,9 @@
 import User from '../models/user.model.js';
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
+import fs from 'fs';
+import path from 'path';
+import { avatarsDir } from '../middleware/avatar.upload.js';
 import { sendResetEmail } from "../../utils/email.js";
 
 export const registerUserService = async (email, password) => {
@@ -215,15 +218,18 @@ export const updateAvatarService = async (userId, avatarUrl) => {
             throw new Error('User not found');
         }
 
+        const oldAvatar = user.avatar;
+
         user.avatar = avatarUrl;
 
         await user.save();
 
-        if (user.avatar) {
-            const oldPath = path.join("uploads", "avatars", path.basename(user.avatar));
-        
+        // Only remove previously uploaded avatars, never the default image
+        if (oldAvatar && oldAvatar.startsWith("/uploads/avatars/")) {
+            const oldPath = path.join(avatarsDir, path.basename(oldAvatar));
+
             fs.unlink(oldPath, (err) => {
-                if (err) console.log("Failed to delete old avatar:", err);
+                if (err) console.error("Failed to delete old avatar:", err);
             });
         }
 

@@ -7,7 +7,6 @@ import path from "path";
 import { fileURLToPath } from 'url';
 import fs from 'fs';
 import upload from './src/middleware/file.storage.js';
-import avatarUpload from './src/middleware/avatar.upload.js';
 
 import { registerUserRouter } from "./src/routes/userRoutes/registerUser.route.js";
 import { loginUserRouter } from "./src/routes/userRoutes/loginUser.route.js";
@@ -17,6 +16,7 @@ import { getCafesRouter } from "./src/routes/userRoutes/getCafes.route.js";
 import { isCafeSavedRouter } from "./src/routes/userRoutes/isCafeSaved.route.js";
 import { getUserDataRouter } from "./src/routes/userRoutes/getUserData.route.js";
 import { deleteSavedCafeRouter } from "./src/routes/userRoutes/deleteSavedCafe.route.js";
+import { updateAvatarRouter } from "./src/routes/userRoutes/updateAvatar.route.js";
 
 import { addReviewRouter } from "./src/routes/reviewRoutes/addReview.route.js";
 import { editReviewRouter } from "./src/routes/reviewRoutes/editReview.route.js";
@@ -64,6 +64,7 @@ app.use("/user", authenticate, addCafeRouter);
 app.use("/user", authenticate, getCafesRouter);
 app.use("/user", authenticate, isCafeSavedRouter);
 app.use("/user", authenticate, getUserDataRouter);
+app.use("/user", authenticate, updateAvatarRouter);
 app.use("/user", authenticate, deleteSavedCafeRouter )
 
 app.use("/review", authenticate, upload.single('image'), addReviewRouter);

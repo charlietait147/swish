@@ -148,7 +148,7 @@ export const deleteSavedCafeController = async (req, res) => {
 
 export const updateAvatarController = async (req, res) => {
     try {
-        const userId = req.user.id;
+        const userId = req.user._id;
         const file = req.file;
 
         if (!file) {
@@ -165,8 +165,7 @@ export const updateAvatarController = async (req, res) => {
         });
 
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(400).json({ message: error.message });
     }
 };
-        
 
