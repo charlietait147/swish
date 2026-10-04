@@ -7,6 +7,7 @@ import path from "path";
 import { fileURLToPath } from 'url';
 import fs from 'fs';
 import upload from './src/middleware/file.storage.js';
+import avatarUpload from './src/middleware/avatar.upload.js';
 
 import { registerUserRouter } from "./src/routes/userRoutes/registerUser.route.js";
 import { loginUserRouter } from "./src/routes/userRoutes/loginUser.route.js";

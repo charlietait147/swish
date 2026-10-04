@@ -1,4 +1,4 @@
-import { registerUserService, loginUserService, forgotPasswordService, updatePasswordService, resetPasswordService, addCafeService, getCafesService, isCafeSavedService, getUserDataService, deleteSavedCafeService } from "../services/user.services.js";
+import { registerUserService, loginUserService, forgotPasswordService, updatePasswordService, resetPasswordService, addCafeService, getCafesService, isCafeSavedService, getUserDataService, deleteSavedCafeService, updateAvatarService } from "../services/user.services.js";
 import { validationResult } from "express-validator";
 import jwt from "jsonwebtoken";
 
@@ -145,5 +145,28 @@ export const deleteSavedCafeController = async (req, res) => {
         res.status(400).json({error: error.message});
     }
 }
+
+export const updateAvatarController = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const file = req.file;
+
+        if (!file) {
+            return res.status(400).json({ message: "No file uploaded" });
+        }
+
+        const avatarUrl = `/uploads/avatars/${file.filename}`;
+
+        const updatedUser = await updateAvatarService(userId, avatarUrl);
+
+        res.status(200).json({
+            message: "Avatar updated",
+            avatar: updatedUser.avatar
+        });
+
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
         
 

@@ -207,6 +207,32 @@ export const deleteSavedCafeService = async (userId, cafeId) => {
 
 }
 
+export const updateAvatarService = async (userId, avatarUrl) => {
+    try {
+        const user = await User.findById(userId);
+
+        if (!user) {
+            throw new Error('User not found');
+        }
+
+        user.avatar = avatarUrl;
+
+        await user.save();
+
+        if (user.avatar) {
+            const oldPath = path.join("uploads", "avatars", path.basename(user.avatar));
+        
+            fs.unlink(oldPath, (err) => {
+                if (err) console.log("Failed to delete old avatar:", err);
+            });
+        }
+
+        return user;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
+
 
 
 
