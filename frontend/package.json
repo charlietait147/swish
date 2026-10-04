@@ -15,7 +15,8 @@
     "next": "14.2.4",
     "react": "^18",
     "react-dom": "^18",
-    "react-swipeable": "^7.0.2"
+    "react-swipeable": "^7.0.2",
+    "sharp": "^0.33.5"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
@@ -43,7 +44,12 @@
     ],
     "testEnvironment": "jest-environment-jsdom",
     "transform": {
-      "^.+\\.jsx?$": "babel-jest"
+      "^.+\\.jsx?$": [
+        "babel-jest",
+        {
+          "configFile": "./jest.babel.config.js"
+        }
+      ]
     },
     "moduleNameMapper": {
       "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js",

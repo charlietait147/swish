@@ -36,11 +36,13 @@ function CallToAction() {
             src={slideshowImg1}
             className="w-1/2 border-white off-screen-left rounded-lg shadow-md "
             alt="cafe"
+            sizes="(min-width: 768px) 440px, 50vw"
           />
           <Image
             src={slideshowImg2}
             className="w-1/2 border-white off-screen-right rounded-lg shadow-md md:translate-x-0"
             alt="cafe"
+            sizes="(min-width: 768px) 440px, 50vw"
           />
         </div>
       </div>
@@ -50,6 +52,7 @@ function CallToAction() {
             src={coffeeLaptopSignIn}
             alt="Coffee in front of Laptop"
             className="px-4 md:w-1/2"
+            sizes="(min-width: 1184px) 592px, (min-width: 768px) 50vw, 100vw"
           />
 
           <div className="flex flex-col px-4 md:justify-center items-center md:w-1/2 gap-1">
@@ -70,6 +73,7 @@ function CallToAction() {
             src={accountView}
             alt="Woman sitting with laptop"
             className="px-4 md:w-1/2"
+            sizes="(min-width: 1184px) 592px, (min-width: 768px) 50vw, 100vw"
           />
           <div className="flex flex-col px-4 md:justify-center items-center md:w-1/2 gap-1">
             <h2 className="text-3xl font-semibold mt-5">Manage your account</h2>

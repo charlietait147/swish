@@ -144,12 +144,28 @@ function CafeDetailsSection({ cafe }) {
           {...handlers}
           className="relative h-[max-content] w-full lg:w-1/2 flex-shrink-0"
           >
-            <img
+            <Image
               // src={`${process.env.NEXT_API_URL}/public/images/${cafe.image}`}
               src={`${process.env.NEXT_API_URL}/public/images/${cafe.images[index]}`}
               alt={cafe.name}
+              width={1200}
+              height={800}
+              sizes="(min-width: 1024px) 512px, 100vw"
+              priority
               className="w-full h-auto object-cover rounded-lg"
             />
+            {/* Load the next slide in the background so swiping is instant */}
+            {index < cafe.images.length - 1 && (
+              <Image
+                src={`${process.env.NEXT_API_URL}/public/images/${cafe.images[index + 1]}`}
+                alt=""
+                width={1200}
+                height={800}
+                sizes="(min-width: 1024px) 512px, 100vw"
+                loading="eager"
+                className="hidden"
+              />
+            )}
             <button
               onClick={handleSaveCafe}
               className={`absolute top-2 right-2 p-2 rounded-2xl border font-semibold flex flex-row gap-1 items-center text-sm ${

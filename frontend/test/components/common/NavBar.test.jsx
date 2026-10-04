@@ -13,6 +13,10 @@ jest.mock("next/navigation", () => ({
   }),
 }));
 
+jest.mock("../../../services/user.service.jsx", () => ({
+  fetchUserData: jest.fn().mockResolvedValue({ avatar: null }),
+}));
+
 jest.mock("js-cookie", () => ({
   get: jest.fn(),
   set: jest.fn(),
@@ -20,6 +24,8 @@ jest.mock("js-cookie", () => ({
 }));
 
 describe("NavBar Component", () => {
+  const originalConsoleError = console.error;
+
   beforeEach(() => {
     jest.spyOn(console, "error").mockImplementation((message) => {
       const msg = String(message);
@@ -28,7 +34,7 @@ describe("NavBar Component", () => {
         return;
       }
       // Otherwise, log the error
-      console.error(message);
+      originalConsoleError(message);
     });
     jest.clearAllMocks();
   });
@@ -45,12 +51,12 @@ describe("NavBar Component", () => {
     expect(loginLink).toBeInTheDocument();
   });
 
-  it("should render an avatar button  when the user is logged in", () => {
+  it("should render an avatar button  when the user is logged in", async () => {
     Cookies.get.mockReturnValue("839429f778gfd8gf8387gd");
 
     render(<NavBar />);
 
-    const avatar = screen.getByRole("button", { name: /avatar/i });
+    const avatar = await screen.findByRole("button", { name: /avatar/i });
 
     expect(avatar).toBeInTheDocument();
   });
@@ -64,7 +70,7 @@ describe("NavBar Component", () => {
     expect(menuList).not.toBeInTheDocument(); // No menu initially
 
     // Find and click the burger menu icon
-    const burgerIcon = screen.getByRole("button", { name: /burger menu/i });
+    const burgerIcon = await screen.findByRole("button", { name: /burger menu/i });
     userEvent.click(burgerIcon);
 
     // Assert that the menu is visible
@@ -95,7 +101,7 @@ describe("NavBar Component", () => {
     console.log("Token from Cookies.get mock:", Cookies.get("token"));
 
     // 4. Find and click the Avatar button
-    const avatar = screen.getByRole("button", { name: /avatar/i });
+    const avatar = await screen.findByRole("button", { name: /avatar/i });
     userEvent.click(avatar);
 
     // 5. Find and click the Sign Out button

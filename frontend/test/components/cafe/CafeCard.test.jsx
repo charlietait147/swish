@@ -34,11 +34,12 @@ describe("CafeCard Component", () => {
 
     render(<CafeCard {...mockCafeData} />);
 
-    const cafeCard = screen.getByTestId("cafe-card");
+    const cafeImage = screen.getByTestId("cafe-card").querySelector("img");
 
     // Assert that the background image is set correctly
-    expect(cafeCard).toHaveStyle(
-      `background-image: url(https://example.com/public/images/${mockCafeData.image})`
+    expect(cafeImage).toHaveAttribute(
+      "src",
+      `https://example.com/public/images/${mockCafeData.image}`
     );
   });
 });
