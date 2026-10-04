@@ -42,6 +42,10 @@ function NavBar() {
     const token = Cookies.get("token");
     if (token) {
       setIsLoggedIn(true);
+      getUserData();
+    } else {
+      // Logged out users have no user data to wait for, so show the nav straight away
+      setLoading(false);
     }
   }, []);
 
@@ -59,17 +63,12 @@ function NavBar() {
     try {
       const response = await fetchUserData();
       setUserData(response);
-      console.log(userData);
     } catch (error) {
       setError(error.message);
     } finally {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    getUserData();
-  }, []);
 
   const handleSignOut = () => {
     Cookies.remove("token");

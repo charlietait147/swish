@@ -1,3 +1,6 @@
+// Let next/image optimise images served by the API (cafe photos, avatars)
+const apiUrl = process.env.NEXT_API_URL ? new URL(process.env.NEXT_API_URL) : null;
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     env: {
@@ -6,6 +9,15 @@ const nextConfig = {
       },
       images: {
         domains: ['localhost'],
+        remotePatterns: apiUrl
+          ? [
+              {
+                protocol: apiUrl.protocol.replace(':', ''),
+                hostname: apiUrl.hostname,
+                port: apiUrl.port,
+              },
+            ]
+          : [],
       },
 };
 

@@ -49,7 +49,8 @@ app.use('/uploads', express.static(uploadsDir));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/public', express.static(path.join(__dirname, 'public')));
+// Cache cafe images/icons so browsers and the Next image optimiser don't refetch them on every visit
+app.use('/public', express.static(path.join(__dirname, 'public'), { maxAge: '7d' }));
 
 // app.use('/public', express.static('./images'));
 

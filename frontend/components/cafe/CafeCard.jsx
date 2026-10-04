@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import PropTypes from "prop-types";
 
 function CafeCard({ cafeId, name, location, image }) {
@@ -6,12 +7,16 @@ function CafeCard({ cafeId, name, location, image }) {
   return (
     <Link href={`cafe/${cafeId}`} data-testid="cafe-link">
       <div
-        className="relative bg-cover bg-center w-full shadow-lg overflow-hidden h-56 rounded-lg cursor-pointer transition duration-300 ease-in-out transform hover:scale-105"
+        className="relative w-full shadow-lg overflow-hidden h-56 rounded-lg cursor-pointer transition duration-300 ease-in-out transform hover:scale-105"
         data-testid="cafe-card"
-        style={{
-          backgroundImage: `url(${process.env.NEXT_API_URL}/public/images/${image})`,
-        }}
       >
+        <Image
+          src={`${process.env.NEXT_API_URL}/public/images/${image}`}
+          alt=""
+          fill
+          sizes="(min-width: 1024px) 400px, (min-width: 480px) 50vw, 100vw"
+          className="object-cover"
+        />
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>{" "}
         {/* Overlay */}
         <div className="relative z-10 flex flex-col justify-center items-center h-full p-4">

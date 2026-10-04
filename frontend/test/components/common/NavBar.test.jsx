@@ -14,6 +14,10 @@ jest.mock("next/navigation", () => ({
   }),
 }));
 
+jest.mock("../../../services/user.service.jsx", () => ({
+  fetchUserData: jest.fn().mockResolvedValue({ avatar: null }),
+}));
+
 jest.mock("js-cookie", () => ({
   get: jest.fn(),
   set: jest.fn(),
