@@ -73,6 +73,8 @@ export default function AccountPage() {
         <div className="bg-gray-200 pb md:px-24 lg:px-6 md:pb-6 lg:pb-12">
           <AccountOverview
             email={userData.email}
+            avatar={userData.avatar}
+            onAvatarUpdated={(avatar) => setUserData({ ...userData, avatar })}
             cafesLength={userData.cafes.length}
             reviewsLength={userData.reviews.length}
           />

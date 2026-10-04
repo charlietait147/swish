@@ -1,8 +1,11 @@
 import { expect } from "chai";
+import fs from "fs";
+import path from "path";
 
 import userData from "./data/testUser.js";
 import { testCafeData } from "./data/testData.js";
 import { setupDatabase, initialiseSetup } from "./testSetup.js";
+import { avatarsDir } from "../src/middleware/avatar.upload.js";
 
 
 const { userDataToImport, wellFormedUser, userNoEmail, userWrongTypeEmail, userShortPassword } = userData;
@@ -320,6 +323,98 @@ describe("Testing Requests on User Collection", () => {
             expect(res).to.have.status(200);
             const parsedResponse = JSON.parse(res.text);
             expect(parsedResponse).to.deep.equal({ isSaved: false });
+        });
+    });
+    describe(`PUT request to /user/avatar`, () => {
+        // 1x1 transparent PNG
+        const pngBuffer = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=", "base64");
+        const uploadedAvatars = [];
+
+        after(() => {
+            uploadedAvatars.forEach((avatar) => {
+                fs.rmSync(path.join(avatarsDir, path.basename(avatar)), { force: true });
+            });
+        });
+
+        it('should return a 200 status code and the new avatar path when a valid image is uploaded', async () => {
+            //Act
+            const res = await testServer
+                .put('/user/avatar')
+                .set('Authorization', `Bearer ${token}`)
+                .attach('avatar', pngBuffer, { filename: 'avatar.png', contentType: 'image/png' });
+
+            //Assert
+            expect(res).to.have.status(200);
+            expect(res.body).to.have.property('message').that.equals('Avatar updated');
+            expect(res.body.avatar).to.match(/^\/uploads\/avatars\/.+\.png$/);
+            uploadedAvatars.push(res.body.avatar);
+            expect(fs.existsSync(path.join(avatarsDir, path.basename(res.body.avatar)))).to.be.true;
+        });
+
+        it('should serve the uploaded avatar and delete the previous one when the avatar is replaced', async () => {
+            //Arrange
+            const previousAvatar = uploadedAvatars[uploadedAvatars.length - 1];
+
+            //Act
+            const res = await testServer
+                .put('/user/avatar')
+                .set('Authorization', `Bearer ${token}`)
+                .attach('avatar', pngBuffer, { filename: 'avatar.png', contentType: 'image/png' });
+            uploadedAvatars.push(res.body.avatar);
+
+            const imageRes = await testServer.get(res.body.avatar);
+
+            //Assert
+            expect(res).to.have.status(200);
+            expect(res.body.avatar).to.not.equal(previousAvatar);
+            expect(imageRes).to.have.status(200);
+            expect(fs.existsSync(path.join(avatarsDir, path.basename(previousAvatar)))).to.be.false;
+        });
+
+        it('should return a 400 status code when no file is uploaded', async () => {
+            //Act
+            const res = await testServer
+                .put('/user/avatar')
+                .set('Authorization', `Bearer ${token}`);
+
+            //Assert
+            expect(res).to.have.status(400);
+            expect(res.body.message).to.equal('No file uploaded');
+        });
+
+        it('should return a 400 status code when a non-image file is uploaded', async () => {
+            //Act
+            const res = await testServer
+                .put('/user/avatar')
+                .set('Authorization', `Bearer ${token}`)
+                .attach('avatar', Buffer.from('not an image'), { filename: 'avatar.txt', contentType: 'text/plain' });
+
+            //Assert
+            expect(res).to.have.status(400);
+            expect(res.body.message).to.equal('Only JPEG, PNG or WEBP images are allowed');
+        });
+
+        it('should return a 400 status code when the image is larger than 2MB', async () => {
+            //Act
+            const res = await testServer
+                .put('/user/avatar')
+                .set('Authorization', `Bearer ${token}`)
+                .attach('avatar', Buffer.alloc(2 * 1024 * 1024 + 1), { filename: 'big.png', contentType: 'image/png' });
+
+            //Assert
+            expect(res).to.have.status(400);
+            expect(res.body.message).to.equal('Avatar must be 2MB or smaller');
+        });
+
+        it('should return a 401 status code when a user with no token uploads an avatar', async () => {
+            //Act
+            const res = await testServer
+                .put('/user/avatar')
+                .attach('avatar', pngBuffer, { filename: 'avatar.png', contentType: 'image/png' });
+
+            //Assert
+            expect(res).to.have.status(401);
+            expect(res.body.error).to.equal('Authentication failed: No token provided');
         });
     });
 });

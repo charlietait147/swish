@@ -1,7 +1,42 @@
-import Logo from "../../public/logo/swish-logo.png";
+import { useRef, useState } from "react";
 import Image from "next/image";
+import { uploadAvatar } from "../../services/user.service.jsx";
+import { getAvatarSrc } from "../../utils/avatar";
 
-function AccountOverview({ email, cafesLength, reviewsLength }) {
+const ALLOWED_AVATAR_TYPES = ["image/jpeg", "image/png", "image/webp"];
+const MAX_AVATAR_SIZE = 2 * 1024 * 1024; // 2MB, matches the backend limit
+
+function AccountOverview({ email, avatar, onAvatarUpdated, cafesLength, reviewsLength }) {
+  const fileInputRef = useRef(null);
+  const [uploading, setUploading] = useState(false);
+  const [avatarError, setAvatarError] = useState(null);
+
+  const handleAvatarChange = async (e) => {
+    const file = e.target.files[0];
+    e.target.value = ""; // allow picking the same file again
+    if (!file) return;
+
+    if (!ALLOWED_AVATAR_TYPES.includes(file.type)) {
+      setAvatarError("Please choose a JPEG, PNG or WEBP image");
+      return;
+    }
+    if (file.size > MAX_AVATAR_SIZE) {
+      setAvatarError("Avatar must be 2MB or smaller");
+      return;
+    }
+
+    setAvatarError(null);
+    setUploading(true);
+    try {
+      const data = await uploadAvatar(file);
+      onAvatarUpdated?.(data.avatar);
+    } catch (error) {
+      setAvatarError(error.message);
+    } finally {
+      setUploading(false);
+    }
+  };
+
   return (
     <div>
       <div className="bg-gray-200 pt-16 pb-3">
@@ -14,9 +49,30 @@ function AccountOverview({ email, cafesLength, reviewsLength }) {
         <div className="bg-white py-3 shadow-lg max-w-screen-lg mx-auto md:pb-6 md:pt-4">
           <div className="flex flex-row items-center px-4">
             <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center overflow-hidden shadow-xl border border-gray-300">
-              <Image src={Logo} alt="Account Avatar" className="w-14 h-14" />
+              <Image src={getAvatarSrc(avatar)} width={64} height={64} alt="Account Avatar" className="w-full h-full object-cover" />
             </div>
-            <h1 className="font-light text-gray-700 text-sm ml-2">{email}</h1>
+            <div className="ml-2">
+              <h1 className="font-light text-gray-700 text-sm">{email}</h1>
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                disabled={uploading}
+                className="text-xs font-semibold text-gray-600 underline cursor-pointer disabled:opacity-50"
+              >
+                {uploading ? "Uploading..." : "Change avatar"}
+              </button>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                onChange={handleAvatarChange}
+                className="hidden"
+                data-testid="avatar-input"
+              />
+              {avatarError && (
+                <p className="text-xs text-red-600" role="alert">{avatarError}</p>
+              )}
+            </div>
           </div>
           <div className="flex justify-center">
             <button className="border border-gray-200 rounded-md py-2 px-4 bg-gray-100 text-sm font-semibold cursor-pointer">
