@@ -1,18 +1,48 @@
-import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
+import {
+  APIProvider,
+  Map,
+  AdvancedMarker,
+  APILoadingStatus,
+  useApiLoadingStatus,
+} from "@vis.gl/react-google-maps";
 import { useMemo } from "react";
 import Link from "next/link";
 
-function CafeMapContainer({ cafe }) {
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
-  });
-  const center = useMemo(
-    () => ({
-      lat: cafe && cafe.lat,
-      lng: cafe && cafe.lng,
-    }),
-    []
+// Google's test Map ID, AdvancedMarker needs a Map ID to render
+const MAP_ID = "DEMO_MAP_ID";
+
+function CafeMap({ center }) {
+  const status = useApiLoadingStatus();
+
+  if (status === APILoadingStatus.FAILED || status === APILoadingStatus.AUTH_FAILURE) {
+    return (
+      <p className="text-sm text-gray-600">
+        The map couldn&apos;t be loaded. Use the address link above to view this cafe on Google Maps.
+      </p>
+    );
+  }
+
+  if (status !== APILoadingStatus.LOADED) {
+    return <h1>Loading...</h1>;
+  }
+
+  return (
+    <Map
+      key={`${center.lat},${center.lng}`} // remount so the map re-centres when the cafe changes
+      defaultZoom={14}
+      defaultCenter={center}
+      mapId={MAP_ID}
+      className="w-full h-80 sm:h-96 md:h-120 lg:h-132"
+    >
+      <AdvancedMarker position={center} />
+    </Map>
   );
+}
+
+function CafeMapContainer({ cafe }) {
+  const lat = cafe?.lat;
+  const lng = cafe?.lng;
+  const center = useMemo(() => ({ lat, lng }), [lat, lng]);
   return (
     <div className="max-w-screen-lg mx-auto xs:px-6 sm:px-10 lg:pt-6 xl:px-0 px-4 flex flex-col gap-3 pb-6">
       <div className="flex flex-col gap-1.5">
@@ -50,23 +80,9 @@ function CafeMapContainer({ cafe }) {
         </div>
       </div>
       <div className="map">
-        {!isLoaded ? (
-          <h1>Loading...</h1>
-        ) : (
-          <GoogleMap
-            zoom={14}
-            center={center}
-            mapContainerClassName="w-full h-80 sm:h-96 md:h-120 lg:h-132"
-          >
-            <Marker
-              key="marker_1"
-              position={{
-                lat: cafe && cafe.lat,
-                lng: cafe && cafe.lng,
-              }}
-            />
-          </GoogleMap>
-        )}
+        <APIProvider apiKey={process.env.MAPS_DEMO_KEY}>
+          <CafeMap center={center} />
+        </APIProvider>
       </div>
     </div>
   );
