@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "NODE_ENV=test jest"
+    "test": "NODE_ENV=test jest",
+    "test:integration": "NODE_ENV=test jest --testPathIgnorePatterns=/node_modules/ --testPathPattern=test/integration"
   },
   "dependencies": {
     "@vis.gl/react-google-maps": "^1.10.1",
@@ -42,12 +43,17 @@
       "./test/config/setup.js"
     ],
     "testEnvironment": "jest-environment-jsdom",
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "<rootDir>/test/integration/"
+    ],
     "transform": {
       "^.+\\.jsx?$": "babel-jest"
     },
     "moduleNameMapper": {
       "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js",
-      "\\.(jpg|jpeg|png|gif)$": "<rootDir>/__mocks__/fileMock.js"
+      "\\.(jpg|jpeg|png|gif)$": "<rootDir>/__mocks__/fileMock.js",
+      "^@/(.*)$": "<rootDir>/$1"
     }
   }
 }

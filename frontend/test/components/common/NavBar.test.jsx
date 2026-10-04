@@ -2,6 +2,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Cookies from "js-cookie";
 import NavBar from "../../../components/NavBar.jsx";
+import { fetchUserData } from "../../../services/user.service.jsx";
 
 const mockRouterPush = jest.fn();
 jest.mock("next/navigation", () => ({
@@ -19,7 +20,13 @@ jest.mock("js-cookie", () => ({
   remove: jest.fn(),
 }));
 
+jest.mock("../../../services/user.service.jsx", () => ({
+  fetchUserData: jest.fn(),
+}));
+
 describe("NavBar Component", () => {
+  const originalConsoleError = console.error;
+
   beforeEach(() => {
     jest.spyOn(console, "error").mockImplementation((message) => {
       const msg = String(message);
@@ -28,29 +35,30 @@ describe("NavBar Component", () => {
         return;
       }
       // Otherwise, log the error
-      console.error(message);
+      originalConsoleError(message);
     });
     jest.clearAllMocks();
+    fetchUserData.mockResolvedValue({ avatar: null });
   });
 
   afterEach(() => {
     console.error.mockRestore();
   });
 
-  it("should render a Sign in link when the user is not logged in", () => {
+  it("should render a Sign in link when the user is not logged in", async () => {
     render(<NavBar />);
 
-    const loginLink = screen.getByText(/Sign in/i);
+    const loginLink = await screen.findByText(/Sign in/i);
 
     expect(loginLink).toBeInTheDocument();
   });
 
-  it("should render an avatar button  when the user is logged in", () => {
+  it("should render an avatar button  when the user is logged in", async () => {
     Cookies.get.mockReturnValue("839429f778gfd8gf8387gd");
 
     render(<NavBar />);
 
-    const avatar = screen.getByRole("button", { name: /avatar/i });
+    const avatar = await screen.findByRole("button", { name: /avatar/i });
 
     expect(avatar).toBeInTheDocument();
   });
@@ -59,12 +67,14 @@ describe("NavBar Component", () => {
     // Render the NavBar component
     render(<NavBar />);
 
+    // Find the burger menu icon once the user data has loaded
+    const burgerIcon = await screen.findByRole("button", { name: /burger menu/i });
+
     // Initially, the menu should not be visible
     const menuList = screen.queryByRole("menu");
     expect(menuList).not.toBeInTheDocument(); // No menu initially
 
-    // Find and click the burger menu icon
-    const burgerIcon = screen.getByRole("button", { name: /burger menu/i });
+    // Click the burger menu icon
     userEvent.click(burgerIcon);
 
     // Assert that the menu is visible
@@ -95,7 +105,7 @@ describe("NavBar Component", () => {
     console.log("Token from Cookies.get mock:", Cookies.get("token"));
 
     // 4. Find and click the Avatar button
-    const avatar = screen.getByRole("button", { name: /avatar/i });
+    const avatar = await screen.findByRole("button", { name: /avatar/i });
     userEvent.click(avatar);
 
     // 5. Find and click the Sign Out button

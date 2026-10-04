@@ -68,5 +68,3 @@ if (process.env.NODE_ENV === 'production') {
         }
     })();
 }
-
-updateCafes().catch(console.error);

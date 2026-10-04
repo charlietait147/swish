@@ -282,7 +282,7 @@ function NavBar() {
             </li> */}
             <AccountMenu
               handleSignOut={handleSignOut}
-              avatarUrl={userData.avatar}
+              avatarUrl={userData?.avatar}
             />
           </>
         )}

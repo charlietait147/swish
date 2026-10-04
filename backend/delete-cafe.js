@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import Cafe from './src/models/cafe.model.js';
 import { connectDb } from './src/db/db.connection.js';
 import dotenv from 'dotenv';
+import { fileURLToPath } from 'url';
 
 dotenv.config({
     path: `.env${process.env.NODE_ENV ? `.${process.env.NODE_ENV}` : ``}`,
@@ -44,5 +45,7 @@ export const deleteCafes = async (cafeName) => {
 }
 
 // To delete a specific cafe, run this script and pass the cafe name like this:
-deleteCafes('').catch(console.error);
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+    deleteCafes('').catch(console.error);
+}
 
