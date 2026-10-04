@@ -23,7 +23,7 @@ describe('Cafe Upsert', () => {
         testCafeData.forEach((cafe) => {
             const dbCafe = cafes.find(dbCafe => dbCafe.name === cafe.name);
             expect(dbCafe).to.exist;
-            expect(dbCafe.location).to.equal(cafe.location);
+            expect(dbCafe.locations).to.deep.equal(cafe.locations);
             expect(dbCafe.description).to.equal(cafe.description);
             // Add other fields to compare as needed, except `reviews`
         });

@@ -31,7 +31,7 @@ CafeList.propTypes = {
     PropTypes.shape({
       _id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-      location: PropTypes.string.isRequired,
+      locations: PropTypes.arrayOf(PropTypes.string).isRequired,
       image: PropTypes.string.isRequired,
     })
   ).isRequired,

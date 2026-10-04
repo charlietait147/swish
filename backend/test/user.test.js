@@ -69,7 +69,7 @@ describe("Testing Requests on User Collection", () => {
 
             //Assert
             expect(res).to.have.status(400);
-            expect(res.text).to.equal('["Password must be at least 6 characters long and must contain at least one letter and one number"]');
+            expect(res.text).to.equal('["Password must be at least 8 characters long and must contain at least one letter and one number"]');
         });
     });
 
@@ -156,7 +156,7 @@ describe("Testing Requests on User Collection", () => {
 
             //Assert
             expect(res).to.have.status(400);
-            expect(res.text).to.equal('["New password must be between 8 to 16 characters long and must contain at least one letter and one number"]');
+            expect(res.text).to.equal('["New password must be at least 8 characters and must contain at least one letter and one number"]');
         });
     });
 
@@ -206,7 +206,7 @@ describe("Testing Requests on User Collection", () => {
             expect(res).to.have.status(200);
             expect(res.body.cafes).to.be.an('array').that.has.lengthOf(1);
             expect(res.body.cafes[0]).to.have.property('name').that.equals(testCafeData[0].name);
-            expect(res.body.cafes[0]).to.have.property('location').that.equals(testCafeData[0].location);
+            expect(res.body.cafes[0]).to.have.property('locations').that.deep.equals(testCafeData[0].locations);
             expect(res.body.cafes[0]).to.have.property('description').that.equals(testCafeData[0].description);
         });
 

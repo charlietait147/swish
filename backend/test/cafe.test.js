@@ -28,7 +28,7 @@ describe("Testing Requests on Cafe Collection", () => {
             res.body.forEach(cafe => {
                 expect(cafe).to.have.property('_id');
                 expect(cafe).to.have.property('name');
-                expect(cafe).to.have.property('location');
+                expect(cafe).to.have.property('locations');
                 expect(cafe).to.have.property('description');
             });
         });
@@ -45,7 +45,7 @@ describe("Testing Requests on Cafe Collection", () => {
             expect(res.body).to.be.an('object');
             expect(res.body).to.have.property('_id').that.equals(testCafeData[0]._id);
             expect(res.body).to.have.property('name').that.equals(testCafeData[0].name);
-            expect(res.body).to.have.property('location').that.equals(testCafeData[0].location);
+            expect(res.body).to.have.property('locations').that.deep.equals(testCafeData[0].locations);
             expect(res.body).to.have.property('description').that.equals(testCafeData[0].description);
         });
 

@@ -48,26 +48,13 @@ export const setupDatabase = async (userData, cafeData, reviewData) => {
     }
 };
 
-let serverInstance; // to keep the server running for all tests
-
 export const initialiseSetup = () => { 
     before(async () => { // before all tests
         await connectDb(); // connect to the database
-        if (!serverInstance) { // if the server is not already running
-            serverInstance = app.listen(process.env.PORT || 3000, () => { // start the server
-                console.log('Server started for tests'); // log that the server has started
-            });
-        }
     });
 
     after(async () => { // after all tests
-        if (serverInstance) { // if the server is running
-            await mongoose.connection.close(); // close the database connection
-            await new Promise((resolve) => { // close the server
-                serverInstance.close(resolve); // resolve the promise
-            });
-            console.log('Server stopped after tests');  // log that the server has stopped
-        }
+        await mongoose.connection.close(); // close the database connection
     });
 
     return request(app).keepOpen(); // return the request object

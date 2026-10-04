@@ -35,6 +35,8 @@ describe("CafePage Component", () => {
       description: "A great cafe",
       website: "cafe1@gmail.com",
       image: "cafe1.jpg",
+      images: ["cafe1.jpg"],
+      locations: ["Town 1"],
       address: "Town 1",
       reviews: [],
     });
@@ -69,9 +71,10 @@ describe("CafePage Component", () => {
         _id: 1,
         name: "Cafe 1",
         description: "A great cafe",
-        location: "Town 1",
+        locations: ["Town 1"],
         website: "cafe1@gmail.com",
         image: "cafe1.jpg",
+        images: ["cafe1.jpg"],
         address: 'Address 1',
         reviews: [],
       });
