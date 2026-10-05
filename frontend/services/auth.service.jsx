@@ -3,6 +3,18 @@ import Cookies from "js-cookie";
 
 const API_URL = process.env.NEXT_API_URL || "http://localhost:3000";
 
+const setAuthCookie = (token) => {
+  Cookies.set("token", token, { expires: 1, sameSite: "Strict" });
+};
+
+// The API replies with plain text, a list of validation messages, or { error } / { errors }
+const getErrorMessage = (error, fallback) => {
+  const data = error?.response?.data;
+  if (typeof data === "string" && data) return data;
+  if (Array.isArray(data) && data.length) return data[0];
+  return data?.error || data?.errors?.[0] || data?.message || error?.message || fallback;
+};
+
 export const register = async (email, password) => {
   try {
     const res = await axios.post(`${API_URL}/user/register`, {
@@ -13,7 +25,7 @@ export const register = async (email, password) => {
     const data = await res.data;
 
     if (res.status === 201) {
-      Cookies.set("token", data.token, { expires: 1 }, { sameSite: "Strict" });
+      setAuthCookie(data.token);
       console.log("User registered successfully");
       return data;
     } else {
@@ -39,7 +51,7 @@ export const login = async (email, password) => {
     const data = await res.data;
 
     if (res.status === 201) {
-      Cookies.set("token", data.token, { expires: 1 }, { sameSite: "Strict" });
+      setAuthCookie(data.token);
       console.log("User logged in successfully");
       return data;
     } else {
@@ -58,7 +70,7 @@ export const updatePassword = async (newPassword) => {
   try {
     const token = Cookies.get("token");
 
-    const res = await axios.put(
+    const { data } = await axios.put(
       `${API_URL}/user/update-password`,
       { newPassword },
       {
@@ -68,58 +80,24 @@ export const updatePassword = async (newPassword) => {
       }
     );
 
-    const data = await res.data;
-
-    if (res.status === 200) {
-      console.log("Password updated successfully", data);
-      return data;
-    } else {
-      throw new Error(data.message || "Password update failed");
-    }
+    // Changing the password invalidates the old token, so store the new one
+    setAuthCookie(data.token);
+    return data;
   } catch (error) {
-    throw new Error(error.response?.data || "An error occurred during password update");
+    throw new Error(getErrorMessage(error, "An error occurred during password update"));
   }
 };
 
 export const forgotPassword = async (email) => {
-
-  const res = await axios.post(`${API_URL}/user/forgot-password`, {
-    email
-  });
-
-  const data = await res.data;
-
-  if (res.status === 200) {
-    console.log("Password link sent", data);
+  try {
+    const { data } = await axios.post(`${API_URL}/user/forgot-password`, {
+      email,
+    });
     return data;
-  } else {
-    if (error.response && error.response.status === 400) {
-      throw new Error(error.response.data)// Throw the specific error message
-    } else {
-      throw new Error(error.message || "Password reset failed");
-    }
+  } catch (error) {
+    throw new Error(getErrorMessage(error, "Password reset failed"));
   }
-  
-}
-
-
-// export const resetPassword = async (token, newPassword) => {
-
-//   const res = await axios.post(`${API_URL}/user/reset-password/${token}`, {
-//     newPassword,
-//   });
-
-//   console.log("Password changed successfully", res.data);
-
-//   const data = await res.data;
-  
-//   if (res.status === 200) {
-//     console.log("Password changed successfully", data);
-//     return data;
-//   } else {
-//     throw new Error(data.message || "Password reset failed");
-//   }
-// }
+};
 
 export const resetPassword = async (token, newPassword) => {
   try {
@@ -128,14 +106,10 @@ export const resetPassword = async (token, newPassword) => {
       { newPassword }
     );
 
+    // The API signs the user in with their new password
+    setAuthCookie(data.token);
     return data;
-  } catch (err) {
-    const message =
-      err?.response?.data?.error ||
-      err?.response?.data?.errors?.[0] ||
-      err?.message ||
-      "Password reset failed";
-
-    throw new Error(message);
+  } catch (error) {
+    throw new Error(getErrorMessage(error, "Password reset failed"));
   }
 };

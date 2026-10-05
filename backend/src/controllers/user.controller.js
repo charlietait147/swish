@@ -2,6 +2,7 @@ import { registerUserService, loginUserService, forgotPasswordService, updatePas
 import { validationResult } from "express-validator";
 import jwt from "jsonwebtoken";
 
+const signToken = (user) => jwt.sign({ email: user.email }, process.env.JWT_KEY, { expiresIn: '24h' });
 
 export const registerUserController = async (req, res) => {
     const errors = validationResult(req);
@@ -11,7 +12,7 @@ export const registerUserController = async (req, res) => {
     try {
         const { email, password } = req.body;
         const user = await registerUserService(email, password);
-        const token = jwt.sign({ email }, process.env.JWT_KEY, { expiresIn: '24h' });
+        const token = signToken(user);
         res.status(201).json({ message: "User registered successfully", user, token });
     } catch (error) {
         res.status(400).send(error.message);
@@ -23,7 +24,7 @@ export const loginUserController = async (req, res) => {
     try {
         const { email, password } = req.body;
         const user = await loginUserService(email, password);
-        const token = jwt.sign({ email }, process.env.JWT_KEY, { expiresIn: '24h' });
+        const token = signToken(user);
         res.status(201).json({ message: "User logged in successfully", user, token });
     } catch (error) {
         res.status(400).send(error.message);
@@ -42,6 +43,9 @@ export const forgotPasswordController = async (req, res) => {
       
 
     } catch (error) {
+        // Still respond generically so the endpoint can't reveal which emails are registered,
+        // but log it so a broken mail setup doesn't fail silently
+        console.error("Forgot password failed", error);
         return res.status(200).json({
             message: "If your email is registered, you'll receive instructions to reset your password shortly."
           });
@@ -56,7 +60,8 @@ export const updatePasswordController = async (req, res) => {
     try {
         const userId = req.user._id
         const user = await updatePasswordService(req.body.newPassword, userId);
-        res.status(200).json(user);
+        // The old token is now invalid, so hand back a new one for this session
+        res.status(200).json({ message: "Password updated successfully", user, token: signToken(user) });
     } catch (error) {
         res.status(400).send("Password update failed");
         console.error("Password update failed", error);
@@ -79,7 +84,8 @@ export const resetPasswordController = async (req, res) => {
 
     const user = await resetPasswordService(token, newPassword);
 
-    res.status(200).json({ message: "Password has been reset successfully", userId: user._id });
+    // Sign the user straight in with their new password
+    res.status(200).json({ message: "Password has been reset successfully", user, token: signToken(user) });
   } catch (error) {
     res.status(400).json({ error: error.message });
     console.error("Password reset failed", error);

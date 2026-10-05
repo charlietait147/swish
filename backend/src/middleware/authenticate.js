@@ -21,7 +21,9 @@ const authenticate = async (req, res, next) => {
     try {
         const decoded = jwt.verify(authToken, JWT_KEY);
         const user = await User.findOne({ email: decoded.email })
-        if (!user ) {
+        // Reject tokens issued before the password was last changed or reset
+        const tokenIssuedBeforePasswordChange = user?.passwordChangedAt && decoded.iat * 1000 < user.passwordChangedAt.getTime();
+        if (!user || tokenIssuedBeforePasswordChange) {
             return res.status(401).json({
                 status: 'error',
                 error: 'Authentication failed'

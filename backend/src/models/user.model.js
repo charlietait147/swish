@@ -5,6 +5,8 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
+        lowercase: true,
+        trim: true,
     },
     password: {
         type: String,
@@ -26,6 +28,21 @@ const userSchema = new mongoose.Schema({
     },
     resetPasswordExpires: {
         type: Date
+    },
+    // Tokens issued before this time are rejected, so changing the password logs out other sessions
+    passwordChangedAt: {
+        type: Date
+    }
+}, {
+    // Never send the password hash or reset token back to the client
+    toJSON: {
+        transform: (doc, ret) => {
+            delete ret.password;
+            delete ret.resetPasswordToken;
+            delete ret.resetPasswordExpires;
+            delete ret.passwordChangedAt;
+            return ret;
+        }
     }
 });
 

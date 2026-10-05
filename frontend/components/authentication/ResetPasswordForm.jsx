@@ -32,14 +32,8 @@ function ResetPasswordForm({onSubmit, loading, error, success}) {
       return (
         <form onSubmit={handleSubmit}>
         <div className="space-y-2">
-        <label
-           htmlFor="password"
-           className="block text-sm font-medium leading-6 text-gray-900"
-         >
-           
-         </label>
          <div className="mt-2">
-         <label className="block text-sm font-medium text-gray-900">
+         <label htmlFor="password" className="block text-sm font-medium text-gray-900">
           Password
         </label>
          <input

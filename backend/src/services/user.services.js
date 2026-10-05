@@ -6,8 +6,18 @@ import path from 'path';
 import { avatarsDir } from '../middleware/avatar.upload.js';
 import { sendResetEmail } from "../../utils/email.js";
 
+const normaliseEmail = (email) => String(email ?? "").trim().toLowerCase();
+
+// Hashes and stores a new password, and records when it changed so older JWTs stop working.
+// Rounded down to the second because JWT `iat` is in whole seconds.
+const setPassword = async (user, newPassword) => {
+    user.password = await bcrypt.hash(newPassword, 10);
+    user.passwordChangedAt = new Date(Math.floor(Date.now() / 1000) * 1000);
+};
+
 export const registerUserService = async (email, password) => {
     try {
+        email = normaliseEmail(email);
         const user = await User.findOne({ email });
         if (user) {
             throw new Error('A user with this email already exists');
@@ -25,9 +35,10 @@ export const registerUserService = async (email, password) => {
 
 export const loginUserService = async (email, password) => {
     try {
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ email: normaliseEmail(email) });
+        // Same message for unknown email and wrong password, so login can't be used to discover accounts
         if (!user) {
-            throw new Error('A user with this email does not exist');
+            throw new Error('Invalid email or password');
         }
 
         let isPasswordValid = false;
@@ -40,7 +51,7 @@ export const loginUserService = async (email, password) => {
             isPasswordValid = await bcrypt.compare(password, user.password);
         }
         if (!isPasswordValid) {
-            throw new Error('Invalid password');
+            throw new Error('Invalid email or password');
         }
         return user;
     }
@@ -51,7 +62,7 @@ export const loginUserService = async (email, password) => {
 
 export const forgotPasswordService = async (email) => {
     try {
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ email: normaliseEmail(email) });
         if (!user) {
             throw new Error('A user with this email does not exist');
         }
@@ -83,9 +94,8 @@ export const updatePasswordService = async (newPassword, userId) => {
             throw new Error('User not found');
         }
 
-        const hashedPassword = await bcrypt.hash(newPassword, 10); // hash the new password
-        user.password = hashedPassword; // set the user's password to the hashed password
-        await user.save(); // save the user
+        await setPassword(user, newPassword);
+        await user.save();
 
         return user;
     } catch (error) {
@@ -106,8 +116,7 @@ export const resetPasswordService = async(token, newPassword) => {
             throw new Error('Token is invalid or has expired');
           }
         
-          const hashedPassword = await bcrypt.hash(newPassword, 10);
-          user.password = hashedPassword;
+          await setPassword(user, newPassword);
 
           user.resetPasswordToken = undefined;
           user.resetPasswordExpires = undefined;

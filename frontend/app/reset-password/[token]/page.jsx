@@ -12,7 +12,6 @@ import Logo from "../../../public/logo/swish-orange-logo.jpeg";
 
 export default function PasswordReset() {
     const [success, setSuccess] = useState(false);
-    const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
@@ -21,14 +20,13 @@ export default function PasswordReset() {
     const { token } = useParams();
 
     const handleResetPassword = async (newPassword) => {
-        console.log("token: ", token);
-        console.log("new password", newPassword )
         if (!token) return;
     
         try {
           setLoading(true);
           setError("");
     
+          // Also signs the user in by storing the token the API returns
           await resetPasswordService(token, newPassword);
     
           setSuccess(true);
@@ -38,7 +36,7 @@ export default function PasswordReset() {
           }, 2000); // 2 seconds delay
 
         } catch (err) {
-            setError(err?.response?.data?.error || "Something went wrong");
+            setError(err.message || "Something went wrong");
         } finally {
           setLoading(false);
           
