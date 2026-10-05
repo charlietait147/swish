@@ -78,8 +78,9 @@ export const resetPasswordController = async (req, res) => {
     }
 
     const user = await resetPasswordService(token, newPassword);
+    const authToken = jwt.sign({ email: user.email }, process.env.JWT_KEY, { expiresIn: '24h' });
 
-    res.status(200).json({ message: "Password has been reset successfully", userId: user._id });
+    res.status(200).json({ message: "Password has been reset successfully", userId: user._id, token: authToken });
   } catch (error) {
     res.status(400).json({ error: error.message });
     console.error("Password reset failed", error);

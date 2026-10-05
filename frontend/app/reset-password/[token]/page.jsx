@@ -38,7 +38,7 @@ export default function PasswordReset() {
           }, 2000); // 2 seconds delay
 
         } catch (err) {
-            setError(err?.response?.data?.error || "Something went wrong");
+            setError(err?.message || "Something went wrong");
         } finally {
           setLoading(false);
           

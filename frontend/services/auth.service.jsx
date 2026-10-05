@@ -128,6 +128,9 @@ export const resetPassword = async (token, newPassword) => {
       { newPassword }
     );
 
+    // Log the user straight in with their new password
+    Cookies.set("token", data.token, { expires: 1, sameSite: "Strict" });
+
     return data;
   } catch (err) {
     const message =
