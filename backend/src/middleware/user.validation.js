@@ -2,6 +2,7 @@ import { check } from 'express-validator';
 
 export const userRegisterValidation = [
     check('email')
+        .trim()
         .isEmail()
         .withMessage('Please provide a valid email address'),
     check('password')

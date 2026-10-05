@@ -1,6 +1,11 @@
 import { expect } from "chai";
 import fs from "fs";
 import path from "path";
+import crypto from "crypto";
+import jwt from "jsonwebtoken";
+import sinon from "sinon";
+import nodemailer from "nodemailer";
+import User from "../src/models/user.model.js";
 
 import userData from "./data/testUser.js";
 import { testCafeData } from "./data/testData.js";
@@ -36,7 +41,24 @@ describe("Testing Requests on User Collection", () => {
             expect(res.body).to.be.an('object');
             expect(res.body).to.have.property('user');
             expect(res.body.user).to.have.property('email').that.equals(wellFormedUser.email);
+            expect(res.body.user).to.not.have.property('password');
             expect(res.body).to.have.property('token');
+        });
+
+        it('should store the email in lowercase and reject the same email in a different case', async () => {
+            //Act
+            const first = await testServer
+                .post('/user/register')
+                .send({ email: '  MixedCase@Example.com ', password: 'testPassword123' });
+            const duplicate = await testServer
+                .post('/user/register')
+                .send({ email: 'mixedcase@example.com', password: 'testPassword123' });
+
+            //Assert
+            expect(first).to.have.status(201);
+            expect(first.body.user.email).to.equal('mixedcase@example.com');
+            expect(duplicate).to.have.status(400);
+            expect(duplicate.text).to.equal('A user with this email already exists');
         });
 
         it(`should return a 400 status code when a user with no email is sent`, async () => {
@@ -89,7 +111,19 @@ describe("Testing Requests on User Collection", () => {
             expect(res.body).to.be.an('object');
             expect(res.body).to.have.property('user');
             expect(res.body.user).to.have.property('email').that.equals(email);
+            expect(res.body.user).to.not.have.property('password');
             expect(res.body).to.have.property('token');
+        });
+
+        it('should log in regardless of the case or surrounding spaces of the email', async () => {
+            //Act
+            const res = await testServer
+                .post('/user/login')
+                .send({ email: ' TestUser@Gmail.com ', password: "testPassword123" });
+
+            //Assert
+            expect(res).to.have.status(201);
+            expect(res.body.user.email).to.equal(userDataToImport[0].email);
         });
 
         it('should return a 400 status code when a user with no email is sent', async () => {
@@ -100,7 +134,18 @@ describe("Testing Requests on User Collection", () => {
 
             //Assert
             expect(res).to.have.status(400);
-            expect(res.text).to.equal('A user with this email does not exist');
+            expect(res.text).to.equal('Invalid email or password');
+        });
+
+        it('should return the same error for an unknown email as for a wrong password', async () => {
+            //Act
+            const res = await testServer
+                .post('/user/login')
+                .send({ email: 'nobody@example.com', password: "testPassword123" });
+
+            //Assert
+            expect(res).to.have.status(400);
+            expect(res.text).to.equal('Invalid email or password');
         });
 
         it('should return a 400 status code when a user with a wrong password is sent', async () => {
@@ -114,12 +159,12 @@ describe("Testing Requests on User Collection", () => {
 
             //Assert
             expect(res).to.have.status(400);
-            expect(res.text).to.equal('Invalid password');
+            expect(res.text).to.equal('Invalid email or password');
         });
     });
 
     describe(`PUT request to /user/update-password`, () => {
-        it('should return a 200 status code and the user when a well formed user is sent', async () => {
+        it('should return a 200 status code, the user and a new token when a well formed user is sent', async () => {
             //Arrange
             const { email } = userDataToImport[0];
 
@@ -131,8 +176,39 @@ describe("Testing Requests on User Collection", () => {
 
             //Assert
             expect(res).to.have.status(200);
-            expect(res.body).to.have.property('email').that.equals(email);
-            expect(res.body).to.have.property('password');
+            expect(res.body.user).to.have.property('email').that.equals(email);
+            expect(res.body.user).to.not.have.property('password');
+            expect(res.body).to.have.property('token');
+
+            // The old token is no longer valid, so carry on with the new one
+            token = res.body.token;
+        });
+
+        it('should reject tokens issued before the password was changed and accept the new one', async () => {
+            //Arrange
+            const { email } = userDataToImport[0];
+            const oldToken = jwt.sign({ email, iat: Math.floor(Date.now() / 1000) - 60 }, process.env.JWT_KEY);
+
+            //Act
+            const oldRes = await testServer.get('/user').set('Authorization', `Bearer ${oldToken}`);
+            const newRes = await testServer.get('/user').set('Authorization', `Bearer ${token}`);
+
+            //Assert
+            expect(oldRes).to.have.status(401);
+            expect(newRes).to.have.status(200);
+        });
+
+        it('should let the user log in with the new password but not the old one', async () => {
+            //Arrange
+            const { email } = userDataToImport[0];
+
+            //Act
+            const oldRes = await testServer.post('/user/login').send({ email, password: "testPassword123" });
+            const newRes = await testServer.post('/user/login').send({ email, password: "newPassword123" });
+
+            //Assert
+            expect(oldRes).to.have.status(400);
+            expect(newRes).to.have.status(201);
         });
 
         it('should return a 401 status code when a user with no token updates password', async () => {
@@ -268,7 +344,7 @@ describe("Testing Requests on User Collection", () => {
             //Assert
             expect(res).to.have.status(200);
             expect(res.body).to.have.property('email').that.equals(userDataToImport[0].email);
-            expect(res.body).to.have.property('password');
+            expect(res.body).to.not.have.property('password');
             expect(res.body).to.have.property('cafes').that.is.an('array').that.has.lengthOf(0);
             expect(res.body).to.have.property('reviews').that.is.an('array').that.has.lengthOf(0);
         });
@@ -415,6 +491,126 @@ describe("Testing Requests on User Collection", () => {
             //Assert
             expect(res).to.have.status(401);
             expect(res.body.error).to.equal('Authentication failed: No token provided');
+        });
+    });
+
+    describe(`POST request to /user/forgot-password`, () => {
+        let sendMail;
+
+        beforeEach(() => {
+            // Stub the mail transport so no real email is sent
+            sendMail = sinon.stub().resolves();
+            sinon.stub(nodemailer, 'createTransport').returns({ sendMail });
+        });
+
+        afterEach(() => {
+            sinon.restore();
+        });
+
+        it('should store a hashed reset token and email the reset link to a registered user', async () => {
+            //Arrange
+            const { email } = userDataToImport[1];
+
+            //Act
+            const res = await testServer
+                .post('/user/forgot-password')
+                .send({ email: email.toUpperCase() });
+
+            //Assert
+            expect(res).to.have.status(200);
+            expect(sendMail.calledOnce).to.be.true;
+            const mail = sendMail.firstCall.args[0];
+            expect(mail.to).to.equal(email);
+
+            const rawToken = mail.html.match(/reset-password\/([a-f0-9]{64})/)[1];
+            const user = await User.findOne({ email });
+            expect(user.resetPasswordToken).to.equal(crypto.createHash('sha256').update(rawToken).digest('hex'));
+            expect(user.resetPasswordExpires.getTime()).to.be.greaterThan(Date.now());
+        });
+
+        it('should return the same 200 response without sending an email for an unknown address', async () => {
+            //Act
+            const res = await testServer
+                .post('/user/forgot-password')
+                .send({ email: 'nobody@example.com' });
+
+            //Assert
+            expect(res).to.have.status(200);
+            expect(res.body.message).to.equal("If your email is registered, you'll receive instructions to reset your password shortly.");
+            expect(sendMail.called).to.be.false;
+        });
+    });
+
+    describe(`POST request to /user/reset-password/:token`, () => {
+        const { email } = userDataToImport[1];
+        let rawToken;
+
+        beforeEach(async () => {
+            rawToken = crypto.randomBytes(32).toString('hex');
+            await User.updateOne({ email }, {
+                resetPasswordToken: crypto.createHash('sha256').update(rawToken).digest('hex'),
+                resetPasswordExpires: Date.now() + 60 * 60 * 1000,
+            });
+        });
+
+        it('should reset the password, return a token for the user and clear the reset token', async () => {
+            //Act
+            const res = await testServer
+                .post(`/user/reset-password/${rawToken}`)
+                .send({ newPassword: 'resetPassword123' });
+
+            //Assert
+            expect(res).to.have.status(200);
+            expect(res.body.message).to.equal('Password has been reset successfully');
+            expect(res.body).to.have.property('token');
+            expect(res.body.user.email).to.equal(email);
+            expect(res.body.user).to.not.have.property('password');
+
+            const profile = await testServer.get('/user').set('Authorization', `Bearer ${res.body.token}`);
+            expect(profile).to.have.status(200);
+
+            const login = await testServer.post('/user/login').send({ email, password: 'resetPassword123' });
+            expect(login).to.have.status(201);
+
+            const user = await User.findOne({ email });
+            expect(user.resetPasswordToken).to.be.undefined;
+        });
+
+        it('should not allow the same reset token to be used twice', async () => {
+            //Act
+            await testServer.post(`/user/reset-password/${rawToken}`).send({ newPassword: 'resetPassword123' });
+            const res = await testServer
+                .post(`/user/reset-password/${rawToken}`)
+                .send({ newPassword: 'resetPassword456' });
+
+            //Assert
+            expect(res).to.have.status(400);
+            expect(res.body.error).to.equal('Token is invalid or has expired');
+        });
+
+        it('should return a 400 status code when the token has expired', async () => {
+            //Arrange
+            await User.updateOne({ email }, { resetPasswordExpires: Date.now() - 1000 });
+
+            //Act
+            const res = await testServer
+                .post(`/user/reset-password/${rawToken}`)
+                .send({ newPassword: 'resetPassword123' });
+
+            //Assert
+            expect(res).to.have.status(400);
+            expect(res.body.error).to.equal('Token is invalid or has expired');
+        });
+
+        it('should return a 400 status code when the new password is too weak', async () => {
+            //Act
+            const res = await testServer
+                .post(`/user/reset-password/${rawToken}`)
+                .send({ newPassword: 'weak' });
+
+            //Assert
+            expect(res).to.have.status(400);
+            expect(res.body.errors).to.deep.equal(['New password must be at least 8 characters and must contain at least one letter and one number']);
         });
     });
 });

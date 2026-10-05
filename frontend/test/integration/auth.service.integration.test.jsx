@@ -59,7 +59,7 @@ describe("Integration Tests: Auth Service", () => {
         }
         catch (error) {
             // Assert
-            expect(error.message).toBe("A user with this email does not exist");
+            expect(error.message).toBe("Invalid email or password");
         }
     });
 
@@ -72,7 +72,7 @@ describe("Integration Tests: Auth Service", () => {
             await login(user.email, user.password);
         } catch (error) {
             // Assert
-            expect(error.message).toBe("Invalid password");
+            expect(error.message).toBe("Invalid email or password");
         }
     });
 
