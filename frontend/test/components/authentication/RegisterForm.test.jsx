@@ -122,7 +122,7 @@ jest.mock("js-cookie", () => ({
             const existingEmail = "test@gmail.com"
             const testPassword = "Test1234";
 
-            register.mockRejectedValueOnce(new Error("A user with this email already exists"));
+            register.mockRejectedValueOnce(new Error("Unable to create an account with these details"));
 
             render(<RegisterForm />);
 
@@ -138,7 +138,7 @@ jest.mock("js-cookie", () => ({
 
             //Assert
             await waitFor(() => {
-                expect(screen.getByText(/A user with this email already exists/i)).toBeInTheDocument();
+                expect(screen.getByText(/Unable to create an account with these details/i)).toBeInTheDocument();
                 expect(mockRouterPush).not.toHaveBeenCalled();
             });
         });

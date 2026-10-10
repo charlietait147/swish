@@ -46,7 +46,7 @@ describe("AuthServiceTests", () => {
 
             it("4 - should return an error when registering with an existing email", async () => {
                 // Arrange
-                const expectedErrorMessage = "A user with this email already exists"; // Assuming this is the error message your backend sends
+                const expectedErrorMessage = "Unable to create an account with these details"; // Assuming this is the error message your backend sends
                 axios.post.mockRejectedValueOnce({
                     response: {
                         status: 400,
@@ -126,7 +126,7 @@ describe("AuthServiceTests", () => {
 
             it("10 - should return an error when logging in with an invalid email", async () => {
                 // Arrange
-                const expectedErrorMessage = "A user with this email does not exist"; // Assuming this is the error message your backend sends
+                const expectedErrorMessage = "Invalid email or password"; // Assuming this is the error message your backend sends
                 axios.post.mockRejectedValueOnce({
                     response: {
                         status: 400,
@@ -140,7 +140,7 @@ describe("AuthServiceTests", () => {
 
             it("11 - should return an error when logging in with an invalid password", async () => {
                 // Arrange
-                const expectedErrorMessage = "Invalid password"; // Assuming this is the error message your backend sends
+                const expectedErrorMessage = "Invalid email or password"; // Assuming this is the error message your backend sends
                 axios.post.mockRejectedValueOnce({
                     response: {
                         status: 400,

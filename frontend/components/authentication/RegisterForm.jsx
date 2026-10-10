@@ -35,7 +35,6 @@ function RegisterForm() {
 
     try {
       const response = await register(email, password);
-      console.log(response);
       setSuccess(true);
 
       setTimeout(() => {

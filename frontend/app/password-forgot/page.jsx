@@ -14,7 +14,6 @@ export default function PasswordForgot() {
   const handleSubmit = async (email) => {
     try { 
       const response = await forgotPassword(email);
-      console.log(response);
       setSuccess(true);
     } catch (error) {
       setSuccess(true);

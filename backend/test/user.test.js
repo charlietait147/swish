@@ -100,7 +100,7 @@ describe("Testing Requests on User Collection", () => {
 
             //Assert
             expect(res).to.have.status(400);
-            expect(res.text).to.equal('A user with this email does not exist');
+            expect(res.text).to.equal('Invalid email or password');
         });
 
         it('should return a 400 status code when a user with a wrong password is sent', async () => {
@@ -114,7 +114,7 @@ describe("Testing Requests on User Collection", () => {
 
             //Assert
             expect(res).to.have.status(400);
-            expect(res.text).to.equal('Invalid password');
+            expect(res.text).to.equal('Invalid email or password');
         });
     });
 

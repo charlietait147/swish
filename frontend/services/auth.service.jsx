@@ -14,7 +14,6 @@ export const register = async (email, password) => {
 
     if (res.status === 201) {
       Cookies.set("token", data.token, { expires: 1 }, { sameSite: "Strict" });
-      console.log("User registered successfully");
       return data;
     } else {
       throw new Error(data.message || ("Registration failed"));
@@ -40,7 +39,6 @@ export const login = async (email, password) => {
 
     if (res.status === 201) {
       Cookies.set("token", data.token, { expires: 1 }, { sameSite: "Strict" });
-      console.log("User logged in successfully");
       return data;
     } else {
       throw new Error(data.message || "Login failed");
@@ -71,7 +69,6 @@ export const updatePassword = async (newPassword) => {
     const data = await res.data;
 
     if (res.status === 200) {
-      console.log("Password updated successfully", data);
       return data;
     } else {
       throw new Error(data.message || "Password update failed");
@@ -90,7 +87,6 @@ export const forgotPassword = async (email) => {
   const data = await res.data;
 
   if (res.status === 200) {
-    console.log("Password link sent", data);
     return data;
   } else {
     if (error.response && error.response.status === 400) {

@@ -92,7 +92,7 @@ jest.mock("js-cookie", () => ({
                 const testEmail = "test@fakeexample.com";
                 const testPassword = "Test1234";
 
-                login.mockRejectedValueOnce(new Error("A user with this email does not exist"));
+                login.mockRejectedValueOnce(new Error("Invalid email or password"));
 
                 render(<LoginForm />);
 
@@ -109,7 +109,7 @@ jest.mock("js-cookie", () => ({
 
                 //Assert
                 await waitFor(() => {
-                    expect(screen.getByText(/A user with this email does not exist/i)).toBeInTheDocument();
+                    expect(screen.getByText(/Invalid email or password/i)).toBeInTheDocument();
                     expect(mockRouterPush).not.toHaveBeenCalled();
                 });
             });
@@ -120,7 +120,7 @@ jest.mock("js-cookie", () => ({
                 const testEmail = "test@example.com";
                 const testPassword = "badpassword";
 
-                login.mockRejectedValueOnce(new Error("Invalid password"));
+                login.mockRejectedValueOnce(new Error("Invalid email or password"));
 
                 render(<LoginForm />);
 
@@ -137,7 +137,7 @@ jest.mock("js-cookie", () => ({
 
                 //Assert
                 await waitFor(() => {
-                    expect(screen.getByText(/Invalid password/i)).toBeInTheDocument();
+                    expect(screen.getByText(/Invalid email or password/i)).toBeInTheDocument();
                     expect(mockRouterPush).not.toHaveBeenCalled();
                 });
             });

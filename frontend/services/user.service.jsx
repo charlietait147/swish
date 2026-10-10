@@ -20,7 +20,6 @@ export const addCafe = async (cafeId) => {
         },
       }
     );
-    console.log("Cafe added successfully", res.data);
     return res.data;
   } catch (error) {
     if (error.response && error.response.status === 400) {
@@ -45,7 +44,6 @@ export const getCafes = async () => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log("Cafes fetched successfully", res.data);
     return res.data;
   } catch (error) {
     if (error.response && error.response.status === 400) {
@@ -71,7 +69,6 @@ export const isCafeSaved = async (cafeId) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log("Cafe saved status fetched successfully", res.data);
     return res.data.isSaved;
   } catch (error) {
     if (error.response && error.response.status === 400) {
@@ -96,7 +93,6 @@ export const fetchUserData = async () => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log("User data fetched successfully", res.data);
     return res.data;
   } catch (error) {
     if (error.response && error.response.status === 400) {
@@ -121,7 +117,6 @@ export const deleteSavedCafe = async (cafeId) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log("Cafe deleted successfully", res.data);
     return res.data;
   } catch (error) {
     if (error.response && error.response.status === 400) {
@@ -150,7 +145,6 @@ export const uploadAvatar = async (file) => {
         "Content-Type": "multipart/form-data",
       },
     });
-    console.log("Avatar updated successfully", res.data);
     return res.data;
   } catch (error) {
     throw new Error(error.response?.data?.message || error.message || "An error occurred uploading your avatar");

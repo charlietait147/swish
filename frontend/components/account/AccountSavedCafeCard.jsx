@@ -32,13 +32,11 @@ function AccountSavedCafeCard({
     if (!deleteClicked) {
       router.push(`/cafe/${cafeId}`);
     } else {
-      console.log("Navigation prevented due to delete action");
       setDeleteClicked(false);
     }
   };
 
   const handleDeleteClick = (event) => {
-    console.log("Delete icon clicked, setting deleteClicked to true");
     handleDelete(event);
     setDeleteClicked(true);
   };
