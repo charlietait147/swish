@@ -21,8 +21,6 @@ export default function PasswordReset() {
     const { token } = useParams();
 
     const handleResetPassword = async (newPassword) => {
-        console.log("token: ", token);
-        console.log("new password", newPassword )
         if (!token) return;
     
         try {

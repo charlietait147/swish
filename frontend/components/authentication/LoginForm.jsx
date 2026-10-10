@@ -34,7 +34,6 @@ function LoginForm() {
 
     try {
         const response = await login(email, password);
-        console.log(response);
         setSuccess(true);
         setTimeout(() => {
           router.push("/"); // Redirect to the homepage after a delay

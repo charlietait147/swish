@@ -23,7 +23,6 @@ export const addReview = async (cafeId, formData) => {
             }
         }
         );
-        console.log("Review added successfully", res.data);
         return res.data;
     } catch (error) {
         if (error.response && error.response.status === 400) {
@@ -53,7 +52,6 @@ export const addReview = async (cafeId, formData) => {
                 },
             }
             );
-            console.log("Review edited successfully", res.data);
             return res.data;
         } catch (error) {
             if (error.response && error.response.status === 400) {
@@ -85,7 +83,6 @@ export const addReview = async (cafeId, formData) => {
                 },
             }
             );
-            console.log("Review deleted successfully", res.data);
             return res.data;
         } catch (error) {
             if (error.response && error.response.status === 400) {
