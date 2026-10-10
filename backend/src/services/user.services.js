@@ -10,7 +10,7 @@ export const registerUserService = async (email, password) => {
     try {
         const user = await User.findOne({ email });
         if (user) {
-            throw new Error('A user with this email already exists');
+            throw new Error('Unable to create an account with these details');
         }
         const hashedPassword = await bcrypt.hash(password, 10);
         const avatarUrl = "swish-logo.png";
@@ -27,7 +27,7 @@ export const loginUserService = async (email, password) => {
     try {
         const user = await User.findOne({ email });
         if (!user) {
-            throw new Error('A user with this email does not exist');
+            throw new Error('Invalid email or password');
         }
 
         let isPasswordValid = false;
@@ -40,7 +40,7 @@ export const loginUserService = async (email, password) => {
             isPasswordValid = await bcrypt.compare(password, user.password);
         }
         if (!isPasswordValid) {
-            throw new Error('Invalid password');
+            throw new Error('Invalid email or password');
         }
         return user;
     }
@@ -103,7 +103,7 @@ export const resetPasswordService = async(token, newPassword) => {
           });
 
           if (!user) {
-            throw new Error('Token is invalid or has expired');
+            throw new Error('This password reset link has expired. Please request a new one.');
           }
         
           const hashedPassword = await bcrypt.hash(newPassword, 10);
