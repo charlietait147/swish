@@ -42,15 +42,15 @@ describe("CafePage Component", () => {
     });
   });
 
-  it("should render the loading spinner while fetching the cafe", async () => {
+  it("should render the loading skeleton while fetching the cafe", async () => {
     fetchCafe.mockReturnValueOnce(null);
 
     render(<CafePage />);
 
-    const loadingSpinner = screen.getByAltText(/Swish Logo Spinning/i);
+    const loadingSkeleton = screen.getByTestId("cafe-page-skeleton");
 
     await waitFor(() => {
-      expect(loadingSpinner).toBeInTheDocument();
+      expect(loadingSkeleton).toBeInTheDocument();
     });
   });
 
@@ -81,8 +81,8 @@ describe("CafePage Component", () => {
 
       render(<CafePage />);
 
-      //Expect loading spinner to be rendered initially
-      expect(screen.getByAltText("Swish Logo Spinning")).toBeInTheDocument();
+      //Expect loading skeleton to be rendered initially
+      expect(screen.getByTestId("cafe-page-skeleton")).toBeInTheDocument();
 
       //Expect cafe to be fetched and rendered
       await waitFor(() => {
@@ -97,7 +97,7 @@ describe("CafePage Component", () => {
           expect(screen.getByAltText(/Cafe 1/i)).toBeInTheDocument();
           expect(screen.getByText(/Address 1/i)).toBeInTheDocument();
           expect(
-              screen.queryByAltText("Swish Logo Spinning")
+              screen.queryByTestId("cafe-page-skeleton")
           ).not.toBeInTheDocument();
       });
   });

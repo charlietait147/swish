@@ -6,8 +6,7 @@ import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { fetchUserData } from "../../services/user.service.jsx";
-import Image from "next/image";
-import Logo from "../../public/logo/swish-logo.png";
+import AccountPageSkeleton from "../../components/account/AccountPageSkeleton";
 import AccountReviewList from "../../components/account/AccountReviewList";
 import AccountSavedCafeList from "../../components/account/AccountSavedCafeList";
 import { notFound } from "next/navigation";
@@ -51,16 +50,7 @@ export default function AccountPage() {
     return (
       <>
         <Header />
-        <div className="flex justify-center items-center h-screen">
-          <Image
-            src={Logo}
-            alt="Swish Logo Spinning"
-            width={125}
-            height={125}
-            className="spinner"
-            priority={true}
-          />
-        </div>
+        <AccountPageSkeleton />
         <Footer />
       </>
     );
