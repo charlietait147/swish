@@ -61,3 +61,13 @@
 .max-width {
   max-width: 1184px;
 }
+
+.auth-background {
+  background-color: #f97316;
+  background-image: radial-gradient(
+      rgba(255, 255, 255, 0.16) 1.5px,
+      transparent 1.5px
+    ),
+    linear-gradient(135deg, #fb923c 0%, #f97316 50%, #ea580c 100%);
+  background-size: 22px 22px, 100% 100%;
+}
