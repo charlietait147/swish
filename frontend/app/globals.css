@@ -64,3 +64,13 @@
     linear-gradient(135deg, #fb923c 0%, #f97316 50%, #ea580c 100%);
   background-size: 22px 22px, 100% 100%;
 }
+
+/* Softly fades an image's edges into the background behind it */
+.fade-edges {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent),
+    linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent),
+    linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+  mask-composite: intersect;
+}
