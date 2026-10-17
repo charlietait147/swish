@@ -4,7 +4,9 @@ import { useState } from "react";
 import { forgotPassword } from "../../services/auth.service.jsx";
 
 import Image from "next/image";
+import Link from "next/link";
 import Logo from "../../public/logo/swish-orange-logo.jpeg";
+import AuthLayout from "@/components/authentication/AuthLayout";
 import PasswordForgotForm from "@/components/authentication/PasswordForgotForm.jsx"
 
 export default function PasswordForgot() {
@@ -22,15 +24,17 @@ export default function PasswordForgot() {
   }
 
   return (
-    <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+    <AuthLayout>
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         {!success ? (
-         <Image
-          src={Logo}
-          alt="Swish Logo"
-          priority={true}
-          className="mx-auto h-24 w-24"
-        />
+         <Link href="/" aria-label="Swish home" className="mx-auto block w-fit">
+           <Image
+            src={Logo}
+            alt="Swish Logo"
+            priority={true}
+            className="mx-auto h-24 w-24"
+          />
+         </Link>
         ) : (
          
           <svg
@@ -50,19 +54,19 @@ export default function PasswordForgot() {
         )}
          {!success ? (
           <>
-         <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+         <h2 className="mt-6 text-center text-[27px] font-bold leading-9 tracking-tight text-gray-900">
           Reset your password
         </h2>
         </>
          ) : (
-          <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          <h2 className="mt-6 text-center text-[27px] font-bold leading-9 tracking-tight text-gray-900">
           Check your email
         </h2>
          )}
        </div>
        {!success ? (
         <>
-       <p className="mt-5 sm:mx-auto sm:w-full sm:max-w-sm text-sm/6 text-gray-700 ">Enter your email and we'll send you a link to reset your password</p>
+       <p className="mt-5 sm:mx-auto sm:w-full sm:max-w-sm text-[15px] leading-6 text-gray-700 ">Enter your email and we'll send you a link to reset your password</p>
        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-sm">
         <PasswordForgotForm
          handleSubmit={handleSubmit}
@@ -73,29 +77,29 @@ export default function PasswordForgot() {
            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5 text-orange-600 hover-orange-500 cursor-pointer">
             <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
            </svg>
-           <p className="text-center font-semibold text-sm text-orange-600 cursor-pointer hover-orange-500">Back to Login</p>
+           <p className="text-center font-semibold text-[15px] text-orange-600 cursor-pointer hover-orange-500">Back to Login</p>
          </a>
        </div>
       </div>
       </>
        ): (
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-sm text-center">
-          <p className="text-sm text-gray-500">
+          <p className="text-[15px] text-gray-500">
           If your email is registered, you'll receive instructions to reset your password shortly.
           </p>
-          <p className="text-sm text-gray-500 font-bold mt-6 mb-2">
+          <p className="text-[15px] text-gray-500 font-bold mt-6 mb-2">
           Can't find the email in your inbox? Try checking your spam or junk folders.
           </p>
           <a className="inline-flex items-center space-x-2 mr-1 cursor-pointer mt-4" href="/login" >
            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5 text-orange-600 hover-orange-500 cursor-pointer">
             <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
            </svg>
-           <p className="text-center font-semibold text-sm text-orange-600 cursor-pointer hover-orange-500">Back to Login</p>
+           <p className="text-center font-semibold text-[15px] text-orange-600 cursor-pointer hover-orange-500">Back to Login</p>
          </a>
         </div>
 
        )}
-    </div>
+    </AuthLayout>
     
   )
 }

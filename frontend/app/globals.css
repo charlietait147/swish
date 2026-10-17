@@ -47,17 +47,30 @@
     animation: slideDown 0.6s ease-in-out;
 }
 
-.off-screen-left {
-  transform: translateX(-20px);
-}
-
-.off-screen-right {
-  transform: translateX(20px);
-}
 .white-shadow {
   box-shadow: 1 0 10px 10px white;
 }
 
 .max-width {
   max-width: 1184px;
+}
+
+.auth-background {
+  background-color: #f97316;
+  background-image: radial-gradient(
+      rgba(255, 255, 255, 0.16) 1.5px,
+      transparent 1.5px
+    ),
+    linear-gradient(135deg, #fb923c 0%, #f97316 50%, #ea580c 100%);
+  background-size: 22px 22px, 100% 100%;
+}
+
+/* Softly fades an image's edges into the background behind it */
+.fade-edges {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent),
+    linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent),
+    linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+  mask-composite: intersect;
 }

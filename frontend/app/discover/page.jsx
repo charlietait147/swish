@@ -4,11 +4,10 @@ import Footer from "../../components/Footer.jsx";
 import Header from "../../components/Header.jsx";
 import CafeFilters from "../../components/cafe/CafeFilters.jsx";
 import CafeList from "../../components/cafe/CafeList.jsx";
+import CafeListSkeleton from "@/components/cafe/CafeListSkeleton";
 import DiscoverCafeHero from "../../components/cafe/DiscoverCafeHero.jsx";
 import { fetchCafes } from "../../services/cafe.service.jsx";
 import { useState, useEffect } from "react";
-import Image from "next/image";
-import Logo from "../../public/logo/swish-logo.png"; // Image
 
 export default function DiscoverPage() {
   const [cafes, setCafes] = useState([]);
@@ -74,16 +73,7 @@ export default function DiscoverPage() {
           />
         </div>
         {loading ? (
-          <div className="flex justify-center items-center py-6 lg:pl-72 lg:py-24">
-            <Image
-              src={Logo}
-              alt="Swish Logo Spinning"
-              width={125}
-              height={125}
-              className="spinner"
-              priority={true}
-            />
-          </div>
+          <CafeListSkeleton />
         ) : (
           <CafeList cafes={filteredCafes} />
         )}

@@ -36,17 +36,17 @@ describe("AccountPage Component", () => {
       jest.clearAllMocks();
     });
 
-    it("should render the loading spinner while fetching the user data", async () => {
+    it("should render the loading skeleton while fetching the user data", async () => {
       Cookies.get.mockReturnValueOnce("839429f778gfd8gf8387gd");
 
       fetchUserData.mockReturnValueOnce(null);
 
       render(<AccountPage />);
 
-      const loadingSpinner = screen.getByAltText(/Swish Logo Spinning/i);
+      const loadingSkeleton = screen.getByTestId("account-page-skeleton");
 
       await waitFor(() => {
-        expect(loadingSpinner).toBeInTheDocument();
+        expect(loadingSkeleton).toBeInTheDocument();
       });
     });
 

@@ -1,13 +1,24 @@
+import Reveal from "./Reveal";
+
 function ContactForm() {
   return (
-    <div className="bg-white px-4" id="contact-form">
-      <h1 className="text-3xl font-semibold text-center tracking-wide text-gray-700 pt-4">
-        Contact<em className="font-light pl-2.5">Us.</em>
-      </h1>
-      <p className="text-center text-gray-600 py-4">
-        We'd love to hear from you!
-      </p>
-      <form className="pb-4 max-w-md mx-auto md:pb-12">
+    <section className="overflow-hidden bg-white lg:flex" id="contact-form">
+      <div className="flex items-center justify-center bg-gray-800 px-4 py-10 lg:w-1/2 lg:py-20">
+        <Reveal direction="left">
+          <h1 className="text-3xl font-semibold text-center tracking-wide text-white lg:text-5xl">
+            Contact<em className="font-light pl-2.5">Us.</em>
+          </h1>
+          <p className="text-center text-gray-300 pt-4 lg:text-lg">
+            We&apos;d love to hear from you!
+          </p>
+        </Reveal>
+      </div>
+      <Reveal
+        direction="right"
+        delay={150}
+        className="px-4 py-10 lg:w-1/2 lg:py-20"
+      >
+      <form className="max-w-md mx-auto">
         <span className="text-gray-600 font-semibold my-3">Name*</span>
         <div className="flex flex-row gap-6 pt-3">
           <div className="flex flex-col w-1/2">
@@ -21,7 +32,7 @@ function ContactForm() {
               type="text"
               id="first-name"
               name="first-name"
-              className="w-full border border-gray-300  p-2 mt-1 bg-gray-50 text-sm"
+              className="w-full border border-gray-300 rounded-md p-2 mt-1 bg-gray-50 text-sm"
               required
             />
           </div>
@@ -36,7 +47,7 @@ function ContactForm() {
               type="text"
               id="last-name"
               name="last-name"
-              className="w-full border border-gray-300  p-2 mt-1  bg-gray-50 text-sm"
+              className="w-full border border-gray-300 rounded-md p-2 mt-1  bg-gray-50 text-sm"
               required
             />
           </div>
@@ -49,7 +60,7 @@ function ContactForm() {
             type="email"
             id="email"
             name="email"
-            className="w-full border border-gray-300  p-2 mt-2  bg-gray-50 text-sm"
+            className="w-full border border-gray-300 rounded-md p-2 mt-2  bg-gray-50 text-sm"
             required
           />
         </div>
@@ -60,15 +71,16 @@ function ContactForm() {
           <textarea
             id="message"
             name="message"
-            className="w-full border border-gray-300 p-2 mt-1  bg-gray-50 text-sm"
+            className="w-full border border-gray-300 rounded-md p-2 mt-1  bg-gray-50 text-sm"
             required
           />
         </div>
         <div className="flex justify-center mt-4">
-          <button type="submit" className="bg-gray-700 px-6 py-3 text-white hover:bg-gray-600">Send</button>
+          <button type="submit" className="bg-gray-800 rounded-2xl px-6 py-3 text-white hover:bg-gray-700">Send</button>
         </div>
       </form>
-    </div>
+      </Reveal>
+    </section>
   );
 }
 

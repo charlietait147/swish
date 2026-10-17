@@ -34,12 +34,12 @@ function ResetPasswordForm({onSubmit, loading, error, success}) {
         <div className="space-y-2">
         <label
            htmlFor="password"
-           className="block text-sm font-medium leading-6 text-gray-900"
+           className="block text-[15px] font-medium leading-6 text-gray-900"
          >
            
          </label>
          <div className="mt-2">
-         <label className="block text-sm font-medium text-gray-900">
+         <label className="block text-[15px] font-medium text-gray-900">
           Password
         </label>
          <input
@@ -48,19 +48,19 @@ function ResetPasswordForm({onSubmit, loading, error, success}) {
               type="password"
               autoComplete="new-password"
               required
-              className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+              className="block w-full rounded-md border-0 py-2.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-[15px] sm:leading-6"
               value={password}
               onChange={handlePasswordChange}
             />
          </div>
         {/* <div className="mt-4">
-        <label className="block text-sm font-medium text-gray-900">
+        <label className="block text-[15px] font-medium text-gray-900">
           Confirm Password
         </label>
         <input
           type="password"
           required
-          className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+          className="block w-full rounded-md border-0 py-2.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-[15px] sm:leading-6"
           value={confirmPassword}
           onChange={handleConfirmPasswordChange}
         />
@@ -70,7 +70,7 @@ function ResetPasswordForm({onSubmit, loading, error, success}) {
          <button
            type="submit"
            disabled={loading}
-           className="flex w-full justify-center rounded-md bg-gray-800 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
+           className="flex w-full justify-center rounded-md bg-gray-800 px-3 py-2.5 text-[15px] font-semibold leading-6 text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
          >
              {loading ? "Saving..." : "Save and Login"}
          </button>
@@ -90,7 +90,7 @@ function ResetPasswordForm({onSubmit, loading, error, success}) {
           >
             <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
           </svg>
-          <div className="ms-3 text-sm font-medium">
+          <div className="ms-3 text-[15px] font-medium">
             Logging in ...
           </div>
         </div>
@@ -110,7 +110,7 @@ function ResetPasswordForm({onSubmit, loading, error, success}) {
           >
             <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
           </svg>
-          <div className="ms-3 text-sm font-medium">
+          <div className="ms-3 text-[15px] font-medium">
             {error}
           </div>
         </div>

@@ -6,8 +6,7 @@ import { fetchCafe } from "../../../services/cafe.service.jsx";
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import CafeDetailsSection from "../../../components/cafe/CafeDetailsSection.jsx";
-import Logo from "../../../public/logo/swish-logo.png";
-import Image from "next/image";
+import CafePageSkeleton from "../../../components/cafe/CafePageSkeleton.jsx";
 import CafeReviewList from "../../../components/cafe/CafeReviewList.jsx";
 import CafeMapContainer from "../../../components/cafe/CafeMapContainer.jsx";
 import { notFound } from "next/navigation";
@@ -45,16 +44,7 @@ export default function CafePage() {
       {loading ? (
         <>
           <Header />
-          <div className="flex justify-center items-center h-screen">
-            <Image
-              src={Logo}
-              alt="Swish Logo Spinning"
-              width={125}
-              height={125}
-              className="spinner"
-              priority={true}
-            />
-          </div>
+          <CafePageSkeleton />
           <Footer />
         </>
       ) : (

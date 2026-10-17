@@ -24,15 +24,15 @@ describe("DiscoverPage Component", () => {
     });
 
   describe("Cafe fetching tests", () => {
-    it("should render the loading spinner while fetching cafes", async () => {
+    it("should render the skeleton cards while fetching cafes", async () => {
       fetchCafes.mockReturnValueOnce([]);
 
       render(<DiscoverPage />);
 
-      const loadingSpinner = screen.getByAltText(/Swish Logo Spinning/i);
+      const loadingSkeleton = screen.getByTestId("cafe-list-skeleton");
 
       await waitFor(() => {
-        expect(loadingSpinner).toBeInTheDocument();
+        expect(loadingSkeleton).toBeInTheDocument();
       });
     });
 
@@ -41,8 +41,8 @@ describe("DiscoverPage Component", () => {
 
       render(<DiscoverPage />);
 
-      //Expect loading spinner to be rendered initially
-      expect(screen.getByAltText("Swish Logo Spinning")).toBeInTheDocument();
+      //Expect skeleton cards to be rendered initially
+      expect(screen.getByTestId("cafe-list-skeleton")).toBeInTheDocument();
 
       //Expect cafes to be fetched and rendered
       await waitFor(() => {
@@ -50,7 +50,7 @@ describe("DiscoverPage Component", () => {
         expect(screen.getByText(/Cafe 1/i)).toBeInTheDocument();
         expect(screen.getByText(/Cafe 2/i)).toBeInTheDocument();
         expect(
-          screen.queryByAltText("Swish Logo Spinning")
+          screen.queryByTestId("cafe-list-skeleton")
         ).not.toBeInTheDocument();
       });
     });

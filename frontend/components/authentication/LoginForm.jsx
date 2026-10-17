@@ -49,7 +49,7 @@ function LoginForm() {
       <div className="space-y-2">
         <label
           htmlFor="email"
-          className="block text-sm font-medium leading-6 text-gray-900"
+          className="block text-[15px] font-medium leading-6 text-gray-900"
         >
           Email address
         </label>
@@ -60,7 +60,7 @@ function LoginForm() {
             type="email"
             autoComplete="email"
             required
-            className="text-sm block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+            className="text-base block w-full rounded-md border-0 py-2.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-[15px] sm:leading-6"
             value={email}
             onChange={handleEmailChange}
           />
@@ -70,11 +70,11 @@ function LoginForm() {
           <div className="flex items-center justify-between">
             <label
               htmlFor="password"
-              className="block text-sm font-medium leading-6 text-gray-900"
+              className="block text-[15px] font-medium leading-6 text-gray-900"
             >
               Password
             </label>
-            <div className="text-sm">
+            <div className="text-[15px]">
               <a
                 href="/password-forgot"
                 className="font-semibold text-orange-500 hover:text-orange-600"
@@ -90,7 +90,7 @@ function LoginForm() {
               type="password"
               autoComplete="current-password"
               required
-              className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+              className="block w-full rounded-md border-0 py-2.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-[15px] sm:leading-6"
               value={password}
               onChange={handlePasswordChange}
             />
@@ -100,7 +100,7 @@ function LoginForm() {
       <div className="mt-4">
         <button
           type="submit"
-          className="flex w-full justify-center rounded-md bg-orange-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
+          className="flex w-full justify-center rounded-md bg-orange-500 px-3 py-2.5 text-[15px] font-semibold leading-6 text-white shadow-sm hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
         >
           Sign in
         </button>
@@ -120,7 +120,7 @@ function LoginForm() {
           >
             <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
           </svg>
-          <div className="ms-3 text-sm font-medium">
+          <div className="ms-3 text-[15px] font-medium">
             Logging in ...
           </div>
         </div>
@@ -140,7 +140,7 @@ function LoginForm() {
           >
             <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
           </svg>
-          <div className="ms-3 text-sm font-medium">
+          <div className="ms-3 text-[15px] font-medium">
             {error}
           </div>
           
