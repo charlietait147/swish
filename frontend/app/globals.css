@@ -47,13 +47,6 @@
     animation: slideDown 0.6s ease-in-out;
 }
 
-.off-screen-left {
-  transform: translateX(-20px);
-}
-
-.off-screen-right {
-  transform: translateX(20px);
-}
 .white-shadow {
   box-shadow: 1 0 10px 10px white;
 }
