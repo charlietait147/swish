@@ -4,19 +4,33 @@ import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+export const CONTACT_EMAIL = "info@swish-discounts.com";
+
+const createTransporter = () =>
+  nodemailer.createTransport({
+    host: "smtp.zoho.eu", // or your provider
+    port: 465,
+    secure: true, // true for 465
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+  });
+
+// Contact form fields are user input, so escape them before putting them in the email HTML
+const escapeHtml = (value) =>
+  String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+
 export const sendResetEmail = async (to, resetUrl) => {
     // Users don't have a name field, so address them by their email username
     const name = to.split("@")[0];
 
-    const transporter = nodemailer.createTransport({
-      host: "smtp.zoho.eu", // or your provider
-      port: 465,
-      secure: true, // true for 465
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
+    const transporter = createTransporter();
   
     const mailOptions = {
       from: `Swish Support <${process.env.EMAIL_USER}>`,
@@ -106,4 +120,26 @@ export const sendResetEmail = async (to, resetUrl) => {
     };
   
     await transporter.sendMail(mailOptions);
+  };
+
+export const sendContactEmail = async ({ firstName, lastName, email, message }) => {
+    const name = `${firstName} ${lastName}`;
+    const transporter = createTransporter();
+
+    await transporter.sendMail({
+      from: `Swish Contact Form <${process.env.EMAIL_USER}>`,
+      to: CONTACT_EMAIL,
+      // Replying goes straight to the person who filled in the form
+      replyTo: `"${name.replace(/"/g, "")}" <${email}>`,
+      subject: `New contact form message from ${name}`,
+      text: `Name: ${name}\nEmail: ${email}\n\n${message}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; font-size:14px; color:#374151;">
+          <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+          <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+          <p><strong>Message:</strong></p>
+          <p style="white-space:pre-wrap;">${escapeHtml(message)}</p>
+        </div>
+      `,
+    });
   };

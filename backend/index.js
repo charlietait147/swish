@@ -27,6 +27,8 @@ import { getSingleCafeRouter } from "./src/routes/cafeRoutes/getSingleCafe.route
 import { forgotPasswordRouter } from "./src/routes/userRoutes/forgotPassword.route.js";
 import { resetPasswordRouter } from "./src/routes/userRoutes/resetPassword.route.js";
 
+import { sendContactMessageRouter } from "./src/routes/contactRoutes/sendContactMessage.route.js";
+
 
 
 const app = express();
@@ -74,6 +76,8 @@ app.use("/review", authenticate, deleteReviewRouter);
 
 app.use("/cafes", getAllCafesRouter);
 app.use("/cafes", getSingleCafeRouter);
+
+app.use("/contact", sendContactMessageRouter);
 
 
 
