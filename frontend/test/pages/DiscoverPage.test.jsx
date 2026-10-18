@@ -66,10 +66,10 @@ describe("DiscoverPage Component", () => {
             expect(fetchCafes).toHaveBeenCalledTimes(1);
         });
     
-        const nameInput = screen.getByLabelText(/Name/i);
+        const nameInput = screen.getByLabelText("Name");
         await userEvent.type(nameInput, "Cafe 1");
 
-        const applyButton = screen.getByRole("button", { name: /Apply Filters/i });
+        const applyButton = screen.getByRole("button", { name: "Search" });
         await userEvent.click(applyButton);
     
         await waitFor(() => {
@@ -88,10 +88,10 @@ describe("DiscoverPage Component", () => {
                 expect(fetchCafes).toHaveBeenCalledTimes(1);
             });
         
-            const locationInput = screen.getByLabelText(/Location/i);
+            const locationInput = screen.getByLabelText("Location");
             await userEvent.type(locationInput, "Location 2");
     
-            const applyButton = screen.getByRole("button", { name: /Apply Filters/i });
+            const applyButton = screen.getByRole("button", { name: "Search" });
             await userEvent.click(applyButton);
         
             await waitFor(() => {
@@ -120,7 +120,7 @@ describe("DiscoverPage Component", () => {
 
         await userEvent.click(firstAmenityButton1);
 
-        const applyButton = screen.getByRole("button", { name: /Apply Filters/i });
+        const applyButton = screen.getByRole("button", { name: "Search" });
         await userEvent.click(applyButton);
     
         await waitFor(() => {
@@ -129,7 +129,7 @@ describe("DiscoverPage Component", () => {
             });
         });
 
-    it("should reset filters when the Reset Filters button is clicked", async () => {
+    it("should reset filters when the Clear button is clicked", async () => {
         fetchCafes.mockResolvedValue(mockCafeData);
     
         render(<DiscoverPage />);
@@ -138,10 +138,10 @@ describe("DiscoverPage Component", () => {
             expect(fetchCafes).toHaveBeenCalledTimes(1);
         });
     
-        const nameInput = screen.getByLabelText(/Name/i);
+        const nameInput = screen.getByLabelText("Name");
         await userEvent.type(nameInput, "Cafe 1");
 
-        const locationInput = screen.getByLabelText(/Location/i);
+        const locationInput = screen.getByLabelText("Location");
         await userEvent.type(locationInput, "Location 2");
 
         // const toggleDropdown = screen.getByTestId("amenities-dropdown");
@@ -155,7 +155,10 @@ describe("DiscoverPage Component", () => {
 
         await userEvent.click(firstAmenityButton1);
 
-        const resetButton = screen.getByRole("button", { name: /Clear Filters/i });
+        const filtersModalButton = screen.getByRole("button", { name: /filters modal/i });
+        await userEvent.click(filtersModalButton);
+
+        const resetButton = screen.getByRole("button", { name: /clear modal filters/i });
         await userEvent.click(resetButton);
     
         await waitFor(() => {
@@ -173,10 +176,10 @@ describe("DiscoverPage Component", () => {
             expect(fetchCafes).toHaveBeenCalledTimes(1);
         });
     
-        const nameInput = screen.getByLabelText(/Name/i);
+        const nameInput = screen.getByLabelText("Name");
         await userEvent.type(nameInput, "Cafe 1");
 
-        const locationInput = screen.getByLabelText(/Location/i);
+        const locationInput = screen.getByLabelText("Location");
         await userEvent.type(locationInput, "Location 1");
 
         // const toggleDropdown = screen.getByTestId("amenities-dropdown");
@@ -190,7 +193,7 @@ describe("DiscoverPage Component", () => {
 
         await userEvent.click(firstAmenityButton1);
 
-        const applyButton = screen.getByRole("button", { name: /Apply Filters/i });
+        const applyButton = screen.getByRole("button", { name: "Search" });
         await userEvent.click(applyButton);
     
         await waitFor(() => {

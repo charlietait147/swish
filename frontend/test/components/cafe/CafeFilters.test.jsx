@@ -4,12 +4,12 @@ import CafeFilters from "../../../components/cafe/CafeFilters.jsx";
 
 describe("CafeFilters Component", () => {
   describe("Amenities Dropdown", () => {
-    it("should toggle the dropdown menu when the button is clicked below a large screen breakpoint", async () => {
+    it("should toggle the amenities dropdown when the button is clicked", async () => {
       //Arrange
       render(<CafeFilters selectedAmenities={[]} />);
 
       const amenitiesList = screen.queryByRole("list", {
-        name: /amenities-list-mobile/i,
+        name: /amenities-list/i,
       });
       expect(amenitiesList).not.toBeInTheDocument();
 
@@ -21,7 +21,7 @@ describe("CafeFilters Component", () => {
       // Check if the list is initially hidden based on the state
       await waitFor(() => {
         const amenitiesList = screen.getByRole("list", {
-          name: /amenities-list-mobile/i,
+          name: /amenities-list/i,
         });
         expect(amenitiesList).toBeVisible();
       });
@@ -32,7 +32,7 @@ describe("CafeFilters Component", () => {
       // After clicking, the list should be visible
       await waitFor(() => {
         const amenitiesList = screen.queryByRole("list", {
-          name: /amenities-list-mobile/i,
+          name: /amenities-list/i,
         });
         expect(amenitiesList).not.toBeInTheDocument();
       });
@@ -175,13 +175,121 @@ describe("CafeFilters Component", () => {
       fireEvent.change(searchInput, { target: { value: "Cafe Test" } });
 
       // Click on the search icon
-      const searchIcon = screen.getByRole("button", { name: /search/i });
+      const searchIcon = screen.getByRole("button", { name: "search" });
       fireEvent.click(searchIcon);
 
       // Expect onFilterChange to be called with the search term
       expect(onFilterChange).toHaveBeenCalledWith({
         name: "Cafe Test",
         location: "",
+      });
+    });
+  });
+
+  describe("Collapsed filters bar", () => {
+    it("should show the collapsed bar and call onExpand when it is clicked", () => {
+      const onExpand = jest.fn();
+      render(
+        <CafeFilters selectedAmenities={["Dog Friendly"]} collapsed onExpand={onExpand} />
+      );
+
+      const bar = screen.getByRole("button", { name: /expand filters/i });
+      expect(bar.textContent).toContain("Any cafe · Anywhere · 1 amenity");
+
+      fireEvent.click(bar);
+      expect(onExpand).toHaveBeenCalledTimes(1);
+    });
+
+    it("should not show the collapsed bar by default", () => {
+      render(<CafeFilters selectedAmenities={[]} />);
+      expect(
+        screen.queryByRole("button", { name: /expand filters/i })
+      ).not.toBeInTheDocument();
+    });
+  });
+
+  describe("Desktop search bar", () => {
+    it("should suggest matching locations and fill the field when one is picked", () => {
+      const onFilterChange = jest.fn();
+      render(
+        <CafeFilters
+          onFilterChange={onFilterChange}
+          setSelectedAmenities={jest.fn()}
+          selectedAmenities={[]}
+          locations={["Farnham", "Winchester"]}
+        />
+      );
+
+      const locationInput = screen.getByLabelText("Location");
+      fireEvent.change(locationInput, { target: { name: "location", value: "win" } });
+      expect(screen.getByRole("button", { name: "Winchester" })).toBeInTheDocument();
+      expect(screen.queryByRole("button", { name: "Farnham" })).not.toBeInTheDocument();
+
+      fireEvent.click(screen.getByRole("button", { name: "Winchester" }));
+      expect(locationInput).toHaveValue("Winchester");
+      expect(screen.queryByRole("list", { name: "location-list" })).not.toBeInTheDocument();
+
+      fireEvent.click(screen.getByRole("button", { name: "Search" }));
+      expect(onFilterChange).toHaveBeenCalledWith({
+        name: "",
+        location: "Winchester",
+        amenities: [],
+      });
+    });
+
+    it("should search by a typed location that isn't in the suggestions", () => {
+      const onFilterChange = jest.fn();
+      render(
+        <CafeFilters
+          onFilterChange={onFilterChange}
+          setSelectedAmenities={jest.fn()}
+          selectedAmenities={[]}
+          locations={["Farnham"]}
+        />
+      );
+
+      fireEvent.change(screen.getByLabelText("Location"), {
+        target: { name: "location", value: "Guildford" },
+      });
+      expect(screen.queryByRole("list", { name: "location-list" })).not.toBeInTheDocument();
+
+      fireEvent.click(screen.getByRole("button", { name: "Search" }));
+      expect(onFilterChange).toHaveBeenCalledWith({
+        name: "",
+        location: "Guildford",
+        amenities: [],
+      });
+    });
+
+    it("should clear a field and refresh the results when its cross is clicked", () => {
+      const onFilterChange = jest.fn();
+      const setSelectedAmenities = jest.fn();
+      render(
+        <CafeFilters
+          onFilterChange={onFilterChange}
+          setSelectedAmenities={setSelectedAmenities}
+          selectedAmenities={["Dog Friendly"]}
+          locations={["Farnham"]}
+        />
+      );
+
+      fireEvent.change(screen.getByLabelText("Name"), {
+        target: { name: "name", value: "Cafe 1" },
+      });
+      fireEvent.click(screen.getByRole("button", { name: "Clear name" }));
+      expect(screen.getByLabelText("Name")).toHaveValue("");
+      expect(onFilterChange).toHaveBeenLastCalledWith({
+        name: "",
+        location: "",
+        amenities: ["Dog Friendly"],
+      });
+
+      fireEvent.click(screen.getByRole("button", { name: "Clear amenities" }));
+      expect(setSelectedAmenities).toHaveBeenCalledWith([]);
+      expect(onFilterChange).toHaveBeenLastCalledWith({
+        name: "",
+        location: "",
+        amenities: [],
       });
     });
   });

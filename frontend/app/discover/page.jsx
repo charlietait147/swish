@@ -2,10 +2,9 @@
 
 import Footer from "../../components/Footer.jsx";
 import Header from "../../components/Header.jsx";
-import CafeFilters from "../../components/cafe/CafeFilters.jsx";
+import DiscoverFiltersBar from "../../components/cafe/DiscoverFiltersBar.jsx";
 import CafeList from "../../components/cafe/CafeList.jsx";
 import CafeListSkeleton from "@/components/cafe/CafeListSkeleton";
-import DiscoverCafeHero from "../../components/cafe/DiscoverCafeHero.jsx";
 import { fetchCafes } from "../../services/cafe.service.jsx";
 import { useState, useEffect } from "react";
 
@@ -59,19 +58,20 @@ export default function DiscoverPage() {
     setFilteredCafes(filteredCafes);
   };
 
+  // Every location a cafe is in, for the location dropdown
+  const locations = [...new Set(cafes.flatMap((cafe) => cafe.locations))].sort();
+
   return (
     <>
       <Header />
-      <DiscoverCafeHero />
-      <div className="flex flex-col lg:flex-row max-width mx-auto lg:my-12">
-        <div className="px-4 sticky z-10 bg-white top-0 lg:h-full lg:pt-4 md:px-24 lg:px-4 shadow-lg lg:shadow-none">
-          <CafeFilters
-            onFilterChange={handleFilters}
-            setSelectedAmenities={setSelectedAmenities}
-            selectedAmenities={selectedAmenities}
-            setLoading={setLoading}
-          />
-        </div>
+      <DiscoverFiltersBar
+        onFilterChange={handleFilters}
+        setSelectedAmenities={setSelectedAmenities}
+        selectedAmenities={selectedAmenities}
+        setLoading={setLoading}
+        locations={locations}
+      />
+      <div className="flex flex-col max-width mx-auto lg:mt-2 lg:mb-8">
         {loading ? (
           <CafeListSkeleton />
         ) : (

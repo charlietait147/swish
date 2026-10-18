@@ -15,6 +15,15 @@ module.exports = {
         '120': '30rem', 
         '132': '33rem', 
       },
+      keyframes: {
+        'slide-down': {
+          from: { transform: 'translateY(-100%)' },
+          to: { transform: 'translateY(0)' },
+        },
+      },
+      animation: {
+        'slide-down': 'slide-down 0.25s ease-out',
+      },
     },
     screens: {
       'xs': '480px', 
