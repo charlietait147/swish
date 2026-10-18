@@ -8,13 +8,12 @@ const DESKTOP_QUERY = "(min-width: 1024px)";
 // Orange band that continues on from the navbar. On desktop, once the full filters panel has
 // scrolled out of view, it pins a shorter bar to the top that expands into the full panel on click.
 // Once expanded, it stays open until the user scrolls back up to the full panel.
-// On mobile the band is white and only the search row is sticky, picking up a bottom border
-// once it sticks to the top. The heading above it scrolls away with the page.
+// On mobile the band is white and only the search row is sticky. The heading above it scrolls
+// away with the page.
 function DiscoverFiltersBar(props) {
   const sectionRef = useRef(null);
   const [isDesktop, setIsDesktop] = useState(false);
   const [isPinned, setIsPinned] = useState(false);
-  const [isStuck, setIsStuck] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [sectionHeight, setSectionHeight] = useState(null);
   const [viewportOffset, setViewportOffset] = useState(0);
@@ -40,15 +39,10 @@ function DiscoverFiltersBar(props) {
   useEffect(() => {
     setIsPinned(false);
     setIsExpanded(false);
-    setIsStuck(false);
+    if (!isDesktop) return;
 
     const handleScroll = () => {
-      const rect = sectionRef.current.getBoundingClientRect();
-      if (!isDesktop) {
-        setIsStuck(window.scrollY > 0 && rect.top <= 0);
-        return;
-      }
-      const pinned = rect.bottom <= 0;
+      const pinned = sectionRef.current.getBoundingClientRect().bottom <= 0;
       setIsPinned(pinned);
       if (!pinned) setIsExpanded(false);
     };
@@ -88,9 +82,7 @@ function DiscoverFiltersBar(props) {
     <section
       ref={sectionRef}
       style={sectionStyle || undefined}
-      className={`sticky top-0 z-10 pt-3 pb-4 bg-white border-b transition-colors duration-300 lg:static lg:pt-0 lg:pb-3 lg:bg-orange-500 lg:border-b-0 ${
-        isStuck ? "border-gray-200" : "border-transparent"
-      }`}
+      className="sticky top-0 z-10 pt-3 pb-4 bg-white lg:static lg:pt-0 lg:pb-3 lg:bg-orange-500"
     >
       <div
         className={
