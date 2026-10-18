@@ -16,7 +16,7 @@ function CafeList({ cafes }) {
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-8 px-4 pb-8 xs:grid-cols-2 md:px-24 lg:px-4 flex-grow pt-4 bg-white">
+        <div className="grid grid-cols-1 gap-8 px-4 pb-8 xs:grid-cols-2 lg:grid-cols-3 md:px-24 lg:px-4 flex-grow pt-4 bg-white">
           {sortedCafes.map((cafe) => (
             <CafeCard key={cafe._id} cafeId={cafe._id} image={cafe.image} name={cafe.name} location={cafe.locations[0]} />
           ))}

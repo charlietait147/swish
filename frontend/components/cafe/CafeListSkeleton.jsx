@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 function CafeListSkeleton({ count = 6 }) {
   return (
     <div
-      className="grid grid-cols-1 gap-8 px-4 pb-8 xs:grid-cols-2 md:px-24 lg:px-4 flex-grow pt-4 bg-white"
+      className="grid grid-cols-1 gap-8 px-4 pb-8 xs:grid-cols-2 lg:grid-cols-3 md:px-24 lg:px-4 flex-grow pt-4 bg-white"
       role="status"
       aria-label="Loading cafes"
       data-testid="cafe-list-skeleton"
