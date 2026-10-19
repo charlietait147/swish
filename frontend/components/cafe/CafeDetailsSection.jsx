@@ -3,7 +3,6 @@ import Cookies from "js-cookie";
 import { addCafe, isCafeSaved } from "../../services/user.service";
 import { useRouter } from "next/navigation";
 import { disableScroll, enableScroll } from "@/utils/scroll";
-import { useSwipeable } from "react-swipeable";
 import PropTypes from "prop-types";
 import SignInModal from "../SignInModal";
 import menuIcon from "../../public/icons/menu.jpg";
@@ -15,7 +14,6 @@ function CafeDetailsSection({ cafe }) {
   const [showModal, setShowModal] = useState(false);
   const [showFullText, setShowFullText] = useState(false);
   const [showSignInModal, setShowSignInModal] = useState(false);
-  const [index, setIndex] = useState(0);
 
   const router = useRouter();
 
@@ -89,33 +87,6 @@ function CafeDetailsSection({ cafe }) {
     enableScroll();
   };
 
-  const handlers = useSwipeable({
-    onSwipedLeft: () => nextImage(),
-    onSwipedRight: () => prevImage(),
-    preventDefaultTouchmoveEvent: true,
-    trackMouse: true // lets swipe work with mouse too
-  });
-
-  // const nextImage = () => {
-  //   setIndex((index + 1) % cafe.images.length);
-  // };
-
-  // const prevImage = () => {
-  //   setIndex((index - 1 + cafe.images.length) % cafe.images.length);
-  // };
-
-  const nextImage = () => {
-    if (index < cafe.images.length - 1) {
-      setIndex(index + 1);
-    }
-  };
-  
-  const prevImage = () => {
-    if (index > 0) {
-      setIndex(index - 1);
-    }
-  };
-
   return (
     <div className="max-w-screen-lg mx-auto xs:px-6 sm:px-10 xl:px-0 mt-8 lg:mt-12 mb-6 px-4">
       {showSignInModal && <SignInModal toggleModalClose={toggleModalClose} />}
@@ -140,13 +111,9 @@ function CafeDetailsSection({ cafe }) {
       )}
       {cafe && (
         <div className="flex flex-col lg:flex-row gap-5 md:gap-8 lg:gap-14">
-          <div 
-          {...handlers}
-          className="relative h-[max-content] w-full lg:w-1/2 flex-shrink-0"
-          >
+          <div className="relative h-[max-content] w-full lg:w-1/2 flex-shrink-0">
             <Image
-              // src={`${process.env.NEXT_API_URL}/public/images/${cafe.image}`}
-              src={`${process.env.NEXT_API_URL}/public/images/${cafe.images[index]}`}
+              src={`${process.env.NEXT_API_URL}/public/images/${cafe.images[0]}`}
               alt={cafe.name}
               width={1200}
               height={800}
@@ -154,18 +121,6 @@ function CafeDetailsSection({ cafe }) {
               priority
               className="w-full h-auto object-cover rounded-lg"
             />
-            {/* Load the next slide in the background so swiping is instant */}
-            {index < cafe.images.length - 1 && (
-              <Image
-                src={`${process.env.NEXT_API_URL}/public/images/${cafe.images[index + 1]}`}
-                alt=""
-                width={1200}
-                height={800}
-                sizes="(min-width: 1024px) 512px, 100vw"
-                loading="eager"
-                className="hidden"
-              />
-            )}
             <button
               onClick={handleSaveCafe}
               className={`absolute top-2 right-2 p-2 rounded-2xl border font-semibold flex flex-row gap-1 items-center text-sm ${
@@ -188,32 +143,6 @@ function CafeDetailsSection({ cafe }) {
               </svg>
               {isSaved ? "Saved" : "Save"}
             </button>
-            {cafe.images.length > 1 && (
-              <>
-              {index > 0 && (
-              <button
-                onClick={prevImage}
-                className="absolute bottom-4 left-4 bg-orange-100 hover:bg-orange-200 rounded-full p-2 shadow"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5 ">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
-                </svg>
-              </button>
-            )}
-
-          {/* Right arrow */}
-            {index < cafe.images.length - 1 && (
-            <button
-              onClick={nextImage}
-              className="absolute bottom-4 right-4 bg-orange-100 hover:bg-orange-200 rounded-full p-2 shadow"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5 ">
-                <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-             </svg>
-          </button>
-        )}
-      </>
-          )}
           </div>
 
           <div className="lg:w-1/2 flex flex-col gap-4 md:gap-5">

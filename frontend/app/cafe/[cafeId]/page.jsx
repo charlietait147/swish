@@ -9,6 +9,7 @@ import CafeDetailsSection from "../../../components/cafe/CafeDetailsSection.jsx"
 import CafePageSkeleton from "../../../components/cafe/CafePageSkeleton.jsx";
 import CafeReviewList from "../../../components/cafe/CafeReviewList.jsx";
 import CafeMapContainer from "../../../components/cafe/CafeMapContainer.jsx";
+import CafeImageGallery from "../../../components/cafe/CafeImageGallery.jsx";
 import { notFound } from "next/navigation";
 
 export default function CafePage() {
@@ -52,6 +53,7 @@ export default function CafePage() {
           <Header />
           <CafeDetailsSection cafe={cafe} />
           <CafeMapContainer cafe={cafe} />
+          <CafeImageGallery cafe={cafe} />
           <CafeReviewList cafe={cafe} setReviewsUpdated={setReviewsUpdated} />
           <Footer />
         </>
