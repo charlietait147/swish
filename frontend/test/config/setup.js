@@ -17,3 +17,5 @@ jest.mock('next/image', () => ({
     return <img {...props} alt={props.alt || 'test-image'} width={500} height={500} priority="true"/>;
   },
 }));
+// jsdom doesn't implement window.scrollTo (used by utils/scroll when re-enabling scroll)
+window.scrollTo = jest.fn();
