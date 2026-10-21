@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { disableScroll, enableScroll } from "@/utils/scroll";
 function CafeFiltersModal({
   toggleModal,
   filters,
@@ -11,6 +12,12 @@ function CafeFiltersModal({
   setLoading,
 }) {
   const [slideOut, setSlideOut] = useState(false);
+
+  // Lock page scroll while the modal is open
+  useEffect(() => {
+    disableScroll();
+    return () => enableScroll();
+  }, []);
 
   const toggleClose = () => {
     setSlideOut(true); // Trigger slide-out animation
