@@ -1,9 +1,18 @@
 import Image from "next/image";
 import Logo from "../public/logo/swish-updated-logo.jpeg";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { disableScroll, enableScroll } from "@/utils/scroll";
 
 function SignInModal({ toggleModalClose }) {
     const router = useRouter();
+
+    // Lock page scroll while the modal is open. Unlocking on unmount means the
+    // lock is also released when navigating away (e.g. to /login)
+    useEffect(() => {
+      disableScroll();
+      return () => enableScroll();
+    }, []);
 
     const handleSignIn = () => {
         router.push("/login");

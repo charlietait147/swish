@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { addCafe, isCafeSaved } from "../../services/user.service";
 import { useRouter } from "next/navigation";
-import { disableScroll, enableScroll } from "@/utils/scroll";
 import PropTypes from "prop-types";
 import SignInModal from "../SignInModal";
 import menuIcon from "../../public/icons/menu.jpg";
@@ -52,7 +51,7 @@ function CafeDetailsSection({ cafe }) {
   const handleSaveCafe = async () => {
     if (!isLoggedIn) {
       setShowSignInModal(true);
-      disableScroll();
+      return;
     }
     if (isSaved) {
       router.push("/account");
@@ -84,7 +83,6 @@ function CafeDetailsSection({ cafe }) {
 
   const toggleModalClose = () => {
     setShowSignInModal(false);
-    enableScroll();
   };
 
   return (
