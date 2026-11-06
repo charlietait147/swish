@@ -113,7 +113,6 @@
 import CafeReviewCard from "./CafeReviewCard";
 import CafeReviewForm from "./CafeReviewForm";
 import { useState, useEffect } from "react";
-import { disableScroll, enableScroll } from "@/utils/scroll";
 import Link from "next/link";
 import SignInModal from "../SignInModal";
 
@@ -136,7 +135,6 @@ function CafeReviewList({ cafe, setReviewsUpdated }) {
   const handleOpenReviewForm = () => {
     if (!isLoggedIn) {
       setShowSignInModal(true);
-      disableScroll();
     } else {
       setOpenReviewForm(true);
     }
@@ -144,7 +142,6 @@ function CafeReviewList({ cafe, setReviewsUpdated }) {
 
   const toggleModalClose = () => {
     setShowSignInModal(false);
-    enableScroll();
   };
 
   return (
