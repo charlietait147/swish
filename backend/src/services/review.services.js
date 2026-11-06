@@ -22,11 +22,9 @@ export const addReviewService = async (cafeId, userId, reviewData) => {
 
         await newReview.save();
 
-        user.reviews.push(newReview._id);
-        await user.save();
-
-        cafe.reviews.push(newReview._id);
-        await cafe.save();
+        // $push only touches the reviews array, so unrelated missing fields on older docs can't fail the request
+        await User.updateOne({ _id: userId }, { $push: { reviews: newReview._id } });
+        await Cafe.updateOne({ _id: cafeId }, { $push: { reviews: newReview._id } });
 
         return newReview;
 
