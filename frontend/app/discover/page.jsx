@@ -6,6 +6,7 @@ import DiscoverFiltersBar from "../../components/cafe/DiscoverFiltersBar.jsx";
 import CafeList from "../../components/cafe/CafeList.jsx";
 import CafeListSkeleton from "@/components/cafe/CafeListSkeleton";
 import { fetchCafes } from "../../services/cafe.service.jsx";
+import { suggestCafes } from "../../utils/cafeSuggestions.js";
 import { useState, useEffect } from "react";
 
 export default function DiscoverPage() {
@@ -13,6 +14,7 @@ export default function DiscoverPage() {
   const [loading, setLoading] = useState(true); // Loading state
   const [filteredCafes, setFilteredCafes] = useState([]);
   const [selectedAmenities, setSelectedAmenities] = useState([]);
+  const [suggestions, setSuggestions] = useState(null);
 
   const getCafes = async () => {
     const response = await fetchCafes();
@@ -56,6 +58,9 @@ export default function DiscoverPage() {
     }
 
     setFilteredCafes(filteredCafes);
+    setSuggestions(
+      filteredCafes.length === 0 ? suggestCafes(cafes, filters) : null
+    );
   };
 
   // Every location a cafe is in, for the location dropdown
@@ -75,7 +80,7 @@ export default function DiscoverPage() {
         {loading ? (
           <CafeListSkeleton />
         ) : (
-          <CafeList cafes={filteredCafes} />
+          <CafeList cafes={filteredCafes} suggestions={suggestions} />
         )}
       </div>
       <Footer />

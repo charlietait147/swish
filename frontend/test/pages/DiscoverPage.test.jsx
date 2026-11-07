@@ -201,5 +201,45 @@ describe("DiscoverPage Component", () => {
             expect(screen.queryByText(/Cafe 2/i)).not.toBeInTheDocument();
         });
     });
+
+    it("should show the closest cafes when no cafe matches every filter", async () => {
+        fetchCafes.mockResolvedValue(mockCafeData);
+
+        render(<DiscoverPage />);
+
+        await waitFor(() => {
+            expect(fetchCafes).toHaveBeenCalledTimes(1);
+        });
+
+        // Cafe 2 is in Location 2; Cafe 1 matches the name but isn't near Location 2
+        await userEvent.type(screen.getByLabelText("Name"), "Cafe 1");
+        await userEvent.type(screen.getByLabelText("Location"), "Location 2");
+        await userEvent.click(screen.getByRole("button", { name: "Search" }));
+
+        await waitFor(() => {
+            expect(screen.getByText(/Here are some close matches near Location 2/i)).toBeInTheDocument();
+        });
+        const names = screen.getAllByRole("heading", { level: 2 }).map((h) => h.textContent);
+        expect(names.slice(1)).toEqual(["Cafe 2"]);
+    });
+
+    it("should show recommended cafes when nothing about the search matches", async () => {
+        fetchCafes.mockResolvedValue(mockCafeData);
+
+        render(<DiscoverPage />);
+
+        await waitFor(() => {
+            expect(fetchCafes).toHaveBeenCalledTimes(1);
+        });
+
+        await userEvent.type(screen.getByLabelText("Name"), "Nothing like this");
+        await userEvent.click(screen.getByRole("button", { name: "Search" }));
+
+        await waitFor(() => {
+            expect(screen.getByText(/Here are some of our recommended cafes/i)).toBeInTheDocument();
+        });
+        expect(screen.getByText(/Cafe 1/i)).toBeInTheDocument();
+        expect(screen.getByText(/Cafe 2/i)).toBeInTheDocument();
+    });
   });
 });
