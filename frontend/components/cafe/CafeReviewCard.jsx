@@ -30,7 +30,7 @@ function CafeReviewCard({ timestamp, description, name, image, rating, avatar })
           </p>
         </div>
         {/* <p className="text-gray-500 text-sm">{date}</p>   */}
-        <p className="text-gray-800 text-sm font-light">{description}</p>
+        <p className="text-gray-800 text-sm font-light pr-4">{description}</p>
         <div
           className={`flex ${
             image ? "flex-row justify-between" : "flex-col"

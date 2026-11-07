@@ -209,7 +209,7 @@ function CafeReviewList({ cafe, setReviewsUpdated }) {
       {/* </div> */}
       {/* <div className="flex flex-col gap-4 md:grid grid-cols-2 md:gap-16">  */}
       {/* A swipeable slider on mobile with the next review peeking in, a two column grid with equal height rows from md up */}
-      <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 no-scrollbar md:grid md:grid-cols-2 md:overflow-visible">
+      <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 no-scrollbar md:grid md:grid-cols-2 md:gap-x-12 md:gap-y-6 md:overflow-visible">
         {sortedReviews.map((review, index) => (
           <div key={review._id || index} className="w-[80%] shrink-0 snap-start md:w-auto">
             <CafeReviewCard
