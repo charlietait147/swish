@@ -26,4 +26,18 @@ describe("CafeList Component", () => {
         expect(screen.getByText(/Sorry!/i)).toBeInTheDocument();
         expect(screen.getByText(/We couldn't find any cafes that matched your search./i)).toBeInTheDocument();
     });
+
+    it("should show suggested cafes with a smaller message when nothing matches exactly", () => {
+        const suggestions = {
+            message: "We couldn't find any cafes that matched all of your filters.",
+            heading: "Here are some close matches",
+            cafes: [mockCafeData[1]],
+        };
+        render(<CafeList cafes={[]} suggestions={suggestions} />);
+
+        expect(screen.getByText(/couldn't find any cafes that matched all of your filters/i)).toBeInTheDocument();
+        expect(screen.getByText(/Here are some close matches/i)).toBeInTheDocument();
+        expect(screen.getByText(/Cafe 2/i)).toBeInTheDocument();
+        expect(screen.queryByText(/Sorry!/i)).not.toBeInTheDocument();
+    });
 });
