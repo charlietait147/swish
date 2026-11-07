@@ -96,12 +96,13 @@ describe("CafeReviewForm Component", () => {
 
       await userEvent.type(nameInput, "Test");
       await userEvent.type(reviewInput, "Great cafe!");
+      await userEvent.click(screen.getByRole("radio", { name: "4 stars" }));
 
       const submitButton = screen.getByText(/Submit/i);
       await userEvent.click(submitButton);
 
       await waitFor(() => {
-        expect(addReview).toHaveBeenCalledWith("1", { name: "Test", description: "Great cafe!" });
+        expect(addReview).toHaveBeenCalledWith("1", { name: "Test", description: "Great cafe!", rating: 4 });
         expect(mockSetReviewsUpdated).toHaveBeenCalledWith(true);
         expect(screen.getByRole("alertdialog")).toHaveTextContent(
           "Thank you for your review!"
@@ -125,6 +126,7 @@ describe("CafeReviewForm Component", () => {
 
       await userEvent.type(nameInput, "Test");
       await userEvent.type(reviewInput, "Great cafe!");
+      await userEvent.click(screen.getByRole("radio", { name: "4 stars" }));
 
       const submitButton = screen.getByText(/Submit/i);
       await userEvent.click(submitButton);
@@ -148,6 +150,28 @@ describe("CafeReviewForm Component", () => {
       await userEvent.click(cancelButton);
 
       expect(mockOnClose).toHaveBeenCalled();
+    });
+  });
+
+  describe("rating tests", () => {
+    it("keeps the submit button disabled until a rating is chosen", async () => {
+      render(
+        <CafeReviewForm
+          cafeId="1"
+          cafeName="Test Cafe"
+          onClose={mockOnClose}
+          setReviewsUpdated={mockSetReviewsUpdated}
+        />
+      );
+
+      await userEvent.type(screen.getByLabelText(/Name/i), "Test");
+      await userEvent.type(screen.getByLabelText(/Review/i), "Great cafe!");
+      const submitButton = screen.getByText(/Submit/i);
+      expect(submitButton).toBeDisabled();
+
+      await userEvent.click(screen.getByRole("radio", { name: "3 stars" }));
+      expect(submitButton).not.toBeDisabled();
+      expect(screen.getByRole("radio", { name: "3 stars" })).toHaveAttribute("aria-checked", "true");
     });
   });
 

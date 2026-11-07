@@ -92,13 +92,25 @@ const reviewData =
 const testReviewData = {
     wellFormedReviewData: {
         name: 'Test Review',
-        description: 'Test Description'
+        description: 'Test Description',
+        rating: 4
     },
     reviewNoName: {
-        description: 'Test Description'
+        description: 'Test Description',
+        rating: 4
     },
     reviewNoDescription: {
-        name: 'Test Review'
+        name: 'Test Review',
+        rating: 4
+    },
+    reviewNoRating: {
+        name: 'Test Review',
+        description: 'Test Description'
+    },
+    reviewInvalidRating: {
+        name: 'Test Review',
+        description: 'Test Description',
+        rating: 6
     }
 }
 

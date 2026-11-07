@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { addReview } from "../../services/review.service.jsx";
 import { fetchUserData } from "../../services/user.service.jsx";
+import StarRating from "./StarRating";
 import PropTypes from "prop-types";
 
 function CafeReviewForm({ onClose, cafeId, cafeName, setReviewsUpdated }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [rating, setRating] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [submitted, setSubmitted] = useState(false);
@@ -25,9 +27,10 @@ function CafeReviewForm({ onClose, cafeId, cafeName, setReviewsUpdated }) {
     setLoading(true);
 
     try {
-      await addReview(cafeId, { name, description });
+      await addReview(cafeId, { name, description, rating });
       setName("");
       setDescription("");
+      setRating(0);
       setReviewsUpdated(true);
       setSubmitted(true);
       setTimeout(() => {
@@ -41,7 +44,7 @@ function CafeReviewForm({ onClose, cafeId, cafeName, setReviewsUpdated }) {
     }
   };
 
-  const isButtonDisabled = !name.trim() || !description.trim();
+  const isButtonDisabled = !name.trim() || !description.trim() || !rating;
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
@@ -90,6 +93,10 @@ function CafeReviewForm({ onClose, cafeId, cafeName, setReviewsUpdated }) {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                   />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold pb-1">Rating</p>
+                  <StarRating rating={rating} onChange={setRating} size="size-7" />
                 </div>
                 <div>
                   <label

@@ -4,6 +4,11 @@ import Cafe from '../models/cafe.model.js';
 
 export const addReviewService = async (cafeId, userId, reviewData) => {
     try {
+        // Older reviews have no rating, but every new one needs a 1-5 star rating
+        if (!Number.isInteger(reviewData.rating) || reviewData.rating < 1 || reviewData.rating > 5) {
+            throw new Error('Rating must be a whole number from 1 to 5');
+        }
+
         const cafe = await Cafe.findById(cafeId);
         if (!cafe) {
             throw new Error('Cafe not found');

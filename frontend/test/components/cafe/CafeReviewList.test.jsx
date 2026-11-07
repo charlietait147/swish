@@ -58,6 +58,20 @@ describe("CafeReviewList Component", () => {
       const dates = screen.getAllByText("1 day ago");
       expect(dates.length).toBe(2);
     });
+
+    it("should show the most recent review first", () => {
+      const cafe = {
+        reviews: [
+          { _id: "old", name: "Old", description: "Older review", timestamp: new Date("2026-01-01") },
+          { _id: "new", name: "New", description: "Newer review", timestamp: new Date("2026-06-01") },
+        ],
+      };
+      render(<CafeReviewList cafe={cafe} />);
+
+      const older = screen.getByText("Older review");
+      const newer = screen.getByText("Newer review");
+      expect(newer.compareDocumentPosition(older) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    });
   });
   describe("user state tests", () => {
     it("should show the sign in modal when a logged out user clicks Add a review", async () => {

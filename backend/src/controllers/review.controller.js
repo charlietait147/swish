@@ -3,10 +3,10 @@ import { addReviewService, editReviewService, deleteReviewService } from "../ser
 export const addReviewController = async (req, res) => {
     try {
         const { cafeId } = req.params;
-        const { name, description } = req.body;
+        const { name, description, rating } = req.body;
         const userId = req.user._id;
 
-        const newReview = await addReviewService(cafeId, userId, { name, description });
+        const newReview = await addReviewService(cafeId, userId, { name, description, rating });
         res.status(201).json({message: "Review added successfully", review: newReview});
     } catch (error) {
         res.status(400).send("Review failed");
