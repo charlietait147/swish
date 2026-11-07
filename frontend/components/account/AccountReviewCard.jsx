@@ -46,7 +46,7 @@ function AccountReviewCard({ cafeName, reviewDescription, reviewTimestamp, revie
           <StarRating rating={reviewRating} />
         </div>
       )}
-      <p className="text-gray-800 text-xs font-light">{reviewDescription}</p>
+      <p className="text-gray-800 text-xs font-light [overflow-wrap:anywhere]">{reviewDescription}</p>
       <div className={`flex ${reviewImage ? 'flex-row justify-between' : 'flex-col'} gap-5`}>
         {reviewImage && (
           <div className="flex items-center">
