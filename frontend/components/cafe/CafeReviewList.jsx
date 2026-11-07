@@ -124,6 +124,10 @@ function CafeReviewList({ cafe, setReviewsUpdated }) {
   const [showSignInModal, setShowSignInModal] = useState(false);
 
   const reviewCount = cafe?.reviews?.length || 0;
+  // Newest first, so the mobile slider opens on the most recent review
+  const sortedReviews = [...(cafe?.reviews || [])].sort(
+    (a, b) => new Date(b.timestamp) - new Date(a.timestamp)
+  );
 
   useEffect(() => {
     const token = Cookies.get("token");
@@ -146,13 +150,31 @@ function CafeReviewList({ cafe, setReviewsUpdated }) {
 
   return (
     <div className="max-w-screen-lg mx-auto xs:px-6 sm:px-10 lg:pt-6 xl:px-0 px-4 pb-4 ">
-      <h3 className="text-xl font-semibold">Reviews</h3>
-      {/* <div className="flex flex-row justify-between pb-3 sm:flex-col"> */}
-      <p className="text-sm font-semibold text-gray-400 pb-3">
-        {reviewCount === 0
-          ? "No reviews yet"
-          : `${reviewCount} ${reviewCount === 1 ? "Review" : "Reviews"}`}
-      </p>
+      <div className="flex flex-row items-center justify-between gap-4 pb-4">
+        <div>
+          <h3 className="text-xl font-semibold">Reviews</h3>
+          <p className="text-sm font-semibold text-gray-400">
+            {reviewCount === 0
+              ? "No reviews yet"
+              : `${reviewCount} ${reviewCount === 1 ? "Review" : "Reviews"}`}
+          </p>
+        </div>
+        <button
+          onClick={handleOpenReviewForm}
+          className="flex flex-row items-center gap-1.5 shrink-0 bg-orange-500 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-orange-600"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+            className="size-4"
+          >
+            <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z" />
+          </svg>
+          Add a review
+        </button>
+      </div>
       {showSignInModal && <SignInModal toggleModalClose={toggleModalClose} />}
       {/* {!isLoggedIn ? ( */}
       <>
@@ -177,45 +199,23 @@ function CafeReviewList({ cafe, setReviewsUpdated }) {
           </Link> */}
       </>
       {/* ) : ( */}
-      <div>
-        <div className="flex flex-col justify-center gap-1 items-center pb-4 md:pb-8">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            className="size-6"
-          >
-            <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z" />
-            <path d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
-          </svg>
-          <p className="font-semibold">Write a review</p>
-          <p className="text-gray-500 text-sm">
-            What was your cafe experience like?
-          </p>
-
-          <button
-            onClick={handleOpenReviewForm}
-            className="bg-orange-500 text-white text-sm px-4 py-2  rounded-lg flex flex-row items-center hover:bg-orange-600 sm:w-fit mt-2"
-          >
-            Add a review
-          </button>
-        </div>
-      </div>
       {/* )} */}
       {/* </div> */}
       {/* <div className="flex flex-col gap-4 md:grid grid-cols-2 md:gap-16">  */}
-      <div className="columns-1 sm:columns-2 lg:columns-3 gap-4">
-        {cafe &&
-          cafe.reviews &&
-          cafe.reviews.map((review, index) => (
+      {/* A swipeable slider on mobile with the next review peeking in, a two column grid with equal height rows from md up */}
+      <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 no-scrollbar md:grid md:grid-cols-2 md:gap-x-12 md:gap-y-6 md:overflow-visible">
+        {sortedReviews.map((review, index) => (
+          <div key={review._id || index} className="w-[80%] shrink-0 snap-start md:w-auto">
             <CafeReviewCard
-              key={review._id || index}
               timestamp={review.timestamp}
               description={review.description}
               name={review.name}
               image={review.image}
+              rating={review.rating}
+              avatar={review.user?.avatar}
             />
-          ))}
+          </div>
+        ))}
       </div>
       {/* <div
         id="default-carousel"

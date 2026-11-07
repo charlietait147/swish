@@ -41,6 +41,7 @@ function AccountReviewList({ reviews, setReviewsUpdated }) {
                 reviewTimestamp={review.timestamp}
                 reviewName={review.name}
                 reviewImage={review.image}
+                reviewRating={review.rating}
                 reviewId={review._id}
                 setReviewsUpdated={setReviewsUpdated}
               />

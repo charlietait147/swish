@@ -19,6 +19,16 @@ const reviewSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    // Optional on the schema so reviews from before ratings existed still load
+    rating: {
+        type: Number,
+        min: 1,
+        max: 5,
+        validate: {
+            validator: Number.isInteger,
+            message: 'Rating must be a whole number',
+        },
+    },
     likes: {
         type: Number,
         default: 0,

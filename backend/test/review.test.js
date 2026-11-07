@@ -2,11 +2,12 @@ import { expect } from "chai";
 
 import { userData, testCafeData, reviewData, testReviewData } from "./data/testData.js";
 import { setupDatabase, initialiseSetup } from "./testSetup.js";
+import User from "../src/models/user.model.js";
 
 
 
 
-const { wellFormedReviewData, reviewNoName, reviewNoDescription } = testReviewData;
+const { wellFormedReviewData, reviewNoName, reviewNoDescription, reviewNoRating, reviewInvalidRating } = testReviewData;
 
 describe("Testing Requests on Review Collection", () => {
     let token;
@@ -34,6 +35,50 @@ describe("Testing Requests on Review Collection", () => {
             expect(res.body).to.have.property('review');
             expect(res.body.review).to.have.property('name').that.equals(wellFormedReviewData.name);
             expect(res.body.review).to.have.property('description').that.equals(wellFormedReviewData.description);
+            expect(res.body.review).to.have.property('rating').that.equals(wellFormedReviewData.rating);
+        });
+
+        it('should return a 400 status code when a review with no rating is sent', async () => {
+            //Act
+            const res = await testServer
+                .post(`/review/${testCafeData[1]._id}/add-review`)
+                .set('Authorization', `Bearer ${token}`)
+                .send(reviewNoRating);
+
+            //Assert
+            expect(res).to.have.status(400);
+            expect(res.text).to.equal('Review failed');
+        });
+
+        it('should return a 400 status code when a rating outside 1-5 is sent', async () => {
+            //Act
+            const res = await testServer
+                .post(`/review/${testCafeData[1]._id}/add-review`)
+                .set('Authorization', `Bearer ${token}`)
+                .send(reviewInvalidRating);
+
+            //Assert
+            expect(res).to.have.status(400);
+            expect(res.text).to.equal('Review failed');
+        });
+
+        it("should save the first review's name to the user's account", async () => {
+            //Assert
+            const user = await User.findById(userId);
+            expect(user.name).to.equal(wellFormedReviewData.name.trim());
+        });
+
+        it("should not overwrite the account name on later reviews", async () => {
+            //Act
+            const res = await testServer
+                .post(`/review/${testCafeData[1]._id}/add-review`)
+                .set('Authorization', `Bearer ${token}`)
+                .send({ ...wellFormedReviewData, name: 'A Different Name' });
+
+            //Assert
+            expect(res).to.have.status(201);
+            const user = await User.findById(userId);
+            expect(user.name).to.equal(wellFormedReviewData.name.trim());
         });
 
         it(`should return a 400 status code when a review with no name is sent`, async () => {

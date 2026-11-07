@@ -74,3 +74,11 @@
     linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
   mask-composite: intersect;
 }
+
+/* Hide the scrollbar on swipeable sliders while keeping them scrollable */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

@@ -10,7 +10,11 @@ export const getAllCafesService = async () => {
 
 export const getSingleCafeService = async (cafeId) => {
     try {
-        return await Cafe.findById(cafeId).populate(`reviews`);
+        // Only the reviewer's avatar is selected so emails and passwords never reach the cafe page
+        return await Cafe.findById(cafeId).populate({
+            path: 'reviews',
+            populate: { path: 'user', select: 'avatar' },
+        });
     } catch (error) {
         throw new Error(error.message);
     }

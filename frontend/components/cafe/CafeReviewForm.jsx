@@ -1,41 +1,36 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { addReview } from "../../services/review.service.jsx";
+import { fetchUserData } from "../../services/user.service.jsx";
+import StarRating from "./StarRating";
 import PropTypes from "prop-types";
 
 function CafeReviewForm({ onClose, cafeId, cafeName, setReviewsUpdated }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [rating, setRating] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [submitted, setSubmitted] = useState(false);
-  const [image, setImage] = useState(null);
 
-  const handleImageChange = (e) => {
-    if (e.target.files[0]) {
-      setImage(e.target.files[0]);
-    }
-  };
-
-  const handleRemoveImage = () => {
-    setImage(null);
-  };
+  // Pre-fill the name from the account, older accounts may not have one so it stays editable
+  useEffect(() => {
+    fetchUserData()
+      .then((user) => {
+        if (user?.name) setName((current) => current || user.name);
+      })
+      .catch(() => {});
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     setLoading(true);
 
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("description", description);
-    if (image) {
-      formData.append("image", image);
-    }
-
     try {
-      const response = await addReview(cafeId, formData);
+      await addReview(cafeId, { name, description, rating });
       setName("");
       setDescription("");
+      setRating(0);
       setReviewsUpdated(true);
       setSubmitted(true);
       setTimeout(() => {
@@ -49,7 +44,7 @@ function CafeReviewForm({ onClose, cafeId, cafeName, setReviewsUpdated }) {
     }
   };
 
-  const isButtonDisabled = !name.trim() || !description.trim();
+  const isButtonDisabled = !name.trim() || !description.trim() || !rating;
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
@@ -100,6 +95,10 @@ function CafeReviewForm({ onClose, cafeId, cafeName, setReviewsUpdated }) {
                   />
                 </div>
                 <div>
+                  <p className="text-sm font-semibold pb-1">Rating</p>
+                  <StarRating rating={rating} onChange={setRating} size="size-7" />
+                </div>
+                <div>
                   <label
                     htmlFor="description"
                     className="text-sm font-semibold"
@@ -115,74 +114,6 @@ function CafeReviewForm({ onClose, cafeId, cafeName, setReviewsUpdated }) {
                     onChange={(e) => setDescription(e.target.value)}
                   ></textarea>
                 </div>
-                <div>
-                  <label htmlFor="file" className="text-sm font-semibold">
-                    Upload a Photo
-                  </label>
-                  <div className="flex items-center border border-gray-300 rounded">
-                    <input
-                      type="text"
-                      value={image ? image.name : "No file chosen"}
-                      className="relative flex-grow p-2 text-gray-700 text-sm bg-white rounded-l focus:outline-none"
-                      readOnly
-                    />
-                    {image && (
-                      // <svg
-                      //   role="button"
-                      //   aria-label="remove-image"
-                      //   onClick={handleRemoveImage}
-                      //   className="w-2 h-2 mt-0.5 absolute left-44 text-gray-500 hover:text-gray-700"
-                      //   aria-hidden="true"
-                      //   xmlns="http://www.w3.org/2000/svg"
-                      //   fill="none"
-                      //   viewBox="0 0 14 14"
-                      // >
-                      //   <path
-                      //     stroke="currentColor"
-                      //     strokeLinecap="round"
-                      //     strokeLinejoin="round"
-                      //     strokeWidth="2"
-                      //     d="M1 1l6 6m0 0l6 6M7 7l6-6M7 7L1 13"
-                      //   />
-                      // </svg>
-                      <button
-                        type="button"
-                        aria-label="remove-image"
-                        onClick={handleRemoveImage}
-                        className="absolute left-44 text-gray-500 hover:text-gray-700"
-                      >
-                        <svg
-                          className="w-2 h-2 mt-0.5"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 14 14"
-                        >
-                          <path
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M1 1l6 6m0 0l6 6M7 7l6-6M7 7L1 13"
-                          />
-                        </svg>
-                      </button>
-                    )}
-                    <input
-                      type="file"
-                      id="file"
-                      accept="image/*"
-                      onChange={handleImageChange}
-                      className="hidden"
-                    />
-                    <label
-                      htmlFor="file"
-                      className="bg-blue-500 text-sm text-white py-2 px-4 rounded-r cursor-pointer hover:bg-blue-600"
-                    >
-                      Browse
-                    </label>
-                  </div>
-                </div>
-
                 <div>
                   <button
                     type="submit"

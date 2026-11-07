@@ -2,11 +2,12 @@ import { formatDistanceToNowStrict } from "date-fns";
 import { useState } from "react";
 import Image from "next/image";
 import PropTypes from "prop-types";
+import StarRating from "../cafe/StarRating";
 
 import AccountEditReviewForm from "./AccountEditReviewForm";
 import AccountDeleteReviewModal from "./AccountDeleteReviewModal";
 
-function AccountReviewCard({ cafeName, reviewDescription, reviewTimestamp, reviewImage, reviewId, setReviewsUpdated, reviewName }) {
+function AccountReviewCard({ cafeName, reviewDescription, reviewTimestamp, reviewImage, reviewId, setReviewsUpdated, reviewName, reviewRating }) {
   const [openReviewForm, setOpenReviewForm] = useState(false);
   const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
 
@@ -40,7 +41,12 @@ function AccountReviewCard({ cafeName, reviewDescription, reviewTimestamp, revie
           {formatDistanceToNowStrict(reviewTimestamp)} ago
         </p>
       </div>
-      <p className="text-gray-800 text-xs font-light">{reviewDescription}</p>
+      {reviewRating && (
+        <div className="pb-1.5">
+          <StarRating rating={reviewRating} />
+        </div>
+      )}
+      <p className="text-gray-800 text-xs font-light [overflow-wrap:anywhere]">{reviewDescription}</p>
       <div className={`flex ${reviewImage ? 'flex-row justify-between' : 'flex-col'} gap-5`}>
         {reviewImage && (
           <div className="flex items-center">
@@ -101,6 +107,7 @@ AccountReviewCard.propTypes = {
   reviewImage: PropTypes.string,
   reviewId: PropTypes.string.isRequired,
   reviewName: PropTypes.string.isRequired,
+  reviewRating: PropTypes.number,
   setReviewsUpdated: PropTypes.func.isRequired,
 };
 

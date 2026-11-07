@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 const API_URL = process.env.NEXT_API_URL || "http://localhost:3000";
 
 
-export const addReview = async (cafeId, formData) => {
+export const addReview = async (cafeId, reviewData) => {
     try {
         // const token = localStorage.getItem("token");
         const token = Cookies.get("token");
@@ -15,11 +15,10 @@ export const addReview = async (cafeId, formData) => {
 
         const res = await axios.post(
         `${API_URL}/review/${cafeId}/add-review`,
-         formData,
+         reviewData,
         {
             headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
             }
         }
         );

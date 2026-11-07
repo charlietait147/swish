@@ -24,6 +24,24 @@ describe("CafeReviewCard Component", () => {
     expect(description).toBeInTheDocument();
   });
 
+  it("renders the reviewer's uploaded avatar", () => {
+    render(<CafeReviewCard {...mockReviewData} avatar="/uploads/avatars/test.jpg" />);
+
+    expect(screen.getByAltText("Test's avatar")).toHaveAttribute(
+      "src",
+      expect.stringContaining("/uploads/avatars/test.jpg")
+    );
+  });
+
+  it("falls back to the default avatar when the reviewer has none", () => {
+    render(<CafeReviewCard {...mockReviewData} />);
+
+    expect(screen.getByAltText("Test's avatar")).toHaveAttribute(
+      "src",
+      expect.stringContaining("/public/images/swish-logo.png")
+    );
+  });
+
   it("renders the correct timestamp", () => {
     render(<CafeReviewCard {...mockReviewData} />);
 

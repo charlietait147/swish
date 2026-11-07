@@ -6,7 +6,6 @@ import authenticate from "./src/middleware/authenticate.js";
 import path from "path";
 import { fileURLToPath } from 'url';
 import fs from 'fs';
-import upload from './src/middleware/file.storage.js';
 
 import { registerUserRouter } from "./src/routes/userRoutes/registerUser.route.js";
 import { loginUserRouter } from "./src/routes/userRoutes/loginUser.route.js";
@@ -70,7 +69,7 @@ app.use("/user", authenticate, getUserDataRouter);
 app.use("/user", authenticate, updateAvatarRouter);
 app.use("/user", authenticate, deleteSavedCafeRouter )
 
-app.use("/review", authenticate, upload.single('image'), addReviewRouter);
+app.use("/review", authenticate, addReviewRouter);
 app.use("/review", authenticate, editReviewRouter);
 app.use("/review", authenticate, deleteReviewRouter);
 
