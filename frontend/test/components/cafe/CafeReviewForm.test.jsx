@@ -2,11 +2,16 @@ import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import CafeReviewForm from "../../../components/cafe/CafeReviewForm.jsx";
 import { addReview } from "../../../services/review.service.jsx";
+import { fetchUserData } from "../../../services/user.service.jsx";
 
 const ue = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
 
 jest.mock("../../../services/review.service.jsx", () => ({
   addReview: jest.fn(),
+}));
+
+jest.mock("../../../services/user.service.jsx", () => ({
+  fetchUserData: jest.fn(),
 }));
 
 describe("CafeReviewForm Component", () => {
@@ -15,6 +20,7 @@ describe("CafeReviewForm Component", () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
+    fetchUserData.mockResolvedValue({});
   });
 
   describe("prop tests", () => {
@@ -30,7 +36,7 @@ describe("CafeReviewForm Component", () => {
       expect(screen.getByText(/Test Cafe/i)).toBeInTheDocument();
       expect(screen.getByLabelText(/Name/i)).toBeInTheDocument();
       expect(screen.getByLabelText(/Review/i)).toBeInTheDocument();
-      expect(screen.getByLabelText(/Upload a Photo/i)).toBeInTheDocument();
+      expect(screen.queryByText(/Upload a Photo/i)).not.toBeInTheDocument();
     });
   });
 
@@ -95,7 +101,7 @@ describe("CafeReviewForm Component", () => {
       await userEvent.click(submitButton);
 
       await waitFor(() => {
-        expect(addReview).toHaveBeenCalledWith("1", expect.any(FormData));
+        expect(addReview).toHaveBeenCalledWith("1", { name: "Test", description: "Great cafe!" });
         expect(mockSetReviewsUpdated).toHaveBeenCalledWith(true);
         expect(screen.getByRole("alertdialog")).toHaveTextContent(
           "Thank you for your review!"
@@ -145,8 +151,10 @@ describe("CafeReviewForm Component", () => {
     });
   });
 
-  describe("form tests", () => {
-    it("allows the user to select and remove an image", async () => {
+  describe("name prefill tests", () => {
+    it("pre-fills the name from the user's account", async () => {
+      fetchUserData.mockResolvedValue({ name: "Jane Doe" });
+
       render(
         <CafeReviewForm
           cafeId="1"
@@ -156,24 +164,23 @@ describe("CafeReviewForm Component", () => {
         />
       );
 
-      const fileInput = screen.getByLabelText(/Upload a Photo/i);
-      const testFile = new File(["test-image"], "test-image.png", {
-        type: "image/png",
-      });
-
-      fireEvent.change(fileInput, { target: { files: [testFile] } });
-
       await waitFor(() => {
-        expect(fileInput.files[0]).toBe(testFile);
-        expect(fileInput.files[0].name).toBe("test-image.png");
+        expect(screen.getByLabelText(/Name/i).value).toBe("Jane Doe");
       });
-    
-      const removeButton = screen.getByRole("button", { name: /remove-image/i });
-      fireEvent.click(removeButton);
+    });
 
-      await waitFor(() => {
-        expect(fileInput.value).toBe(""); // Ensure the file input is empty
-      });
+    it("leaves the name empty when the account has no name", async () => {
+      render(
+        <CafeReviewForm
+          cafeId="1"
+          cafeName="Test Cafe"
+          onClose={mockOnClose}
+          setReviewsUpdated={mockSetReviewsUpdated}
+        />
+      );
+
+      await waitFor(() => expect(fetchUserData).toHaveBeenCalled());
+      expect(screen.getByLabelText(/Name/i).value).toBe("");
     });
   });
 });

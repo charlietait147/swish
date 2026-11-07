@@ -25,7 +25,6 @@ describe("ReviewServiceTests", () => {
             {
               headers: {
                 Authorization: `Bearer ${fakeToken}`,
-                "Content-Type": "multipart/form-data",
               }
             }
           );

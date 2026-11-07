@@ -24,6 +24,11 @@ export const addReviewService = async (cafeId, userId, reviewData) => {
 
         // $push only touches the reviews array, so unrelated missing fields on older docs can't fail the request
         await User.updateOne({ _id: userId }, { $push: { reviews: newReview._id } });
+        // The first review's name becomes the account name so later review forms can pre-fill it
+        await User.updateOne(
+            { _id: userId, $or: [{ name: { $exists: false } }, { name: null }, { name: "" }] },
+            { $set: { name: newReview.name.trim() } }
+        );
         await Cafe.updateOne({ _id: cafeId }, { $push: { reviews: newReview._id } });
 
         return newReview;

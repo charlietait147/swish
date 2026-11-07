@@ -5,9 +5,8 @@ export const addReviewController = async (req, res) => {
         const { cafeId } = req.params;
         const { name, description } = req.body;
         const userId = req.user._id;
-        const image = req.file ? req.file.filename : null;
 
-        const newReview = await addReviewService(cafeId, userId, { name, description, image });
+        const newReview = await addReviewService(cafeId, userId, { name, description });
         res.status(201).json({message: "Review added successfully", review: newReview});
     } catch (error) {
         res.status(400).send("Review failed");
