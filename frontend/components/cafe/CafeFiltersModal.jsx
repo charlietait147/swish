@@ -89,6 +89,7 @@ function CafeFiltersModal({
               <label className="text-sm font-semibold">Name</label>
               <input
                 type="text"
+                autoComplete="off"
                 name="name"
                 value={filters.name}
                 onChange={handleInputChange}
@@ -99,6 +100,7 @@ function CafeFiltersModal({
               <label className="text-sm font-semibold">Location</label>
               <input
                 type="text"
+                autoComplete="off"
                 name="location"
                 value={filters.location}
                 onChange={handleInputChange}

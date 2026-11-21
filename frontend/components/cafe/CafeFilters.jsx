@@ -132,6 +132,7 @@ function CafeFilters({
           {/* Search Input */}
           <input
             type="text"
+            autoComplete="off"
             className="ml-2 w-full bg-transparent focus:outline-none text-base text-gray-700 placeholder-gray-500 placeholder:text-sm"
             placeholder="Search by name"
             value={mobileSearch}
@@ -231,6 +232,7 @@ function CafeFilters({
             </label>
             <input
               type="text"
+              autoComplete="off"
               name="name"
               id="name"
               value={filters.name}
@@ -256,6 +258,7 @@ function CafeFilters({
             </label>
             <input
               type="text"
+              autoComplete="off"
               name="location"
               id="location"
               value={filters.location}

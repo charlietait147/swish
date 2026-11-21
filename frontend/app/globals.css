@@ -82,3 +82,11 @@
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+/* Stop the browser's blue autofill tint from showing on inputs, so they keep their own background and text colour */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: inherit;
+  transition: background-color 9999s ease-in-out 0s;
+}
