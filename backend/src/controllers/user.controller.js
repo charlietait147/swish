@@ -1,4 +1,4 @@
-import { registerUserService, loginUserService, forgotPasswordService, updatePasswordService, resetPasswordService, addCafeService, getCafesService, isCafeSavedService, getUserDataService, deleteSavedCafeService, updateAvatarService } from "../services/user.services.js";
+import { registerUserService, loginUserService, googleAuthService, forgotPasswordService, updatePasswordService, resetPasswordService, addCafeService, getCafesService, isCafeSavedService, getUserDataService, deleteSavedCafeService, updateAvatarService } from "../services/user.services.js";
 import { validationResult } from "express-validator";
 import jwt from "jsonwebtoken";
 
@@ -28,6 +28,21 @@ export const loginUserController = async (req, res) => {
     } catch (error) {
         res.status(400).send(error.message);
         console.error("Login failed", error);
+    }
+}
+
+export const googleAuthController = async (req, res) => {
+    try {
+        const { code } = req.body;
+        if (!code) {
+            return res.status(400).send("Google credential is required");
+        }
+        const user = await googleAuthService(code);
+        const token = jwt.sign({ email: user.email }, process.env.JWT_KEY, { expiresIn: '24h' });
+        res.status(201).json({ message: "User logged in with Google successfully", user, token });
+    } catch (error) {
+        res.status(400).send(error.message);
+        console.error("Google sign in failed", error);
     }
 }
 

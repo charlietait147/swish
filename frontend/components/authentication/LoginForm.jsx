@@ -3,6 +3,7 @@ import Cookies from "js-cookie";
 
 import { useState, useEffect } from "react";
 import { login } from "../../services/auth.service.jsx";
+import GoogleSignInButton from "./GoogleSignInButton.jsx";
 import { useRouter } from "next/navigation";
 
 function LoginForm() {
@@ -43,6 +44,19 @@ function LoginForm() {
         setSuccess(false);
       }
   }
+
+  const handleGoogleSuccess = () => {
+    setError(null);
+    setSuccess(true);
+    setTimeout(() => {
+      router.push("/");
+    }, 2000);
+  };
+
+  const handleGoogleError = (message) => {
+    setError(message);
+    setSuccess(false);
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -105,6 +119,11 @@ function LoginForm() {
           Sign in
         </button>
       </div>
+      <GoogleSignInButton
+        text="signin_with"
+        onSuccess={handleGoogleSuccess}
+        onError={handleGoogleError}
+      />
       {success && (
         <div
           id="alert-border-3"

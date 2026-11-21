@@ -9,6 +9,7 @@ import fs from 'fs';
 
 import { registerUserRouter } from "./src/routes/userRoutes/registerUser.route.js";
 import { loginUserRouter } from "./src/routes/userRoutes/loginUser.route.js";
+import { googleAuthRouter } from "./src/routes/userRoutes/googleAuth.route.js";
 import { updatePasswordRouter } from "./src/routes/userRoutes/updatePassword.route.js";
 import { addCafeRouter } from "./src/routes/userRoutes/addCafe.route.js";
 import { getCafesRouter } from "./src/routes/userRoutes/getCafes.route.js";
@@ -59,6 +60,7 @@ connectDb();
 
 app.use("/user", registerUserRouter);
 app.use("/user", loginUserRouter);
+app.use("/user", googleAuthRouter);
 app.use('/user', forgotPasswordRouter);
 app.use("/user", resetPasswordRouter);
 app.use("/user", authenticate, updatePasswordRouter);
