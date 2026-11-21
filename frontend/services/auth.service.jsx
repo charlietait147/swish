@@ -52,6 +52,20 @@ export const login = async (email, password) => {
   }
 };
 
+export const googleLogin = async (code) => {
+  try {
+    const { data } = await axios.post(`${API_URL}/user/google`, { code });
+    Cookies.set("token", data.token, { expires: 1, sameSite: "Strict" });
+    return data;
+  } catch (error) {
+    if (error.response && error.response.status === 400) {
+      throw new Error(error.response.data);
+    } else {
+      throw new Error(error.message || "An error occurred during Google sign in");
+    }
+  }
+};
+
 export const updatePassword = async (newPassword) => {
   try {
     const token = Cookies.get("token");

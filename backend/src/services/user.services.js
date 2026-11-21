@@ -5,6 +5,7 @@ import fs from 'fs';
 import path from 'path';
 import { avatarsDir } from '../middleware/avatar.upload.js';
 import { sendResetEmail } from "../../utils/email.js";
+import { exchangeGoogleAuthCode } from "../../utils/google.js";
 
 export const registerUserService = async (email, password) => {
     try {
@@ -26,7 +27,8 @@ export const registerUserService = async (email, password) => {
 export const loginUserService = async (email, password) => {
     try {
         const user = await User.findOne({ email });
-        if (!user) {
+        // Google-only accounts have no password to check against
+        if (!user || !user.password) {
             throw new Error('Invalid email or password');
         }
 
@@ -45,6 +47,36 @@ export const loginUserService = async (email, password) => {
         return user;
     }
     catch (error) {
+        throw new Error(error.message);
+    }
+}
+
+export const googleAuthService = async (code) => {
+    try {
+        const { sub: googleId, email, email_verified, name } = await exchangeGoogleAuthCode(code);
+        if (!email || !email_verified) {
+            throw new Error('Your Google account email is not verified');
+        }
+
+        const existingGoogleUser = await User.findOne({ googleId });
+        if (existingGoogleUser) {
+            return existingGoogleUser;
+        }
+
+        // Link Google to an existing email/password account with the same verified email
+        const existingEmailUser = await User.findOne({ email });
+        if (existingEmailUser) {
+            existingEmailUser.googleId = googleId;
+            if (!existingEmailUser.name && name) {
+                existingEmailUser.name = name;
+            }
+            return await existingEmailUser.save();
+        }
+
+        const newUser = new User({ email, googleId, name, avatar: "swish-logo.png" });
+        return await newUser.save();
+
+    } catch (error) {
         throw new Error(error.message);
     }
 }

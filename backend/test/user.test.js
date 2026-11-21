@@ -118,6 +118,30 @@ describe("Testing Requests on User Collection", () => {
         });
     });
 
+    describe(`POST request to /user/google`, () => {
+        it('should return a 400 status code when no Google credential is sent', async () => {
+            //Act
+            const res = await testServer
+                .post('/user/google')
+                .send({});
+
+            //Assert
+            expect(res).to.have.status(400);
+            expect(res.text).to.equal('Google credential is required');
+        });
+
+        it('should return a 400 status code when an invalid Google credential is sent', async () => {
+            //Act
+            const res = await testServer
+                .post('/user/google')
+                .send({ code: 'not-a-google-code' });
+
+            //Assert
+            expect(res).to.have.status(400);
+            expect(res.text).to.equal('Invalid Google credential');
+        });
+    });
+
     describe(`PUT request to /user/update-password`, () => {
         it('should return a 200 status code and the user when a well formed user is sent', async () => {
             //Arrange
