@@ -63,9 +63,6 @@ export default function DiscoverPage() {
     );
   };
 
-  // Every location a cafe is in, for the location dropdown
-  const locations = [...new Set(cafes.flatMap((cafe) => cafe.locations))].sort();
-
   return (
     <>
       <Header />
@@ -74,7 +71,6 @@ export default function DiscoverPage() {
         setSelectedAmenities={setSelectedAmenities}
         selectedAmenities={selectedAmenities}
         setLoading={setLoading}
-        locations={locations}
       />
       <div className="flex flex-col max-width mx-auto lg:mt-2 lg:mb-8">
         {loading ? (

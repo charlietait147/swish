@@ -110,7 +110,6 @@ DiscoverFiltersBar.propTypes = {
   setSelectedAmenities: PropTypes.func.isRequired,
   selectedAmenities: PropTypes.arrayOf(PropTypes.string).isRequired,
   setLoading: PropTypes.func,
-  locations: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default DiscoverFiltersBar;

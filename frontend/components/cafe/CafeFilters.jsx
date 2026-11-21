@@ -8,9 +8,8 @@ function CafeFilters({
   collapsed = false,
   pinned = false,
   onExpand,
-  locations = [],
 }) {
-  const [openDropdown, setOpenDropdown] = useState(null); // "location", "amenities" or null
+  const [openDropdown, setOpenDropdown] = useState(null); // "amenities" or null
   const [mobileSearch, setMobileSearch] = useState(""); // New state for mobile search
   const [isModalOpen, setIsModalOpen] = useState(false);
   const searchBarRef = useRef(null);
@@ -66,16 +65,6 @@ function CafeFilters({
       amenities: selectedAmenities,
     };
     onFilterChange(appliedFilters); // Call the onFilterChange prop with the applied filters
-    setOpenDropdown(null);
-  };
-
-  // Locations matching what has been typed so far, shown as suggestions under the location field
-  const locationSuggestions = locations.filter((location) =>
-    location.toLowerCase().includes(filters.location.toLowerCase())
-  );
-
-  const handleSelectLocation = (location) => {
-    setFilters({ ...filters, location });
     setOpenDropdown(null);
   };
 
@@ -143,6 +132,7 @@ function CafeFilters({
           {/* Search Input */}
           <input
             type="text"
+            autoComplete="off"
             className="ml-2 w-full bg-transparent focus:outline-none text-base text-gray-700 placeholder-gray-500 placeholder:text-sm"
             placeholder="Search by name"
             value={mobileSearch}
@@ -242,6 +232,7 @@ function CafeFilters({
             </label>
             <input
               type="text"
+              autoComplete="off"
               name="name"
               id="name"
               value={filters.name}
@@ -257,7 +248,7 @@ function CafeFilters({
 
           <span className="w-px my-2 bg-gray-200" aria-hidden="true"></span>
 
-          {/* Location - free text, with suggestions from the cafes' locations */}
+          {/* Location */}
           <div className="relative flex-1 min-w-0 hover:bg-gray-50 focus-within:bg-gray-50">
             <label
               className="block px-6 pt-3.5 text-sm font-semibold text-gray-800 cursor-text"
@@ -267,51 +258,17 @@ function CafeFilters({
             </label>
             <input
               type="text"
+              autoComplete="off"
               name="location"
               id="location"
               value={filters.location}
-              onChange={(e) => {
-                handleInputChange(e);
-                setOpenDropdown("location");
-              }}
-              onFocus={() => setOpenDropdown("location")}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") handleApplyFilters();
-                if (e.key === "Escape") setOpenDropdown(null);
-              }}
+              onChange={handleInputChange}
+              onKeyDown={(e) => e.key === "Enter" && handleApplyFilters()}
               placeholder="Search by town or area"
-              autoComplete="off"
-              role="combobox"
-              aria-expanded={openDropdown === "location" && locationSuggestions.length > 0}
-              aria-controls="location-list"
               className="block w-full px-6 pr-10 pb-3.5 bg-transparent text-base text-gray-700 placeholder-gray-400 placeholder:text-sm focus:outline-none"
             />
             {filters.location && (
               <ClearFieldButton label="Clear location" onClick={() => handleClearField("location")} />
-            )}
-            {openDropdown === "location" && locationSuggestions.length > 0 && (
-              <ul
-                id="location-list"
-                role="list"
-                aria-label="location-list"
-                className="absolute top-full left-0 right-0 mt-2 z-30 max-h-64 overflow-y-auto bg-white border border-gray-200 rounded-xl shadow-lg py-1"
-              >
-                {locationSuggestions.map((location) => (
-                  <li key={location}>
-                    <button
-                      type="button"
-                      onClick={() => handleSelectLocation(location)}
-                      className={`w-full px-4 py-1.5 text-sm text-left hover:bg-gray-50 ${
-                        filters.location === location
-                          ? "font-semibold text-orange-600"
-                          : "text-gray-700"
-                      }`}
-                    >
-                      {location}
-                    </button>
-                  </li>
-                ))}
-              </ul>
             )}
           </div>
 
