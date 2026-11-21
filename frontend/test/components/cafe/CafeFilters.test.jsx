@@ -209,49 +209,19 @@ describe("CafeFilters Component", () => {
   });
 
   describe("Desktop search bar", () => {
-    it("should suggest matching locations and fill the field when one is picked", () => {
+    it("should search by a typed location", () => {
       const onFilterChange = jest.fn();
       render(
         <CafeFilters
           onFilterChange={onFilterChange}
           setSelectedAmenities={jest.fn()}
           selectedAmenities={[]}
-          locations={["Farnham", "Winchester"]}
-        />
-      );
-
-      const locationInput = screen.getByLabelText("Location");
-      fireEvent.change(locationInput, { target: { name: "location", value: "win" } });
-      expect(screen.getByRole("button", { name: "Winchester" })).toBeInTheDocument();
-      expect(screen.queryByRole("button", { name: "Farnham" })).not.toBeInTheDocument();
-
-      fireEvent.click(screen.getByRole("button", { name: "Winchester" }));
-      expect(locationInput).toHaveValue("Winchester");
-      expect(screen.queryByRole("list", { name: "location-list" })).not.toBeInTheDocument();
-
-      fireEvent.click(screen.getByRole("button", { name: "Search" }));
-      expect(onFilterChange).toHaveBeenCalledWith({
-        name: "",
-        location: "Winchester",
-        amenities: [],
-      });
-    });
-
-    it("should search by a typed location that isn't in the suggestions", () => {
-      const onFilterChange = jest.fn();
-      render(
-        <CafeFilters
-          onFilterChange={onFilterChange}
-          setSelectedAmenities={jest.fn()}
-          selectedAmenities={[]}
-          locations={["Farnham"]}
         />
       );
 
       fireEvent.change(screen.getByLabelText("Location"), {
         target: { name: "location", value: "Guildford" },
       });
-      expect(screen.queryByRole("list", { name: "location-list" })).not.toBeInTheDocument();
 
       fireEvent.click(screen.getByRole("button", { name: "Search" }));
       expect(onFilterChange).toHaveBeenCalledWith({
@@ -269,7 +239,6 @@ describe("CafeFilters Component", () => {
           onFilterChange={onFilterChange}
           setSelectedAmenities={setSelectedAmenities}
           selectedAmenities={["Dog Friendly"]}
-          locations={["Farnham"]}
         />
       );
 
